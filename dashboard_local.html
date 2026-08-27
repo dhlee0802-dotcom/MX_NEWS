@@ -122,7 +122,7 @@ function render(){
       </div>`).join("");
   }
 }
-setTimeout(()=>location.reload(), 5*60*1000); // 감시 모드에서 5분마다 최신 데이터로 자동 갱신
+setTimeout(()=>{ location.href = location.pathname + "?t=" + Date.now(); }, 5*60*1000); // 5분마다 캐시 우회 갱신
 render();
 </script>
 </body>
