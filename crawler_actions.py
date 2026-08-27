@@ -121,7 +121,7 @@ def crawl():
             "summary": (summary[:140] + "…") if len(summary) > 140 else summary,
             "source": src or "Google News",
             "date": pub.astimezone(KST).strftime("%Y-%m-%d %H:%M"),
-            "url": link, "category": category(blob), "importance": score(blob), "wl": wl,
+            "url": link, "category": category(blob), "importance": score(blob), "wl": wl, "topic": "",
         })
 
     for src, url in FEEDS:
@@ -176,9 +176,10 @@ def gemini_judge(pool):
 섹션(sec): phone(스마트폰) tablet(태블릿) pc(노트북/PC) watch(스마트워치) tws(무선이어폰) glasses(XR/AI글래스) wallet(결제/월렛) health(디지털헬스) memchina(메모리 가격·중국 스마트폰 제조사 동향) none(MX사업과 무관→제외)
 카테고리(cat): quality launch price exec policy community other
 중요도(imp): 5=삼성 MX에 즉각 대응 필요한 긴급, 4=경영진 보고 필요, 3=주시, 2=참고, 1=단순 정보
+이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명(10자 내외). 같은 사건·발표·루머를 다룬 기사들에는 반드시 완전히 동일한 이슈명을 부여할 것(예: 여러 매체가 언팩 초청장 발송을 보도하면 전부 "언팩 초청장"). 이슈명이 같으면 중복 기사로 간주되어 1건만 표시됨.
 요약(sum): 반드시 한국어로만 작성. 외국어 기사도 한국어로 번역 요약. 1문장 60자 이내, 제공 정보 범위 내에서만, 추측 금지.
 
-모든 기사에 대해 JSON 배열만 출력: [{{"i":0,"sec":"phone","cat":"launch","imp":3,"sum":"..."}}]
+모든 기사에 대해 JSON 배열만 출력: [{{"i":0,"sec":"phone","cat":"launch","imp":3,"topic":"언팩 초청장","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
@@ -235,6 +236,7 @@ def gemini_judge(pool):
                         if 1 <= imp <= 5: item["importance"] = imp
                     except Exception: pass
                     if j.get("sum"): item["summary"] = str(j["sum"])
+                    if j.get("topic"): item["topic"] = re.sub(r"\s+","",str(j["topic"])).lower()
                     applied += 1
                 print(f"Gemini 판정 적용: {applied}건")
                 open("gemini_model.txt","w",encoding="utf-8").write(model)
@@ -254,15 +256,28 @@ def gemini_judge(pool):
     print("경고: 모든 Gemini 모델 실패 - 키워드 분류로 대체")
     return None
 
+def dedupe_topics(items):
+    """같은 이슈(topic)의 기사는 정렬상 가장 앞선 1건만 유지"""
+    out, seen_topics = [], set()
+    for a in items:
+        t = a.get("topic","")
+        if t:
+            if t in seen_topics: continue
+            seen_topics.add(t)
+        out.append(a)
+    return out
+
 def main():
     pool, engine = crawl()
     data = {}
     for sid, name, _ in SEC_DEFS:
         items = [a for a in pool if a["sid"] == sid]
         items.sort(key=lambda a: (a["wl"], a["importance"], a["date"]), reverse=True)
+        items = dedupe_topics(items)
         data[sid] = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","wl")} for a in items[:PER]]
         print(f"{name}: {len(items)}건 -> {len(data[sid])}건")
-    latest = sorted(pool, key=lambda a: a["date"], reverse=True)[:LATEST_N]
+    latest = sorted(pool, key=lambda a: a["date"], reverse=True)
+    latest = dedupe_topics(latest)[:LATEST_N]
     latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid")} for a in latest]
     meta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M") + " · " + engine,
             "sections": [{"id": s[0], "name": s[1]} for s in [next(x for x in SEC_DEFS if x[0]==o) for o in ORDER]]}
