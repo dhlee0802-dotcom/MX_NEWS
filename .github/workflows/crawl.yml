@@ -1,0 +1,39 @@
+name: MX News Crawl
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"   # 10분 간격 (GitHub 사정에 따라 수 분 지연될 수 있음)
+  workflow_dispatch:          # Actions 탭에서 수동 실행 버튼
+
+permissions:
+  contents: write
+
+concurrency:
+  group: crawl
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install feedparser
+
+      - name: Run crawler
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python crawler_actions.py
+
+      - name: Commit dashboard
+        run: |
+          git config user.name "news-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add docs/index.html gemini_model.txt || true
+          git diff --cached --quiet || git commit -m "update dashboard [skip ci]"
+          git push
