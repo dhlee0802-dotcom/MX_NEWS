@@ -40,9 +40,6 @@ jobs:
             exit 0
           fi
           git commit -m "update dashboard [skip ci]"
-          # push 전에 원격의 새 커밋을 먼저 반영 (수동 업로드 등과의 충돌 방지)
-          git pull --rebase origin main || {
-            git checkout --theirs . 2>/dev/null || true
-            git rebase --continue || true
-          }
+          # 원격에 새 커밋이 있으면 당겨오되, docs/index.html 충돌은 방금 생성한 최신본으로 자동 해소
+          git pull --rebase -X theirs origin main
           git push origin main
