@@ -170,14 +170,14 @@ def gemini_call(url, payload=None, timeout=120):
 def gemini_judge(pool):
     key = os.environ["GEMINI_API_KEY"]
     batch = pool[:250]
-    lines = [f"{i} | {b['title']} | {b['summary'][:80]} | {b['source']}" for i, b in enumerate(batch)]
+    lines = [f"{i} | {b['title']} | {b['summary'][:140]} | {b['source']}" for i, b in enumerate(batch)]
     prompt = f"""당신은 삼성전자 MX사업부 경쟁정보(CI) 분석가입니다. 아래 기사 목록(번호|제목|요약|매체)을 각각 판정하세요.
 
 섹션(sec): phone(스마트폰) tablet(태블릿) pc(노트북/PC) watch(스마트워치) tws(무선이어폰) glasses(XR/AI글래스) wallet(결제/월렛) health(디지털헬스) memchina(메모리 가격·중국 스마트폰 제조사 동향) none(MX사업과 무관→제외)
 카테고리(cat): quality launch price exec policy community other
 중요도(imp): 5=삼성 MX에 즉각 대응 필요한 긴급, 4=경영진 보고 필요, 3=주시, 2=참고, 1=단순 정보
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명(10자 내외). 같은 사건·발표·루머를 다룬 기사들에는 반드시 완전히 동일한 이슈명을 부여할 것(예: 여러 매체가 언팩 초청장 발송을 보도하면 전부 "언팩 초청장"). 이슈명이 같으면 중복 기사로 간주되어 1건만 표시됨.
-요약(sum): 반드시 한국어로만 작성. 외국어 기사도 한국어로 번역 요약. 1문장 60자 이내, 제공 정보 범위 내에서만, 추측 금지.
+요약(sum): 반드시 한국어로만 작성. 외국어 기사도 한국어로 번역 요약. 2문장 이내 130자 내외로, 핵심 사실과 사업적 의미가 드러나게 작성. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 억지로 늘리지 말고 짧게 유지.
 
 모든 기사에 대해 JSON 배열만 출력: [{{"i":0,"sec":"phone","cat":"launch","imp":3,"topic":"언팩 초청장","sum":"..."}}]
 
