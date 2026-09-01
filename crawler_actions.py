@@ -176,7 +176,7 @@ def gemini_judge(pool):
 섹션(sec): phone(스마트폰) tablet(태블릿) pc(노트북/PC) watch(스마트워치) tws(무선이어폰) glasses(XR/AI글래스) wallet(결제/월렛) health(디지털헬스) memchina(메모리 가격·중국 스마트폰 제조사 동향) none(MX사업과 무관→제외)
 카테고리(cat): quality launch price exec policy community other
 중요도(imp): 5=삼성 MX에 즉각 대응 필요한 긴급, 4=경영진 보고 필요, 3=주시, 2=참고, 1=단순 정보
-이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명(10자 내외). "제품명+사건" 수준으로 굵게 묶을 것. 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여(예: 갤럭시 북6 출시를 다룬 기사가 15건이면 15건 모두 정확히 "북6 출시"). 같은 제품의 출시·공개·발표·리뷰 보도는 원칙적으로 하나의 이슈로 묶을 것. 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
+이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "제품명 사건" 형식으로, 제품명을 첫 단어로 동일하게 표기할 것(예: "북6 출시", "북6 리뷰", "북6 가격" — 제품명 표기는 전부 통일). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 같은 제품의 출시·공개·발표·리뷰 보도는 원칙적으로 하나의 이슈로 묶을 것. 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
 요약(sum): 반드시 한국어로만 작성. 외국어 기사도 한국어로 번역 요약. 4~5문장 300자 내외로, 핵심 사실 → 배경·수치 → 경쟁 구도 → 사업적 의미 순으로 충실히 작성. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 억지로 늘리지 말고 짧게 유지.
 
 모든 기사에 대해 JSON 배열만 출력: [{{"i":0,"sec":"phone","cat":"launch","imp":3,"topic":"언팩 초청장","sum":"..."}}]
@@ -236,7 +236,7 @@ def gemini_judge(pool):
                         if 1 <= imp <= 5: item["importance"] = imp
                     except Exception: pass
                     if j.get("sum"): item["summary"] = str(j["sum"])
-                    if j.get("topic"): item["topic"] = re.sub(r"\s+","",str(j["topic"])).lower()
+                    if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
                     applied += 1
                 print(f"Gemini 판정 적용: {applied}건")
                 open("gemini_model.txt","w",encoding="utf-8").write(model)
@@ -284,11 +284,11 @@ def main():
         items = [a for a in pool if a["sid"] == sid]
         items.sort(key=lambda a: (a["wl"], a["importance"], a["date"]), reverse=True)
         items = dedupe_topics(items)
-        data[sid] = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","wl")} for a in items[:30]]
+        data[sid] = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","wl","topic")} for a in items[:30]]
         print(f"{name}: {len(items)}건 -> {len(data[sid])}건")
     latest = sorted(pool, key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
-    latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid")} for a in latest]
+    latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")} for a in latest]
     meta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M") + " · " + engine,
             "sections": [{"id": s[0], "name": s[1]} for s in [next(x for x in SEC_DEFS if x[0]==o) for o in ORDER]]}
     js = ("const NEWS_META = " + json.dumps(meta, ensure_ascii=False) + ";\n"
