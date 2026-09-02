@@ -15,6 +15,9 @@ HOURS, PER, LATEST_N = 48, 5, 20
 KST = timezone(timedelta(hours=9))
 
 FEEDS = [
+    ("WSJ Tech", "https://feeds.a.dj.com/rss/RSSWSJD.xml"),
+    ("Financial Times Tech", "https://www.ft.com/technology?format=rss"),
+    ("Nikkei Asia", "https://asia.nikkei.com/rss/feed/nar"),
     ("The Verge", "https://www.theverge.com/rss/index.xml"),
     ("9to5Mac", "https://9to5mac.com/feed/"),
     ("MacRumors", "https://feeds.macrumors.com/MacRumors-All"),
