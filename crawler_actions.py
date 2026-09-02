@@ -22,12 +22,18 @@ FEEDS = [
     ("ZDNet", "https://www.zdnet.com/news/rss.xml"),
     ("CNET", "https://www.cnet.com/rss/news/"),
     ("전자신문", "https://rss.etnews.com/Section901.xml"),
+    ("ZDNet Korea", "https://feeds.feedburner.com/zdkorea"),
+    ("한국경제 IT", "https://rss.hankyung.com/feed/it.xml"),
+    ("매일경제 IT", "https://www.mk.co.kr/rss/50300009/"),
 ]
 GN_QUERIES = [
     "삼성 갤럭시", "Samsung Galaxy", "iPhone OR iPad OR Apple Watch",
     "DRAM NAND memory price", "메모리 가격 스마트폰",
     "Xiaomi OR OPPO OR vivo OR Honor smartphone shipment",
     "smart glasses OR XR headset", "Samsung Wallet OR Samsung Pay",
+    "갤럭시 워치 OR 갤럭시 버즈", "갤럭시 북 OR 갤럭시 탭",
+    "삼성월렛 OR 삼성페이 OR 삼성헬스", "중국 스마트폰 판매량 OR 출하량",
+    "스마트 글래스 OR XR 헤드셋",
 ]
 
 SEC_DEFS = [  # 검사 순서 = 분류 우선순위
