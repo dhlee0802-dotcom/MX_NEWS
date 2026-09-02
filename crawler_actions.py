@@ -35,6 +35,10 @@ GN_QUERIES = [
     "삼성월렛 OR 삼성페이 OR 삼성헬스", "중국 스마트폰 판매량 OR 출하량",
     "스마트 글래스 OR XR 헤드셋",
 ]
+NAVER_QUERIES = [
+    "갤럭시 스마트폰", "갤럭시 워치", "갤럭시 버즈", "갤럭시 탭", "갤럭시 북",
+    "삼성월렛", "삼성헬스", "메모리 가격", "중국 스마트폰 판매", "스마트 글래스 XR",
+]
 
 SEC_DEFS = [  # 검사 순서 = 분류 우선순위
     ("memchina", "[CN] 메모리·中폰", ["dram","nand","메모리 가격","memory price","memory chip","낸드","d램"]),
@@ -158,6 +162,30 @@ def crawl():
                 add(e.get("title",""), e.get("description",""), src, pub, e.get("link",""), False)
         except Exception as ex:
             print(f"경고: Google News 실패({q}) - {ex}")
+    # ── 네이버 뉴스 검색 (NAVER API HUB, 키 등록 시에만 동작) ──
+    nv_id = os.environ.get("NAVER_CLIENT_ID"); nv_secret = os.environ.get("NAVER_CLIENT_SECRET")
+    if nv_id and nv_secret:
+        from email.utils import parsedate_to_datetime
+        from urllib.parse import urlparse
+        for q in NAVER_QUERIES:
+            try:
+                req = urllib.request.Request(
+                    f"https://naverapihub.apigw.ntruss.com/search/v1/news?query={quote(q)}&display=30&sort=date&format=json")
+                req.add_header("X-NCP-APIGW-API-KEY-ID", nv_id)
+                req.add_header("X-NCP-APIGW-API-KEY", nv_secret)
+                with urllib.request.urlopen(req, timeout=25) as r:
+                    res = json.loads(r.read().decode("utf-8"))
+                for it in res.get("items", []):
+                    try: pub = parsedate_to_datetime(it["pubDate"]).astimezone(timezone.utc)
+                    except Exception: continue
+                    link = it.get("originallink") or it.get("link","")
+                    src = urlparse(link).netloc.replace("www.","") if link else "네이버뉴스"
+                    add(it.get("title",""), it.get("description",""), src, pub, link, False)
+            except Exception as ex:
+                print(f"경고: 네이버 API 실패({q}) - {ex}")
+        print("네이버 뉴스 수집 완료")
+    else:
+        print("안내: NAVER_CLIENT_ID/SECRET 미등록 - 네이버 수집 생략")
     print(f"수집 완료 / 후보 풀: {len(pool)}건")
 
     engine = "키워드 분류"
