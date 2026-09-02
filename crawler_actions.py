@@ -331,6 +331,27 @@ def dedupe_topics(items):
         out.append(a)
     return out
 
+def resolve_google_links(all_items):
+    """news.google.com 중계 주소를 원문 기사 주소로 변환 (변환 실패 시 원래 링크 유지)"""
+    targets = [a for a in all_items if "news.google.com" in a.get("url","")]
+    if not targets: return
+    try:
+        from googlenewsdecoder import gnewsdecoder
+    except Exception:
+        print("안내: googlenewsdecoder 미설치 - 구글 링크 원본 변환 생략"); return
+    cache, n = {}, 0
+    for a in targets:
+        u = a["url"]
+        if u in cache:
+            a["url"] = cache[u]; continue
+        try:
+            r = gnewsdecoder(u, interval=1)
+            if isinstance(r, dict) and r.get("status") and r.get("decoded_url"):
+                cache[u] = r["decoded_url"]; a["url"] = cache[u]; n += 1
+        except Exception:
+            pass
+    print(f"구글 뉴스 링크 원본 변환: {n}/{len(targets)}건")
+
 def main():
     pool, engine = crawl()
     data = {}
@@ -343,6 +364,8 @@ def main():
     latest = sorted(pool, key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
     latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")} for a in latest]
+    shown = [a for arr in data.values() for a in arr] + latest
+    resolve_google_links(shown)
     meta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M") + " · " + engine,
             "sections": [{"id": s[0], "name": s[1]} for s in [next(x for x in SEC_DEFS if x[0]==o) for o in ORDER]]}
     js = ("const NEWS_META = " + json.dumps(meta, ensure_ascii=False) + ";\n"
