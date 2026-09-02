@@ -2,7 +2,7 @@ name: MX News Crawl
 
 on:
   schedule:
-    - cron: "7,17,27,37,47,57 * * * *"
+    - cron: "7,27,47 * * * *"   # 10분 간격 (혼잡한 정각 회피)
   workflow_dispatch:          # Actions 탭에서 수동 실행 버튼
 
 permissions:
@@ -28,6 +28,8 @@ jobs:
       - name: Run crawler
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
         run: python crawler_actions.py
 
       - name: Commit dashboard
