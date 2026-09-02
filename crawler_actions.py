@@ -206,22 +206,57 @@ def gemini_call(url, payload=None, timeout=120):
 
 def gemini_judge(pool):
     key = os.environ["GEMINI_API_KEY"]
-    batch = pool[:250]
-    lines = [f"{i} | {b['title']} | {b['summary'][:220]} | {b['source']}" for i, b in enumerate(batch)]
-    prompt = f"""당신은 삼성전자 MX사업부 경쟁정보(CI) 분석가입니다. 아래 기사 목록(번호|제목|요약|매체)을 각각 판정하세요.
+    # 후보 전체를 150건씩 묶어 전부 판정 (최대 600건). 250건 초과분이 판정 없이 남던 문제 해결
+    chunks = [pool[i:i+150] for i in range(0, min(len(pool), 600), 150)]
+
+    def build_payload(batch):
+        lines = [f"{i} | {b['title']} | {b['summary'][:220]} | {b['source']}" for i, b in enumerate(batch)]
+        prompt = f"""당신은 삼성전자 MX사업부 경쟁정보(CI) 분석가입니다. 아래 기사 목록(번호|제목|요약|매체)을 각각 판정하세요.
 
 섹션(sec): phone(스마트폰) tablet(태블릿) pc(노트북/PC) watch(스마트워치) tws(무선이어폰) glasses(XR/AI글래스) wallet(결제/월렛) health(디지털헬스) memchina(메모리 가격·중국 스마트폰 제조사 동향) none(MX사업과 무관→제외)
 카테고리(cat): quality launch price exec policy community other
 중요도(imp): 5=삼성 MX에 즉각 대응 필요한 긴급, 4=경영진 보고 필요, 3=주시, 2=참고, 1=단순 정보
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "제품명 사건" 형식으로, 제품명을 첫 단어로 동일하게 표기할 것(예: "북6 출시", "북6 리뷰", "북6 가격" — 제품명 표기는 전부 통일). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 같은 제품의 출시·공개·발표·리뷰 보도는 원칙적으로 하나의 이슈로 묶을 것. 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
-요약(sum): 반드시 한국어로만 작성. 외국어 기사도 한국어로 번역 요약. 4~5문장 300자 내외로, 핵심 사실 → 배경·수치 → 경쟁 구도 → 사업적 의미 순으로 충실히 작성. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 억지로 늘리지 말고 짧게 유지.
+요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장이나 영어 원문 요약을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 4~5문장 300자 내외로, 핵심 사실 → 배경·수치 → 경쟁 구도 → 사업적 의미 순으로 충실히 작성. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 억지로 늘리지 말고 짧게 유지.
 
-모든 기사에 대해 JSON 배열만 출력: [{{"i":0,"sec":"phone","cat":"launch","imp":3,"topic":"언팩 초청장","sum":"..."}}]
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"phone","cat":"launch","imp":3,"topic":"언팩 초청장","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
-    payload = {"contents":[{"parts":[{"text":prompt}]}],
-               "generationConfig":{"response_mime_type":"application/json","temperature":0}}
+        return {"contents":[{"parts":[{"text":prompt}]}],
+                "generationConfig":{"response_mime_type":"application/json","temperature":0}}
+
+    def parse_judged(raw):
+        try:
+            return json.loads(raw)
+        except Exception:
+            out = []
+            for m in re.finditer(r"\{[^{}]*\}", raw):
+                try: out.append(json.loads(m.group()))
+                except Exception: pass
+            if out: print(f"  일부 형식 오류 -> 복구 파싱 {len(out)}건")
+            return out
+
+    def apply_judged(batch, judged):
+        applied = 0
+        for j in judged:
+            try: idx = int(j["i"])
+            except Exception: continue
+            if not (0 <= idx < len(batch)): continue
+            item = batch[idx]
+            sec = j.get("sec")
+            if sec == "none" or sec not in VALID_IDS:
+                item["sid"] = "drop"; continue
+            item["sid"] = sec
+            if j.get("cat"): item["category"] = j["cat"]
+            try:
+                imp = int(j.get("imp", 0))
+                if 1 <= imp <= 5: item["importance"] = imp
+            except Exception: pass
+            if j.get("sum"): item["summary"] = str(j["sum"])
+            if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
+            applied += 1
+        return applied
 
     last_good = None
     if os.path.exists("gemini_model.txt"):
@@ -243,53 +278,35 @@ def gemini_judge(pool):
 
     import time
     for model in cands:
-        for attempt in range(2):
-            try:
-                print(f"Gemini 분류 요청... ({model})")
-                r = gemini_call(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}", payload)
-                raw = r["candidates"][0]["content"]["parts"][0]["text"]
-                try:
-                    judged = json.loads(raw)
-                except Exception:
-                    judged = []
-                    for m in re.finditer(r"\{[^{}]*\}", raw):
-                        try: judged.append(json.loads(m.group()))
-                        except Exception: pass
-                    print(f"  일부 형식 오류 -> 복구 파싱 {len(judged)}건")
-                if not judged: raise ValueError("판정 결과 파싱 실패")
-                applied = 0
-                for j in judged:
-                    try: idx = int(j["i"])
-                    except Exception: continue
-                    if not (0 <= idx < len(batch)): continue
-                    item = batch[idx]
-                    sec = j.get("sec")
-                    if sec == "none" or sec not in VALID_IDS:
-                        item["sid"] = "drop"; continue
-                    item["sid"] = sec
-                    if j.get("cat"): item["category"] = j["cat"]
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
+        try:
+            total = 0
+            for ci, batch in enumerate(chunks):
+                payload = build_payload(batch)
+                ok = False
+                for attempt in range(2):
                     try:
-                        imp = int(j.get("imp", 0))
-                        if 1 <= imp <= 5: item["importance"] = imp
-                    except Exception: pass
-                    if j.get("sum"): item["summary"] = str(j["sum"])
-                    if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
-                    applied += 1
-                print(f"Gemini 판정 적용: {applied}건")
-                open("gemini_model.txt","w",encoding="utf-8").write(model)
-                return f"Gemini 분류 ({model})"
-            except urllib.error.HTTPError as ex:
-                if ex.code == 404:
-                    print(f"  {model} 사용 불가(404) -> 다음 모델"); break
-                if ex.code == 429:
-                    if attempt == 0:
-                        print(f"  {model} 429 -> 30초 대기 후 재시도"); time.sleep(30)
-                    else:
-                        print(f"  {model} 재시도도 429 -> 다음 모델")
-                else:
-                    print(f"경고: {model} 실패 - HTTP {ex.code} -> 다음 모델"); break
-            except Exception as ex:
-                print(f"경고: {model} 실패 - {ex} -> 다음 모델"); break
+                        print(f"Gemini 분류 요청... ({model}, {ci+1}/{len(chunks)}묶음 {len(batch)}건)")
+                        r = gemini_call(url, payload)
+                        raw = r["candidates"][0]["content"]["parts"][0]["text"]
+                        judged = parse_judged(raw)
+                        if not judged: raise ValueError("판정 결과 파싱 실패")
+                        total += apply_judged(batch, judged)
+                        ok = True; break
+                    except urllib.error.HTTPError as ex:
+                        if ex.code == 429 and attempt == 0:
+                            print(f"  {model} 429 -> 30초 대기 후 재시도"); time.sleep(30); continue
+                        raise
+                if not ok: raise ValueError("묶음 처리 실패")
+                if ci < len(chunks) - 1: time.sleep(5)   # 분당 호출 제한 배려
+            print(f"Gemini 판정 적용: 총 {total}건 / {len(chunks)}묶음")
+            open("gemini_model.txt","w",encoding="utf-8").write(model)
+            return f"Gemini 분류 ({model})"
+        except urllib.error.HTTPError as ex:
+            if ex.code == 404: print(f"  {model} 사용 불가(404) -> 다음 모델")
+            else: print(f"경고: {model} 실패 - HTTP {ex.code} -> 다음 모델")
+        except Exception as ex:
+            print(f"경고: {model} 실패 - {ex} -> 다음 모델")
     print("경고: 모든 Gemini 모델 실패 - 키워드 분류로 대체")
     return None
 
