@@ -26,6 +26,11 @@ FEEDS = [
     ("WSJ Tech", "https://feeds.a.dj.com/rss/RSSWSJD.xml"),
     ("Financial Times Tech", "https://www.ft.com/technology?format=rss"),
     ("Nikkei Asia", "https://asia.nikkei.com/rss/feed/nar"),
+    # ── 인도 ──
+    ("ET Telecom", "https://telecom.economictimes.indiatimes.com/rss/topstories"),
+    ("Business Standard", "https://www.business-standard.com/rss/technology-108.rss"),
+    ("Mint", "https://www.livemint.com/rss/industry"),
+    ("Fortune India", "https://www.fortuneindia.com/rss"),
     # ── 국내 ──
     ("전자신문", "https://rss.etnews.com/Section901.xml"),
     ("ZDNet Korea", "https://feeds.feedburner.com/zdkorea"),
@@ -51,6 +56,8 @@ GN_QUERIES = [
     "Starlink OR AST SpaceMobile direct to cell",
     "Amazon Leo OR Kuiper satellite",
     "저궤도 위성통신 OR 스타링크",
+    "6G technology OR 6G standard",
+    "6G 상용화 OR 6G 표준",
     # 정책
     "FCC OR spectrum auction",
     "net neutrality OR Digital Networks Act OR EU Cybersecurity Act",
@@ -68,7 +75,7 @@ NAVER_QUERIES = [
 
 SEC_DEFS = [  # 검사 순서 = 분류 우선순위 (outage 최우선)
     ("outage", "[Alert] Outage", ["outage","통신장애","통신 장애","먹통","서비스 중단","network down","service disruption","대규모 장애","전국 장애"]),
-    ("satellite", "[Sat] 위성", ["starlink","스타링크","ast spacemobile","kuiper","amazon leo","저궤도","leo satellite","direct-to-cell","direct to cell","위성통신","위성 통신","non-terrestrial","ntn"]),
+    ("satellite", "[Sat] 위성·6G", ["starlink","스타링크","ast spacemobile","kuiper","amazon leo","저궤도","leo satellite","direct-to-cell","direct to cell","위성통신","위성 통신","non-terrestrial","ntn","6g","6세대 이동통신"]),
     ("competitor", "[Comp] 경쟁사", ["ericsson","에릭슨","nokia","노키아","huawei","화웨이","zte","mavenir","마베니어","rakuten symphony","라쿠텐 심포니","open ran","오픈랜","vran","ai-ran"]),
     ("policy", "[Policy] 정책·규제", ["fcc","과기정통부","spectrum","주파수","net neutrality","망중립성","digital networks act","cybersecurity act","spectrum auction","주파수 경매","통신 정책","통신 규제"]),
     ("carrier", "[Telco] 통신사", ["verizon","at&t","t-mobile","echostar","viaero","us cellular","charter","docomo","도코모","kddi","softbank","소프트뱅크","rakuten mobile","reliance jio","jio","airtel","vodafone","보다폰","telus","videotron","sasktel","deutsche telekom","도이치텔레콤","orange","telefonica","telefónica","skt","sk텔레콤","lg유플러스","lgu+","케이티","이동통신사","통신사"]),
@@ -240,14 +247,14 @@ def gemini_judge(pool):
         prompt = f"""당신은 삼성전자 네트워크사업부 경쟁정보(CI) 분석가입니다. 아래 기사 목록(번호|제목|요약|매체)을 각각 판정하세요.
 
 섹션(sec):
-competitor = 통신장비 경쟁사(Ericsson, Nokia, Huawei, ZTE, Mavenir, Rakuten Symphony)의 수주·기술·실적·전략
+competitor = 글로벌 대형 통신장비 경쟁사(Ericsson, Nokia, Huawei, ZTE, Mavenir, Rakuten Symphony)의 수주·기술·실적·전략. 국내 중소 통신장비·부품업체(우리넷, 알에프텍, 쏠리드 등) 기사는 competitor가 아니라 none
 carrier = 통신사 동향. 대상: 한국 SKT·KT·LG유플러스 / 미국 Verizon·AT&T·T-Mobile·EchoStar·Viaero·US Cellular·Charter / 일본 NTT DOCOMO·KDDI·SoftBank·Rakuten Mobile / 인도 Reliance Jio·Bharti Airtel·Vodafone Idea / 캐나다 TELUS·Videotron·SaskTel / 유럽 Vodafone·Deutsche Telekom·Orange·Telefónica. 단, 네트워크 투자·장비 조달·주파수·실적·경영 전략 관련만 해당
-satellite = 위성통신(Starlink, AST SpaceMobile, Amazon Leo/Kuiper, Direct-to-Cell, 저궤도 위성)
+satellite = 위성통신(Starlink, AST SpaceMobile, Amazon Leo/Kuiper, Direct-to-Cell, 저궤도 위성) 및 6G(기술·표준화·연구개발·상용화 준비)
 policy = 통신 정책·규제(FCC, 과기정통부, Digital Networks Act, EU Cybersecurity Act, 망중립성, 주파수 경매 등)
 outage = 위 통신사의 통신망 장애 발생·확산·복구 보도
 none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰 단말·요금제 프로모션·소비자 마케팅·연예 기사는 none
 
-판정 규칙: 실제로 발생한 통신망 장애·복구 보도만 sec=outage에 해당하며, 이 경우 통신사 이름이 있어도 반드시 outage로 분류. 다음은 outage가 절대 아님 — 장애인(disability) 복지·요금제·접근성 기사(무관하면 none), 축제·행사·재난 대비 통신 지원이나 트래픽 증설 기사(carrier 또는 none), 장애 예방 훈련·점검·모의훈련 기사. 장애 기사의 중요도는 둘 중 하나만 가능 — 전국 단위 대규모 장애(전국 규모 또는 수백만 가입자, 수 시간 이상 지속)면 imp=5, 그 외 지역·일부 서비스·경미한 장애는 imp=3 이하. 장애 기사에 imp=4는 부여 금지.
+판정 규칙: 실제로 발생한 통신망 장애·복구 보도만 sec=outage에 해당하며, 이 경우 통신사 이름이 있어도 반드시 outage로 분류. 해킹·보안사고 기사는 그로 인해 통신 서비스 중단·장애가 실제 발생한 경우에만 outage이며, 서비스 영향이 없는 단순 해킹·개인정보 유출·보안 취약점 기사는 none으로 제외. 다음도 outage가 절대 아님 — 장애인(disability) 복지·요금제·접근성 기사(무관하면 none), 축제·행사·재난 대비 통신 지원이나 트래픽 증설 기사(carrier 또는 none), 장애 예방 훈련·점검·모의훈련 기사. 장애 기사의 중요도는 둘 중 하나만 가능 — 전국 단위 대규모 장애(전국 규모 또는 수백만 가입자, 수 시간 이상 지속)면 imp=5, 그 외 지역·일부 서비스·경미한 장애는 imp=3 이하. 장애 기사에 imp=4는 부여 금지.
 
 카테고리(cat): outage contract tech earnings exec policy other
 중요도(imp) — 보수적으로 판정하고 5점은 아래 유형에 해당할 때만 부여:
@@ -257,7 +264,7 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
 2 = 참고 수준
 1 = 단순 정보·홍보성
 회사 이름이 크더라도 단순 언급·제품 소개·인터뷰·시황 전망 기사는 3 이하.
-이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 영문 매체 기사라도 회사명은 반드시 한국어 표기(에릭슨, 노키아, 화웨이, 버라이즌, 도이치텔레콤 등)로 쓸 것 — 같은 사건을 다룬 한국어·영어 기사가 동일 이슈명으로 묶여야 함. 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
+이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 영문 매체 기사라도 회사명은 반드시 한국어 표기(에릭슨, 노키아, 화웨이, 버라이즌, 도이치텔레콤 등)로 쓸 것 — 같은 사건을 다룬 한국어·영어 기사가 동일 이슈명으로 묶여야 함. 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 특히 같은 행사·발표·컨퍼런스·국정감사·정책 브리핑에서 파생된 기사들은 세부 주제가 조금씩 달라도 전부 하나의 동일 이슈명으로 묶을 것(예: 국정감사에서 나온 통신 관련 기사 전부 → "과기정통부 국감"). 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장이나 영어 원문 요약을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 4~5문장 300자 내외로, 핵심 사실 → 배경·수치 → 경쟁 구도 → 사업적 의미 순으로 충실히 작성. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 억지로 늘리지 말고 짧게 유지.
 
 모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"topic":"버라이즌 수주","sum":"..."}}]
