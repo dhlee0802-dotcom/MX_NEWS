@@ -54,6 +54,10 @@
   .hd-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
   .noti-btn{flex:0 0 auto;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer}
   .noti-btn.on{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}
+  .subbar{display:flex;gap:6px;overflow-x:auto;margin:0 0 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .subbar::-webkit-scrollbar{display:none}
+  .rchip{flex:0 0 auto;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;white-space:nowrap}
+  .rchip.on{background:var(--blue);border-color:var(--blue);color:#fff}
 </style>
 </head>
 <body>
@@ -113,6 +117,22 @@ function hasWord(t,w){
   }
   return t.includes(w);
 }
+/* 통신사 지역 매핑 (인도를 유럽보다 먼저 검사 — Vodafone Idea가 유럽 Vodafone에 걸리지 않게) */
+const REGIONS=[
+  ["한국",["skt","sk텔레콤","sk telecom","kt","케이티","korea telecom","lg유플러스","lgu+","lg uplus","lg u+"]],
+  ["미국",["verizon","버라이즌","at&t","에이티앤티","t-mobile","t모바일","tmobile","echostar","에코스타","viaero","us cellular","us셀룰러","charter","차터"]],
+  ["일본",["docomo","도코모","ntt","kddi","softbank","소프트뱅크","rakuten mobile","라쿠텐"]],
+  ["인도",["vodafone idea","jio","지오","reliance","릴라이언스","airtel","에어텔","bharti"]],
+  ["캐나다",["telus","텔러스","videotron","비디오트론","sasktel"]],
+  ["유럽",["vodafone","보다폰","deutsche telekom","도이치텔레콤","orange","오렌지","telefonica","텔레포니카"]]
+];
+let carrierRegion="전체";
+function setRegion(r){carrierRegion=r;render();}
+function regionOf(a){
+  const t=(((a.topic||"")+" "+(a.title||"")+" "+(a.summary||""))).toLowerCase();
+  for(const [r,kws] of REGIONS){ if(kws.some(w=>hasWord(t,w))) return r; }
+  return "기타";
+}
 function prodKey(a){
   const t=(((a.topic||"")+" "+(a.title||""))).toLowerCase();
   for(const [canon,ali] of COMPANIES){
@@ -150,13 +170,20 @@ function render(){
     latest=capPerProduct(latest,2).slice(0,20);  // 같은 회사 최대 2건
     html+=block("🕐 최신 기사",latest.length+"건",latest.map(a=>artCard(a,true)).join(""));
   }else{
+    let regionFilter=null;
+    if(tab.id==="telco"){
+      const regions=["전체"].concat(REGIONS.map(r=>r[0])).concat(["기타"]);
+      html+=`<div class="subbar">`+regions.map(r=>`<div class="rchip${r===carrierRegion?" on":""}" onclick="setRegion('${r}')">${r}</div>`).join("")+`</div>`;
+      regionFilter=a=>carrierRegion==="전체"||regionOf(a)===carrierRegion;
+    }
     tab.secs.forEach(sid=>{
       const n=(tab.impN&&tab.impN[sid])||5;
-      let imp=secItems(sid).slice().sort((a,b)=>b.importance-a.importance||(b.date||"").localeCompare(a.date||""));
+      let items=secItems(sid); if(regionFilter) items=items.filter(regionFilter);
+      let imp=items.slice().sort((a,b)=>b.importance-a.importance||(b.date||"").localeCompare(a.date||""));
       imp=capPerProduct(imp,2).slice(0,n);   // 같은 키워드(회사) 최대 2건
-      html+=block("⚠ "+(SEC_NAME[sid]||sid)+" 중요 기사 TOP "+n,imp.length+"건",imp.map(a=>artCard(a,false)).join(""),true);
+      html+=block("⚠ "+(SEC_NAME[sid]||sid)+(regionFilter&&carrierRegion!=="전체"?" · "+carrierRegion:"")+" 중요 기사 TOP "+n,imp.length+"건",imp.map(a=>artCard(a,false)).join(""),true);
     });
-    let merged=[]; tab.secs.forEach(s=>merged=merged.concat(secItems(s)));
+    let merged=[]; tab.secs.forEach(s=>{let it=secItems(s); if(regionFilter) it=it.filter(regionFilter); merged=merged.concat(it);});
     merged.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
     const latest=merged.slice(0,20);
     html+=block("🕐 최신 기사",latest.length+"건",latest.map(a=>artCard(a,tab.secs.length>1)).join(""));
