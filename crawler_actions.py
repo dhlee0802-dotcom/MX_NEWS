@@ -388,11 +388,11 @@ def main():
         items = [a for a in pool if a["sid"] == sid]
         items.sort(key=lambda a: (a["wl"], a["importance"], a["date"]), reverse=True)
         items = dedupe_topics(items)
-        data[sid] = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","wl","topic")} for a in items[:30]]
+        data[sid] = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","wl","topic","alert")} for a in items[:30]]
         print(f"{name}: {len(items)}건 -> {len(data[sid])}건")
     latest = sorted(pool, key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
-    latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")} for a in latest]
+    latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic","alert")} for a in latest]
     shown = [a for arr in data.values() for a in arr] + latest
     resolve_google_links(shown)
     notify_urgent(pool)
