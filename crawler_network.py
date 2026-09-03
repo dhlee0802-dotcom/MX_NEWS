@@ -251,7 +251,7 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
 
 카테고리(cat): outage contract tech earnings exec policy other
 중요도(imp) — 보수적으로 판정하고 5점은 아래 유형에 해당할 때만 부여:
-5 = ①전국 단위 대규모 통신망 장애 ②삼성전자 네트워크사업이 당사자인 대형 수주·실주·제재 확정 ③주요 통신사·장비사의 인수합병 및 시장 구도를 바꾸는 대형 딜(대형 M&A, 수조 원대 장비 공급계약) ④경쟁사(Ericsson·Nokia·Huawei·ZTE·Mavenir 등)의 주요 신제품·신기술 출시, 생산·R&D 거점 이전, CEO 등 최고경영진 교체 ⑤중국산 통신장비(Huawei·ZTE)에 대한 각국의 제재·퇴출·반입 금지. 단계 요건: ①②는 실제 발생·확정 보도만 5점, ③④⑤는 루머·검토·협상·추진 단계 보도라도 5점 부여. 다만 구체적 사실 근거 없이 시황 전망·애널리스트 의견만 담은 기사는 5 불가
+5 = ①전국 단위 대규모 통신망 장애 ②삼성전자 네트워크사업이 당사자인 대형 수주·실주·제재 확정 ③업계 판도를 바꾸는 수준의 대형 M&A·딜(주요 통신사·장비사 간 인수합병, 수조 원대 장비 공급계약 — 소규모 기업·스타트업 인수나 지분 일부 투자는 4 이하) ④경쟁사(Ericsson·Nokia·Huawei·ZTE·Mavenir 등)의 플래그십급 신제품·차세대 기술의 공식 출시, 생산·R&D 거점의 국가 간 이전, CEO·회장급 최고경영진 교체(부분 업그레이드·로드맵 발표·임원급 인사는 4 이하) ⑤주요국 정부 차원의 중국산 통신장비(Huawei·ZTE) 제재·퇴출·반입 금지(개별 기업·지방정부 차원 조치는 4 이하). 단계 요건: ①②는 실제 발생·확정 보도만 5점, ③④⑤는 루머·검토·협상·추진 단계 보도라도 5점 가능. 판단이 애매하면 5가 아닌 4를 부여할 것 — 한 판정 묶음에서 5점은 많아야 2~3건이어야 정상. 구체적 사실 근거 없이 시황 전망·애널리스트 의견만 담은 기사는 5 불가
 4 = 경영진 보고 가치: 주요 수주전 진행 상황, 주파수 경매 결과, 규제 확정, 경쟁사의 대형 발표
 3 = 주시할 업계 동향
 2 = 참고 수준
@@ -400,7 +400,8 @@ def main():
         items = [a for a in pool if a["sid"] == sid]
         items.sort(key=lambda a: (a["importance"], a["date"]), reverse=True)  # 중요도 -> 최신순
         items = dedupe_topics(items)
-        data[sid] = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","wl","topic")} for a in items[:30]]
+        cap = 60 if sid == "carrier" else 30   # 통신사는 지역 필터용으로 넉넉히 보관
+        data[sid] = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","wl","topic")} for a in items[:cap]]
         print(f"{name}: {len(items)}건 -> {len(data[sid])}건")
     # 최신 탭: 소규모 장애(outage & imp<5)는 제외 — 대규모 장애(imp=5)만 주요·최신에 노출
     latest = sorted([a for a in pool if not (a["sid"] == "outage" and a["importance"] < 5)],
