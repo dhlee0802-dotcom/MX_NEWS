@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Network CI Dashboard</title>
+<style>
+:root{
+  --bg:#F4F6F8; --surface:#FFFFFF; --ink:#1C2B3A; --ink-soft:#5B6B7B;
+  --line:#DDE4EA; --brand:#155EA2; --brand-soft:#E8F1F9;
+  --alert:#C0392B; --alert-bg:#FBEDEB;
+  --imp5:#C0392B; --imp4:#D97C2B; --imp3:#155EA2; --imp2:#7C8A98;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+body{background:var(--bg); color:var(--ink);
+  font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo",-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.55}
+a{color:inherit; text-decoration:none}
+.wrap{max-width:920px; margin:0 auto; padding:0 16px 60px}
+
+header{padding:22px 0 14px}
+header h1{font-size:21px; font-weight:800; letter-spacing:-.3px}
+header h1 span{color:var(--brand)}
+.meta{margin-top:4px; font-size:12.5px; color:var(--ink-soft)}
+
+/* Outage 경보 배너 */
+.alert-banner{display:none; background:var(--alert-bg); border:1px solid #EBC4BE;
+  border-left:4px solid var(--alert); border-radius:8px; padding:12px 14px; margin-bottom:14px}
+.alert-banner.on{display:block}
+.alert-banner .ab-head{font-weight:800; color:var(--alert); font-size:14px; margin-bottom:6px}
+.alert-banner a{display:block; font-size:13.5px; padding:2px 0; color:#7A2A20}
+.alert-banner a:hover{text-decoration:underline}
+
+/* 탭 */
+nav{position:sticky; top:0; z-index:10; background:var(--bg);
+  display:flex; gap:2px; overflow-x:auto; padding:6px 0 10px; -webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:none; border:1px solid var(--line); background:var(--surface); color:var(--ink-soft);
+  border-radius:20px; padding:7px 14px; font-size:13.5px; font-weight:600; cursor:pointer; white-space:nowrap}
+nav button .n{margin-left:5px; font-size:11.5px; color:#9AA7B3}
+nav button.active{background:var(--brand); border-color:var(--brand); color:#fff}
+nav button.active .n{color:#CFE2F3}
+nav button.tab-outage.has-alert{border-color:var(--alert); color:var(--alert)}
+nav button.tab-outage.has-alert.active{background:var(--alert); color:#fff}
+
+h2.group{font-size:13px; font-weight:700; color:var(--ink-soft); margin:18px 0 8px}
+
+/* 기사 카드 */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:14px 16px; margin-bottom:10px}
+.card .row1{display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap}
+.imp{flex:none; min-width:26px; text-align:center; border-radius:6px;
+  font-size:11.5px; font-weight:800; color:#fff; padding:2px 6px}
+.imp.i5{background:var(--imp5)} .imp.i4{background:var(--imp4)}
+.imp.i3{background:var(--imp3)} .imp.i2,.imp.i1{background:var(--imp2)}
+.chip{flex:none; font-size:11.5px; font-weight:700; color:var(--brand);
+  background:var(--brand-soft); border-radius:6px; padding:2px 8px}
+.chip.c-outage{color:var(--alert); background:var(--alert-bg)}
+.sec-tag{font-size:11.5px; color:#9AA7B3; font-weight:600}
+.card h3{font-size:15.5px; font-weight:700; line-height:1.4}
+.card h3 a:hover{color:var(--brand); text-decoration:underline}
+.card p{margin-top:6px; font-size:13.5px; color:#3D4C5B}
+.card .foot{margin-top:8px; font-size:12px; color:var(--ink-soft)}
+.empty{padding:40px 0; text-align:center; color:var(--ink-soft); font-size:14px}
+
+@media (max-width:520px){
+  .card{padding:12px 13px}
+  .card h3{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Samsung <span>Network</span> CI Dashboard</h1>
+    <div class="meta" id="meta"></div>
+  </header>
+
+  <div class="alert-banner" id="alertBanner">
+    <div class="ab-head">⚠ 대규모 통신망 장애 감지</div>
+    <div id="alertList"></div>
+  </div>
+
+  <nav id="tabs"></nav>
+  <main id="content"></main>
+</div>
+
+<script src="news_data.js"></script>
+<script>
+const META  = (typeof NEWS_META  !== "undefined") ? NEWS_META  : {generated:"데이터 없음", sections:[]};
+const DATA  = (typeof NEWS_DATA  !== "undefined") ? NEWS_DATA  : {};
+const LATEST= (typeof NEWS_LATEST!== "undefined") ? NEWS_LATEST: [];
+
+const CAT_LABEL = {outage:"장애", contract:"수주·계약", tech:"기술", earnings:"실적",
+                   exec:"인사", policy:"정책·규제", other:"일반"};
+const SEC_NAME = {};
+META.sections.forEach(s => SEC_NAME[s.id] = s.name);
+
+function esc(s){const d=document.createElement("div"); d.textContent=s||""; return d.innerHTML;}
+
+function card(a, showSec){
+  const imp = a.importance || 2;
+  const cat = CAT_LABEL[a.category] || "일반";
+  return `<article class="card">
+    <div class="row1">
+      <span class="imp i${imp}">${imp}</span>
+      <span class="chip ${a.category==="outage"?"c-outage":""}">${esc(cat)}</span>
+      ${showSec && a.sid ? `<span class="sec-tag">${esc(SEC_NAME[a.sid]||"")}</span>` : ""}
+    </div>
+    <h3><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)}</a></h3>
+    ${a.summary ? `<p>${esc(a.summary)}</p>` : ""}
+    <div class="foot">${esc(a.source)} — ${esc(a.date)}</div>
+  </article>`;
+}
+
+function dedupeByTopic(list){
+  const seen = new Set(); const out = [];
+  for(const a of list){
+    const t = a.topic || "";
+    if(t && seen.has(t)) continue;
+    if(t) seen.add(t);
+    out.push(a);
+  }
+  return out;
+}
+
+/* 주요·최신 탭 */
+function renderTop(){
+  let tops = [];
+  META.sections.forEach(s => (DATA[s.id]||[]).forEach(a => {
+    if((a.importance||0) >= 4) tops.push({...a, sid:s.id});
+  }));
+  tops.sort((x,y) => (y.importance-x.importance) || (y.date>x.date?1:-1));
+  tops = dedupeByTopic(tops).slice(0,12);
+  let h = "";
+  if(tops.length){ h += `<h2 class="group">중요 기사 (중요도 4 이상)</h2>` + tops.map(a=>card(a,true)).join(""); }
+  if(LATEST.length){ h += `<h2 class="group">최신 기사</h2>` + LATEST.map(a=>card(a,true)).join(""); }
+  return h || `<div class="empty">최근 48시간 내 수집된 기사가 없습니다</div>`;
+}
+
+function renderSection(sid){
+  const items = DATA[sid] || [];
+  if(!items.length) return `<div class="empty">최근 48시간 내 해당 섹션 기사가 없습니다</div>`;
+  return items.map(a=>card(a,false)).join("");
+}
+
+/* Outage 경보 배너: outage 섹션 중요도 4+ */
+function renderAlert(){
+  const alerts = (DATA.outage||[]).filter(a => (a.importance||0) >= 4);
+  if(!alerts.length) return false;
+  document.getElementById("alertList").innerHTML =
+    alerts.slice(0,3).map(a =>
+      `<a href="${esc(a.url)}" target="_blank" rel="noopener">• ${esc(a.title)} <small>(${esc(a.source)}, ${esc(a.date)})</small></a>`
+    ).join("");
+  document.getElementById("alertBanner").classList.add("on");
+  return true;
+}
+
+/* 탭 구성 */
+const tabsEl = document.getElementById("tabs");
+const contentEl = document.getElementById("content");
+const tabDefs = [{id:"top", name:"주요·최신", count:null}]
+  .concat(META.sections.map(s => ({id:s.id, name:s.name, count:(DATA[s.id]||[]).length})));
+
+function select(id){
+  [...tabsEl.children].forEach(b => b.classList.toggle("active", b.dataset.id===id));
+  contentEl.innerHTML = (id==="top") ? renderTop() : renderSection(id);
+  window.scrollTo(0,0);
+}
+
+tabDefs.forEach(t => {
+  const b = document.createElement("button");
+  b.dataset.id = t.id;
+  b.innerHTML = esc(t.name) + (t.count!==null ? `<span class="n">${t.count}</span>` : "");
+  if(t.id==="outage") b.classList.add("tab-outage");
+  b.onclick = () => select(t.id);
+  tabsEl.appendChild(b);
+});
+
+document.getElementById("meta").textContent = "업데이트 " + META.generated + " (KST, 최근 48시간)";
+const hasAlert = renderAlert();
+if(hasAlert) document.querySelector(".tab-outage")?.classList.add("has-alert");
+select("top");
+
+/* 5분 자동 새로고침 */
+setTimeout(() => location.reload(), 5*60*1000);
+</script>
+</body>
+</html>
