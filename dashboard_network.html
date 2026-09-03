@@ -73,12 +73,12 @@
 <script src="news_data.js"></script>
 <script>
 const CAT_LABEL={outage:"통신 장애",contract:"수주/계약",tech:"기술/표준",earnings:"실적",exec:"경영/인사",policy:"정책/규제",other:"기타"};
-const SEC_NAME={competitor:"경쟁사",carrier:"통신사",satellite:"위성",policy:"정책·규제",outage:"Outage"};
+const SEC_NAME={competitor:"경쟁사",carrier:"통신사",satellite:"위성·6G",policy:"정책·규제",outage:"Outage"};
 const TABS=[
   {id:"top",    name:"⭐ 주요·최신",  secs:["competitor","carrier","satellite","policy","outage"], mode:"top"},
   {id:"comp",   name:"🏭 경쟁사",     secs:["competitor"], impN:{competitor:5}},
   {id:"telco",  name:"📡 통신사",     secs:["carrier"],    impN:{carrier:5}},
-  {id:"sat",    name:"🛰 위성",       secs:["satellite"],  impN:{satellite:5}},
+  {id:"sat",    name:"🛰 위성·6G",    secs:["satellite"],  impN:{satellite:5}},
   {id:"policy", name:"⚖️ 정책·규제",  secs:["policy"],     impN:{policy:5}},
   {id:"outage", name:"🚨 Outage",     secs:["outage"],     impN:{outage:5}}
 ];
