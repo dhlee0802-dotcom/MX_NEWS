@@ -129,7 +129,8 @@ function render(){
   }else{
     tab.secs.forEach(sid=>{
       const n=(tab.impN&&tab.impN[sid])||5;
-      const imp=secItems(sid).slice().sort((a,b)=>b.importance-a.importance||(b.date||"").localeCompare(a.date||"")).slice(0,n);
+      let imp=secItems(sid).slice().sort((a,b)=>b.importance-a.importance||(b.date||"").localeCompare(a.date||""));
+      imp=capPerProduct(imp,2).slice(0,n);   // 같은 키워드(회사) 최대 2건
       html+=block("⚠ "+(SEC_NAME[sid]||sid)+" 중요 기사 TOP "+n,imp.length+"건",imp.map(a=>artCard(a,false)).join(""),true);
     });
     let merged=[]; tab.secs.forEach(s=>merged=merged.concat(secItems(s)));
