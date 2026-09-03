@@ -94,9 +94,32 @@ function block(title,cnt,inner,isImp){
 function secItems(sid){
   return (typeof NEWS_DATA!=="undefined"&&NEWS_DATA[sid]?NEWS_DATA[sid]:[]).map(a=>({...a,_sid:sid}));
 }
+/* 회사 별칭 매핑: 한/영 표기가 달라도 같은 키로 묶어 2건 제한 적용 */
+const COMPANIES=[
+  ["에릭슨",["ericsson"]],["노키아",["nokia"]],["화웨이",["huawei"]],["zte",[]],["마베니어",["mavenir"]],
+  ["라쿠텐",["rakuten"]],["skt",["sk텔레콤","sk telecom"]],["kt",["케이티","korea telecom"]],
+  ["lg유플러스",["lgu+","lg uplus","lg u+"]],["버라이즌",["verizon"]],["at&t",["에이티앤티"]],
+  ["t모바일",["t-mobile","tmobile"]],["에코스타",["echostar"]],["us cellular",["us셀룰러"]],["차터",["charter"]],
+  ["도코모",["docomo"]],["kddi",[]],["소프트뱅크",["softbank"]],["지오",["jio","릴라이언스","reliance"]],
+  ["에어텔",["airtel","bharti"]],["보다폰",["vodafone"]],["텔러스",["telus"]],["비디오트론",["videotron"]],
+  ["도이치텔레콤",["deutsche telekom"]],["오렌지",["orange"]],["텔레포니카",["telefonica","telefónica"]],
+  ["스타링크",["starlink","스페이스x","spacex"]],["ast",["ast spacemobile"]],
+  ["아마존",["amazon","kuiper","카이퍼","amazon leo"]],["fcc",[]],["과기정통부",[]],["삼성",["samsung"]]
+];
+function hasWord(t,w){
+  if(/^[a-z0-9&+]+$/.test(w)){ // 짧은 영문 약칭은 단어 경계 검사 (kt가 blacktop 등에 걸리지 않게)
+    const e=w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+    return new RegExp("(^|[^a-z0-9])"+e+"($|[^a-z0-9])").test(t);
+  }
+  return t.includes(w);
+}
 function prodKey(a){
-  const t=(a.topic||"").trim();
-  if(t) return t.split(" ")[0];                 // 이슈명 첫 단어 = 회사명
+  const t=(((a.topic||"")+" "+(a.title||""))).toLowerCase();
+  for(const [canon,ali] of COMPANIES){
+    if(hasWord(t,canon)||ali.some(x=>hasWord(t,x))) return canon;
+  }
+  const tp=(a.topic||"").trim();
+  if(tp) return tp.split(" ")[0];
   const m=(a.title||"").toLowerCase().match(/[a-z0-9가-힣]+/); return m?m[0]:"";
 }
 function capPerProduct(list,max){
