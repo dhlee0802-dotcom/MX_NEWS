@@ -51,11 +51,17 @@
   .art-title:hover{color:var(--blue)}
   .art-sum{font-size:12.5px;color:var(--sub);margin-top:3px}
   .art-src{font-size:11px;color:var(--low);margin-top:4px}
+  .hd-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .noti-btn{flex:0 0 auto;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer}
+  .noti-btn.on{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}
 </style>
 </head>
 <body>
 <header>
-  <h1>Samsung Network <span>뉴스 모니터링</span></h1>
+  <div class="hd-top">
+    <h1>Samsung Network <span>뉴스 모니터링</span></h1>
+    <button class="noti-btn" id="notiBtn" onclick="toggleNoti()">🔕 알림 꺼짐</button>
+  </div>
   <div class="hd-meta" id="lastUpdate">news_data.js 없음</div>
   <div class="tabbar" id="tabbar"></div>
 </header>
@@ -134,8 +140,47 @@ function render(){
   document.getElementById("content").innerHTML=html;
 }
 function setTab(id){activeTab=id;render();window.scrollTo(0,0);}
+
+/* ── 5점(긴급) 기사 브라우저 알림 ── */
+const NOTI_KEY="nw_noti_on", SEEN_KEY="nw_noti_seen";
+function notiState(){try{return localStorage.getItem(NOTI_KEY)==="1";}catch(e){return false;}}
+function updateNotiBtn(){
+  const b=document.getElementById("notiBtn");if(!b)return;
+  const on=notiState()&&("Notification" in window)&&Notification.permission==="granted";
+  b.textContent=on?"🔔 알림 켜짐":"🔕 알림 꺼짐";
+  b.classList.toggle("on",on);
+}
+function toggleNoti(){
+  if(notiState()){localStorage.setItem(NOTI_KEY,"0");updateNotiBtn();return;}
+  if(!("Notification" in window)){alert("이 브라우저는 알림을 지원하지 않습니다.");return;}
+  Notification.requestPermission().then(p=>{
+    if(p==="granted"){localStorage.setItem(NOTI_KEY,"1");updateNotiBtn();notifyCritical();}
+    else{alert("브라우저 알림 권한이 거부되어 있습니다. 주소창 옆 사이트 설정에서 알림을 허용해 주세요.");}
+  });
+}
+function notifyCritical(){
+  if(!notiState()||!("Notification" in window)||Notification.permission!=="granted")return;
+  if(typeof NEWS_DATA==="undefined")return;
+  let crit=[];Object.keys(NEWS_DATA).forEach(s=>(NEWS_DATA[s]||[]).forEach(a=>{if((a.importance||0)>=5)crit.push(a);}));
+  crit.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  let seen=[];try{seen=JSON.parse(localStorage.getItem(SEEN_KEY)||"[]");}catch(e){}
+  const seenSet=new Set(seen);let fired=0;
+  for(const a of crit){
+    const k=String(a.url||a.title).slice(0,180);
+    if(seenSet.has(k))continue;
+    seenSet.add(k);
+    if(fired<5){ // 한 번에 최대 5건까지만 알림
+      const n=new Notification("🚨 긴급(5점) 기사",{body:a.title,tag:k});
+      n.onclick=()=>{window.open(a.url,"_blank");n.close();};
+      fired++;
+    }
+  }
+  try{localStorage.setItem(SEEN_KEY,JSON.stringify([...seenSet].slice(-200)));}catch(e){}
+}
+updateNotiBtn();
 setTimeout(()=>{ location.href = location.pathname + "?t=" + Date.now(); }, 5*60*1000);
 render();
+notifyCritical();
 </script>
 <!-- 방문자 집계: 아래 "여기에코드"를 GoatCounter 가입 시 정한 코드로 교체하세요 -->
 <script data-goatcounter="https://여기에코드.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
