@@ -125,8 +125,10 @@ def load_lines(path):
 def crawl():
     cutoff = datetime.now(timezone.utc) - timedelta(hours=HOURS)
     exclude = load_lines("exclude_network.txt")
+    print(f"제외어 {len(exclude)}개 로드: {', '.join(exclude) if exclude else '없음 (exclude_network.txt 미발견 또는 비어있음)'}")
     use_gemini = bool(os.environ.get("GEMINI_API_KEY"))
     pool, seen = [], set()
+    excl_n = [0]
 
     def add(title, summary, src, pub, link, wl):
         if pub < cutoff: return
@@ -139,7 +141,8 @@ def crawl():
             summary = ""
         blob = (title + " " + summary)
         bl = blob.lower()
-        if any(x in bl for x in exclude): return
+        if any(x in bl for x in exclude):
+            excl_n[0] += 1; return
         sid = section_id(blob)
         if not sid:
             if use_gemini: sid = "unknown"
@@ -205,11 +208,18 @@ def crawl():
         print("네이버 뉴스 수집 완료")
     else:
         print("안내: NAVER_CLIENT_ID/SECRET 미등록 - 네이버 수집 생략")
-    print(f"수집 완료 / 후보 풀: {len(pool)}건")
+    print(f"수집 완료 / 후보 풀: {len(pool)}건 / 제외어 필터 {excl_n[0]}건 제외")
 
     engine = "키워드 분류"
     if use_gemini and pool:
         engine = gemini_judge(pool) or engine
+    # 2차 필터: Gemini가 만든 한국어 요약에도 제외어 재검사
+    # (영어 원문엔 없던 제외어가 번역 요약에서 드러나는 경우 대응)
+    if exclude:
+        before = len(pool)
+        pool[:] = [a for a in pool if not any(x in (a["title"] + " " + a["summary"]).lower() for x in exclude)]
+        if before - len(pool):
+            print(f"제외어 2차 필터(요약 기준): {before - len(pool)}건 제외")
     pool[:] = [a for a in pool if a["sid"] not in ("unknown","drop")]
     return pool, engine
 
