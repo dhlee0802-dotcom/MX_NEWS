@@ -134,7 +134,7 @@ def crawl():
             "summary": (summary[:220] + "…") if len(summary) > 220 else summary,
             "source": src or "Google News",
             "date": pub.astimezone(KST).strftime("%Y-%m-%d %H:%M"),
-            "url": link, "category": category(blob), "importance": score(blob), "wl": wl, "topic": "",
+            "url": link, "category": category(blob), "importance": score(blob), "wl": wl, "topic": "", "alert": False,
         })
 
     for src, url in FEEDS:
@@ -216,10 +216,11 @@ def gemini_judge(pool):
 섹션(sec): phone(스마트폰) tablet(태블릿) pc(노트북/PC) watch(스마트워치) tws(무선이어폰) glasses(XR/AI글래스) wallet(결제/월렛) health(디지털헬스) memchina(메모리 가격·중국 스마트폰 제조사 동향) none(MX사업과 무관→제외)
 카테고리(cat): quality launch price exec policy community other
 중요도(imp): 5=삼성 MX에 즉각 대응 필요한 긴급, 4=경영진 보고 필요, 3=주시, 2=참고, 1=단순 정보
+알람(alert): true/false. 다음 세 조건을 모두 충족할 때만 true — ① 루머·전망·유출이 아닌 실제 발생 사건(공식 발표·판결·사고·조치), ② 삼성 MX사업에 직접 영향(당사 제품 품질·안전 사고/리콜, 당사 대상 소송·규제·판매금지, 당사 제품·서비스 보안사고, 관세·수출규제 등 정부 조치 확정), ③ 당일 인지가 필요한 시급성. 신제품 유출·루머·리뷰·전망·점유율 통계·예고된 이벤트는 중요도가 높아도 반드시 false. 확실하지 않으면 false.
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "제품명 사건" 형식으로, 제품명을 첫 단어로 동일하게 표기할 것(예: "북6 출시", "북6 리뷰", "북6 가격" — 제품명 표기는 전부 통일). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 같은 제품의 출시·공개·발표·리뷰 보도는 원칙적으로 하나의 이슈로 묶을 것. 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장이나 영어 원문 요약을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 4~5문장 300자 내외로, 핵심 사실 → 배경·수치 → 경쟁 구도 → 사업적 의미 순으로 충실히 작성. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 억지로 늘리지 말고 짧게 유지.
 
-모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"phone","cat":"launch","imp":3,"topic":"언팩 초청장","sum":"..."}}]
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"phone","cat":"launch","imp":3,"alert":false,"topic":"언팩 초청장","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
@@ -255,6 +256,7 @@ def gemini_judge(pool):
             except Exception: pass
             if j.get("sum"): item["summary"] = str(j["sum"])
             if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
+            item["alert"] = (j.get("alert") is True)
             applied += 1
         return applied
 
@@ -352,6 +354,33 @@ def resolve_google_links(all_items):
             pass
     print(f"구글 뉴스 링크 원본 변환: {n}/{len(targets)}건")
 
+def notify_urgent(pool):
+    """중요도 5 신규 기사를 ntfy 푸시로 알림 (NTFY_TOPIC 미설정 시 생략, 회차당 최대 3건)"""
+    topic = os.environ.get("NTFY_TOPIC")
+    if not topic: return
+    urgent = [a for a in pool if a.get("alert") and a.get("sid") in VALID_IDS]
+    if not urgent: return
+    notified = set()
+    if os.path.exists("notified.txt"):
+        with open("notified.txt", encoding="utf-8") as f:
+            notified = set(l.strip() for l in f if l.strip())
+    sent = 0
+    with open("notified.txt", "a", encoding="utf-8") as f:
+        for a in urgent:
+            key = norm_key(a["title"])
+            if key in notified: continue
+            f.write(key + "\n"); notified.add(key)
+            if sent >= 3: continue   # 알림 폭주 방지 (기록은 남기되 전송은 3건까지)
+            try:
+                body = f"🚨 [긴급] {a['title']}\n{a.get('summary','')[:120]}\n{a['source']} · {a['date']}\n{a['url']}"
+                req = urllib.request.Request(f"https://ntfy.sh/{topic}", data=body.encode("utf-8"), method="POST")
+                req.add_header("Priority", "high")
+                urllib.request.urlopen(req, timeout=15)
+                sent += 1
+            except Exception as ex:
+                print(f"경고: 알림 전송 실패 - {ex}")
+    if sent: print(f"긴급 알림 전송: {sent}건")
+
 def main():
     pool, engine = crawl()
     data = {}
@@ -366,6 +395,7 @@ def main():
     latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")} for a in latest]
     shown = [a for arr in data.values() for a in arr] + latest
     resolve_google_links(shown)
+    notify_urgent(pool)
     meta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M") + " · " + engine,
             "sections": [{"id": s[0], "name": s[1]} for s in [next(x for x in SEC_DEFS if x[0]==o) for o in ORDER]]}
     js = ("const NEWS_META = " + json.dumps(meta, ensure_ascii=False) + ";\n"
