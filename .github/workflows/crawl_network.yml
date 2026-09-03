@@ -1,0 +1,42 @@
+name: Network News Crawl
+
+on:
+  schedule:
+    - cron: "12,42 * * * *"   # 30분 주기, MX(7,27,47분)와 겹치지 않게 배치
+  workflow_dispatch:
+
+concurrency:
+  group: network-crawl
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install feedparser googlenewsdecoder
+
+      - name: Run crawler
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+        run: python crawler_network.py
+
+      - name: Commit & push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add docs/network.html gemini_model_nw.txt || true
+          git commit -m "network dashboard update" || echo "no changes"
+          git pull --rebase -X theirs
+          git push
