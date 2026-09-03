@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>네트워크 뉴스 모니터링</title>
+<style>
+  :root{
+    --navy:#0f2a5c; --blue:#1e5eff; --blue-soft:#eef3ff;
+    --ink:#1a2233; --sub:#5b6577; --line:#e4e8f0;
+    --bg:#f6f8fb; --card:#ffffff;
+    --crit:#d63031; --crit-bg:#fdeeee; --high:#e67e22; --high-bg:#fdf3e7;
+    --mid:#2f80ed; --mid-bg:#ebf3fe; --low:#8a94a6; --low-bg:#f1f3f7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55}
+  header{background:var(--card);border-bottom:1px solid var(--line);padding:14px 18px 0}
+  h1{font-size:18px;font-weight:800;color:var(--navy);letter-spacing:-.3px}
+  h1 span{color:var(--blue)}
+  .hd-meta{font-size:11.5px;color:var(--sub);margin-top:2px}
+  .tabbar{display:flex;gap:2px;overflow-x:auto;margin-top:10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tabbar::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;padding:9px 14px;font-size:13px;font-weight:700;color:var(--sub);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+  .tab.on{color:var(--blue);border-bottom-color:var(--blue)}
+  main{padding:14px 16px 40px;max-width:900px;margin:0 auto}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
+  .blk-hd{padding:11px 14px;border-bottom:1px solid var(--line);background:#fbfcfe;display:flex;align-items:baseline;gap:8px}
+  .blk-hd h3{font-size:14px;font-weight:800;color:var(--navy)}
+  .blk-hd.imp h3{color:var(--crit)}
+  .blk-hd .cnt{font-size:11px;color:var(--sub);font-weight:500}
+  .blk-body{padding:4px 14px 10px}
+  .empty{color:var(--low);font-size:12.5px;padding:12px 0;text-align:center}
+  .art{padding:10px 0;border-top:1px solid var(--line)}
+  .art:first-child{border-top:none}
+  .art-tags{display:flex;gap:5px;margin-bottom:4px;flex-wrap:wrap;align-items:center}
+  .imp{font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:4px}
+  .imp.i5{background:var(--crit);color:#fff}
+  .imp.i4{background:var(--crit-bg);color:var(--crit)}
+  .imp.i3{background:var(--high-bg);color:var(--high)}
+  .imp.i2{background:var(--mid-bg);color:var(--mid)}
+  .imp.i1{background:var(--low-bg);color:var(--low)}
+  .cat{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--low-bg);color:var(--sub)}
+  .cat.outage{background:#fdeeee;color:#c0392b}
+  .cat.contract{background:#e8f8ef;color:#1e8e4e}
+  .cat.tech{background:#f0ebfa;color:#6c3fc5}
+  .cat.earnings{background:#fdf3e7;color:#c46a10}
+  .cat.exec{background:#fff6d9;color:#9a7b00}
+  .cat.policy{background:#ebf3fe;color:#1e5eff}
+  .sec-tag{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--blue-soft);color:var(--blue)}
+  .art-title{font-size:13.5px;font-weight:700;color:var(--ink);text-decoration:none;display:block}
+  .art-title:hover{color:var(--blue)}
+  .art-sum{font-size:12.5px;color:var(--sub);margin-top:3px}
+  .art-src{font-size:11px;color:var(--low);margin-top:4px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Samsung Network <span>뉴스 모니터링</span></h1>
+  <div class="hd-meta" id="lastUpdate">news_data.js 없음</div>
+  <div class="tabbar" id="tabbar"></div>
+</header>
+<main id="content"></main>
+<script src="news_data.js"></script>
+<script>
+const CAT_LABEL={outage:"통신 장애",contract:"수주/계약",tech:"기술/표준",earnings:"실적",exec:"경영/인사",policy:"정책/규제",other:"기타"};
+const SEC_NAME={competitor:"경쟁사",carrier:"통신사",satellite:"위성",policy:"정책·규제",outage:"Outage"};
+const TABS=[
+  {id:"top",    name:"⭐ 주요·최신",  secs:["competitor","carrier","satellite","policy","outage"], mode:"top"},
+  {id:"comp",   name:"🏭 경쟁사",     secs:["competitor"], impN:{competitor:5}},
+  {id:"telco",  name:"📡 통신사",     secs:["carrier"],    impN:{carrier:5}},
+  {id:"sat",    name:"🛰 위성",       secs:["satellite"],  impN:{satellite:5}},
+  {id:"policy", name:"⚖️ 정책·규제",  secs:["policy"],     impN:{policy:5}},
+  {id:"outage", name:"🚨 Outage",     secs:["outage"],     impN:{outage:5}}
+];
+let activeTab="top";
+function esc(s){return String(s).replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));}
+function impBadge(n){const t=n>=5?"긴급":n>=4?"중요":n>=3?"주목":n>=2?"참고":"저";return `<span class="imp i${n}">${t} ${n}</span>`;}
+function artCard(a,showSec){
+  return `<div class="art">
+    <div class="art-tags">${impBadge(a.importance)}<span class="cat ${a.category}">${CAT_LABEL[a.category]||a.category}</span>${showSec&&a._sid?`<span class="sec-tag">${SEC_NAME[a._sid]||a._sid}</span>`:""}</div>
+    <a class="art-title" href="${a.url}" target="_blank">${esc(a.title)}</a>
+    <div class="art-sum">${esc(a.summary||"")}</div>
+    <div class="art-src">${esc(a.source)} · ${esc(a.date)}</div></div>`;
+}
+function block(title,cnt,inner,isImp){
+  return `<div class="block"><div class="blk-hd${isImp?" imp":""}"><h3>${title}</h3><span class="cnt">${cnt}</span></div><div class="blk-body">${inner||'<div class="empty">해당 기사 없음</div>'}</div></div>`;
+}
+function secItems(sid){
+  return (typeof NEWS_DATA!=="undefined"&&NEWS_DATA[sid]?NEWS_DATA[sid]:[]).map(a=>({...a,_sid:sid}));
+}
+function prodKey(a){
+  const t=(a.topic||"").trim();
+  if(t) return t.split(" ")[0];                 // 이슈명 첫 단어 = 회사명
+  const m=(a.title||"").toLowerCase().match(/[a-z0-9가-힣]+/); return m?m[0]:"";
+}
+function capPerProduct(list,max){
+  const cnt={},out=[];
+  for(const a of list){
+    const k=prodKey(a); if(!k){out.push(a);continue;}
+    cnt[k]=(cnt[k]||0)+1;
+    if(cnt[k]<=max) out.push(a);
+  }
+  return out;
+}
+function render(){
+  if(typeof NEWS_META==="undefined"){return;}
+  document.getElementById("lastUpdate").textContent="최근 48시간 · "+NEWS_META.generated;
+  document.getElementById("tabbar").innerHTML=TABS.map(t=>`<div class="tab${t.id===activeTab?" on":""}" onclick="setTab('${t.id}')">${t.name}</div>`).join("");
+  const tab=TABS.find(t=>t.id===activeTab);
+  let html="";
+  if(tab.mode==="top"){
+    // 전국 단위 대규모 통신망 장애(중요도 5)만 최상단 경보 블록으로 노출
+    const bigOut=secItems("outage").filter(a=>a.importance>=5)
+      .sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+    if(bigOut.length) html+=block("🚨 대규모 통신망 장애",bigOut.length+"건",bigOut.map(a=>artCard(a,false)).join(""),true);
+    let allArts=[]; tab.secs.forEach(s=>{if(s!=="outage")allArts=allArts.concat(secItems(s));});
+    let imp=allArts.filter(a=>a.importance>=4).sort((a,b)=>b.importance-a.importance||(b.date||"").localeCompare(a.date||""));
+    imp=capPerProduct(imp,2);                    // 같은 회사 최대 2건
+    html+=block("⚠ 중요 기사 (중요도 4·5)",imp.length+"건",imp.map(a=>artCard(a,true)).join(""),true);
+    let latest=(typeof NEWS_LATEST!=="undefined"?NEWS_LATEST:[]).map(a=>({...a,_sid:a.sid}));
+    latest=capPerProduct(latest,2).slice(0,20);  // 같은 회사 최대 2건
+    html+=block("🕐 최신 기사",latest.length+"건",latest.map(a=>artCard(a,true)).join(""));
+  }else{
+    tab.secs.forEach(sid=>{
+      const n=(tab.impN&&tab.impN[sid])||5;
+      const imp=secItems(sid).slice().sort((a,b)=>b.importance-a.importance||(b.date||"").localeCompare(a.date||"")).slice(0,n);
+      html+=block("⚠ "+(SEC_NAME[sid]||sid)+" 중요 기사 TOP "+n,imp.length+"건",imp.map(a=>artCard(a,false)).join(""),true);
+    });
+    let merged=[]; tab.secs.forEach(s=>merged=merged.concat(secItems(s)));
+    merged.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+    const latest=merged.slice(0,20);
+    html+=block("🕐 최신 기사",latest.length+"건",latest.map(a=>artCard(a,tab.secs.length>1)).join(""));
+  }
+  document.getElementById("content").innerHTML=html;
+}
+function setTab(id){activeTab=id;render();window.scrollTo(0,0);}
+setTimeout(()=>{ location.href = location.pathname + "?t=" + Date.now(); }, 5*60*1000);
+render();
+</script>
+<!-- 방문자 집계: 아래 "여기에코드"를 GoatCounter 가입 시 정한 코드로 교체하세요 -->
+<script data-goatcounter="https://여기에코드.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
