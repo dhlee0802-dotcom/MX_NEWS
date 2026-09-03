@@ -109,10 +109,11 @@ def category(text):
     return "other"
 
 def score(text):
+    # 키워드 폴백은 최대 4점 — 5점은 Gemini가 사업 영향을 확인한 경우에만 부여
     t = text.lower(); s = 2
-    if any(k.lower() in t for k in CRIT): s += 2
+    if any(k.lower() in t for k in CRIT): s += 1
     if any(k.lower() in t for k in HIGH): s += 1
-    return min(5, s)
+    return min(4, s)
 
 def load_lines(path):
     if os.path.exists(path):
@@ -235,10 +236,16 @@ policy = 통신 정책·규제(FCC, 과기정통부, Digital Networks Act, EU Cy
 outage = 위 통신사의 통신망 장애 발생·확산·복구 보도
 none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰 단말·요금제 프로모션·소비자 마케팅·연예 기사는 none
 
-판정 규칙: 통신망 장애 기사는 통신사 이름이 있어도 반드시 sec=outage로 분류. 전국 규모·수백만 가입자·수 시간 이상 지속 장애면 imp=5, 국지적·경미한 장애면 imp=3 이하.
+판정 규칙: 통신망 장애 기사는 통신사 이름이 있어도 반드시 sec=outage로 분류. 장애 기사의 중요도는 둘 중 하나만 가능 — 전국 단위 대규모 장애(전국 규모 또는 수백만 가입자, 수 시간 이상 지속)면 imp=5, 그 외 지역·일부 서비스·경미한 장애는 imp=3 이하. 장애 기사에 imp=4는 부여 금지.
 
 카테고리(cat): outage contract tech earnings exec policy other
-중요도(imp): 5=삼성 네트워크사업에 즉각 대응 필요(대규모 통신장애, 주요 통신사의 대형 장비 수주/실주, 삼성 직접 관련 긴급), 4=경영진 보고 필요(주요 수주전 동향, 주파수 경매 결과, 규제 확정, 경쟁사 대형 발표), 3=주시, 2=참고, 1=단순 정보
+중요도(imp) — 보수적으로 판정하고 5점은 극히 예외적으로만 부여(전체의 5% 미만이어야 정상):
+5 = 이동통신 사업·장비 사업에 확정적이고 중대한 영향이 있는 경우만: ①전국 단위 대규모 통신망 장애 ②삼성전자 네트워크사업이 당사자인 대형 수주·실주·제재의 확정 ③시장 구도를 바꾸는 확정 딜(주요 통신사·장비사 대형 M&A 성사, 수조 원대 장비 공급계약 체결). 계획·검토·협상 중·루머·전망·애널리스트 의견 기사는 규모가 커도 5 불가
+4 = 경영진 보고 가치: 주요 수주전 진행 상황, 주파수 경매 결과, 규제 확정, 경쟁사의 대형 발표
+3 = 주시할 업계 동향
+2 = 참고 수준
+1 = 단순 정보·홍보성
+회사 이름이 크더라도 단순 언급·제품 소개·인터뷰·시황 전망 기사는 3 이하.
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장이나 영어 원문 요약을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 4~5문장 300자 내외로, 핵심 사실 → 배경·수치 → 경쟁 구도 → 사업적 의미 순으로 충실히 작성. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 억지로 늘리지 말고 짧게 유지.
 
@@ -380,11 +387,13 @@ def main():
     data = {}
     for sid, name, _ in SEC_DEFS:
         items = [a for a in pool if a["sid"] == sid]
-        items.sort(key=lambda a: (a["wl"], a["importance"], a["date"]), reverse=True)
+        items.sort(key=lambda a: (a["importance"], a["date"]), reverse=True)  # 중요도 -> 최신순
         items = dedupe_topics(items)
         data[sid] = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","wl","topic")} for a in items[:30]]
         print(f"{name}: {len(items)}건 -> {len(data[sid])}건")
-    latest = sorted(pool, key=lambda a: a["date"], reverse=True)
+    # 최신 탭: 소규모 장애(outage & imp<5)는 제외 — 대규모 장애(imp=5)만 주요·최신에 노출
+    latest = sorted([a for a in pool if not (a["sid"] == "outage" and a["importance"] < 5)],
+                    key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
     latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")} for a in latest]
     shown = [a for arr in data.values() for a in arr] + latest
