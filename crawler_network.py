@@ -87,10 +87,11 @@ SEC_DEFS = [  # 검사 순서 = 분류 우선순위 (outage 최우선)
 ]
 ORDER = ["competitor","carrier","satellite","policy","outage"]
 VALID_IDS = [s[0] for s in SEC_DEFS]
-# outage 키워드 폴백 범위 제한: 통신사명 또는 통신망 관련 단어가 함께 있어야 outage로 분류
-# (ChatGPT·클라우드·앱 등 비통신 서비스 장애가 outage로 잡히는 것 방지)
-OUTAGE_SCOPE = next(s[2] for s in SEC_DEFS if s[0] == "carrier") + \
-    ["통신","telecom","cellular","mobile network","이동통신","유무선","기지국","휴대폰"]
+# outage 키워드 폴백 범위 제한: 명단의 이동통신사 이름이 직접 언급된 경우에만 outage로 분류
+# (ChatGPT·클라우드 장애, 통신장애를 제도·책임 문맥에서 언급만 하는 기사 차단)
+OUTAGE_SCOPE = [k for k in next(s[2] for s in SEC_DEFS if s[0] == "carrier")
+                if not (k.isascii() and len(k) <= 3)] + ["이동통신사","통신3사","통신 3사"]
+OUTAGE_SCOPE_RE = re.compile(r"(?<![a-z0-9])(kt|skt)(?![a-z0-9])")  # 짧은 약칭은 단어 경계로만 검사 (desktop 등 오탐 방지)
 
 CATS = [
     ("outage", ["outage","장애","먹통","복구","disruption","restore","서비스 중단"]),
@@ -115,8 +116,8 @@ def section_id(text):
     t = text.lower().replace("장애인", "")
     for sid, _, kws in SEC_DEFS:
         if any(k.lower() in t for k in kws):
-            if sid == "outage" and not any(h.lower() in t for h in OUTAGE_SCOPE):
-                continue  # 통신사·통신망 언급 없는 장애 기사는 outage 아님 -> 다음 섹션 검사
+            if sid == "outage" and not (any(h.lower() in t for h in OUTAGE_SCOPE) or OUTAGE_SCOPE_RE.search(t)):
+                continue  # 명단의 이동통신사 언급 없는 장애 기사는 outage 아님 -> 다음 섹션 검사
             return sid
     return None
 
@@ -266,7 +267,7 @@ policy = 통신 정책·규제(FCC, 과기정통부, Digital Networks Act, EU Cy
 outage = 위에 나열한 이동통신사의 통신망(무선망·유선 인터넷) 장애 발생·확산·복구 보도만 해당
 none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰 단말·요금제 프로모션·소비자 마케팅·연예 기사는 none. 원자력·건설·에너지·조선·바이오 등 통신과 무관한 산업 기사는 회사명이 겹쳐도 none — 삼성물산·삼성SDI·삼성중공업 등 삼성전자가 아닌 삼성 계열사 기사, 그리고 삼성전자 기사라도 반도체·가전·스마트폰 등 네트워크사업 외 분야 기사는 모두 none
 
-판정 규칙: 실제로 발생한 이동통신사의 통신망 장애·복구 보도만 sec=outage에 해당하며, 이 경우 통신사 이름이 있어도 반드시 outage로 분류. 통신사가 아닌 서비스의 장애 — ChatGPT 등 AI 서비스, AWS·Azure·Google Cloud·Cloudflare 등 클라우드/CDN, 앱·플랫폼·게임·금융·SNS 서비스 장애 — 는 outage가 절대 아니며 none으로 제외("outage"라는 단어가 있어도 통신사 통신망 장애가 아니면 제외). 해킹·보안사고 기사는 그로 인해 통신 서비스 중단·장애가 실제 발생한 경우에만 outage이며, 서비스 영향이 없는 단순 해킹·개인정보 유출·보안 취약점 기사는 none으로 제외. 다음도 outage가 절대 아님 — 장애인(disability) 복지·요금제·접근성 기사(무관하면 none), 축제·행사·재난 대비 통신 지원이나 트래픽 증설 기사(carrier 또는 none), 장애 예방 훈련·점검·모의훈련 기사. 장애 기사의 중요도는 둘 중 하나만 가능 — 전국 단위 대규모 장애(전국 규모 또는 수백만 가입자, 수 시간 이상 지속)면 imp=5, 그 외 지역·일부 서비스·경미한 장애는 imp=3 이하. 장애 기사에 imp=4는 부여 금지.
+판정 규칙: sec=outage는 위 명단의 특정 이동통신사가 운영하는 통신망에서 실제로 발생한 장애의 발생·확산·복구 보도만 해당하며, 이 경우 통신사 이름이 있어도 반드시 outage로 분류. 통신장애를 언급만 하는 기사는 outage가 아님 — 통신장애 관련 제도·법령·책임 범위·보상 기준 논의, 의료·재난·행정 등 다른 주제의 기사에서 통신장애를 부수적으로 언급하는 경우, 과거 장애의 회고·통계 기사는 실제 장애 발생 보도가 아니므로 outage 금지(내용에 따라 policy·carrier 또는 none). 통신사가 아닌 서비스의 장애 — ChatGPT 등 AI 서비스, AWS·Azure·Google Cloud·Cloudflare 등 클라우드/CDN, 앱·플랫폼·게임·금융·SNS 서비스 장애 — 는 outage가 절대 아니며 none으로 제외("outage"라는 단어가 있어도 통신사 통신망 장애가 아니면 제외). 해킹·보안사고 기사는 그로 인해 통신 서비스 중단·장애가 실제 발생한 경우에만 outage이며, 서비스 영향이 없는 단순 해킹·개인정보 유출·보안 취약점 기사는 none으로 제외. 다음도 outage가 절대 아님 — 장애인(disability) 복지·요금제·접근성 기사(무관하면 none), 축제·행사·재난 대비 통신 지원이나 트래픽 증설 기사(carrier 또는 none), 장애 예방 훈련·점검·모의훈련 기사. 장애 기사의 중요도는 둘 중 하나만 가능 — 전국 단위 대규모 장애(전국 규모 또는 수백만 가입자, 수 시간 이상 지속)면 imp=5, 그 외 지역·일부 서비스·경미한 장애는 imp=3 이하. 장애 기사에 imp=4는 부여 금지.
 
 카테고리(cat): outage contract tech earnings exec policy other
 중요도(imp) — 보수적으로 판정하고 5점은 아래 유형에 해당할 때만 부여:
