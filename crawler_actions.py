@@ -386,6 +386,54 @@ def notify_urgent(pool):
                 print(f"경고: 알림 전송 실패 - {ex}")
     if sent: print(f"긴급 알림 전송: {sent}건")
 
+def semantic_dedupe(data, latest):
+    """화면 표시 대상 기사 제목을 Gemini에 보내 같은 사건끼리 그룹핑 -> 목록별로 그룹당 1건만 유지"""
+    key = os.environ.get("GEMINI_API_KEY")
+    if not key: return
+    lists = list(data.values()) + [latest]
+    title_idx, order = {}, []
+    for lst in lists:
+        for a in lst:
+            t = a["title"]
+            if t not in title_idx:
+                title_idx[t] = len(order); order.append(t)
+    if len(order) < 2: return
+    prompt = ("아래 뉴스 제목 목록에서 같은 사건·발표·조치를 다룬 기사끼리 동일한 그룹 번호(g)를 부여하세요. "
+              "언어(한국어/영어)나 표현이 달라도 같은 사건이면 반드시 같은 그룹. 확실히 같은 사건일 때만 묶고 애매하면 다른 그룹. "
+              "모든 번호에 대해 JSON 배열만 출력: [{\"i\":0,\"g\":1},{\"i\":1,\"g\":1},{\"i\":2,\"g\":2}]\n\n"
+              + "\n".join(f"{i} | {t}" for i, t in enumerate(order)))
+    payload = {"contents":[{"parts":[{"text":prompt}]}],
+               "generationConfig":{"response_mime_type":"application/json","temperature":0}}
+    model = "gemini-2.5-flash-lite"
+    if os.path.exists("gemini_model.txt"):
+        model = open("gemini_model.txt", encoding="utf-8").read().strip() or model
+    try:
+        r = gemini_call(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}", payload, timeout=90)
+        raw = r["candidates"][0]["content"]["parts"][0]["text"]
+        try: judged = json.loads(raw)
+        except Exception:
+            judged = []
+            for m in re.finditer(r"\{[^{}]*\}", raw):
+                try: judged.append(json.loads(m.group()))
+                except Exception: pass
+        groups = {}
+        for j in judged:
+            try: groups[int(j["i"])] = j["g"]
+            except Exception: continue
+        removed = 0
+        for lst in lists:
+            seen_g, keep = set(), []
+            for a in lst:
+                g = groups.get(title_idx.get(a["title"], -1))
+                if g is not None and g in seen_g:
+                    removed += 1; continue
+                if g is not None: seen_g.add(g)
+                keep.append(a)
+            lst[:] = keep
+        print(f"의미 기반 중복 제거: {removed}건 제거")
+    except Exception as ex:
+        print(f"경고: 의미 기반 중복 제거 생략 - {ex}")
+
 def main():
     pool, engine = crawl()
     data = {}
@@ -398,6 +446,7 @@ def main():
     latest = sorted(pool, key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
     latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic","alert")} for a in latest]
+    semantic_dedupe(data, latest)
     shown = [a for arr in data.values() for a in arr] + latest
     resolve_google_links(shown)
     notify_urgent(pool)
