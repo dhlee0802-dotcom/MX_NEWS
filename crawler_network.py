@@ -26,6 +26,9 @@ FEEDS = [
     ("WSJ Tech", "https://feeds.a.dj.com/rss/RSSWSJD.xml"),
     ("Financial Times Tech", "https://www.ft.com/technology?format=rss"),
     ("Nikkei Asia", "https://asia.nikkei.com/rss/feed/nar"),
+    # ── 일본 ──
+    ("ケータイ Watch", "https://k-tai.watch.impress.co.jp/data/rss/1.0/ktw/feed.rdf"),
+    ("ITmedia Mobile", "https://rss.itmedia.co.jp/rss/2.0/mobile.xml"),
     # ── 인도 ──
     ("ET Telecom", "https://telecom.economictimes.indiatimes.com/rss/topstories"),
     ("Business Standard", "https://www.business-standard.com/rss/technology-108.rss"),
@@ -48,6 +51,8 @@ GN_QUERIES = [
     "Verizon OR AT&T OR T-Mobile network",
     "EchoStar OR Viaero OR US Cellular OR Charter spectrum",
     "NTT DOCOMO OR KDDI OR SoftBank OR Rakuten Mobile network",
+    "ドコモ OR KDDI OR ソフトバンク 基地局",
+    "楽天モバイル OR 通信障害",
     "Reliance Jio OR Bharti Airtel OR Vodafone Idea",
     "TELUS OR Videotron OR SaskTel network",
     "Vodafone OR Deutsche Telekom OR Orange OR Telefonica network",
@@ -185,7 +190,8 @@ def crawl():
 
     for q in GN_QUERIES:
         ko = bool(re.search(r"[가-힣]", q))
-        hl, gl, ceid = ("ko","KR","KR:ko") if ko else ("en-US","US","US:en")
+        ja = bool(re.search(r"[ぁ-んァ-ヶ一-龯]", q))
+        hl, gl, ceid = ("ko","KR","KR:ko") if ko else ("ja","JP","JP:ja") if ja else ("en-US","US","US:en")
         url = f"https://news.google.com/rss/search?q={quote(q+' when:2d')}&hl={hl}&gl={gl}&ceid={ceid}"
         try:
             feed = feedparser.parse(url)
