@@ -316,20 +316,25 @@ def _tokens(t):
     return set(re.findall(r"[a-z0-9가-힣]+", t.lower()))
 
 def dedupe_topics(items):
-    """1차: 같은 이슈명은 1건만. 2차: 이슈명이 달라도 제목 단어가 55% 이상 겹치면 중복으로 간주"""
-    out, seen_topics, kept_tokens = [], set(), []
+    """1차: 동일 이슈명 1건만. 2차: 이슈명 단어가 50% 이상 겹치면 같은 사건으로 간주.
+       3차: 제목 단어가 55% 이상 겹치면 중복. (한/영 혼재·묶음 분할로 이슈명이 갈리는 경우 대비)"""
+    out, seen_topics, kept_topic_toks, kept_title_toks = [], set(), [], []
     for a in items:
         t = a.get("topic","")
-        if t:
-            if t in seen_topics: continue
-        tk = _tokens(a.get("title",""))
+        if t and t in seen_topics: continue
+        ttk = _tokens(t) if t else set()
         dup = False
-        for x in kept_tokens:
-            inter = len(tk & x); union = len(tk | x)
-            if union and inter / union >= 0.55: dup = True; break
+        if ttk:
+            for x in kept_topic_toks:
+                if x and len(ttk & x) / max(1, min(len(ttk), len(x))) >= 0.6: dup = True; break
+        if not dup:
+            tk = _tokens(a.get("title",""))
+            for x in kept_title_toks:
+                if len(tk & x) / max(1, len(tk | x)) >= 0.55: dup = True; break
         if dup: continue
         if t: seen_topics.add(t)
-        kept_tokens.append(tk)
+        kept_topic_toks.append(ttk)
+        kept_title_toks.append(_tokens(a.get("title","")))
         out.append(a)
     return out
 
