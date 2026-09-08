@@ -66,25 +66,13 @@ const CAT_LABEL={quality:"품질 이슈",launch:"신제품/출시",price:"가격
 const SEC_NAME={phone:"스마트폰",tablet:"태블릿",pc:"PC",watch:"워치",tws:"TWS",glasses:"XR·AI글래스",wallet:"삼성월렛",health:"헬스",memchina:"메모리·中폰"};
 const TABS=[
   {id:"top",     name:"⭐ 주요·최신", secs:["phone","tablet","pc","watch","tws","glasses","wallet","health","memchina"], mode:"top"},
+  {id:"daily",   name:"📌 일자별 중요", secs:[], mode:"daily"},
   {id:"phone",   name:"📱 스마트폰",  secs:["phone"],            impN:{phone:10}},
   {id:"memcn",   name:"🇨🇳 메모리·中폰", secs:["memchina"],      impN:{memchina:5}},
   {id:"tabpc",   name:"📟 태블릿·PC", secs:["tablet","pc"],      impN:{tablet:5,pc:5}},
   {id:"wear",    name:"⌚ 워치·TWS",  secs:["watch","tws"],      impN:{watch:5,tws:5}},
   {id:"xr",      name:"🕶 XR",        secs:["glasses"],          impN:{glasses:5}},
   {id:"payhp",   name:"💳 월렛·헬스", secs:["wallet","health"],  impN:{wallet:5,health:5}}
-];
-let activeTab="top";
-function esc(s){return String(s).replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));}
-function impBadge(n){const t=n>=5?"긴급":n>=4?"중요":n>=3?"주목":n>=2?"참고":"저";return `<span class="imp i${n}">${t} ${n}</span>`;}
-function artCard(a,showSec){
-  return `<div class="art">
-    <div class="art-tags">${impBadge(a.importance)}<span class="cat ${a.category}">${CAT_LABEL[a.category]||a.category}</span>${showSec&&a._sid?`<span class="sec-tag">${SEC_NAME[a._sid]||a._sid}</span>`:""}</div>
-    <a class="art-title" href="${a.url}" target="_blank">${esc(a.title)}</a>
-    <div class="art-sum">${esc(a.summary||"")}</div>
-    <div class="art-src">${esc(a.source)} · ${esc(a.date)}</div></div>`;
-}
-function block(title,cnt,inner,isImp){
-  return `<div class="block"><div class="blk-hd${isImp?" imp":""}"><h3>${title}</h3><span class="cnt">${cnt}</span></div><div class="blk-body">${inner||'<div class="empty">해당 기사 없음</div>'}</div></div>`;
 }
 function secItems(sid){
   return (typeof NEWS_DATA!=="undefined"&&NEWS_DATA[sid]?NEWS_DATA[sid]:[]).map(a=>({...a,_sid:sid}));
@@ -109,7 +97,15 @@ function render(){
   document.getElementById("tabbar").innerHTML=TABS.map(t=>`<div class="tab${t.id===activeTab?" on":""}" onclick="setTab('${t.id}')">${t.name}</div>`).join("");
   const tab=TABS.find(t=>t.id===activeTab);
   let html="";
-  if(tab.mode==="top"){
+  if(tab.mode==="daily"){
+    const arch=(typeof NEWS_ARCHIVE!=="undefined")?NEWS_ARCHIVE:{};
+    const days=Object.keys(arch).sort().reverse();
+    if(!days.length){ html+=block("📌 일자별 중요 기사","0건","",true); }
+    days.forEach(d=>{
+      const items=(arch[d]||[]).map(a=>({...a,_sid:a.sid}));
+      html+=block("📌 "+d+" 중요 기사",items.length+"건",items.map(a=>artCard(a,true)).join(""),true);
+    });
+  }else if(tab.mode==="top"){
     let allArts=[]; tab.secs.forEach(s=>allArts=allArts.concat(secItems(s)));
     let imp=allArts.filter(a=>a.importance>=4).sort((a,b)=>b.importance-a.importance||(b.date||"").localeCompare(a.date||""));
     imp=capPerProduct(imp,2);                    // 같은 제품 최대 2건
