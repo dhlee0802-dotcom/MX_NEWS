@@ -12,6 +12,7 @@ from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
 
 HOURS, PER, LATEST_N = 48, 5, 20
+ARCHIVE_FILE, ARCHIVE_DAYS, ARCHIVE_MIN_IMP = "network_archive.json", 30, 4
 KST = timezone(timedelta(hours=9))
 
 FEEDS = [
@@ -413,6 +414,29 @@ def resolve_google_links(all_items):
             pass
     print(f"구글 뉴스 링크 원본 변환: {n}/{len(targets)}건")
 
+def update_archive(items):
+    """중요 기사(4점 이상)를 발행일 기준으로 network_archive.json에 누적. 30일 보존."""
+    arch = {}
+    if os.path.exists(ARCHIVE_FILE):
+        try: arch = json.loads(open(ARCHIVE_FILE, encoding="utf-8").read())
+        except Exception: arch = {}
+    added = 0
+    for a in items:
+        day = a["date"][:10]
+        lst = arch.setdefault(day, [])
+        key = norm_key(a["title"]); tp = a.get("topic","")
+        if any(norm_key(x.get("title","")) == key or (tp and x.get("topic") == tp) for x in lst):
+            continue  # 같은 날짜에 같은 제목·이슈명 기사는 1건만
+        lst.append({k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")})
+        added += 1
+    cutoff_day = (datetime.now(KST) - timedelta(days=ARCHIVE_DAYS)).strftime("%Y-%m-%d")
+    arch = {d: v for d, v in arch.items() if d >= cutoff_day}
+    for d in arch:
+        arch[d].sort(key=lambda x: (x.get("importance",0), x.get("date","")), reverse=True)
+    open(ARCHIVE_FILE, "w", encoding="utf-8").write(json.dumps(arch, ensure_ascii=False))
+    print(f"아카이브 갱신: 신규 {added}건 / 보존 {len(arch)}일치")
+    return arch
+
 def main():
     pool, engine = crawl()
     data = {}
@@ -428,13 +452,17 @@ def main():
                     key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
     latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")} for a in latest]
-    shown = [a for arr in data.values() for a in arr] + latest
+    arch_items = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")}
+                  for a in pool if a["importance"] >= ARCHIVE_MIN_IMP]
+    shown = [a for arr in data.values() for a in arr] + latest + arch_items
     resolve_google_links(shown)
+    archive = update_archive(arch_items)
     meta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M") + " · " + engine,
             "sections": [{"id": s[0], "name": s[1]} for s in [next(x for x in SEC_DEFS if x[0]==o) for o in ORDER]]}
     js = ("const NEWS_META = " + json.dumps(meta, ensure_ascii=False) + ";\n"
           + "const NEWS_DATA = " + json.dumps(data, ensure_ascii=False) + ";\n"
-          + "const NEWS_LATEST = " + json.dumps(latest, ensure_ascii=False) + ";\n")
+          + "const NEWS_LATEST = " + json.dumps(latest, ensure_ascii=False) + ";\n"
+          + "const NEWS_ARCHIVE = " + json.dumps(archive, ensure_ascii=False) + ";\n")
     tpl = open("dashboard_network.html", encoding="utf-8").read()
     out = tpl.replace('<script src="news_data.js"></script>', "<script>\n" + js + "</script>")
     os.makedirs("docs", exist_ok=True)
