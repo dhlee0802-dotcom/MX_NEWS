@@ -51,6 +51,9 @@
   .art-title:hover{color:var(--blue)}
   .art-sum{font-size:12.5px;color:var(--sub);margin-top:3px}
   .art-src{font-size:11px;color:var(--low);margin-top:4px}
+  .datebar{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 12px}
+  .dchip{padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--sub);font-size:12px;font-weight:700;cursor:pointer}
+  .dchip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
 </style>
 </head>
 <body>
@@ -66,15 +69,17 @@ const CAT_LABEL={quality:"품질 이슈",launch:"신제품/출시",price:"가격
 const SEC_NAME={phone:"스마트폰",tablet:"태블릿",pc:"PC",watch:"워치",tws:"TWS",glasses:"XR·AI글래스",wallet:"삼성월렛",health:"헬스",memchina:"메모리·中폰"};
 const TABS=[
   {id:"top",     name:"⭐ 주요·최신", secs:["phone","tablet","pc","watch","tws","glasses","wallet","health","memchina"], mode:"top"},
-  {id:"daily",   name:"📌 일자별 중요", secs:[], mode:"daily"},
   {id:"phone",   name:"📱 스마트폰",  secs:["phone"],            impN:{phone:10}},
   {id:"memcn",   name:"🇨🇳 메모리·中폰", secs:["memchina"],      impN:{memchina:5}},
   {id:"tabpc",   name:"📟 태블릿·PC", secs:["tablet","pc"],      impN:{tablet:5,pc:5}},
   {id:"wear",    name:"⌚ 워치·TWS",  secs:["watch","tws"],      impN:{watch:5,tws:5}},
   {id:"xr",      name:"🕶 XR",        secs:["glasses"],          impN:{glasses:5}},
-  {id:"payhp",   name:"💳 월렛·헬스", secs:["wallet","health"],  impN:{wallet:5,health:5}}
+  {id:"payhp",   name:"💳 월렛·헬스", secs:["wallet","health"],  impN:{wallet:5,health:5}},
+  {id:"daily",   name:"📌 일자별 중요", secs:[], mode:"daily"}
 ];
 let activeTab="top";
+let dailyDate="all";
+function setDailyDate(d){ dailyDate=d; render(); window.scrollTo(0,0); }
 function esc(s){return String(s).replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));}
 function impBadge(n){const t=n>=5?"긴급":n>=4?"중요":n>=3?"주목":n>=2?"참고":"저";return `<span class="imp i${n}">${t} ${n}</span>`;}
 function artCard(a,showSec){
@@ -114,10 +119,16 @@ function render(){
     const arch=(typeof NEWS_ARCHIVE!=="undefined")?NEWS_ARCHIVE:{};
     const days=Object.keys(arch).sort().reverse();
     if(!days.length){ html+=block("📌 일자별 중요 기사","0건","",true); }
-    days.forEach(d=>{
-      const items=(arch[d]||[]).map(a=>({...a,_sid:a.sid}));
-      html+=block("📌 "+d+" 중요 기사",items.length+"건",items.map(a=>artCard(a,true)).join(""),true);
-    });
+    else{
+      html+=`<div class="datebar"><span class="dchip${dailyDate==="all"?" on":""}" onclick="setDailyDate('all')">전체</span>`
+        + days.map(d=>`<span class="dchip${dailyDate===d?" on":""}" onclick="setDailyDate('${d}')">${d.slice(5)}</span>`).join("")
+        + `</div>`;
+      const showDays=(dailyDate==="all")?days:days.filter(d=>d===dailyDate);
+      showDays.forEach(d=>{
+        const items=(arch[d]||[]).map(a=>({...a,_sid:a.sid}));
+        html+=block("📌 "+d+" 중요 기사",items.length+"건",items.map(a=>artCard(a,true)).join(""),true);
+      });
+    }
   }else if(tab.mode==="top"){
     let allArts=[]; tab.secs.forEach(s=>allArts=allArts.concat(secItems(s)));
     let imp=allArts.filter(a=>a.importance>=4).sort((a,b)=>b.importance-a.importance||(b.date||"").localeCompare(a.date||""));
