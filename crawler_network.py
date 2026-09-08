@@ -26,24 +26,6 @@ FEEDS = [
     # ── 종합·경제지 ──
     ("WSJ Tech", "https://feeds.a.dj.com/rss/RSSWSJD.xml"),
     ("Financial Times Tech", "https://www.ft.com/technology?format=rss"),
-    ("Nikkei Asia", "https://asia.nikkei.com/rss/feed/nar"),
-    # ── 일본 ──
-    ("ケータイ Watch", "https://k-tai.watch.impress.co.jp/data/rss/1.0/ktw/feed.rdf"),
-    ("ITmedia Mobile", "https://rss.itmedia.co.jp/rss/2.0/mobile.xml"),
-    # ── 인도 ──
-    ("ET Telecom", "https://telecom.economictimes.indiatimes.com/rss/topstories"),
-    ("Business Standard", "https://www.business-standard.com/rss/technology-108.rss"),
-    ("Mint", "https://www.livemint.com/rss/industry"),
-    ("Fortune India", "https://www.fortuneindia.com/rss"),
-    # ── 국내 ──
-    ("전자신문", "https://rss.etnews.com/Section901.xml"),
-    ("ZDNet Korea", "https://feeds.feedburner.com/zdkorea"),
-    ("한국경제 IT", "https://rss.hankyung.com/feed/it.xml"),
-    ("매일경제 IT", "https://www.mk.co.kr/rss/50300009/"),
-]
-GN_QUERIES = [
-    # 경쟁사
-    "Ericsson OR Nokia telecom",
     "Huawei OR ZTE network equipment",
     "Mavenir OR Rakuten Symphony OR Open RAN",
     "Samsung Networks 5G",
@@ -56,6 +38,16 @@ GN_QUERIES = [
     "楽天モバイル OR 通信障害",
     "Reliance Jio OR Bharti Airtel OR Vodafone Idea",
     "TELUS OR Videotron OR SaskTel network",
+    "Vodafone OR Deutsche Telekom OR Orange OR Telefonica network",
+    "SKT OR KT OR LG유플러스",
+    # 위성
+    "Starlink OR AST SpaceMobile direct to cell",
+    "Amazon Leo OR Kuiper satellite",
+    "저궤도 위성통신 OR 스타링크",
+    "6G technology OR 6G standard",
+    "6G 상용화 OR 6G 표준",
+    # 정책
+    "FCC OR spectrum auction",
     "net neutrality OR Digital Networks Act OR EU Cybersecurity Act",
     "과기정통부 OR 주파수 경매",
     # Outage 전용
@@ -70,24 +62,6 @@ NAVER_QUERIES = [
 ]
 
 SEC_DEFS = [  # 검사 순서 = 분류 우선순위 (outage 최우선)
-    ("outage", "[Alert] Outage", ["outage","통신장애","통신 장애","먹통","서비스 중단","network down","service disruption","대규모 장애","전국 장애"]),
-    ("satellite", "[Sat] 위성·6G", ["starlink","스타링크","ast spacemobile","kuiper","amazon leo","저궤도","leo satellite","direct-to-cell","direct to cell","위성통신","위성 통신","non-terrestrial","ntn","6g","6세대 이동통신"]),
-    ("competitor", "[Comp] 경쟁사", ["ericsson","에릭슨","nokia","노키아","huawei","화웨이","zte","mavenir","마베니어","rakuten symphony","라쿠텐 심포니","open ran","오픈랜","vran","ai-ran"]),
-    ("policy", "[Policy] 정책·규제", ["fcc","과기정통부","spectrum","주파수","net neutrality","망중립성","digital networks act","cybersecurity act","spectrum auction","주파수 경매","통신 정책","통신 규제"]),
-    ("carrier", "[Telco] 통신사", ["verizon","at&t","t-mobile","echostar","viaero","us cellular","charter","docomo","도코모","kddi","softbank","소프트뱅크","rakuten mobile","reliance jio","jio","airtel","vodafone","보다폰","telus","videotron","sasktel","deutsche telekom","도이치텔레콤","orange","telefonica","telefónica","skt","sk텔레콤","lg유플러스","lgu+","케이티","이동통신사","통신사"]),
-]
-ORDER = ["competitor","carrier","satellite","policy","outage"]
-VALID_IDS = [s[0] for s in SEC_DEFS]
-# outage 키워드 폴백 범위 제한: 명단의 이동통신사 이름이 직접 언급된 경우에만 outage로 분류
-# (ChatGPT·클라우드 장애, 통신장애를 제도·책임 문맥에서 언급만 하는 기사 차단)
-OUTAGE_SCOPE = [k for k in next(s[2] for s in SEC_DEFS if s[0] == "carrier")
-                if not (k.isascii() and len(k) <= 3)] + ["이동통신사","통신3사","통신 3사"]
-OUTAGE_SCOPE_RE = re.compile(r"(?<![a-z0-9])(kt|skt)(?![a-z0-9])")  # 짧은 약칭은 단어 경계로만 검사 (desktop 등 오탐 방지)
-
-CATS = [
-    ("outage", ["outage","장애","먹통","복구","disruption","restore","서비스 중단"]),
-    ("contract", ["수주","계약","공급","선정","contract","deal","supply","vendor","공급사"]),
-    ("tech", ["6g","open ran","vran","ai-ran","trial","시연","실증","상용화","표준","standard","mou"]),
     ("earnings", ["실적","earnings","revenue","guidance","분기","매출","순이익"]),
     ("exec", ["사장","부사장","ceo","임원","인사","교체","appoint","resign","executive","조직개편"]),
     ("policy", ["정책","규제","제재","tariff","regulation","ban","spectrum","주파수","auction","경매","fcc"]),
@@ -97,6 +71,18 @@ HIGH = ["삼성","samsung","ericsson","nokia","huawei","5g","6g","주파수","sp
 
 def clean(s):
     s = html.unescape(re.sub(r"<[^>]+>", " ", s or ""))
+    return re.sub(r"\s+", " ", s).strip()
+
+def norm_key(title):
+    return re.sub(r"[^a-z0-9가-힣]", "", title.lower())[:40]
+
+def section_id(text):
+    # '장애인' 복지·요금제 기사가 outage로 오분류되지 않도록 단어 자체를 제거 후 검사
+    t = text.lower().replace("장애인", "")
+    for sid, _, kws in SEC_DEFS:
+        if any(k.lower() in t for k in kws):
+            if sid == "outage" and not (any(h.lower() in t for h in OUTAGE_SCOPE) or OUTAGE_SCOPE_RE.search(t)):
+                continue  # 명단의 이동통신사 언급 없는 장애 기사는 outage 아님 -> 다음 섹션 검사
             return sid
     return None
 
@@ -126,8 +112,43 @@ def crawl():
     print(f"제외어 {len(exclude)}개 로드: {', '.join(exclude) if exclude else '없음 (exclude_network.txt 미발견 또는 비어있음)'}")
     use_gemini = bool(os.environ.get("GEMINI_API_KEY"))
     pool, seen = [], set()
-    excl_n = [0]
+        if summary and len(title) >= 15 and title[:15] in summary:
+            summary = ""
+        blob = (title + " " + summary)
+        bl = blob.lower()
+        if any(x in bl for x in exclude):
+            excl_n[0] += 1; return
+        sid = section_id(blob)
+        if not sid:
+            if use_gemini: sid = "unknown"
+            else: return
+        seen.add(key)
+        pool.append({
+            "sid": sid, "title": title[:90],
+            "summary": (summary[:220] + "…") if len(summary) > 220 else summary,
+            "source": src or "Google News",
+            "date": pub.astimezone(KST).strftime("%Y-%m-%d %H:%M"),
+            "url": link, "category": category(blob), "importance": score(blob), "wl": wl, "topic": "",
+        })
 
+    for src, url in FEEDS:
+        try:
+            feed = feedparser.parse(url)
+            for e in feed.entries:
+                try: pub = datetime(*e.published_parsed[:6], tzinfo=timezone.utc)
+                except Exception:
+                    try: pub = datetime(*e.updated_parsed[:6], tzinfo=timezone.utc)
+            print(f"경고: {src} 실패 - {ex}")
+
+    for q in GN_QUERIES:
+        ko = bool(re.search(r"[가-힣]", q))
+        ja = bool(re.search(r"[ぁ-んァ-ヶ一-龯]", q))
+        hl, gl, ceid = ("ko","KR","KR:ko") if ko else ("ja","JP","JP:ja") if ja else ("en-US","US","US:en")
+        url = f"https://news.google.com/rss/search?q={quote(q+' when:2d')}&hl={hl}&gl={gl}&ceid={ceid}"
+        try:
+            feed = feedparser.parse(url)
+            for e in feed.entries:
+                try: pub = datetime(*e.published_parsed[:6], tzinfo=timezone.utc)
                 except Exception: continue
                 src = ""
                 if hasattr(e, "source"): src = clean(e.source.get("title",""))
@@ -137,37 +158,6 @@ def crawl():
     # ── 네이버 뉴스 검색 (NAVER API HUB, 키 등록 시에만 동작) ──
     nv_id = os.environ.get("NAVER_CLIENT_ID"); nv_secret = os.environ.get("NAVER_CLIENT_SECRET")
     if nv_id and nv_secret:
-        from email.utils import parsedate_to_datetime
-        from urllib.parse import urlparse
-        for q in NAVER_QUERIES:
-            try:
-                req = urllib.request.Request(
-                    f"https://naverapihub.apigw.ntruss.com/search/v1/news?query={quote(q)}&display=30&sort=date&format=json")
-                req.add_header("X-NCP-APIGW-API-KEY-ID", nv_id)
-                req.add_header("X-NCP-APIGW-API-KEY", nv_secret)
-                with urllib.request.urlopen(req, timeout=25) as r:
-                    res = json.loads(r.read().decode("utf-8"))
-                for it in res.get("items", []):
-                    try: pub = parsedate_to_datetime(it["pubDate"]).astimezone(timezone.utc)
-                    except Exception: continue
-                    link = it.get("originallink") or it.get("link","")
-                    src = urlparse(link).netloc.replace("www.","") if link else "네이버뉴스"
-                    add(it.get("title",""), it.get("description",""), src, pub, link, False)
-            except Exception as ex:
-                print(f"경고: 네이버 API 실패({q}) - {ex}")
-        print("네이버 뉴스 수집 완료")
-    else:
-        print("안내: NAVER_CLIENT_ID/SECRET 미등록 - 네이버 수집 생략")
-    print(f"수집 완료 / 후보 풀: {len(pool)}건 / 제외어 필터 {excl_n[0]}건 제외")
-
-    engine = "키워드 분류"
-    if use_gemini and pool:
-        engine = gemini_judge(pool) or engine
-    # 2차 필터: Gemini가 만든 한국어 요약에도 제외어 재검사
-    # (영어 원문엔 없던 제외어가 번역 요약에서 드러나는 경우 대응)
-    if exclude:
-        before = len(pool)
-        pool[:] = [a for a in pool if not any(x in (a["title"] + " " + a["summary"]).lower() for x in exclude)]
         if before - len(pool):
             print(f"제외어 2차 필터(요약 기준): {before - len(pool)}건 제외")
     pool[:] = [a for a in pool if a["sid"] not in ("unknown","drop")]
@@ -189,10 +179,51 @@ def gemini_judge(pool):
         lines = [f"{i} | {b['title']} | {b['summary'][:220]} | {b['source']}" for i, b in enumerate(batch)]
         prompt = f"""당신은 삼성전자 네트워크사업부 경쟁정보(CI) 분석가입니다. 아래 기사 목록(번호|제목|요약|매체)을 각각 판정하세요.
 
-섹션(sec):
-competitor = 글로벌 대형 통신장비 경쟁사(Ericsson, Nokia, Huawei, ZTE, Mavenir, Rakuten Symphony)의 수주·기술·실적·전략. 국내 중소 통신장비·부품업체(우리넷, 알에프텍, 쏠리드 등) 기사는 competitor가 아니라 none
 carrier = 통신사 동향. 대상: 한국 SKT·KT·LG유플러스 / 미국 Verizon·AT&T·T-Mobile·EchoStar·Viaero·US Cellular·Charter / 일본 NTT DOCOMO·KDDI·SoftBank·Rakuten Mobile / 인도 Reliance Jio·Bharti Airtel·Vodafone Idea / 캐나다 TELUS·Videotron·SaskTel / 유럽 Vodafone·Deutsche Telekom·Orange·Telefónica. 단, 네트워크 투자·장비 조달·주파수·실적·경영 전략 관련만 해당
 satellite = 위성통신(Starlink, AST SpaceMobile, Amazon Leo/Kuiper, Direct-to-Cell, 저궤도 위성) 및 6G(기술·표준화·연구개발·상용화 준비)
+policy = 통신 정책·규제(FCC, 과기정통부, Digital Networks Act, EU Cybersecurity Act, 망중립성, 주파수 경매 등)
+outage = 위에 나열한 이동통신사의 통신망(무선망·유선 인터넷) 장애 발생·확산·복구 보도만 해당
+none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰 단말·요금제 프로모션·소비자 마케팅·연예 기사는 none. 원자력·건설·에너지·조선·바이오 등 통신과 무관한 산업 기사는 회사명이 겹쳐도 none — 삼성물산·삼성SDI·삼성중공업 등 삼성전자가 아닌 삼성 계열사 기사, 그리고 삼성전자 기사라도 반도체·가전·스마트폰 등 네트워크사업 외 분야 기사는 모두 none
+
+판정 규칙: sec=outage는 위 명단의 특정 이동통신사가 운영하는 통신망에서 실제로 발생한 장애의 발생·확산·복구 보도만 해당하며, 이 경우 통신사 이름이 있어도 반드시 outage로 분류. 통신장애를 언급만 하는 기사는 outage가 아님 — 통신장애 관련 제도·법령·책임 범위·보상 기준 논의, 의료·재난·행정 등 다른 주제의 기사에서 통신장애를 부수적으로 언급하는 경우, 과거 장애의 회고·통계 기사는 실제 장애 발생 보도가 아니므로 outage 금지(내용에 따라 policy·carrier 또는 none). 통신사가 아닌 서비스의 장애 — ChatGPT 등 AI 서비스, AWS·Azure·Google Cloud·Cloudflare 등 클라우드/CDN, 앱·플랫폼·게임·금융·SNS 서비스 장애 — 는 outage가 절대 아니며 none으로 제외("outage"라는 단어가 있어도 통신사 통신망 장애가 아니면 제외). 해킹·보안사고 기사는 그로 인해 통신 서비스 중단·장애가 실제 발생한 경우에만 outage이며, 서비스 영향이 없는 단순 해킹·개인정보 유출·보안 취약점 기사는 none으로 제외. 다음도 outage가 절대 아님 — 장애인(disability) 복지·요금제·접근성 기사(무관하면 none), 축제·행사·재난 대비 통신 지원이나 트래픽 증설 기사(carrier 또는 none), 장애 예방 훈련·점검·모의훈련 기사. 장애 기사의 중요도는 둘 중 하나만 가능 — 전국 단위 대규모 장애(전국 규모 또는 수백만 가입자, 수 시간 이상 지속)면 imp=5, 그 외 지역·일부 서비스·경미한 장애는 imp=3 이하. 장애 기사에 imp=4는 부여 금지.
+
+카테고리(cat): outage contract tech earnings exec policy other
+중요도(imp) — 보수적으로 판정하고 5점은 아래 유형에 해당할 때만 부여:
+5 = ①전국 단위 대규모 통신망 장애 ②삼성전자 네트워크사업부가 당사자인 통신장비·네트워크 관련 대형 수주·실주·제재 확정(다른 삼성 계열사나 비통신 분야 수주는 해당 없음) ③업계 판도를 바꾸는 수준의 대형 M&A·딜(주요 통신사·장비사 간 인수합병, 수조 원대 장비 공급계약 — 소규모 기업·스타트업 인수나 지분 일부 투자는 4 이하) ④경쟁사(Ericsson·Nokia·Huawei·ZTE·Mavenir 등)의 플래그십급 신제품·차세대 기술의 공식 출시, 생산·R&D 거점의 국가 간 이전, CEO·회장급 최고경영진 교체(부분 업그레이드·로드맵 발표·임원급 인사는 4 이하) ⑤주요국 정부 차원의 중국산 통신장비(Huawei·ZTE) 제재·퇴출·반입 금지(개별 기업·지방정부 차원 조치는 4 이하). 단계 요건: ①②는 실제 발생·확정 보도만 5점, ③④⑤는 루머·검토·협상·추진 단계 보도라도 5점 가능. 판단이 애매하면 5가 아닌 4를 부여할 것 — 한 판정 묶음에서 5점은 많아야 2~3건이어야 정상. 구체적 사실 근거 없이 시황 전망·애널리스트 의견만 담은 기사는 5 불가
+4 = 경영진 보고 가치: 주요 수주전 진행 상황, 주파수 경매 결과, 규제 확정, 경쟁사의 대형 발표
+3 = 주시할 업계 동향
+2 = 참고 수준
+1 = 단순 정보·홍보성
+회사 이름이 크더라도 단순 언급·제품 소개·인터뷰·시황 전망 기사는 3 이하.
+이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 영문 매체 기사라도 회사명은 반드시 한국어 표기(에릭슨, 노키아, 화웨이, 버라이즌, 도이치텔레콤 등)로 쓸 것 — 같은 사건을 다룬 한국어·영어 기사가 동일 이슈명으로 묶여야 함. 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 특히 같은 행사·발표·컨퍼런스·국정감사·정책 브리핑에서 파생된 기사들은 세부 주제가 조금씩 달라도 전부 하나의 동일 이슈명으로 묶을 것(예: 국정감사에서 나온 통신 관련 기사 전부 → "과기정통부 국감"). 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
+요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장이나 영어 원문 요약을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 4~5문장 300자 내외로, 핵심 사실 → 배경·수치 → 경쟁 구도 → 사업적 의미 순으로 충실히 작성. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 억지로 늘리지 말고 짧게 유지.
+
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"topic":"버라이즌 수주","sum":"..."}}]
+
+기사 목록:
+{chr(10).join(lines)}"""
+        return {"contents":[{"parts":[{"text":prompt}]}],
+                "generationConfig":{"response_mime_type":"application/json","temperature":0}}
+
+    def parse_judged(raw):
+        try:
+            return json.loads(raw)
+        except Exception:
+            out = []
+            for m in re.finditer(r"\{[^{}]*\}", raw):
+                try: out.append(json.loads(m.group()))
+                except Exception: pass
+            if out: print(f"  일부 형식 오류 -> 복구 파싱 {len(out)}건")
+            return out
+
+            except Exception: pass
+            if j.get("sum"): item["summary"] = str(j["sum"])
+            if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
+            applied += 1
+        return applied
+
+    last_good = None
+    if os.path.exists("gemini_model_nw.txt"):
         last_good = open("gemini_model_nw.txt", encoding="utf-8").read().strip()
     avail = []
     try:
@@ -213,43 +244,9 @@ satellite = 위성통신(Starlink, AST SpaceMobile, Amazon Leo/Kuiper, Direct-to
     for model in cands:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
         try:
-            total = 0
-            for ci, batch in enumerate(chunks):
-                payload = build_payload(batch)
-                ok = False
-                for attempt in range(2):
-                    try:
-                        print(f"Gemini 분류 요청... ({model}, {ci+1}/{len(chunks)}묶음 {len(batch)}건)")
-                        r = gemini_call(url, payload)
-                        raw = r["candidates"][0]["content"]["parts"][0]["text"]
-                        judged = parse_judged(raw)
-                        total += apply_judged(batch, judged)
-                        ok = True; break
-                    except urllib.error.HTTPError as ex:
-                        if ex.code == 429 and attempt == 0:
-                            print(f"  {model} 429 -> 30초 대기 후 재시도"); time.sleep(30); continue
-                        raise
-                if not ok: raise ValueError("묶음 처리 실패")
-                if ci < len(chunks) - 1: time.sleep(5)   # 분당 호출 제한 배려
-            print(f"Gemini 판정 적용: 총 {total}건 / {len(chunks)}묶음")
-            open("gemini_model_nw.txt","w",encoding="utf-8").write(model)
-            return f"Gemini 분류 ({model})"
-        except urllib.error.HTTPError as ex:
-            if ex.code == 404: print(f"  {model} 사용 불가(404) -> 다음 모델")
-            else: print(f"경고: {model} 실패 - HTTP {ex.code} -> 다음 모델")
-        except Exception as ex:
-            print(f"경고: {model} 실패 - {ex} -> 다음 모델")
-    print("경고: 모든 Gemini 모델 실패 - 키워드 분류로 대체")
-    return None
-
-def _tokens(t):
-    return set(re.findall(r"[a-z0-9가-힣]+", t.lower()))
-
-def dedupe_topics(items):
-    """1차: 같은 이슈명은 1건만. 2차: 이슈명이 달라도 제목 단어가 55% 이상 겹치면 중복으로 간주"""
-    out, seen_topics, kept_tokens = [], set(), []
-    for a in items:
-        t = a.get("topic","")
+        print("안내: googlenewsdecoder 미설치 - 구글 링크 원본 변환 생략"); return
+    cache, n = {}, 0
+    for a in targets:
         u = a["url"]
         if u in cache:
             a["url"] = cache[u]; continue
@@ -276,12 +273,6 @@ def update_archive(items):
             continue  # 같은 날짜에 같은 제목·이슈명 기사는 1건만
         lst.append({k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")})
         added += 1
-    cutoff_day = (datetime.now(KST) - timedelta(days=ARCHIVE_DAYS)).strftime("%Y-%m-%d")
-    arch = {d: v for d, v in arch.items() if d >= cutoff_day}
-    for d in arch:
-        arch[d].sort(key=lambda x: (x.get("importance",0), x.get("date","")), reverse=True)
-    open(ARCHIVE_FILE, "w", encoding="utf-8").write(json.dumps(arch, ensure_ascii=False))
-    print(f"아카이브 갱신: 신규 {added}건 / 보존 {len(arch)}일치")
     return arch
 
 def main():
