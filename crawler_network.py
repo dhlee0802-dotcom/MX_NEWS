@@ -465,7 +465,18 @@ def main():
           + "const NEWS_ARCHIVE = " + json.dumps(archive, ensure_ascii=False) + ";\n")
     js = js.replace("</", "<\\/")  # 기사 내용에 </script> 유사 문자열이 있어도 스크립트가 깨지지 않게
     tpl = open("dashboard_network.html", encoding="utf-8").read()
-    out = tpl.replace('<script src="news_data.js"></script>', "<script>\n" + js + "</script>")
+    inj = "<script>\n" + js + "</script>"
+    # 자리표시자 주변 공백·따옴표 차이를 허용하는 주입
+    out, n = re.subn(r'<script\s+src=["\']news_data\.js["\']\s*>\s*</script>', inj, tpl, count=1)
+    if n == 0:
+        # 자리표시자가 손상된 경우에도 데이터가 뜨도록 </head> 앞에 강제 주입
+        if "</head>" in tpl:
+            out = tpl.replace("</head>", inj + "\n</head>", 1)
+        else:
+            out = inj + tpl
+        print("경고: news_data.js 자리표시자를 찾지 못해 head에 데이터를 강제 주입 (dashboard_network.html 확인 필요)")
+    else:
+        print("데이터 주입 완료")
     os.makedirs("docs", exist_ok=True)
     open("docs/network.html","w",encoding="utf-8").write(out)
     print("완료 -> docs/network.html 생성")
