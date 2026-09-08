@@ -36,6 +36,8 @@ GN_QUERIES = [
     "smart glasses OR XR headset", "Samsung Wallet OR Samsung Pay",
     "갤럭시 워치 OR 갤럭시 버즈", "갤럭시 북 OR 갤럭시 탭",
     "삼성월렛 OR 삼성페이 OR 삼성헬스", "중국 스마트폰 판매량 OR 출하량",
+    "스마트 글래스 OR XR 헤드셋",
+]
 NAVER_QUERIES = [
     "갤럭시 스마트폰", "갤럭시 워치", "갤럭시 버즈", "갤럭시 탭", "갤럭시 북",
     "삼성월렛", "삼성헬스", "메모리 가격", "중국 스마트폰 판매", "스마트 글래스 XR",
@@ -76,6 +78,10 @@ def clean(s):
 def norm_key(title):
     return re.sub(r"[^a-z0-9가-힣]", "", title.lower())[:40]
 
+def section_id(text):
+    t = text.lower()
+    if any(k in t for k in CN_MAKERS) and any(k in t for k in CN_VOL):
+        return "memchina"
     for sid, _, kws in SEC_DEFS:
         if any(k.lower() in t for k in kws):
             return sid
@@ -94,6 +100,22 @@ def score(text):
     if any(k.lower() in t for k in HIGH): s += 1
     return min(5, s)
 
+def load_lines(path):
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            return [l.strip().lower() for l in f if l.strip()]
+    return []
+
+def crawl():
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=HOURS)
+    exclude = load_lines("exclude.txt")
+    use_gemini = bool(os.environ.get("GEMINI_API_KEY"))
+    pool, seen = [], set()
+
+    def add(title, summary, src, pub, link, wl):
+        if pub < cutoff: return
+        title = clean(title)
+        if not title: return
         key = norm_key(title)
         if key in seen: return
         summary = clean(summary)
@@ -149,6 +171,24 @@ def score(text):
         from email.utils import parsedate_to_datetime
         from urllib.parse import urlparse
         for q in NAVER_QUERIES:
+            try:
+                req = urllib.request.Request(
+                    f"https://naverapihub.apigw.ntruss.com/search/v1/news?query={quote(q)}&display=30&sort=date&format=json")
+                req.add_header("X-NCP-APIGW-API-KEY-ID", nv_id)
+                req.add_header("X-NCP-APIGW-API-KEY", nv_secret)
+                with urllib.request.urlopen(req, timeout=25) as r:
+                    res = json.loads(r.read().decode("utf-8"))
+                for it in res.get("items", []):
+                    try: pub = parsedate_to_datetime(it["pubDate"]).astimezone(timezone.utc)
+                    except Exception: continue
+                    link = it.get("originallink") or it.get("link","")
+                    src = urlparse(link).netloc.replace("www.","") if link else "네이버뉴스"
+                    add(it.get("title",""), it.get("description",""), src, pub, link, False)
+            except Exception as ex:
+                print(f"경고: 네이버 API 실패({q}) - {ex}")
+        print("네이버 뉴스 수집 완료")
+    else:
+        print("안내: NAVER_CLIENT_ID/SECRET 미등록 - 네이버 수집 생략")
     print(f"수집 완료 / 후보 풀: {len(pool)}건")
 
     engine = "키워드 분류"
@@ -260,6 +300,8 @@ def gemini_judge(pool):
                             print(f"  {model} 429 -> 30초 대기 후 재시도"); time.sleep(30); continue
                         raise
                 if not ok: raise ValueError("묶음 처리 실패")
+                if ci < len(chunks) - 1: time.sleep(5)   # 분당 호출 제한 배려
+            print(f"Gemini 판정 적용: 총 {total}건 / {len(chunks)}묶음")
             open("gemini_model.txt","w",encoding="utf-8").write(model)
             return f"Gemini 분류 ({model})"
         except urllib.error.HTTPError as ex:
@@ -274,6 +316,63 @@ def _tokens(t):
     return set(re.findall(r"[a-z0-9가-힣]+", t.lower()))
 
 def dedupe_topics(items):
+    """1차: 동일 이슈명 1건만. 2차: 이슈명 단어가 50% 이상 겹치면 같은 사건으로 간주.
+       3차: 제목 단어가 55% 이상 겹치면 중복. (한/영 혼재·묶음 분할로 이슈명이 갈리는 경우 대비)"""
+    out, seen_topics, kept_topic_toks, kept_title_toks = [], set(), [], []
+    for a in items:
+        t = a.get("topic","")
+        if t and t in seen_topics: continue
+        ttk = _tokens(t) if t else set()
+        dup = False
+        if ttk:
+            for x in kept_topic_toks:
+                if x and len(ttk & x) / max(1, min(len(ttk), len(x))) >= 0.6: dup = True; break
+        if not dup:
+            tk = _tokens(a.get("title",""))
+            for x in kept_title_toks:
+                if len(tk & x) / max(1, len(tk | x)) >= 0.55: dup = True; break
+        if dup: continue
+        if t: seen_topics.add(t)
+        kept_topic_toks.append(ttk)
+        kept_title_toks.append(_tokens(a.get("title","")))
+        out.append(a)
+    return out
+
+def resolve_google_links(all_items):
+    """news.google.com 중계 주소를 원문 기사 주소로 변환 (변환 실패 시 원래 링크 유지)"""
+    targets = [a for a in all_items if "news.google.com" in a.get("url","")]
+    if not targets: return
+    try:
+        from googlenewsdecoder import gnewsdecoder
+    except Exception:
+        print("안내: googlenewsdecoder 미설치 - 구글 링크 원본 변환 생략"); return
+    cache, n = {}, 0
+    for a in targets:
+        u = a["url"]
+        if u in cache:
+            a["url"] = cache[u]; continue
+        try:
+            r = gnewsdecoder(u, interval=1)
+            if isinstance(r, dict) and r.get("status") and r.get("decoded_url"):
+                cache[u] = r["decoded_url"]; a["url"] = cache[u]; n += 1
+        except Exception:
+            pass
+    print(f"구글 뉴스 링크 원본 변환: {n}/{len(targets)}건")
+
+def notify_urgent(pool):
+    """중요도 5 신규 기사를 ntfy 푸시로 알림 (NTFY_TOPIC 미설정 시 생략, 회차당 최대 3건)"""
+    topic = os.environ.get("NTFY_TOPIC")
+    if not topic: return
+    urgent = [a for a in pool if a.get("alert") and a.get("sid") in VALID_IDS]
+    if not urgent: return
+    notified = set()
+    if os.path.exists("notified.txt"):
+        with open("notified.txt", encoding="utf-8") as f:
+            notified = set(l.strip() for l in f if l.strip())
+    sent = 0
+    with open("notified.txt", "a", encoding="utf-8") as f:
+        for a in urgent:
+            key = norm_key(a["title"])
             if key in notified: continue
             f.write(key + "\n"); notified.add(key)
             if sent >= 3: continue   # 알림 폭주 방지 (기록은 남기되 전송은 3건까지)
@@ -287,6 +386,9 @@ def dedupe_topics(items):
                 print(f"경고: 알림 전송 실패 - {ex}")
     if sent: print(f"긴급 알림 전송: {sent}건")
 
+def semantic_dedupe(data, latest):
+    """화면 표시 대상 기사 제목을 Gemini에 보내 같은 사건끼리 그룹핑 -> 목록별로 그룹당 1건만 유지"""
+    key = os.environ.get("GEMINI_API_KEY")
     if not key: return
     lists = list(data.values()) + [latest]
     title_idx, order = {}, []
@@ -324,6 +426,25 @@ def dedupe_topics(items):
             for a in lst:
                 g = groups.get(title_idx.get(a["title"], -1))
                 if g is not None and g in seen_g:
+                    removed += 1; continue
+                if g is not None: seen_g.add(g)
+                keep.append(a)
+            lst[:] = keep
+        print(f"의미 기반 중복 제거: {removed}건 제거")
+    except Exception as ex:
+        print(f"경고: 의미 기반 중복 제거 생략 - {ex}")
+
+def update_archive(pool):
+    """중요도 4 이상 기사를 날짜별로 archive.json에 누적 (7일 보관, 일자당 50건 상한)"""
+    arch = {}
+    if os.path.exists("archive.json"):
+        try:
+            with open("archive.json", encoding="utf-8") as f: arch = json.load(f)
+        except Exception: arch = {}
+    cand = [a for a in pool if a.get("importance",0) >= 4 and a.get("sid") in VALID_IDS]
+    for a in cand:
+        day = (a.get("date","") or "")[:10]
+        if not day: continue
         item = {k: a.get(k,"") for k in ("title","summary","source","date","url","category","importance","sid","topic")}
         arch.setdefault(day, []).append(item)
     # 일자별: 중요도순 정렬 후 중복 제거, 50건 상한
@@ -350,6 +471,15 @@ def main():
         print(f"{name}: {len(items)}건 -> {len(data[sid])}건")
     latest = sorted(pool, key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
+    latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic","alert")} for a in latest]
+    semantic_dedupe(data, latest)
+    shown = [a for arr in data.values() for a in arr] + latest
+    resolve_google_links(shown)
+    archive = update_archive(pool)
+    notify_urgent(pool)
+    meta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M") + " · " + engine,
+            "sections": [{"id": s[0], "name": s[1]} for s in [next(x for x in SEC_DEFS if x[0]==o) for o in ORDER]]}
+    js = ("const NEWS_META = " + json.dumps(meta, ensure_ascii=False) + ";\n"
           + "const NEWS_DATA = " + json.dumps(data, ensure_ascii=False) + ";\n"
           + "const NEWS_LATEST = " + json.dumps(latest, ensure_ascii=False) + ";\n"
           + "const NEWS_ARCHIVE = " + json.dumps(archive, ensure_ascii=False) + ";\n")
