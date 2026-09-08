@@ -484,7 +484,15 @@ def main():
           + "const NEWS_LATEST = " + json.dumps(latest, ensure_ascii=False) + ";\n"
           + "const NEWS_ARCHIVE = " + json.dumps(archive, ensure_ascii=False) + ";\n")
     tpl = open("dashboard_local.html", encoding="utf-8").read()
-    out = tpl.replace('<script src="news_data.js"></script>', "<script>\n" + js + "</script>")
+    inline = "<script>\n" + js + "</script>"
+    # 표식(<script src="news_data.js">)이 다소 변형돼 있어도 찾아서 교체, 없으면 </body> 앞에 삽입
+    out, n = re.subn(r'<script[^>]*news_data\.js[^>]*>\s*</script>', inline, tpl, count=1)
+    if n == 0:
+        if "</body>" in out:
+            out = out.replace("</body>", inline + "\n</body>", 1)
+        else:
+            out = out + "\n" + inline
+        print("안내: news_data.js 표식을 못 찾아 페이지 끝에 데이터 삽입")
     os.makedirs("docs", exist_ok=True)
     open("docs/index.html","w",encoding="utf-8").write(out)
     print("완료 -> docs/index.html 생성")
