@@ -64,7 +64,10 @@
 <header>
   <div class="hd-top">
     <h1>Samsung Network <span>뉴스 모니터링</span></h1>
-    <button class="noti-btn" id="notiBtn" onclick="toggleNoti()">🔕 알림 꺼짐</button>
+    <div style="display:flex;gap:6px;flex:0 0 auto">
+      <button class="noti-btn" id="briefBtn" onclick="toggleBrief()">🎧 브리핑</button>
+      <button class="noti-btn" id="notiBtn" onclick="toggleNoti()">🔕 알림 꺼짐</button>
+    </div>
   </div>
   <div class="hd-meta" id="lastUpdate">news_data.js 없음</div>
   <div class="tabbar" id="tabbar"></div>
@@ -212,6 +215,30 @@ function render(){
 }
 function setTab(id){activeTab=id;render();window.scrollTo(0,0);}
 
+/* ── 출근길 음성 브리핑 (최근 24시간 4·5점 기사) ── */
+function briefText(){
+  if(typeof NEWS_BRIEF!=="undefined"&&NEWS_BRIEF.text) return NEWS_BRIEF.text;
+  // 크롤러가 아직 원고를 만들기 전이면 아카이브 최신 날짜에서 즉석 생성
+  const days=Object.keys(ARCH).sort().reverse();
+  if(days.length){
+    const items=(ARCH[days[0]]||[]).slice(0,8);
+    if(items.length) return "네트워크 뉴스 브리핑입니다. "+items.map((a,i)=>(i+1)+"번째 소식. "+a.title+". "+(a.summary||"")).join(" ")+" 이상입니다.";
+  }
+  return "재생할 브리핑이 아직 없습니다.";
+}
+function toggleBrief(){
+  const b=document.getElementById("briefBtn");
+  if(!("speechSynthesis" in window)){alert("이 브라우저는 음성 재생을 지원하지 않습니다.");return;}
+  if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();b.textContent="🎧 브리핑";return;}
+  const u=new SpeechSynthesisUtterance(briefText());
+  u.lang="ko-KR";u.rate=1.05;
+  const v=speechSynthesis.getVoices().find(x=>x.lang&&x.lang.toLowerCase().startsWith("ko"));
+  if(v)u.voice=v;
+  u.onend=()=>{b.textContent="🎧 브리핑";};
+  u.onerror=()=>{b.textContent="🎧 브리핑";};
+  b.textContent="⏹ 정지";
+  speechSynthesis.speak(u);
+}
 /* ── 5점(긴급) 기사 브라우저 알림 ── */
 const NOTI_KEY="nw_noti_on", SEEN_KEY="nw_noti_seen";
 function notiState(){try{return localStorage.getItem(NOTI_KEY)==="1";}catch(e){return false;}}
