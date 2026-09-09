@@ -437,6 +437,46 @@ def update_archive(items):
     print(f"아카이브 갱신: 신규 {added}건 / 보존 {len(arch)}일치")
     return arch
 
+def gemini_brief(items):
+    """최근 24시간 중요 기사(4점 이상)를 출근길 음성 브리핑 원고로 변환. 실패 시 단순 연결 원고."""
+    if not items:
+        return "최근 24시간 사이 중요도 4점 이상 기사가 없습니다. 좋은 하루 되십시오."
+    fallback = ("안녕하십니까, 네트워크 뉴스 브리핑입니다. "
+                + " ".join(f"{i+1}번째 소식. {a['title']}. {a['summary']}" for i, a in enumerate(items[:8]))
+                + " 이상으로 브리핑을 마칩니다.")
+    key = os.environ.get("GEMINI_API_KEY")
+    if not key:
+        return fallback
+    model = "gemini-2.0-flash"
+    if os.path.exists("gemini_model_nw.txt"):
+        m = open("gemini_model_nw.txt", encoding="utf-8").read().strip()
+        if m: model = m
+    lines = [f"- [{a['importance']}점][{a['sid']}] {a['title']} :: {a['summary']}" for a in items[:10]]
+    prompt = f"""당신은 삼성전자 네트워크사업부 임원에게 아침 뉴스 브리핑을 하는 아나운서입니다. 아래 최근 24시간 중요 기사들을 출근길에 듣기 좋은 한국어 브리핑 원고로 작성하세요.
+
+작성 규칙:
+- 전체 700자 내외, 음성으로 약 2분 분량
+- 구성: 인사 및 오늘 기사 건수 한 문장 → 중요도 높은 순으로 소식 전달(기사마다 핵심 사실과 사업적 의미를 2~3문장으로) → 마무리 한 문장
+- 음성으로 읽히는 원고이므로 순수한 문장만 출력: 특수문자, 괄호, 불릿, 마크다운, 이모지 금지
+- 영문 회사명은 한글 발음으로 표기 (예: 에릭슨, 버라이즌, 티모바일)
+- 제공된 기사 내용 범위에서만 작성하고 추측 금지
+
+기사 목록:
+{chr(10).join(lines)}"""
+    payload = {"contents":[{"parts":[{"text":prompt}]}],
+               "generationConfig":{"temperature":0.3}}
+    try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
+        r = gemini_call(url, payload)
+        text = r["candidates"][0]["content"]["parts"][0]["text"].strip()
+        text = re.sub(r"\s+", " ", text)
+        if len(text) > 50:
+            print(f"브리핑 원고 생성 완료 ({len(text)}자)")
+            return text
+    except Exception as ex:
+        print(f"경고: 브리핑 생성 실패 - {ex} -> 단순 원고로 대체")
+    return fallback
+
 def main():
     pool, engine = crawl()
     data = {}
@@ -457,12 +497,23 @@ def main():
     shown = [a for arr in data.values() for a in arr] + latest + arch_items
     resolve_google_links(shown)
     archive = update_archive(arch_items)
+    now_kst = datetime.now(KST)
+    brief_items = []
+    for a in arch_items:
+        try:
+            dt = datetime.strptime(a["date"], "%Y-%m-%d %H:%M").replace(tzinfo=KST)
+            if now_kst - dt <= timedelta(hours=24): brief_items.append(a)
+        except Exception: pass
+    brief_items.sort(key=lambda a: (a["importance"], a["date"]), reverse=True)
+    brief = {"generated": now_kst.strftime("%Y-%m-%d %H:%M"), "n": len(brief_items),
+             "text": gemini_brief(brief_items)}
     meta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M") + " · " + engine,
             "sections": [{"id": s[0], "name": s[1]} for s in [next(x for x in SEC_DEFS if x[0]==o) for o in ORDER]]}
     js = ("const NEWS_META = " + json.dumps(meta, ensure_ascii=False) + ";\n"
           + "const NEWS_DATA = " + json.dumps(data, ensure_ascii=False) + ";\n"
           + "const NEWS_LATEST = " + json.dumps(latest, ensure_ascii=False) + ";\n"
-          + "const NEWS_ARCHIVE = " + json.dumps(archive, ensure_ascii=False) + ";\n")
+          + "const NEWS_ARCHIVE = " + json.dumps(archive, ensure_ascii=False) + ";\n"
+          + "const NEWS_BRIEF = " + json.dumps(brief, ensure_ascii=False) + ";\n")
     js = js.replace("</", "<\\/")  # 기사 내용에 </script> 유사 문자열이 있어도 스크립트가 깨지지 않게
     tpl = open("dashboard_network.html", encoding="utf-8").read()
     inj = "<script>\n" + js + "</script>"
