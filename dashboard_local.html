@@ -58,7 +58,7 @@
 </head>
 <body>
 <header>
-  <h1>Samsung MX <span>뉴스 모니터링</span> <button id="notifBtn" onclick="enableNotif()" style="display:none;font-size:11px;font-weight:700;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--blue-soft);color:var(--blue);cursor:pointer;vertical-align:middle">🔔 알림 켜기</button></h1>
+  <h1>Samsung MX <span>뉴스 모니터링</span> <button id="notifBtn" onclick="enableNotif()" style="display:none;font-size:11px;font-weight:700;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--blue-soft);color:var(--blue);cursor:pointer;vertical-align:middle">🔔 알림 켜기</button> <button id="briefBtn" onclick="toggleBrief()" style="font-size:11px;font-weight:700;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--blue-soft);color:var(--blue);cursor:pointer;vertical-align:middle">🔊 새벽 브리핑</button></h1>
   <div class="hd-meta" id="lastUpdate">news_data.js 없음</div>
   <div class="tabbar" id="tabbar"></div>
 </header>
@@ -79,7 +79,43 @@ const TABS=[
 ];
 let activeTab="top";
 let dailyDate="all";
+let dailyImp=0;
 function setDailyDate(d){ dailyDate=d; render(); window.scrollTo(0,0); }
+function setDailyImp(n){ dailyImp=n; render(); }
+// ── 새벽 브리핑: 어제 18시 이후 중요도 4+ 기사를 음성으로 읽기 ──
+function briefItems(){
+  const cutoff=new Date(); cutoff.setDate(cutoff.getDate()-1); cutoff.setHours(18,0,0,0);
+  const pool=[];
+  if(typeof NEWS_ARCHIVE!=="undefined") Object.values(NEWS_ARCHIVE).forEach(l=>pool.push(...l));
+  if(typeof NEWS_LATEST!=="undefined") pool.push(...NEWS_LATEST);
+  const seen=new Set(), out=[];
+  for(const a of pool){
+    const d=new Date((a.date||"").replace(" ","T"));
+    if(isNaN(d)||d<cutoff||(a.importance||0)<4) continue;
+    const k=(a.title||"").slice(0,40);
+    if(seen.has(k)) continue; seen.add(k);
+    out.push(a);
+  }
+  out.sort((a,b)=>b.importance-a.importance);
+  return out.slice(0,10);
+}
+function toggleBrief(){
+  const b=document.getElementById("briefBtn");
+  if(window.speechSynthesis.speaking){ speechSynthesis.cancel(); b.textContent="🔊 새벽 브리핑"; return; }
+  const items=briefItems();
+  if(!items.length){ alert("어제 저녁 이후 중요도 4점 이상 기사가 없습니다."); return; }
+  let text="밤사이 중요 기사 "+items.length+"건 브리핑입니다. ";
+  items.forEach((a,i)=>{
+    const sec=SEC_NAME[a.sid||a._sid]||"";
+    text+=(i+1)+"번. "+(sec?sec+" 분야. ":"")+a.title+". "+(a.summary||"")+" ";
+  });
+  text+="브리핑을 마칩니다.";
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="ko-KR"; u.rate=1.05;
+  u.onend=()=>{ b.textContent="🔊 새벽 브리핑"; };
+  b.textContent="⏹ 브리핑 중지";
+  speechSynthesis.speak(u);
+}
 function esc(s){return String(s).replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));}
 function impBadge(n){const t=n>=5?"긴급":n>=4?"중요":n>=3?"주목":n>=2?"참고":"저";return `<span class="imp i${n}">${t} ${n}</span>`;}
 function artCard(a,showSec){
@@ -122,10 +158,14 @@ function render(){
     else{
       html+=`<div class="datebar"><span class="dchip${dailyDate==="all"?" on":""}" onclick="setDailyDate('all')">전체</span>`
         + days.map(d=>`<span class="dchip${dailyDate===d?" on":""}" onclick="setDailyDate('${d}')">${d.slice(5)}</span>`).join("")
-        + `</div>`;
+        + `</div>`
+        + `<div class="datebar"><span class="dchip${dailyImp===0?" on":""}" onclick="setDailyImp(0)">중요도 전체</span>`
+        + `<span class="dchip${dailyImp===4?" on":""}" onclick="setDailyImp(4)">중요 4점</span>`
+        + `<span class="dchip${dailyImp===5?" on":""}" onclick="setDailyImp(5)">긴급 5점</span></div>`;
       const showDays=(dailyDate==="all")?days:days.filter(d=>d===dailyDate);
       showDays.forEach(d=>{
-        const items=(arch[d]||[]).map(a=>({...a,_sid:a.sid}));
+        let items=(arch[d]||[]).map(a=>({...a,_sid:a.sid}));
+        if(dailyImp) items=items.filter(a=>a.importance===dailyImp);
         html+=block("📌 "+d+" 중요 기사",items.length+"건",items.map(a=>artCard(a,true)).join(""),true);
       });
     }
