@@ -583,3 +583,4 @@ samsungreleasesstableoneui90updateforgal
 theresaserioussecurityfixhidingingoogles
 삼성원ui9업데이트시작갤s26부터순차적용
 갤럭시gos논란4년만에종결삼성전자배상책임없다mdtodaycokr
+thisios27bugtemporarilyfreezesyouriphone
