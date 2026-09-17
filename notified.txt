@@ -580,3 +580,5 @@ metareportedlycreatingglasseswithoutcame
 쿠팡개인정보유출1인당10만원배상소비자원조정안거부
 삼성갤럭시원ui9배포마이팬캠부터맞춤비서까지
 samsungreleasesstableoneui90updateforgal
+theresaserioussecurityfixhidingingoogles
+삼성원ui9업데이트시작갤s26부터순차적용
