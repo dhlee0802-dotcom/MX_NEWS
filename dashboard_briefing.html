@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>네트워크 뉴스 브리핑</title>
+<style>
+  :root{
+    --navy:#0f2a5c; --blue:#1e5eff; --blue-soft:#eef3ff;
+    --ink:#1a2233; --sub:#5b6577; --line:#e4e8f0;
+    --bg:#f6f8fb; --card:#ffffff;
+    --crit:#d63031;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
+  header{background:var(--card);border-bottom:1px solid var(--line);padding:14px 18px}
+  .hd-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  h1{font-size:18px;font-weight:800;color:var(--navy);letter-spacing:-.3px}
+  h1 span{color:var(--blue)}
+  .hd-meta{font-size:11.5px;color:var(--sub);margin-top:2px}
+  .btn{flex:0 0 auto;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;text-decoration:none;display:inline-block}
+  .btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+  main{padding:14px 16px 40px;max-width:760px;margin:0 auto}
+  .subbar{display:flex;gap:6px;overflow-x:auto;margin:0 0 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .subbar::-webkit-scrollbar{display:none}
+  .rchip{flex:0 0 auto;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;white-space:nowrap}
+  .rchip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
+  .blk-hd{padding:12px 16px;border-bottom:1px solid var(--line);background:#fbfcfe;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .blk-hd h3{font-size:15px;font-weight:800;color:var(--navy)}
+  .blk-hd .cnt{font-size:11.5px;color:var(--sub);font-weight:500}
+  .blk-body{padding:16px}
+  .brief-text p{margin:0 0 14px;font-size:14.5px}
+  .brief-text p:last-child{margin-bottom:0}
+  .empty{padding:40px 0;text-align:center;color:var(--sub);font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd-top">
+    <h1>Samsung Network <span>브리핑</span></h1>
+    <a class="btn" href="network.html">📊 대시보드</a>
+  </div>
+  <div class="hd-meta">매일 06시 모닝 · 17시 이브닝 발행 — 그 사이 수집된 중요 기사(4점 이상) 중 경영진 관심 사안 선별</div>
+</header>
+<main>
+  <div id="chips" class="subbar"></div>
+  <div id="content"></div>
+</main>
+
+<script>/* 진단용 */
+window.onerror=function(m,s,l){var e=document.getElementById("content");if(e)e.innerHTML='<div class="empty">⚠ 스크립트 오류: '+m+' (line '+l+')</div>';return false;};</script>
+<script src="news_data.js"></script>
+<script>
+const BRIEFS=(typeof NEWS_BRIEFINGS!=="undefined")?NEWS_BRIEFINGS:[];
+let cur=0;
+function esc(s){const d=document.createElement("div");d.textContent=s||"";return d.innerHTML;}
+
+/* ── 음성 재생 (한국어 최적 음성 선택 + 문장 분할 재생) ── */
+let queue=[],playing=false,koVoice=null;
+function pickVoice(){
+  if(!("speechSynthesis" in window))return;
+  const vs=speechSynthesis.getVoices().filter(v=>v.lang&&v.lang.toLowerCase().startsWith("ko"));
+  if(!vs.length){koVoice=null;return;}
+  const score=v=>(/natural/i.test(v.name)?4:0)+(/online/i.test(v.name)?2:0)+(/google/i.test(v.name)?1:0);
+  vs.sort((a,b)=>score(b)-score(a));koVoice=vs[0];
+}
+if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+function splitText(t){
+  const parts=t.match(/[^.!?]+[.!?]?/g)||[t];
+  const out=[];let c="";
+  for(const p of parts){if((c+p).length>180){if(c)out.push(c);c=p;}else c+=p;}
+  if(c)out.push(c);return out;
+}
+function playNext(b){
+  if(!playing||!queue.length){playing=false;if(b)b.textContent="🎧 브리핑 듣기";return;}
+  const u=new SpeechSynthesisUtterance(queue.shift());
+  u.lang="ko-KR";u.rate=1.0;u.pitch=1.0;if(koVoice)u.voice=koVoice;
+  u.onend=()=>playNext(b);u.onerror=()=>playNext(b);
+  speechSynthesis.speak(u);
+}
+function togglePlay(){
+  const b=document.getElementById("playBtn");
+  if(!("speechSynthesis" in window)){alert("이 브라우저는 음성 재생을 지원하지 않습니다.");return;}
+  if(playing){speechSynthesis.cancel();queue=[];playing=false;b.textContent="🎧 브리핑 듣기";return;}
+  const cb=BRIEFS[cur]||{};
+  const t=cb.script||cb.text||"";
+  if(!t){alert("재생할 원고가 없습니다.");return;}
+  pickVoice();queue=splitText(t);playing=true;b.textContent="⏹ 정지";playNext(b);
+}
+
+/* ── 렌더링 ── */
+function render(){
+  const chips=document.getElementById("chips"),content=document.getElementById("content");
+  if(!BRIEFS.length){chips.innerHTML="";content.innerHTML='<div class="empty">아직 발행된 브리핑이 없습니다. 다음 06시 또는 17시 크롤 후 생성됩니다.</div>';return;}
+  if(playing){speechSynthesis.cancel();queue=[];playing=false;}
+  chips.innerHTML=BRIEFS.map((b,i)=>`<div class="rchip${i===cur?" on":""}" onclick="sel(${i})">${esc(b.label)}</div>`).join("");
+  const b=BRIEFS[cur];
+  content.innerHTML=`<div class="block">
+    <div class="blk-hd">
+      <div><h3>📄 ${esc(b.label)} 브리핑</h3>
+        <div class="cnt">수집 구간 ${esc(b.window)} · 대상 ${b.n}건 · ${esc(b.generated)} 발행</div></div>
+      <button class="btn primary" id="playBtn" onclick="togglePlay()">🎧 브리핑 듣기</button>
+    </div>
+    <div class="blk-body"><div class="brief-text" style="white-space:pre-wrap">${esc(b.text||"")}</div></div>
+  </div>`;
+}
+function sel(i){cur=i;render();window.scrollTo(0,0);}
+render();
+</script>
+</body>
+</html>
