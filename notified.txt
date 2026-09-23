@@ -841,3 +841,4 @@ applereleaseswatchos2701tofixapplewatchs
 applereleaseswatchos2701withfixforrestar
 이가격못맞추면안방뺏긴다중국산공습에초비상한국경제
 삼성전자갤럭시z8시리즈공개임이투데이
+samsungistippedtoaddsecuritychipstogalax
