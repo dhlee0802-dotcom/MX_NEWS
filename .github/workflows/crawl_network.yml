@@ -23,7 +23,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install deps
-        run: pip install feedparser googlenewsdecoder
+        run: pip install feedparser googlenewsdecoder "selectolax<1.0"
 
       - name: Run crawler
         env:
