@@ -47,6 +47,7 @@
   .cat.exec{background:#fff6d9;color:#9a7b00}
   .cat.policy{background:#ebf3fe;color:#1e5eff}
   .sec-tag{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--blue-soft);color:var(--blue)}
+  .rel-tag{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--low-bg);color:var(--sub)}
   .art-title{font-size:13.5px;font-weight:700;color:var(--ink);text-decoration:none;display:block}
   .art-title:hover{color:var(--blue)}
   .art-sum{font-size:12.5px;color:var(--sub);margin-top:3px;white-space:pre-wrap}
@@ -185,7 +186,7 @@ function artCard(a,showSec){
   const kAttr=esc(k).replace(/'/g,"&#39;");
   const box=(reportMode&&k)?`<input type="checkbox" class="selbox" onchange="toggleSel('${kAttr}')" ${SEL.has(k)?"checked":""}>`:"";
   return `<div class="art">
-    <div class="art-tags">${box}${impBadge(a.importance)}<span class="cat ${a.category}">${CAT_LABEL[a.category]||a.category}</span>${showSec&&a._sid?`<span class="sec-tag">${SEC_NAME[a._sid]||a._sid}</span>`:""}</div>
+    <div class="art-tags">${box}${impBadge(a.importance)}<span class="cat ${a.category}">${CAT_LABEL[a.category]||a.category}</span>${showSec&&a._sid?`<span class="sec-tag">${SEC_NAME[a._sid]||a._sid}</span>`:""}${(a.rel||1)>1?`<span class="rel-tag">관련 보도 ${a.rel}건</span>`:""}</div>
     <a class="art-title" href="${esc(a.url)}" target="_blank">${esc(a.title)}</a>
     <div class="art-sum">${esc(a.summary||"")}</div>
     <div class="art-src">${esc(a.source)} · ${esc(a.date)}</div></div>`;
@@ -234,6 +235,7 @@ function regionOf(a){
   return "기타";
 }
 function prodKey(a){
+  if(a.subj) return a.subj;   // Gemini가 표준 표기로 부여한 주체가 있으면 그대로 사용
   const t=(((a.topic||"")+" "+(a.title||""))).toLowerCase();
   for(const [canon,ali] of COMPANIES){
     if(hasWord(t,canon)||ali.some(x=>hasWord(t,x))) return canon;

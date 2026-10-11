@@ -42,6 +42,16 @@ jobs:
           git add network_archive.json || true
           git add briefings_network.json || true
           git add topics_seen_network.json || true
-          git commit -m "network dashboard update" || echo "no changes"
-          git pull --rebase -X theirs
-          git push
+          git add gn_url_cache_network.json || true
+          git commit -m "network dashboard update" || { echo "no changes"; exit 0; }
+          for i in 1 2 3; do
+            git pull --rebase -X theirs
+            if git push; then
+              echo "push 성공"
+              exit 0
+            fi
+            echo "push 실패 ($i/3) - 30초 후 재시도"
+            sleep 30
+          done
+          echo "push 3회 모두 실패 (GitHub 서버 오류 가능성) - 다음 크롤에서 자동 반영됨"
+          exit 1

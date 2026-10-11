@@ -155,14 +155,14 @@ def filter_stale_topics(pool):
     now = datetime.now(KST)
     # 1) 이번 수집분의 이슈별 최초 보도 시각 기록 (기사 발행 시각 기준, 더 이른 시각으로 갱신)
     for a in pool:
-        t = a.get("topic","")
+        t = issue_key(a)
         if not t: continue
         if t not in seen or a["date"] < seen[t]:
             seen[t] = a["date"]
     # 2) 최초 보도 후 TTL 경과한 이슈의 기사 제외
     kept, dropped = [], 0
     for a in pool:
-        t = a.get("topic","")
+        t = issue_key(a)
         if t and t in seen:
             try:
                 fdt = datetime.strptime(seen[t], "%Y-%m-%d %H:%M").replace(tzinfo=KST)
@@ -179,8 +179,13 @@ def filter_stale_topics(pool):
 
 def crawl():
     cutoff = datetime.now(timezone.utc) - timedelta(hours=HOURS)
-    exclude = load_lines("exclude_network.txt")
-    print(f"제외어 {len(exclude)}개 로드: {', '.join(exclude) if exclude else '없음 (exclude_network.txt 미발견 또는 비어있음)'}")
+    # 내장 제외어: 삼성전자 외 삼성 계열사(비통신)는 Gemini 판정과 무관하게 수집 단계에서 제외
+    BUILTIN_EXCLUDE = ["삼성물산","삼성중공업","삼성sdi","삼성바이오","삼성생명","삼성화재","삼성카드",
+                       "삼성증권","삼성엔지니어링","삼성이앤에이","samsung c&t","samsung heavy",
+                       "samsung sdi","samsung biologics","samsung e&a"]
+    exclude = load_lines("exclude_network.txt") + BUILTIN_EXCLUDE
+    print(f"제외어 {len(exclude)}개 로드 (내장 {len(BUILTIN_EXCLUDE)}개 포함): "
+          f"{', '.join(load_lines('exclude_network.txt')) or 'exclude_network.txt 없음/비어있음'}")
     use_gemini = bool(os.environ.get("GEMINI_API_KEY"))
     pool, seen = [], set()
     excl_n = [0]
@@ -208,7 +213,8 @@ def crawl():
             "summary": (summary[:220] + "…") if len(summary) > 220 else summary,
             "source": src or "Google News",
             "date": pub.astimezone(KST).strftime("%Y-%m-%d %H:%M"),
-            "url": link, "category": category(blob), "importance": score(blob), "wl": wl, "topic": "",
+            "url": link, "category": category(blob), "importance": score(blob), "wl": wl,
+            "topic": "", "subj": "", "evt": "", "tgt": "",
         })
 
     for src, url in FEEDS:
@@ -314,10 +320,15 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
 2 = 참고 수준
 1 = 단순 정보·홍보성
 회사 이름이 크더라도 단순 언급·제품 소개·인터뷰·시황 전망 기사는 3 이하.
+주체(subj): 사건의 주체를 아래 표준 표기 중에서만 골라 기재 (다른 표기·번역·영문 절대 금지):
+에릭슨, 노키아, 화웨이, ZTE, 마베니어, 원피니티, 후지쯔, 라쿠텐심포니, 삼성, 버라이즌, AT&T, T모바일, 에코스타, US셀룰러, 차터, SKT, KT, LG유플러스, 도코모, KDDI, 소프트뱅크, 라쿠텐모바일, 지오, 에어텔, 보다폰아이디어, 텔러스, 비디오트론, 사스크텔, 로저스, 벨, 보다폰, 도이치텔레콤, 오렌지, 텔레포니카, 스타링크, AST, 아마존, FCC, 과기정통부, EU
+어떤 언어의 기사든 같은 회사·기관이면 반드시 같은 표준 표기를 쓸 것(Ericsson도 エリクソン도 전부 "에릭슨"). 목록에 없는 주체(특정 공항, 지역, 타 정부기관 등)는 짧은 한국어 명사 하나로 통일해 기재(예: "미국공항", "인도정부").
+사건(evt): 반드시 다음 중 하나만: 장애 신제품 수주공급 인수합병 실적 경영진 정책주파수 위성 기타
+대상(tgt): 사건의 상대방(수주공급의 발주 통신사, 인수합병의 피인수사, 제재의 대상국 등)이 기사에 명시된 경우에만 위 표준 표기(또는 국가명 한 단어)로 기재하고, 없거나 불분명하면 빈 문자열 "". 같은 주체+사건이라도 대상이 다르면 별개 사건으로 구분하기 위한 필드임.
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 영어·일본어·중국어 등 어떤 언어의 기사라도 이슈명은 반드시 한국어 표기(에릭슨, 노키아, 화웨이, 버라이즌, 도이치텔레콤 등)로 쓸 것 — 같은 사건을 다룬 다국어 기사가 전부 동일 이슈명으로 묶여야 함. 특정 회사가 주체가 아닌 사건(공항·지역 통신장애, 정책 발표 등)은 "지역/기관 사건" 형식으로 통일(예: 같은 공항 통신장애를 다룬 한국어·영어·일본어 기사 전부 → "미국공항 통신장애" 하나로). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 특히 같은 행사·발표·컨퍼런스·국정감사·정책 브리핑에서 파생된 기사들은 세부 주제가 조금씩 달라도 전부 하나의 동일 이슈명으로 묶을 것(예: 국정감사에서 나온 통신 관련 기사 전부 → "과기정통부 국감"). 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 메신저 보고에 바로 붙여 쓸 수 있는 개조식으로 작성: "- "로 시작하는 불릿 2~4개, 불릿 사이는 줄바꿈(\\n), 각 불릿은 명사형 종결(예: 계약 체결, 출시 발표, 대응 필요). 순서는 핵심 사실 → 수치·배경 → 경쟁 구도·사업적 의미. 기사에 인용된 수치·금액·비율·규모는 최대한 그대로 포함할 것. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 불릿 1개만 작성.
 
-모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"topic":"버라이즌 수주","sum":"..."}}]
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","topic":"에릭슨 수주","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
@@ -353,6 +364,8 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
             except Exception: pass
             if j.get("sum"): item["summary"] = str(j["sum"])
             if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
+            for f in ("subj","evt","tgt"):  # 구조화 키: 공백 제거·소문자 정규화로 표기 흔들림 최소화
+                if j.get(f): item[f] = re.sub(r"\s+","",str(j[f])).strip().lower()
             applied += 1
         return applied
 
@@ -411,47 +424,108 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
 def _tokens(t):
     return set(re.findall(r"[a-z0-9가-힣]+", t.lower()))
 
+def event_key(a):
+    """주체|사건 구조화 키 (Gemini가 표준 표기로 부여). 둘 다 있어야 유효"""
+    s = a.get("subj",""); e = a.get("evt","")
+    return (s + "|" + e) if (s and e) else ""
+
+def event_cmp(a, b):
+    """구조화 키 비교: True=같은 사건, False=확실히 별개(같은 키·다른 대상), None=판단 유보(폴백 검사로)"""
+    ka, kb = event_key(a), event_key(b)
+    if not (ka and kb) or ka != kb: return None
+    ta, tb = a.get("tgt",""), b.get("tgt","")
+    if ta and tb and ta != tb: return False  # 예: 둘 다 에릭슨|수주공급 이지만 대상이 버라이즌/텔러스로 다름
+    return True
+
+def issue_key(a):
+    """노출기한 장부용 키: 구조화 키(+대상) 우선, 없으면 이슈명"""
+    k = event_key(a)
+    if k:
+        return k + ("|" + a["tgt"] if a.get("tgt","") else "")
+    return a.get("topic","")
+
+def is_dup_pair(a, b):
+    """대시보드 중복 판정: 1차 구조화 키(주체+사건, 대상 다르면 별개) → 2차 폴백(이슈명·제목 유사도)"""
+    v = event_cmp(a, b)
+    if v is not None: return v
+    ta, tb = a.get("topic",""), b.get("topic","")
+    if ta and ta == tb: return True
+    x, y = _tokens(a.get("title","")), _tokens(b.get("title",""))
+    if x and y and len(x & y) / len(x | y) >= 0.55: return True
+    return False
+
 def dedupe_topics(items):
-    """1차: 같은 이슈명은 1건만. 2차: 이슈명이 달라도 제목 단어가 55% 이상 겹치면 중복으로 간주"""
-    out, seen_topics, kept_tokens = [], set(), []
+    """같은 사건은 대표 1건만 남기고, 대표에 관련 보도 수(rel)를 기록"""
+    out = []
     for a in items:
-        t = a.get("topic","")
-        if t:
-            if t in seen_topics: continue
-        tk = _tokens(a.get("title",""))
-        dup = False
-        for x in kept_tokens:
-            inter = len(tk & x); union = len(tk | x)
-            if union and inter / union >= 0.55: dup = True; break
-        if dup: continue
-        if t: seen_topics.add(t)
-        kept_tokens.append(tk)
+        rep = next((b for b in out if is_dup_pair(a, b)), None)
+        if rep is not None:
+            rep["rel"] = rep.get("rel", 1) + 1
+            continue
+        a["rel"] = a.get("rel", 1)
         out.append(a)
     return out
 
+GN_CACHE_FILE, GN_CACHE_MAX = "gn_url_cache_network.json", 3000
+
 def resolve_google_links(all_items):
-    """news.google.com 중계 주소를 원문 기사 주소로 변환 (변환 실패 시 원래 링크 유지)"""
+    """news.google.com 중계 주소를 원문 기사 주소로 변환 (변환 실패 시 원래 링크 유지).
+    성공분은 파일 캐시에 저장해 다음 실행에서 재변환 없이 즉시 적용 — 매 실행 변환량을 줄여
+    구글 rate limit 실패를 최소화하고, 실패분은 다음 실행에서 자연 재시도됨."""
     targets = [a for a in all_items if "news.google.com" in a.get("url","")]
     if not targets: return
+    cache = {}
+    if os.path.exists(GN_CACHE_FILE):
+        try: cache = json.loads(open(GN_CACHE_FILE, encoding="utf-8").read())
+        except Exception: cache = {}
+    # 1) 캐시 적중분 먼저 적용
+    pend = []
+    for a in targets:
+        u = a["url"]
+        if u in cache: a["url"] = cache[u]
+        else: pend.append(a)
+    hit = len(targets) - len(pend)
+    if not pend:
+        print(f"구글 뉴스 링크 원본 변환: 캐시 {hit}건 / 신규 0건")
+        return
     try:
         from googlenewsdecoder import gnewsdecoder
     except Exception:
         print("안내: googlenewsdecoder 미설치 - 구글 링크 원본 변환 생략"); return
-    cache, n = {}, 0
-    for a in targets:
+    import time
+    n, fail, first_err = 0, 0, ""
+    run, seen_urls = {}, set()
+    for a in pend:
         u = a["url"]
-        if u in cache:
-            a["url"] = cache[u]; continue
-        try:
-            r = gnewsdecoder(u, interval=1)
-            if isinstance(r, dict) and r.get("status") and r.get("decoded_url"):
-                cache[u] = r["decoded_url"]; a["url"] = cache[u]; n += 1
-        except Exception:
-            pass
-    print(f"구글 뉴스 링크 원본 변환: {n}/{len(targets)}건")
+        if u in run:
+            a["url"] = run[u]; continue
+        if u in seen_urls: continue   # 이번 실행에서 이미 실패한 주소는 재시도 생략
+        ok = False
+        for attempt in range(2):      # 실패 시 1회 재시도 (rate limit 완화 대기 후)
+            try:
+                r = gnewsdecoder(u, interval=1)
+                if isinstance(r, dict) and r.get("status") and r.get("decoded_url"):
+                    run[u] = r["decoded_url"]; a["url"] = run[u]; n += 1; ok = True; break
+                if not first_err and isinstance(r, dict): first_err = str(r.get("message",""))[:120]
+            except Exception as ex:
+                if not first_err: first_err = str(ex)[:120]
+            if attempt == 0: time.sleep(3)
+        if not ok:
+            fail += 1; seen_urls.add(u)
+    cache.update(run)
+    if len(cache) > GN_CACHE_MAX:     # 캐시 크기 상한: 오래된 항목부터 정리
+        cache = dict(list(cache.items())[-GN_CACHE_MAX:])
+    try:
+        open(GN_CACHE_FILE, "w", encoding="utf-8").write(json.dumps(cache, ensure_ascii=False))
+    except Exception: pass
+    msg = f"구글 뉴스 링크 원본 변환: 캐시 {hit}건 / 신규 성공 {n}건 / 실패 {fail}건"
+    if fail and first_err: msg += f" (첫 실패 사유: {first_err})"
+    print(msg)
 
 def _arch_dup(a, b):
-    """아카이브용 중복 판정: 이슈명 일치/유사, 제목 일치/유사 중 하나라도 해당하면 중복"""
+    """아카이브용 중복 판정: 1차 구조화 키(주체+사건+대상) → 2차 이슈명 일치/유사·제목 일치/유사"""
+    v = event_cmp(a, b)
+    if v is not None: return v
     ta, tb = a.get("topic",""), b.get("topic","")
     if ta and ta == tb: return True
     if norm_key(a.get("title","")) == norm_key(b.get("title","")): return True
@@ -477,19 +551,33 @@ def update_archive(items):
     if os.path.exists(ARCHIVE_FILE):
         try: arch = json.loads(open(ARCHIVE_FILE, encoding="utf-8").read())
         except Exception: arch = {}
-    # 기존 저장분 소급 정리 (이미 쌓인 중복 제거, 중요도 높은 기사 우선 보존)
-    for d in list(arch.keys()):
+    # 기존 저장분 소급 정리 (같은 날 + 전날 기사와 교차 비교, 중요도 높은 기사 우선 보존)
+    days_sorted = sorted(arch.keys())
+    for i, d in enumerate(days_sorted):
+        prev = arch.get(days_sorted[i-1], []) if i > 0 else []
         cleaned = []
         for x in sorted(arch[d], key=lambda v: (v.get("importance",0), v.get("date","")), reverse=True):
-            if not any(_arch_dup(x, y) for y in cleaned): cleaned.append(x)
+            rep = next((y for y in cleaned if _arch_dup(x, y)), None) \
+                  or next((y for y in prev if _arch_dup(x, y)), None)   # 전날 이미 실린 사건 포함
+            if rep is not None:
+                rep["rel"] = rep.get("rel", 1) + x.get("rel", 1)
+                continue
+            cleaned.append(x)
         arch[d] = cleaned
     added = 0
     for a in items:
         day = a["date"][:10]
         lst = arch.setdefault(day, [])
-        if any(_arch_dup(a, x) for x in lst):
-            continue  # 같은 날짜의 같은 사건(언어·매체 불문)은 1건만
-        lst.append({k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")})
+        try: prev_day = (datetime.strptime(day, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
+        except Exception: prev_day = ""
+        rep = next((x for x in lst if _arch_dup(a, x)), None) \
+              or next((x for x in arch.get(prev_day, []) if _arch_dup(a, x)), None)
+        if rep is not None:
+            rep["rel"] = rep.get("rel", 1) + 1   # 같은 날짜·전날의 같은 사건은 대표에 관련 보도 수만 누적
+            continue
+        rec = {k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
+        rec["rel"] = 1
+        lst.append(rec)
         added += 1
     cutoff_day = (datetime.now(KST) - timedelta(days=ARCHIVE_DAYS)).strftime("%Y-%m-%d")
     arch = {d: v for d, v in arch.items() if d >= cutoff_day}
@@ -610,18 +698,25 @@ def main():
         items.sort(key=lambda a: (a["importance"], a["date"]), reverse=True)  # 중요도 -> 최신순
         items = dedupe_topics(items)
         cap = 60 if sid == "carrier" else 30   # 통신사는 지역 필터용으로 넉넉히 보관
-        data[sid] = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","wl","topic")} for a in items[:cap]]
+        data[sid] = [{k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","wl","topic","subj","evt","tgt","rel")} for a in items[:cap]]
         print(f"{name}: {len(items)}건 -> {len(data[sid])}건")
     # 최신 탭: 소규모 장애(outage & imp<5)는 제외 — 대규모 장애(imp=5)만 주요·최신에 노출
     latest = sorted([a for a in pool if not (a["sid"] == "outage" and a["importance"] < 5)],
                     key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
-    latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")} for a in latest]
-    arch_items = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic")}
+    latest = [{k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt","rel")} for a in latest]
+    arch_items = [{k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
                   for a in pool if a["importance"] >= ARCHIVE_MIN_IMP]
     shown = [a for arr in data.values() for a in arr] + latest + arch_items
     resolve_google_links(shown)
     archive = update_archive(arch_items)
+    # 과거 저장분(일자별 탭)에 남은 미변환 구글 링크도 소급 변환 후 재저장
+    arch_flat = [a for arr in archive.values() for a in arr]
+    if any("news.google.com" in a.get("url","") for a in arch_flat):
+        resolve_google_links(arch_flat)
+        try:
+            open(ARCHIVE_FILE, "w", encoding="utf-8").write(json.dumps(archive, ensure_ascii=False))
+        except Exception: pass
     briefs = update_briefings(pool)
     meta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M") + " · " + engine,
             "sections": [{"id": s[0], "name": s[1]} for s in [next(x for x in SEC_DEFS if x[0]==o) for o in ORDER]]}
