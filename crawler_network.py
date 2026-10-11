@@ -467,6 +467,7 @@ def dedupe_topics(items):
     return out
 
 GN_CACHE_FILE, GN_CACHE_MAX = "gn_url_cache_network.json", 3000
+GN_DECODE_BUDGET = 120   # 실행당 신규 변환 상한 — 초과분은 다음 실행에서 처리 (실행 시간 폭주 방지)
 
 def resolve_google_links(all_items):
     """news.google.com 중계 주소를 원문 기사 주소로 변환 (변환 실패 시 원래 링크 유지).
@@ -493,13 +494,15 @@ def resolve_google_links(all_items):
     except Exception:
         print("안내: googlenewsdecoder 미설치 - 구글 링크 원본 변환 생략"); return
     import time
-    n, fail, first_err = 0, 0, ""
+    n, fail, first_err, skipped = 0, 0, "", 0
     run, seen_urls = {}, set()
     for a in pend:
         u = a["url"]
         if u in run:
             a["url"] = run[u]; continue
         if u in seen_urls: continue   # 이번 실행에서 이미 실패한 주소는 재시도 생략
+        if n + fail >= GN_DECODE_BUDGET:
+            skipped += 1; continue    # 상한 초과분은 다음 실행에서 캐시를 이어서 채움
         ok = False
         for attempt in range(2):      # 실패 시 1회 재시도 (rate limit 완화 대기 후)
             try:
@@ -519,6 +522,7 @@ def resolve_google_links(all_items):
         open(GN_CACHE_FILE, "w", encoding="utf-8").write(json.dumps(cache, ensure_ascii=False))
     except Exception: pass
     msg = f"구글 뉴스 링크 원본 변환: 캐시 {hit}건 / 신규 성공 {n}건 / 실패 {fail}건"
+    if skipped: msg += f" / 다음 실행 이월 {skipped}건"
     if fail and first_err: msg += f" (첫 실패 사유: {first_err})"
     print(msg)
 
