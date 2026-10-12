@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기업 히스토리</title>
+<style>
+  :root{
+    --navy:#0f2a5c; --blue:#1e5eff; --blue-soft:#eef3ff;
+    --ink:#1a2233; --sub:#5b6577; --line:#e4e8f0;
+    --bg:#f6f8fb; --card:#ffffff;
+    --crit:#d63031; --crit-bg:#fdeeee; --high:#e67e22; --high-bg:#fdf3e7;
+    --mid:#2f80ed; --mid-bg:#ebf3fe; --low:#8a94a6; --low-bg:#f1f3f7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55}
+  header{background:var(--card);border-bottom:1px solid var(--line);padding:14px 18px}
+  .hd-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  h1{font-size:18px;font-weight:800;color:var(--navy);letter-spacing:-.3px}
+  h1 span{color:var(--blue)}
+  .hd-meta{font-size:11.5px;color:var(--sub);margin-top:2px}
+  .btn{flex:0 0 auto;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;text-decoration:none;display:inline-block}
+  main{padding:14px 16px 50px;max-width:900px;margin:0 auto}
+  .grp{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .grp-label{flex:0 0 64px;font-size:11.5px;font-weight:700;color:var(--sub);text-align:right}
+  .chips{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex:1}
+  .chips::-webkit-scrollbar{display:none}
+  .rchip{flex:0 0 auto;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;white-space:nowrap}
+  .rchip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .rchip .n{margin-left:4px;font-size:10.5px;opacity:.65}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}
+  .blk-hd{padding:11px 14px;border-bottom:1px solid var(--line);background:#fbfcfe;display:flex;align-items:baseline;gap:8px}
+  .blk-hd h3{font-size:14px;font-weight:800;color:var(--navy)}
+  .blk-hd .cnt{font-size:11px;color:var(--sub);font-weight:500}
+  .blk-body{padding:10px 14px}
+  .stat-row{display:flex;gap:10px;flex-wrap:wrap}
+  .stat{flex:1;min-width:140px;background:var(--blue-soft);border-radius:10px;padding:10px 12px}
+  .stat .k{font-size:11px;color:var(--sub);font-weight:700}
+  .stat .v{font-size:13.5px;font-weight:800;color:var(--navy);margin-top:3px;line-height:1.4}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:560px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#fbfcfe;font-size:11.5px;color:var(--sub);white-space:nowrap}
+  td a{color:var(--ink);text-decoration:none}
+  td a:hover{color:var(--blue)}
+  .tbl-wrap{overflow-x:auto}
+  .ctrl{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:8px;-webkit-overflow-scrolling:touch}
+  .ctrl::-webkit-scrollbar{display:none}
+  .search{width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;font-family:inherit;margin-bottom:4px}
+  .month-hd{font-size:12px;font-weight:800;color:var(--sub);margin:14px 0 2px;padding-bottom:4px;border-bottom:2px solid var(--line)}
+  .art{padding:10px 0;border-top:1px solid var(--line)}
+  .art:first-of-type{border-top:none}
+  .art-tags{display:flex;gap:5px;margin-bottom:4px;flex-wrap:wrap;align-items:center}
+  .imp{font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:4px}
+  .imp.i5{background:var(--crit);color:#fff}
+  .imp.i4{background:var(--crit-bg);color:var(--crit)}
+  .imp.i3{background:var(--high-bg);color:var(--high)}
+  .ev{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--low-bg);color:var(--sub)}
+  .ev.장애{background:var(--crit-bg);color:var(--crit)}
+  .ev.실적{background:var(--mid-bg);color:var(--mid)}
+  .ev.수주공급{background:#e8f8ef;color:#1e8e4e}
+  .ev.신제품{background:#f0ebfa;color:#6c3fc5}
+  .ev.인수합병{background:#e5ecf8;color:var(--navy)}
+  .ev.투자{background:var(--high-bg);color:#c46a10}
+  .ev.경영진거점{background:#fff6d9;color:#9a7b00}
+  .ev.규제주파수{background:var(--blue-soft);color:var(--blue)}
+  .ev.위성{background:#e0f5f4;color:#0e8378}
+  .ev.요금제{background:#fdeef5;color:#b8367f}
+  .art-title{font-size:13.5px;font-weight:700;color:var(--ink);text-decoration:none;display:block}
+  .art-title:hover{color:var(--blue)}
+  .art-sum{font-size:12.5px;color:var(--sub);margin-top:3px}
+  .art-src{font-size:11px;color:var(--low);margin-top:4px}
+  .empty{color:var(--low);font-size:12.5px;padding:16px 0;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd-top">
+    <h1>Samsung Network <span>기업 히스토리</span></h1>
+    <div style="display:flex;gap:6px;flex:0 0 auto">
+      <a class="btn" href="network.html">📊 대시보드</a>
+      <a class="btn" href="briefing.html">📄 브리핑</a>
+    </div>
+  </div>
+  <div class="hd-meta" id="meta"></div>
+</header>
+<main>
+  <div id="selector"></div>
+  <div id="content"></div>
+</main>
+
+<script>/* 진단용 */
+window.onerror=function(m,s,l){var e=document.getElementById("content");if(e)e.innerHTML='<div class="empty">⚠ 스크립트 오류: '+m+' (line '+l+')</div>';return false;};</script>
+<script src="news_data.js"></script>
+<script>
+const META=(typeof COMPANY_META!=="undefined")?COMPANY_META:{generated:"데이터 없음",groups:{}};
+const DATA=(typeof COMPANY_DATA!=="undefined")?COMPANY_DATA:{};
+const NAME={"에릭슨":"Ericsson","노키아":"Nokia","화웨이":"Huawei","zte":"ZTE","스타링크":"Starlink","ast":"AST SpaceMobile","아마존":"Amazon Leo","버라이즌":"Verizon","kddi":"KDDI","도코모":"DOCOMO","skt":"SKT","kt":"KT","lg유플러스":"LG U+","지오":"Jio"};
+const KO={"에릭슨":"에릭슨","노키아":"노키아","화웨이":"화웨이","zte":"ZTE","스타링크":"스타링크","ast":"AST","아마존":"아마존 Leo","버라이즌":"버라이즌","kddi":"KDDI","도코모":"도코모","skt":"SKT","kt":"KT","lg유플러스":"LGU+","지오":"Jio"};
+const EVTS=["장애","신제품","수주공급","인수합병","투자","실적","경영진거점","규제주파수","위성","요금제","기타"];
+const EVT_LABEL={경영진거점:"경영진·거점",규제주파수:"규제·주파수",수주공급:"수주·공급",인수합병:"M&A"};
+const PERIODS=[["1년",365],["분기",92],["90일",90],["전체",9999]];
+let cur=null, period=365, evtFilter="", q="";
+function esc(s){const d=document.createElement("div");d.textContent=s||"";return d.innerHTML;}
+function evLabel(e){return EVT_LABEL[e]||e;}
+function impBadge(n){const t=n>=5?"긴급":n>=4?"중요":"주목";return `<span class="imp i${Math.min(5,Math.max(3,n))}">${t} ${n}</span>`;}
+function items(c){return (DATA[c]||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));}
+function daysAgo(d){try{return (Date.now()-new Date(d.slice(0,10)))/864e5;}catch(e){return 9999;}}
+function quarterOf(d){const y=d.slice(0,4),m=+d.slice(5,7);return y+" Q"+Math.ceil(m/3);}
+
+function renderSelector(){
+  let h="";
+  for(const g in META.groups){
+    h+=`<div class="grp"><div class="grp-label">${esc(g)}</div><div class="chips">`+
+      META.groups[g].map(c=>`<div class="rchip${c===cur?" on":""}" onclick="sel('${c}')">${esc(KO[c]||c)}<span class="n">${(DATA[c]||[]).length}</span></div>`).join("")+
+      `</div></div>`;
+  }
+  document.getElementById("selector").innerHTML=h;
+}
+
+function artCard(a){
+  return `<div class="art">
+    <div class="art-tags">${impBadge(a.imp)}<span class="ev ${esc(a.evt)}">${esc(evLabel(a.evt))}</span></div>
+    ${a.url?`<a class="art-title" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)}</a>`:`<div class="art-title">${esc(a.title)}</div>`}
+    ${a.sum?`<div class="art-sum">${esc(a.sum)}</div>`:""}
+    <div class="art-src">${esc(a.source||"")} · ${esc((a.date||"").slice(0,10))}</div></div>`;
+}
+
+function render(){
+  document.getElementById("meta").textContent="업데이트 "+META.generated+" · 최근 400일 누적 · 회사를 선택하세요";
+  renderSelector();
+  const el=document.getElementById("content");
+  if(!cur){el.innerHTML='<div class="empty">위에서 회사를 선택하면 현황 요약, 분기별 매트릭스, 이슈 타임라인이 표시됩니다.</div>';return;}
+  const all=items(cur);
+  let h="";
+
+  /* ── 현황 요약 ── */
+  const d90=all.filter(a=>daysAgo(a.date)<=90);
+  const lastEarn=all.find(a=>a.evt==="실적");
+  const tops=all.filter(a=>daysAgo(a.date)<=180).sort((a,b)=>(b.imp-a.imp)||(b.date||"").localeCompare(a.date||"")).slice(0,3);
+  h+=`<div class="block"><div class="blk-hd"><h3>${esc(NAME[cur]||cur)} 현황</h3></div><div class="blk-body">
+    <div class="stat-row">
+      <div class="stat"><div class="k">최근 90일 이벤트</div><div class="v">${d90.length}건${d90.filter(a=>a.imp>=5).length?` · 긴급 ${d90.filter(a=>a.imp>=5).length}건`:""}</div></div>
+      <div class="stat"><div class="k">최근 실적</div><div class="v">${lastEarn?esc(lastEarn.title):"수집된 실적 없음"}</div></div>
+    </div>
+    ${tops.length?`<div style="margin-top:10px">`+tops.map(a=>artCard(a)).join("")+`</div>`:""}
+  </div></div>`;
+
+  /* ── 분기 매트릭스 ── */
+  const qs=[...new Set(all.map(a=>quarterOf(a.date)))].sort().reverse().slice(0,5);
+  const evts=EVTS.filter(e=>all.some(a=>a.evt===e));
+  if(qs.length){
+    let tbl=`<table><tr><th>분기</th>`+evts.map(e=>`<th>${esc(evLabel(e))}</th>`).join("")+`</tr>`;
+    for(const qt of qs){
+      tbl+=`<tr><th>${esc(qt)}</th>`+evts.map(e=>{
+        const hit=all.filter(a=>quarterOf(a.date)===qt&&a.evt===e).sort((x,y)=>(y.imp-x.imp)||(y.date||"").localeCompare(x.date||""))[0];
+        if(!hit)return"<td></td>";
+        const t=hit.title.length>34?hit.title.slice(0,33)+"…":hit.title;
+        return `<td>${hit.url?`<a href="${esc(hit.url)}" target="_blank" rel="noopener">${esc(t)}</a>`:esc(t)}</td>`;
+      }).join("")+`</tr>`;
+    }
+    tbl+=`</table>`;
+    h+=`<div class="block"><div class="blk-hd"><h3>분기별 주요 사건</h3><span class="cnt">카테고리별 최고 중요도 1건</span></div><div class="blk-body tbl-wrap">${tbl}</div></div>`;
+  }
+
+  /* ── 타임라인 ── */
+  let list=all.filter(a=>daysAgo(a.date)<=period);
+  if(evtFilter) list=list.filter(a=>a.evt===evtFilter);
+  if(q.trim()){const t=q.toLowerCase();list=list.filter(a=>((a.title||"")+" "+(a.sum||"")).toLowerCase().includes(t));}
+  let tl=`<div class="ctrl">`+PERIODS.map(([lb,d])=>`<div class="rchip${d===period?" on":""}" onclick="setPeriod(${d})">${lb}</div>`).join("")+`</div>`;
+  tl+=`<div class="ctrl"><div class="rchip${!evtFilter?" on":""}" onclick="setEvt('')">전체</div>`+
+    EVTS.filter(e=>all.some(a=>a.evt===e)).map(e=>`<div class="rchip${e===evtFilter?" on":""}" onclick="setEvt('${e}')">${esc(evLabel(e))}</div>`).join("")+`</div>`;
+  tl+=`<input class="search" id="qbox" value="${esc(q)}" placeholder="제목·내용 검색" onkeydown="if(event.key==='Enter'){q=this.value;render();}">`;
+  if(!list.length) tl+=`<div class="empty">조건에 맞는 이슈가 없습니다</div>`;
+  else{
+    let mon="";
+    for(const a of list){
+      const m=(a.date||"").slice(0,7);
+      if(m!==mon){mon=m;tl+=`<div class="month-hd">${esc(m)}</div>`;}
+      tl+=artCard(a);
+    }
+  }
+  h+=`<div class="block"><div class="blk-hd"><h3>이슈 타임라인</h3><span class="cnt">${list.length}건</span></div><div class="blk-body">${tl}</div></div>`;
+  el.innerHTML=h;
+}
+function sel(c){cur=c;evtFilter="";q="";render();window.scrollTo(0,0);}
+function setPeriod(d){period=d;render();}
+function setEvt(e){evtFilter=e;render();}
+const first=Object.values(META.groups)[0];
+if(first&&first.length) cur=first[0];
+render();
+</script>
+</body>
+</html>

@@ -323,7 +323,7 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
 주체(subj): 사건의 주체를 아래 표준 표기 중에서만 골라 기재 (다른 표기·번역·영문 절대 금지):
 에릭슨, 노키아, 화웨이, ZTE, 마베니어, 원피니티, 후지쯔, 라쿠텐심포니, 삼성, 버라이즌, AT&T, T모바일, 에코스타, US셀룰러, 차터, SKT, KT, LG유플러스, 도코모, KDDI, 소프트뱅크, 라쿠텐모바일, 지오, 에어텔, 보다폰아이디어, 텔러스, 비디오트론, 사스크텔, 로저스, 벨, 보다폰, 도이치텔레콤, 오렌지, 텔레포니카, 스타링크, AST, 아마존, FCC, 과기정통부, EU
 어떤 언어의 기사든 같은 회사·기관이면 반드시 같은 표준 표기를 쓸 것(Ericsson도 エリクソン도 전부 "에릭슨"). 목록에 없는 주체(특정 공항, 지역, 타 정부기관 등)는 짧은 한국어 명사 하나로 통일해 기재(예: "미국공항", "인도정부").
-사건(evt): 반드시 다음 중 하나만: 장애 신제품 수주공급 인수합병 실적 경영진 정책주파수 위성 기타
+사건(evt): 반드시 다음 중 하나만: 장애 신제품 수주공급 인수합병 투자 실적 경영진거점 규제주파수 위성 요금제 기타. 기준 — 설비투자·데이터센터·지분 투자는 "투자", CEO·임원 인사와 생산·R&D 거점 이전·감원은 "경영진거점", 주파수 할당·경매·규제·제재는 "규제주파수", 위성 발사·D2C 제휴·위성 서비스 개시는 "위성", 요금제 개편·인상·인하는 "요금제"
 대상(tgt): 사건의 상대방(수주공급의 발주 통신사, 인수합병의 피인수사, 제재의 대상국 등)이 기사에 명시된 경우에만 위 표준 표기(또는 국가명 한 단어)로 기재하고, 없거나 불분명하면 빈 문자열 "". 같은 주체+사건이라도 대상이 다르면 별개 사건으로 구분하기 위한 필드임.
 과거(past): 기사가 보도하는 핵심 사건이 이미 발생한 지 수개월~수년이 지난 과거 사건이면 1, 최근 발생했거나 진행 중인 사건이면 0. 회고·기념·연재·분석 기사, 그리고 스팸성 사이트가 과거의 유명 기사를 최신 날짜로 재발행한 경우(발행일은 최신이어도 내용은 옛 사건)는 반드시 1. 특히 과거의 대규모 통신장애(예: 2021년 NTT 도코모 200만 명 장애, 2022년 KDDI 장애, 2018년 KT 아현 화재)를 다룬 기사를 현재 발생한 장애로 오인하지 말 것 — 기사 속 연도, "당시", "그해", 이미 종결된 사건의 사과·복구 완료 서술 등이 단서. past=1 기사는 전량 자동 제외됨. 현재 장애 기사가 과거 사례를 비교·인용만 하는 경우는 0.
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 영어·일본어·중국어 등 어떤 언어의 기사라도 이슈명은 반드시 한국어 표기(에릭슨, 노키아, 화웨이, 버라이즌, 도이치텔레콤 등)로 쓸 것 — 같은 사건을 다룬 다국어 기사가 전부 동일 이슈명으로 묶여야 함. 특정 회사가 주체가 아닌 사건(공항·지역 통신장애, 정책 발표 등)은 "지역/기관 사건" 형식으로 통일(예: 같은 공항 통신장애를 다룬 한국어·영어·일본어 기사 전부 → "미국공항 통신장애" 하나로). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 특히 같은 행사·발표·컨퍼런스·국정감사·정책 브리핑에서 파생된 기사들은 세부 주제가 조금씩 달라도 전부 하나의 동일 이슈명으로 묶을 것(예: 국정감사에서 나온 통신 관련 기사 전부 → "과기정통부 국감"). 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
@@ -660,6 +660,62 @@ script 작성 규칙 (음성 재생용 구어체 원고):
         print(f"경고: 브리핑 생성 실패 - {ex} -> 단순 원고로 대체")
     return fallback
 
+# ── 기업별 히스토리 누적 (company.html용) ──
+HIST_FILE, HIST_DAYS, HIST_MIN_IMP, HIST_PER_CAP = "company_history.json", 400, 3, 150
+HIST_GROUPS = {
+    "경쟁사": ["에릭슨","노키아","화웨이","zte"],
+    "위성·유관": ["스타링크","ast","아마존"],
+    "고객사": ["버라이즌","kddi","도코모","skt","kt","lg유플러스","지오"],
+}
+HIST_COMPANIES = {c for v in HIST_GROUPS.values() for c in v}
+
+def update_company_history(items):
+    """대상 기업의 중요도 3점 이상 기사를 회사별로 400일 누적 (같은 사건은 1건만)"""
+    hist = {}
+    if os.path.exists(HIST_FILE):
+        try: hist = json.loads(open(HIST_FILE, encoding="utf-8").read())
+        except Exception: hist = {}
+    def day_diff(d1, d2):
+        try:
+            a = datetime.strptime(d1[:10], "%Y-%m-%d"); b = datetime.strptime(d2[:10], "%Y-%m-%d")
+            return abs((a - b).days)
+        except Exception: return 999
+    def dup(e, x):
+        if e["evt"] and e["evt"] == x.get("evt","") and day_diff(e["date"], x.get("date","")) <= 2:
+            ta, tb = e.get("tgt",""), x.get("tgt","")
+            if not (ta and tb and ta != tb): return True   # 같은 사건 유형·같은 시기·대상 미상충
+        if day_diff(e["date"], x.get("date","")) <= 7:
+            a, b = _tokens(e["title"]), _tokens(x.get("title",""))
+            if a and b and len(a & b) / len(a | b) >= 0.55: return True
+        return False
+    added = 0
+    for a in items:
+        c = a.get("subj","")
+        if c not in HIST_COMPANIES: continue
+        e = {"date": a["date"], "title": a["title"][:90], "url": a.get("url",""),
+             "source": a.get("source","")[:40], "evt": a.get("evt","") or "기타",
+             "tgt": a.get("tgt",""), "imp": a.get("importance",3),
+             "sum": re.sub(r"\s+"," ", a.get("summary",""))[:160]}
+        lst = hist.setdefault(c, [])
+        rep = next((x for x in lst if dup(e, x)), None)
+        if rep is not None:
+            if e["imp"] > rep.get("imp",0):  # 같은 사건의 더 중요한 보도면 교체 (날짜·시드 표식은 유지)
+                keep = {k: rep[k] for k in ("date","seed") if k in rep}
+                rep.update(e); rep.update(keep)
+            continue
+        lst.append(e); added += 1
+    cutoff = (datetime.now(KST) - timedelta(days=HIST_DAYS)).strftime("%Y-%m-%d")
+    for c in list(hist.keys()):
+        lst = [x for x in hist[c] if x.get("date","")[:10] >= cutoff]
+        lst.sort(key=lambda x: x.get("date",""), reverse=True)
+        if len(lst) > HIST_PER_CAP:   # 상한 초과 시 오래된 것 중 중요도 낮은 순으로 정리
+            keep = sorted(lst, key=lambda x: (x.get("imp",0), x.get("date","")), reverse=True)[:HIST_PER_CAP]
+            lst = sorted(keep, key=lambda x: x.get("date",""), reverse=True)
+        hist[c] = lst
+    open(HIST_FILE, "w", encoding="utf-8").write(json.dumps(hist, ensure_ascii=False))
+    print(f"기업 히스토리 갱신: 신규 {added}건 / {sum(len(v) for v in hist.values())}건 보존")
+    return hist
+
 BRIEF_FILE, BRIEF_KEEP = "briefings_network.json", 28  # 하루 2회 x 14일
 
 def update_briefings(pool):
@@ -716,8 +772,11 @@ def main():
     latest = [{k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt","rel")} for a in latest]
     arch_items = [{k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
                   for a in pool if a["importance"] >= ARCHIVE_MIN_IMP]
-    shown = [a for arr in data.values() for a in arr] + latest + arch_items
+    hist_items = [{k: a.get(k, "") for k in ("title","summary","source","date","url","importance","subj","evt","tgt")}
+                  for a in pool if a.get("subj","") in HIST_COMPANIES and a["importance"] >= HIST_MIN_IMP]
+    shown = [a for arr in data.values() for a in arr] + latest + arch_items + hist_items
     resolve_google_links(shown)
+    company_hist = update_company_history(hist_items)
     archive = update_archive(arch_items)
     # 과거 저장분(일자별 탭)에 남은 미변환 구글 링크도 소급 변환 후 재저장
     arch_flat = [a for arr in archive.values() for a in arr]
@@ -762,6 +821,19 @@ def main():
         print("경고: briefing 자리표시자를 찾지 못해 head에 강제 주입")
     open("docs/briefing.html","w",encoding="utf-8").write(bout)
     print("완료 -> docs/briefing.html 생성")
+    # ── 기업 히스토리 페이지 생성 ──
+    cmeta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"), "groups": HIST_GROUPS}
+    cjs = ("const COMPANY_META = " + json.dumps(cmeta, ensure_ascii=False) + ";\n"
+           + "const COMPANY_DATA = " + json.dumps(company_hist, ensure_ascii=False) + ";\n").replace("</", "<\\/")
+    cjs = cjs.replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
+    cinj = "<script>\n" + cjs + "</script>"
+    ctpl = open("dashboard_company.html", encoding="utf-8").read()
+    cout, cn = re.subn(r'<script\s+src=["\']news_data\.js["\']\s*>\s*</script>', lambda m: cinj, ctpl, count=1)
+    if cn == 0:
+        cout = ctpl.replace("</head>", cinj + "\n</head>", 1) if "</head>" in ctpl else cinj + ctpl
+        print("경고: company 자리표시자를 찾지 못해 head에 강제 주입")
+    open("docs/company.html","w",encoding="utf-8").write(cout)
+    print("완료 -> docs/company.html 생성")
 
 if __name__ == "__main__":
     main()
