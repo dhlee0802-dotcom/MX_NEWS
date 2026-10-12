@@ -70,6 +70,18 @@
   .art-sum{font-size:12.5px;color:var(--sub);margin-top:3px}
   .art-src{font-size:11px;color:var(--low);margin-top:4px}
   .empty{color:var(--low);font-size:12.5px;padding:16px 0;text-align:center}
+  .legend{display:flex;gap:14px;margin:2px 0 6px;font-size:12px;color:var(--sub);font-weight:700}
+  .legend .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .fin-note{font-size:11px;color:var(--low);margin-top:8px}
+  .fin-tbl{margin-top:10px}
+  .fin-tbl table{min-width:0}
+  .fin-tbl th,.fin-tbl td{text-align:right;white-space:nowrap}
+  .fin-tbl th:first-child,.fin-tbl td:first-child{text-align:left}
+  .est{padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+  .est:first-child{border-top:none}
+  .est a{color:var(--ink);text-decoration:none;font-weight:700}
+  .est a:hover{color:var(--blue)}
+  .est .src{font-size:11px;color:var(--low);margin-top:2px}
 </style>
 </head>
 <body>
@@ -99,13 +111,93 @@ const KO={"에릭슨":"에릭슨","노키아":"노키아","화웨이":"화웨이
 const EVTS=["장애","신제품","수주공급","인수합병","투자","실적","경영진거점","규제주파수","위성","요금제","기타"];
 const EVT_LABEL={경영진거점:"경영진·거점",규제주파수:"규제·주파수",수주공급:"수주·공급",인수합병:"M&A"};
 const PERIODS=[["1년",365],["분기",92],["90일",90],["전체",9999]];
-let cur=null, period=365, evtFilter="", q="";
+const FIN=(typeof COMPANY_FIN!=="undefined")?COMPANY_FIN:{};
+let cur=null, period=365, evtFilter="", q="", finView="annual";
 function esc(s){const d=document.createElement("div");d.textContent=s||"";return d.innerHTML;}
 function evLabel(e){return EVT_LABEL[e]||e;}
 function impBadge(n){const t=n>=5?"긴급":n>=4?"중요":"주목";return `<span class="imp i${Math.min(5,Math.max(3,n))}">${t} ${n}</span>`;}
 function items(c){return (DATA[c]||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));}
 function daysAgo(d){try{return (Date.now()-new Date(d.slice(0,10)))/864e5;}catch(e){return 9999;}}
 function quarterOf(d){const y=d.slice(0,4),m=+d.slice(5,7);return y+" Q"+Math.ceil(m/3);}
+
+/* ── 재무 실적 (USD 환산) ── */
+const C_REV="#1e5eff", C_OP="#e67e22";
+function usdFmt(m){ // $M 값 → 읽기 좋은 표기
+  if(m===null||m===undefined||isNaN(m))return"–";
+  const neg=m<0, v=Math.abs(m);
+  const s=v>=1000?(v/1000).toFixed(v>=100000?0:1)+"B":v>=100?Math.round(v).toLocaleString()+"M":v.toFixed(1)+"M";
+  return (neg?"-$":"$")+s;
+}
+function toUsd(f,v){ if(v===null||v===undefined)return null; return v*((FIN.mult||{})[f.currency]||1); }
+function groupedBars(rows,opName){
+  // rows: [{label, rev($M), op($M|null)}] — 매출·이익 동일 $ 축의 그룹 막대
+  const W=Math.max(340,rows.length*118), H=230, padL=8, padR=8, padT=26, padB=24;
+  const vals=rows.flatMap(r=>[r.rev,r.op]).filter(v=>v!==null&&!isNaN(v));
+  let max=Math.max(...vals,0), min=Math.min(...vals,0);
+  if(max===0&&min===0)max=1;
+  const span=max-min, y=v=>padT+(max-v)/span*(H-padT-padB), y0=y(0);
+  const bw=Math.min(24,Math.floor((W-padL-padR)/rows.length/2)-6);
+  let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;display:block" role="img">`;
+  // 0 기준선
+  s+=`<line x1="${padL}" x2="${W-padR}" y1="${y0}" y2="${y0}" stroke="#e4e8f0" stroke-width="1"/>`;
+  rows.forEach((r,i)=>{
+    const cx=padL+(W-padL-padR)*(i+0.5)/rows.length;
+    const bar=(v,color,dx)=>{
+      if(v===null||isNaN(v))return"";
+      const top=Math.min(y(v),y0), h=Math.max(2,Math.abs(y(v)-y0)), x=cx+dx;
+      const up=v>=0, rx=4;
+      const d=up?`M${x},${top+rx} a${rx},${rx} 0 0 1 ${rx},-${rx} h${bw-2*rx} a${rx},${rx} 0 0 1 ${rx},${rx} v${h-rx} h${-bw} z`
+                :`M${x},${top} h${bw} v${h-rx} a${rx},${rx} 0 0 1 -${rx},${rx} h${-(bw-2*rx)} a${rx},${rx} 0 0 1 -${rx},-${rx} z`;
+      return `<path d="${d}" fill="${color}"><title>${esc(r.label)} · ${usdFmt(v)}</title></path>`;
+    };
+    s+=bar(r.rev,C_REV,-bw-1)+bar(r.op,C_OP,1);
+    if(r.rev!==null&&!isNaN(r.rev))
+      s+=`<text x="${cx-1-bw/2}" y="${Math.min(y(r.rev),y0)-5}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a2233">${usdFmt(r.rev)}</text>`;
+    s+=`<text x="${cx}" y="${H-7}" text-anchor="middle" font-size="11" fill="#5b6577">${esc(r.label)}</text>`;
+  });
+  s+=`</svg>`;
+  return `<div class="legend"><span><span class="sw" style="background:${C_REV}"></span>매출</span><span><span class="sw" style="background:${C_OP}"></span>${esc(opName)}</span></div><div style="overflow-x:auto">${s}</div>`;
+}
+function segBars(items){
+  const max=Math.max(...items.map(x=>x.revenue||0),1);
+  return items.map(x=>{
+    const w=Math.max(2,(x.revenue||0)/max*100);
+    return `<div style="margin:7px 0">
+      <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:3px"><span style="font-weight:700">${esc(x.name)}</span><span style="color:#5b6577;font-weight:700">${usdFmt(x.usd)}</span></div>
+      <div style="background:#f1f3f7;border-radius:4px;height:14px"><div style="width:${w}%;height:14px;border-radius:4px;background:${C_REV}" title="${esc(x.name)} ${usdFmt(x.usd)}"></div></div></div>`;
+  }).join("");
+}
+function finBlock(c){
+  const f=FIN.companies?FIN.companies[c]:null;
+  if(!f)return"";
+  const head=(inner,cnt)=>`<div class="block"><div class="blk-hd"><h3>재무 실적 <span style="font-size:11px;color:var(--sub);font-weight:600">USD 환산</span></h3><span class="cnt">${cnt||""}</span></div><div class="blk-body">${inner}</div></div>`;
+  if(f.private){
+    const inner=`<div class="empty" style="padding:6px 0">비상장 — 공시 실적 없음. 아래는 언론 보도 기반 추정치입니다.</div>`+
+      (f.estimates||[]).map(e=>`<div class="est">${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.label)}: ${usdFmt(e.value)}</a>`:`<b>${esc(e.label)}: ${usdFmt(e.value)}</b>`}<div class="src">${esc(e.source||"")}</div></div>`).join("")+
+      `<div class="fin-note">${esc(f.note||"")}</div>`;
+    return head(inner,"추정치");
+  }
+  const opName=f.op_metric||"영업이익";
+  const hasSeg=!!(f.segments&&f.segments.items&&f.segments.items.length);
+  const fv=(finView==="segments"&&!hasSeg)?"annual":finView;
+  const chips=`<div class="ctrl">`+[["annual","연간 3년"],["quarterly","최근 4분기"],["segments","세그먼트"]]
+    .filter(([k])=>k!=="segments"||hasSeg)
+    .map(([k,lb])=>`<div class="rchip${k===fv?" on":""}" onclick="setFin('${k}')">${lb}</div>`).join("")+`</div>`;
+  let body="";
+  if(fv==="segments"){
+    const items=(f.segments.items||[]).filter(x=>x.revenue!==null).map(x=>({...x,usd:toUsd(f,x.revenue)})).sort((a,b)=>b.usd-a.usd);
+    body=`<div style="font-size:12px;color:var(--sub);font-weight:700;margin-bottom:2px">${esc(f.segments.label||"")} 세그먼트별 매출</div>`+segBars(items);
+  }else{
+    const rows=(f[fv]||[]).map(r=>({label:r.label,rev:toUsd(f,r.revenue),op:toUsd(f,r.op)}));
+    body=groupedBars(rows,opName);
+    body+=`<div class="fin-tbl tbl-wrap"><table><tr><th>기간</th><th>매출</th><th>${esc(opName)}</th><th>이익률</th></tr>`+
+      rows.map(r=>`<tr><td>${esc(r.label)}</td><td>${usdFmt(r.rev)}</td><td>${usdFmt(r.op)}</td><td>${(r.op!==null&&r.rev)?(r.op/r.rev*100).toFixed(1)+"%":"–"}</td></tr>`).join("")+`</table></div>`;
+  }
+  const shortNote=f.note?(f.note.length>130?f.note.slice(0,129)+"…":f.note):"";
+  const note=`<div class="fin-note">현지통화 공시를 USD 환산 (환율 ${esc(FIN.fx_date||"")} 기준) · 이익 지표: ${esc(opName)}${shortNote?" · "+esc(shortNote):""} ${f.url?`· <a href="${esc(f.url)}" target="_blank" rel="noopener" style="color:var(--sub)">출처</a>`:""}</div>`;
+  return head(chips+body+note);
+}
+function setFin(k){finView=k;render();}
 
 function renderSelector(){
   let h="";
@@ -133,16 +225,14 @@ function render(){
   const all=items(cur);
   let h="";
 
+  /* ── 재무 실적 (첫 블록) ── */
+  h+=finBlock(cur);
+
   /* ── 현황 요약 ── */
   const d90=all.filter(a=>daysAgo(a.date)<=90);
-  const lastEarn=all.find(a=>a.evt==="실적");
   const tops=all.filter(a=>daysAgo(a.date)<=180).sort((a,b)=>(b.imp-a.imp)||(b.date||"").localeCompare(a.date||"")).slice(0,3);
-  h+=`<div class="block"><div class="blk-hd"><h3>${esc(NAME[cur]||cur)} 현황</h3></div><div class="blk-body">
-    <div class="stat-row">
-      <div class="stat"><div class="k">최근 90일 이벤트</div><div class="v">${d90.length}건${d90.filter(a=>a.imp>=5).length?` · 긴급 ${d90.filter(a=>a.imp>=5).length}건`:""}</div></div>
-      <div class="stat"><div class="k">최근 실적</div><div class="v">${lastEarn?esc(lastEarn.title):"수집된 실적 없음"}</div></div>
-    </div>
-    ${tops.length?`<div style="margin-top:10px">`+tops.map(a=>artCard(a)).join("")+`</div>`:""}
+  h+=`<div class="block"><div class="blk-hd"><h3>${esc(NAME[cur]||cur)} 주요 이슈</h3><span class="cnt">최근 90일 ${d90.length}건${d90.filter(a=>a.imp>=5).length?` · 긴급 ${d90.filter(a=>a.imp>=5).length}건`:""}</span></div><div class="blk-body">
+    ${tops.length?tops.map(a=>artCard(a)).join(""):'<div class="empty">최근 6개월 내 주요 이슈 없음</div>'}
   </div></div>`;
 
   /* ── 분기 매트릭스 ── */

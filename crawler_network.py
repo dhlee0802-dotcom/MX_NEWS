@@ -823,8 +823,13 @@ def main():
     print("완료 -> docs/briefing.html 생성")
     # ── 기업 히스토리 페이지 생성 ──
     cmeta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"), "groups": HIST_GROUPS}
+    cfin = {}
+    if os.path.exists("company_financials.json"):
+        try: cfin = json.loads(open("company_financials.json", encoding="utf-8").read())
+        except Exception: print("경고: company_financials.json 파싱 실패")
     cjs = ("const COMPANY_META = " + json.dumps(cmeta, ensure_ascii=False) + ";\n"
-           + "const COMPANY_DATA = " + json.dumps(company_hist, ensure_ascii=False) + ";\n").replace("</", "<\\/")
+           + "const COMPANY_DATA = " + json.dumps(company_hist, ensure_ascii=False) + ";\n"
+           + "const COMPANY_FIN = " + json.dumps(cfin, ensure_ascii=False) + ";\n").replace("</", "<\\/")
     cjs = cjs.replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     cinj = "<script>\n" + cjs + "</script>"
     ctpl = open("dashboard_company.html", encoding="utf-8").read()
