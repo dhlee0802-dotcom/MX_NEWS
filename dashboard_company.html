@@ -129,34 +129,38 @@ function usdFmt(m){ // $M 값 → 읽기 좋은 표기
   return (neg?"-$":"$")+s;
 }
 function toUsd(f,v){ if(v===null||v===undefined)return null; return v*((FIN.mult||{})[f.currency]||1); }
-function groupedBars(rows,opName){
-  // rows: [{label, rev($M), op($M|null)}] — 매출·이익 동일 $ 축의 그룹 막대
-  const W=Math.max(340,rows.length*118), H=230, padL=8, padR=8, padT=26, padB=24;
-  const vals=rows.flatMap(r=>[r.rev,r.op]).filter(v=>v!==null&&!isNaN(v));
+function barPanel(rows,title,color){
+  // rows: [{label, v($M)}] — 단일 지표 컬럼 차트 (지표별 독립 축: 매출은 매출끼리, 이익은 이익끼리)
+  const W=Math.max(300,rows.length*78), H=190, padL=6, padR=6, padT=24;
+  const vals=rows.map(r=>r.v).filter(v=>v!==null&&!isNaN(v));
+  if(!vals.length) return "";
   let max=Math.max(...vals,0), min=Math.min(...vals,0);
   if(max===0&&min===0)max=1;
+  const padB=min<0?38:22;   // 음수 막대의 값 라벨이 기간 라벨과 겹치지 않게 여백 확보
   const span=max-min, y=v=>padT+(max-v)/span*(H-padT-padB), y0=y(0);
-  const bw=Math.min(24,Math.floor((W-padL-padR)/rows.length/2)-6);
-  let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;display:block" role="img">`;
-  // 0 기준선
+  const bw=Math.min(24,Math.floor((W-padL-padR)/rows.length)-14);
+  let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block" role="img">`;
   s+=`<line x1="${padL}" x2="${W-padR}" y1="${y0}" y2="${y0}" stroke="#e4e8f0" stroke-width="1"/>`;
   rows.forEach((r,i)=>{
-    const cx=padL+(W-padL-padR)*(i+0.5)/rows.length;
-    const bar=(v,color,dx)=>{
-      if(v===null||isNaN(v))return"";
-      const top=Math.min(y(v),y0), h=Math.max(2,Math.abs(y(v)-y0)), x=cx+dx;
-      const up=v>=0, rx=4;
+    const cx=padL+(W-padL-padR)*(i+0.5)/rows.length, x=cx-bw/2, v=r.v;
+    if(v!==null&&!isNaN(v)){
+      const top=Math.min(y(v),y0), h=Math.max(2,Math.abs(y(v)-y0)), up=v>=0, rx=4;
       const d=up?`M${x},${top+rx} a${rx},${rx} 0 0 1 ${rx},-${rx} h${bw-2*rx} a${rx},${rx} 0 0 1 ${rx},${rx} v${h-rx} h${-bw} z`
                 :`M${x},${top} h${bw} v${h-rx} a${rx},${rx} 0 0 1 -${rx},${rx} h${-(bw-2*rx)} a${rx},${rx} 0 0 1 -${rx},-${rx} z`;
-      return `<path d="${d}" fill="${color}"><title>${esc(r.label)} · ${usdFmt(v)}</title></path>`;
-    };
-    s+=bar(r.rev,C_REV,-bw-1)+bar(r.op,C_OP,1);
-    if(r.rev!==null&&!isNaN(r.rev))
-      s+=`<text x="${cx-1-bw/2}" y="${Math.min(y(r.rev),y0)-5}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a2233">${usdFmt(r.rev)}</text>`;
-    s+=`<text x="${cx}" y="${H-7}" text-anchor="middle" font-size="11" fill="#5b6577">${esc(r.label)}</text>`;
+      s+=`<path d="${d}" fill="${color}"><title>${esc(r.label)} · ${usdFmt(v)}</title></path>`;
+      s+=`<text x="${cx}" y="${up?top-5:top+h+11}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a2233">${usdFmt(v)}</text>`;
+    }
+    s+=`<text x="${cx}" y="${H-6}" text-anchor="middle" font-size="11" fill="#5b6577">${esc(r.label)}</text>`;
   });
   s+=`</svg>`;
-  return `<div class="legend"><span><span class="sw" style="background:${C_REV}"></span>매출</span><span><span class="sw" style="background:${C_OP}"></span>${esc(opName)}</span></div><div style="overflow-x:auto">${s}</div>`;
+  return `<div style="flex:1;min-width:270px"><div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:2px"><span class="sw" style="background:${color}"></span>${esc(title)}</div>${s}</div>`;
+}
+function finCharts(rows,opName){
+  // 매출 패널 + 이익 패널을 나란히 (좁은 화면에선 세로로) — 축을 공유하지 않음
+  return `<div style="display:flex;gap:18px;flex-wrap:wrap">`+
+    barPanel(rows.map(r=>({label:r.label,v:r.rev})),"매출",C_REV)+
+    barPanel(rows.map(r=>({label:r.label,v:r.op})),opName,C_OP)+
+    `</div>`;
 }
 function segBars(items){
   const max=Math.max(...items.map(x=>x.revenue||0),1);
@@ -189,7 +193,7 @@ function finBlock(c){
     body=`<div style="font-size:12px;color:var(--sub);font-weight:700;margin-bottom:2px">${esc(f.segments.label||"")} 세그먼트별 매출</div>`+segBars(items);
   }else{
     const rows=(f[fv]||[]).map(r=>({label:r.label,rev:toUsd(f,r.revenue),op:toUsd(f,r.op)}));
-    body=groupedBars(rows,opName);
+    body=finCharts(rows,opName);
     body+=`<div class="fin-tbl tbl-wrap"><table><tr><th>기간</th><th>매출</th><th>${esc(opName)}</th><th>이익률</th></tr>`+
       rows.map(r=>`<tr><td>${esc(r.label)}</td><td>${usdFmt(r.rev)}</td><td>${usdFmt(r.op)}</td><td>${(r.op!==null&&r.rev)?(r.op/r.rev*100).toFixed(1)+"%":"–"}</td></tr>`).join("")+`</table></div>`;
   }
