@@ -112,7 +112,7 @@ const EVTS=["장애","신제품","수주공급","인수합병","투자","실적"
 const EVT_LABEL={경영진거점:"경영진·거점",규제주파수:"규제·주파수",수주공급:"수주·공급",인수합병:"M&A"};
 const PERIODS=[["1년",365],["분기",92],["90일",90],["전체",9999]];
 const FIN=(typeof COMPANY_FIN!=="undefined")?COMPANY_FIN:{};
-let cur=null, period=365, evtFilter="", q="", finView="annual";
+let cur=null, period=365, evtFilter="", q="", finView="annual", segView="y", issueQ="";
 function esc(s){const d=document.createElement("div");d.textContent=s||"";return d.innerHTML;}
 function evLabel(e){return EVT_LABEL[e]||e;}
 function impBadge(n){const t=n>=5?"긴급":n>=4?"중요":"주목";return `<span class="imp i${Math.min(5,Math.max(3,n))}">${t} ${n}</span>`;}
@@ -162,6 +162,38 @@ function finCharts(rows,opName){
     barPanel(rows.map(r=>({label:r.label,v:r.op})),opName,C_OP)+
     `</div>`;
 }
+function shortLabel(l){
+  return String(l).replace(/^FY20(\d\d)$/,"FY$1").replace(/^20(\d\d)\s*Q(\d)$/,"$1Q$2").replace(/^20(\d\d)\s*H(\d)$/,"$1H$2");
+}
+function segSection(f){
+  // 세그먼트별 연간/분기 비교: 세그먼트마다 자체 축의 미니 막대차트 (매출끼리 비교)
+  if(!(f.segments_annual&&f.segments_annual.length)){
+    if(!(f.segments&&f.segments.items))return"";
+    const items=(f.segments.items||[]).filter(x=>x.revenue!==null).map(x=>({...x,usd:toUsd(f,x.revenue)})).sort((a,b)=>b.usd-a.usd);
+    return `<div style="font-size:12px;color:var(--sub);font-weight:700;margin-bottom:2px">${esc(f.segments.label||"")} 세그먼트별 매출</div>`+segBars(items);
+  }
+  const hasQ=!!(f.segments_quarterly&&f.segments_quarterly.length);
+  const sv=(segView==="q"&&!hasQ)?"y":segView;
+  const periods=sv==="q"?f.segments_quarterly:f.segments_annual;
+  const chips=`<div class="ctrl">`+[["y","연간"],["q","분기"]].filter(([k])=>k!=="q"||hasQ)
+    .map(([k,lb])=>`<div class="rchip${k===sv?" on":""}" onclick="setSegView('${k}')">${lb}</div>`).join("")+`</div>`;
+  // 세그먼트 이름: 최신 기간의 매출 내림차순
+  const last=periods[periods.length-1];
+  const names=last.items.slice().sort((a,b)=>(b.revenue||0)-(a.revenue||0)).map(x=>x.name);
+  for(const p of periods)for(const x of p.items)if(!names.includes(x.name))names.push(x.name);
+  const panels=names.map(nm=>{
+    const rows=periods.map(p=>{
+      const it=p.items.find(x=>x.name===nm);
+      return {label:shortLabel(p.label), v:it?toUsd(f,it.revenue):null};
+    });
+    return barPanel(rows,nm,C_REV);
+  }).join("");
+  const note=sv==="q"?"":` <span style="font-weight:400;color:var(--low)">(${esc(periods.map(p=>shortLabel(p.label)).join(" → "))})</span>`;
+  return chips+`<div style="font-size:12px;color:var(--sub);font-weight:700;margin-bottom:4px">세그먼트별 매출 추이${note}</div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">${panels}</div>
+    ${f.seg_note?`<div class="fin-note">${esc(f.seg_note)}</div>`:""}`;
+}
+function setSegView(k){segView=k;render();}
 function segBars(items){
   const max=Math.max(...items.map(x=>x.revenue||0),1);
   return items.map(x=>{
@@ -182,15 +214,14 @@ function finBlock(c){
     return head(inner,"추정치");
   }
   const opName=f.op_metric||"영업이익";
-  const hasSeg=!!(f.segments&&f.segments.items&&f.segments.items.length);
+  const hasSeg=!!((f.segments_annual&&f.segments_annual.length)||(f.segments&&f.segments.items&&f.segments.items.length));
   const fv=(finView==="segments"&&!hasSeg)?"annual":finView;
   const chips=`<div class="ctrl">`+[["annual","연간 3년"],["quarterly","최근 4분기"],["segments","세그먼트"]]
     .filter(([k])=>k!=="segments"||hasSeg)
     .map(([k,lb])=>`<div class="rchip${k===fv?" on":""}" onclick="setFin('${k}')">${lb}</div>`).join("")+`</div>`;
   let body="";
   if(fv==="segments"){
-    const items=(f.segments.items||[]).filter(x=>x.revenue!==null).map(x=>({...x,usd:toUsd(f,x.revenue)})).sort((a,b)=>b.usd-a.usd);
-    body=`<div style="font-size:12px;color:var(--sub);font-weight:700;margin-bottom:2px">${esc(f.segments.label||"")} 세그먼트별 매출</div>`+segBars(items);
+    body=segSection(f);
   }else{
     const rows=(f[fv]||[]).map(r=>({label:r.label,rev:toUsd(f,r.revenue),op:toUsd(f,r.op)}));
     body=finCharts(rows,opName);
@@ -232,28 +263,25 @@ function render(){
   /* ── 재무 실적 (첫 블록) ── */
   h+=finBlock(cur);
 
-  /* ── 현황 요약 ── */
+  /* ── 현황 요약 (최신순) ── */
   const d90=all.filter(a=>daysAgo(a.date)<=90);
-  const tops=all.filter(a=>daysAgo(a.date)<=180).sort((a,b)=>(b.imp-a.imp)||(b.date||"").localeCompare(a.date||"")).slice(0,3);
+  const recent=all.filter(a=>daysAgo(a.date)<=180);           // all은 이미 최신순 정렬
+  let tops=recent.filter(a=>(a.imp||0)>=4).slice(0,3);
+  if(tops.length<3) tops=tops.concat(recent.filter(a=>!tops.includes(a)).sort((a,b)=>(b.imp-a.imp)||(b.date||"").localeCompare(a.date||"")).slice(0,3-tops.length)).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
   h+=`<div class="block"><div class="blk-hd"><h3>${esc(NAME[cur]||cur)} 주요 이슈</h3><span class="cnt">최근 90일 ${d90.length}건${d90.filter(a=>a.imp>=5).length?` · 긴급 ${d90.filter(a=>a.imp>=5).length}건`:""}</span></div><div class="blk-body">
     ${tops.length?tops.map(a=>artCard(a)).join(""):'<div class="empty">최근 6개월 내 주요 이슈 없음</div>'}
   </div></div>`;
 
-  /* ── 분기 매트릭스 ── */
+  /* ── 분기별 주요 사건: 분기를 칩으로 고르면 카테고리별 대표 사건을 전폭 행으로 표시 ── */
   const qs=[...new Set(all.map(a=>quarterOf(a.date)))].sort().reverse().slice(0,5);
-  const evts=EVTS.filter(e=>all.some(a=>a.evt===e));
   if(qs.length){
-    let tbl=`<table><tr><th>분기</th>`+evts.map(e=>`<th>${esc(evLabel(e))}</th>`).join("")+`</tr>`;
-    for(const qt of qs){
-      tbl+=`<tr><th>${esc(qt)}</th>`+evts.map(e=>{
-        const hit=all.filter(a=>quarterOf(a.date)===qt&&a.evt===e).sort((x,y)=>(y.imp-x.imp)||(y.date||"").localeCompare(x.date||""))[0];
-        if(!hit)return"<td></td>";
-        const t=hit.title.length>34?hit.title.slice(0,33)+"…":hit.title;
-        return `<td>${hit.url?`<a href="${esc(hit.url)}" target="_blank" rel="noopener">${esc(t)}</a>`:esc(t)}</td>`;
-      }).join("")+`</tr>`;
-    }
-    tbl+=`</table>`;
-    h+=`<div class="block"><div class="blk-hd"><h3>분기별 주요 사건</h3><span class="cnt">카테고리별 최고 중요도 1건</span></div><div class="blk-body tbl-wrap">${tbl}</div></div>`;
+    if(!issueQ||!qs.includes(issueQ)) issueQ=qs[0];
+    const qchips=`<div class="ctrl">`+qs.map(qt=>`<div class="rchip${qt===issueQ?" on":""}" onclick="setIssueQ('${qt}')">${esc(qt)}</div>`).join("")+`</div>`;
+    const picks=EVTS.map(e=>all.filter(a=>quarterOf(a.date)===issueQ&&a.evt===e)
+        .sort((x,y)=>(y.imp-x.imp)||(y.date||"").localeCompare(x.date||""))[0])
+      .filter(Boolean).sort((x,y)=>(y.imp-x.imp)||(y.date||"").localeCompare(x.date||""));
+    const list=picks.length?picks.map(a=>artCard({...a})).join(""):`<div class="empty">해당 분기 사건 없음</div>`;
+    h+=`<div class="block"><div class="blk-hd"><h3>분기별 주요 사건</h3><span class="cnt">${esc(issueQ)} · 카테고리별 대표 1건</span></div><div class="blk-body">${qchips}${list}</div></div>`;
   }
 
   /* ── 타임라인 ── */
@@ -276,7 +304,8 @@ function render(){
   h+=`<div class="block"><div class="blk-hd"><h3>이슈 타임라인</h3><span class="cnt">${list.length}건</span></div><div class="blk-body">${tl}</div></div>`;
   el.innerHTML=h;
 }
-function sel(c){cur=c;evtFilter="";q="";render();window.scrollTo(0,0);}
+function sel(c){cur=c;evtFilter="";q="";issueQ="";render();window.scrollTo(0,0);}
+function setIssueQ(qt){issueQ=qt;render();}
 function setPeriod(d){period=d;render();}
 function setEvt(e){evtFilter=e;render();}
 const first=Object.values(META.groups)[0];
