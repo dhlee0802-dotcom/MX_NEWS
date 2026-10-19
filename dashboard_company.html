@@ -280,7 +280,7 @@ function render(){
   /* ── 분기별 주요 사건: 분기×카테고리 매트릭스, 셀은 키워드 요약 ── */
   const qs=[...new Set(all.map(a=>quarterOf(a.date)))].sort().reverse().slice(0,5);
   if(qs.length){
-    const kwOf=a=>a.kw||(a.title.length>23?a.title.slice(0,22)+"…":a.title);  // 구 데이터는 제목 축약 폴백
+    const kwOf=a=>{const k=a.kw||a.title;return k.length>13?k.slice(0,12)+"…":k;};  // 셀은 12자 키워드만 (전체는 호버로)
     // 열 구성: M&A와 투자는 통합, 실적은 상단 재무 도표가 담당하므로 제외
     const COLS=[["신제품",["신제품"]],["수주·공급",["수주공급"]],["M&A·투자",["인수합병","투자"]],
                 ["경영진·거점",["경영진거점"]],["규제·주파수",["규제주파수"]],["장애",["장애"]],
@@ -342,19 +342,48 @@ function stockChart(c,all){
     while(lo<hi){const m=(lo+hi)>>1; if(dates[m]<d)lo=m+1; else hi=m;}
     return lo;
   };
-  // 주요 이벤트: 핵심 유형 또는 긴급(5점), 중요도 우선 상한 24개
-  const evs=all.filter(a=>MARK_EVTS.has(a.evt)||(a.imp||0)>=5)
-    .map(a=>({...a,_i:idxOf((a.date||"").slice(0,10))})).filter(a=>a._i>=0)
+  const mapped=all.map(a=>({...a,_i:idxOf((a.date||"").slice(0,10))})).filter(a=>a._i>=0);
+  // ① 실적 발표: 세로 기준선 + 상단 토글 마커
+  const earns=mapped.filter(a=>a.evt==="실적")
+    .sort((a,b)=>a._i-b._i);
+  const earnCl=[];
+  for(const a of earns){
+    const last=earnCl[earnCl.length-1];
+    if(last&&X(a._i)-X(last.i)<14){last.items.push(a);}
+    else earnCl.push({i:a._i,items:[a],kind:"earn"});
+  }
+  // ② 일반 주요 이벤트 (실적 제외): 주가선 위 주황 점
+  const evs=mapped.filter(a=>a.evt!=="실적"&&(MARK_EVTS.has(a.evt)||(a.imp||0)>=5))
     .sort((a,b)=>(b.imp-a.imp)||(b.date||"").localeCompare(a.date||"")).slice(0,24)
     .sort((a,b)=>a._i-b._i);
-  // 날짜가 가까워 점이 겹치는 이벤트는 한 점으로 묶음 (터치 대상 확보)
   const clusters=[];
   for(const a of evs){
     const last=clusters[clusters.length-1];
     if(last&&X(a._i)-X(last.i)<22){last.items.push(a);}
     else clusters.push({i:a._i,items:[a]});
   }
-  TIPS=clusters;
+  // ③ 주가 급변동일: 전후 ±2일 내 보도가 있으면 빨간 점으로 보완 표시
+  const rets=closes.map((v,i)=>i?Math.log(v/closes[i-1]):0);
+  const sd=Math.sqrt(rets.reduce((s,r)=>s+r*r,0)/Math.max(1,rets.length-1));
+  const thr=Math.max(0.045,2.8*sd);
+  const used=new Set(); clusters.forEach(cl=>cl.items.forEach(a=>used.add(a.url||a.title)));
+  earnCl.forEach(cl=>cl.items.forEach(a=>used.add(a.url||a.title)));
+  const moveCl=[];
+  const bigDays=rets.map((r,i)=>({i,r})).filter(x=>Math.abs(x.r)>=thr)
+    .sort((a,b)=>Math.abs(b.r)-Math.abs(a.r)).slice(0,8);
+  for(const d of bigDays){
+    const day=new Date(dates[d.i]);
+    const near=mapped.filter(a=>{
+      if(used.has(a.url||a.title)||(a.imp||0)<3)return false;
+      const diff=Math.abs((new Date((a.date||"").slice(0,10))-day)/864e5);
+      return diff<=2;
+    }).sort((x,y)=>(y.imp-x.imp)).slice(0,3);
+    if(!near.length)continue;
+    near.forEach(a=>used.add(a.url||a.title));
+    moveCl.push({i:d.i,items:near,kind:"move",pct:(Math.exp(d.r)-1)*100});
+  }
+  moveCl.sort((a,b)=>a.i-b.i);
+  TIPS=earnCl.concat(clusters,moveCl);
   let p="";
   closes.forEach((v,i)=>{p+=(i?"L":"M")+X(i).toFixed(1)+","+Y(v).toFixed(1);});
   const ticks=[max-pad,(max+min)/2,min+pad];
@@ -366,12 +395,27 @@ function stockChart(c,all){
   for(let i=0;i<n;i+=Math.ceil(n/5)){
     svg+=`<text x="${X(i)}" y="${H-6}" text-anchor="middle" font-size="10" fill="#8a94a6">${dates[i].slice(2,7)}</text>`;
   }
+  // 실적 발표 세로 기준선 (마커는 차트 상단, 호버/터치 토글)
+  earnCl.forEach((cl,k)=>{
+    const x=X(cl.i);
+    svg+=`<line x1="${x}" x2="${x}" y1="${padT+8}" y2="${H-padB}" stroke="#8a94a6" stroke-width="1" stroke-dasharray="3,3"/>`+
+         `<rect x="${x-6}" y="${padT-6}" width="12" height="12" rx="3" fill="var(--navy)"/>`+
+         `<text x="${x}" y="${padT+3.5}" text-anchor="middle" font-size="8" font-weight="800" fill="#fff">E</text>`+
+         `<circle cx="${x}" cy="${padT}" r="11" fill="transparent" style="cursor:pointer" onmouseenter="showTip(event,${k})" onmouseleave="hideTip()" onclick="showTip(event,${k});event.stopPropagation()"/>`;
+  });
   svg+=`<path d="${p}" fill="none" stroke="${C_REV}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  const base=earnCl.length;
   clusters.forEach((cl,k)=>{
     const x=X(cl.i),y=Y(closes[cl.i]),m=cl.items.length;
     svg+=`<circle cx="${x}" cy="${y}" r="${m>1?8.5:7}" fill="#fff"/><circle cx="${x}" cy="${y}" r="${m>1?6.5:5}" fill="${C_OP}"/>`+
          (m>1?`<text x="${x}" y="${y+3}" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">${m}</text>`:"")+
-         `<circle cx="${x}" cy="${y}" r="10" fill="transparent" style="cursor:pointer" onmouseenter="showTip(event,${k})" onmouseleave="hideTip()" onclick="showTip(event,${k});event.stopPropagation()"/>`;
+         `<circle cx="${x}" cy="${y}" r="10" fill="transparent" style="cursor:pointer" onmouseenter="showTip(event,${base+k})" onmouseleave="hideTip()" onclick="showTip(event,${base+k});event.stopPropagation()"/>`;
+  });
+  const base2=base+clusters.length;
+  moveCl.forEach((cl,k)=>{
+    const x=X(cl.i),y=Y(closes[cl.i]);
+    svg+=`<circle cx="${x}" cy="${y}" r="7" fill="#fff"/><circle cx="${x}" cy="${y}" r="5" fill="var(--crit)"/>`+
+         `<circle cx="${x}" cy="${y}" r="10" fill="transparent" style="cursor:pointer" onmouseenter="showTip(event,${base2+k})" onmouseleave="hideTip()" onclick="showTip(event,${base2+k});event.stopPropagation()"/>`;
   });
   svg+=`</svg>`;
   const last=closes[n-1], first=closes[0], chg=((last-first)/first*100).toFixed(1);
@@ -379,12 +423,14 @@ function stockChart(c,all){
       <div style="font-size:12px;font-weight:800;color:var(--navy)">주가 1년 (${esc(s.ticker)} · ${esc(s.currency)})</div>
       <div style="font-size:11.5px;color:${chg>=0?"#1e8e4e":"var(--crit)"};font-weight:700">${last>=1000?Math.round(last).toLocaleString():last} · 1년 ${chg>=0?"+":""}${chg}%</div></div>
     <div class="stock-wrap" onclick="hideTip()">${svg}<div class="stock-tip" id="stockTip"></div></div>
-    <div style="font-size:10.5px;color:var(--low);margin:2px 0 10px">● 주요 이벤트 (실적·수주/공급·M&A·경영진/거점·장애) — 점에 마우스를 올리거나 터치하면 내용 표시</div>`;
+    <div style="font-size:10.5px;color:var(--low);margin:2px 0 10px"><span style="color:var(--navy);font-weight:800">E│</span> 실적 발표 · <span style="color:${C_OP}">●</span> 주요 이벤트 (수주/공급·M&A·경영진/거점·장애) · <span style="color:var(--crit)">●</span> 주가 급변동 연계 보도 — 마커에 마우스/터치 시 내용 표시</div>`;
 }
 function showTip(ev,k){
   const cl=TIPS[k]; if(!cl)return;
   const tip=document.getElementById("stockTip"); if(!tip)return;
-  tip.innerHTML=cl.items.slice(0,4).map(a=>
+  const head=cl.kind==="move"?`<div style="font-weight:800;margin-bottom:4px;color:#ffd6d0">주가 ${cl.pct>=0?"+":""}${cl.pct.toFixed(1)}% 변동일 전후 보도</div>`
+            :cl.kind==="earn"?`<div style="font-weight:800;margin-bottom:4px;opacity:.85">실적 발표</div>`:"";
+  tip.innerHTML=head+cl.items.slice(0,4).map(a=>
     `<div style="margin-bottom:6px"><div class="tt-date">${esc((a.date||"").slice(0,10))} · ${esc(a.source||"")}</div>
      <span class="tt-ev">${esc(evLabel(a.evt))} · 중요도 ${a.imp}</span><div class="tt-title">${esc(a.title)}</div></div>`).join("")
     +(cl.items.length>4?`<div class="tt-date">외 ${cl.items.length-4}건 — 아래 타임라인 참조</div>`:"");
