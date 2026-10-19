@@ -323,15 +323,19 @@ def gemini_judge(pool):
                 for attempt in range(2):
                     try:
                         print(f"Gemini 분류 요청... ({model}, {ci+1}/{len(chunks)}묶음 {len(batch)}건)")
-                        r = gemini_call(url, payload)
+                        r = gemini_call(url, payload, timeout=240)   # 신형 상위 모델은 응답이 느려 여유 확보
                         raw = r["candidates"][0]["content"]["parts"][0]["text"]
                         judged = parse_judged(raw)
                         if not judged: raise ValueError("판정 결과 파싱 실패")
                         total += apply_judged(batch, judged)
                         ok = True; break
                     except urllib.error.HTTPError as ex:
-                        if ex.code == 429 and attempt == 0:
-                            print(f"  {model} 429 -> 30초 대기 후 재시도"); time.sleep(30); continue
+                        if ex.code in (429, 503) and attempt == 0:   # 혼잡·한도는 잠시 후 재시도
+                            print(f"  {model} HTTP {ex.code} -> 20초 대기 후 재시도"); time.sleep(20); continue
+                        raise
+                    except (TimeoutError, OSError) as ex:
+                        if attempt == 0:                              # 응답 지연도 1회 재시도
+                            print(f"  {model} 응답 지연 -> 20초 대기 후 재시도"); time.sleep(20); continue
                         raise
                 if not ok: raise ValueError("묶음 처리 실패")
                 if ci < len(chunks) - 1: time.sleep(5)   # 분당 호출 제한 배려
