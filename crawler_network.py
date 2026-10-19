@@ -427,9 +427,11 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
         if avail: print("사용 가능 모델:", ", ".join(avail))
     except Exception as ex:
         print(f"경고: 모델 목록 조회 실패 - {ex}")
-    prefer = ["gemini-2.5-flash","gemini-2.5-flash-lite","gemini-2.0-flash","gemini-2.0-flash-lite","gemini-1.5-flash","gemini-flash-latest"]
-    # 선호 모델(상위 flash)을 캐시보다 우선 — 일시 폴백된 lite 모델에 고착되는 것 방지
-    cands = [m for m in prefer if m in avail] + ([last_good] if last_good else []) + avail + prefer
+    prefer = ["gemini-2.5-flash","gemini-flash-latest","gemini-2.0-flash","gemini-1.5-flash"]
+    # 모델명 변경에 흔들리지 않도록: lite가 아닌 모델을 항상 lite보다 우선 (판정 품질 확보)
+    full  = [m for m in avail if "lite" not in m]
+    lite  = [m for m in avail if "lite" in m]
+    cands = [m for m in prefer if m in full] + full             + ([last_good] if last_good and "lite" not in last_good else [])             + lite + prefer + ["gemini-2.5-flash-lite","gemini-flash-lite-latest"]
     cands = list(dict.fromkeys(c for c in cands if c))
 
     import time
