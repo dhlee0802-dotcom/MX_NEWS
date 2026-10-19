@@ -214,7 +214,7 @@ def crawl():
             "source": src or "Google News",
             "date": pub.astimezone(KST).strftime("%Y-%m-%d %H:%M"),
             "url": link, "category": category(blob), "importance": score(blob), "wl": wl,
-            "topic": "", "subj": "", "evt": "", "tgt": "",
+            "topic": "", "subj": "", "evt": "", "tgt": "", "kw": "",
         })
 
     for src, url in FEEDS:
@@ -327,10 +327,11 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
 대상(tgt): 사건의 상대방(수주공급의 발주 통신사, 인수합병의 피인수사, 제재의 대상국 등)이 기사에 명시된 경우에만 위 표준 표기(또는 국가명 한 단어)로 기재하고, 없거나 불분명하면 빈 문자열 "". 같은 주체+사건이라도 대상이 다르면 별개 사건으로 구분하기 위한 필드임.
 과거(past): 기사가 보도하는 핵심 사건이 이미 발생한 지 수개월~수년이 지난 과거 사건이면 1, 최근 발생했거나 진행 중인 사건이면 0. 회고·기념·연재·분석 기사, 그리고 스팸성 사이트가 과거의 유명 기사를 최신 날짜로 재발행한 경우(발행일은 최신이어도 내용은 옛 사건)는 반드시 1. 특히 과거의 대규모 통신장애(예: 2021년 NTT 도코모 200만 명 장애, 2022년 KDDI 장애, 2018년 KT 아현 화재)를 다룬 기사를 현재 발생한 장애로 오인하지 말 것 — 기사 속 연도, "당시", "그해", 이미 종결된 사건의 사과·복구 완료 서술 등이 단서. past=1 기사는 전량 자동 제외됨. 현재 장애 기사가 과거 사례를 비교·인용만 하는 경우는 0.
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 영어·일본어·중국어 등 어떤 언어의 기사라도 이슈명은 반드시 한국어 표기(에릭슨, 노키아, 화웨이, 버라이즌, 도이치텔레콤 등)로 쓸 것 — 같은 사건을 다룬 다국어 기사가 전부 동일 이슈명으로 묶여야 함. 특정 회사가 주체가 아닌 사건(공항·지역 통신장애, 정책 발표 등)은 "지역/기관 사건" 형식으로 통일(예: 같은 공항 통신장애를 다룬 한국어·영어·일본어 기사 전부 → "미국공항 통신장애" 하나로). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 특히 같은 행사·발표·컨퍼런스·국정감사·정책 브리핑에서 파생된 기사들은 세부 주제가 조금씩 달라도 전부 하나의 동일 이슈명으로 묶을 것(예: 국정감사에서 나온 통신 관련 기사 전부 → "과기정통부 국감"). 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
+키워드(kw): 기사 핵심을 12~18자 한국어 명사구로 압축. 수치·고유명사 우선 (예: "아일랜드 R&D 거점 확대", "CEO 교체(나빙거 취임)", "2Q 매출 527억SEK -6%", "버라이즌 D2C 정식 계약"). 회사명은 중복이므로 생략. 모든 기사에 반드시 기재.
 번역제목(kt): 기사 제목의 자연스러운 한국어 번역. 이미 한국어 제목이면 그대로 기재. 원제목의 의미를 유지하고 과장 금지, 매체명·불필요한 수식어는 제거, 80자 이내. 모든 기사에 반드시 기재.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 메신저 보고에 바로 붙여 쓸 수 있는 개조식으로 작성: "- "로 시작하는 불릿 2~4개, 불릿 사이는 줄바꿈(\\n), 각 불릿은 명사형 종결(예: 계약 체결, 출시 발표, 대응 필요). 순서는 핵심 사실 → 수치·배경 → 경쟁 구도·사업적 의미. 기사에 인용된 수치·금액·비율·규모는 최대한 그대로 포함할 것. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 불릿 1개만 작성.
 
-모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kw":"버라이즌 5G 계약 체결","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
@@ -370,6 +371,8 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
             except Exception: pass
             if j.get("sum"): item["summary"] = str(j["sum"])
             if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
+            kw = re.sub(r"\s+", " ", str(j.get("kw",""))).strip()
+            if kw: item["kw"] = kw[:24]
             kt = re.sub(r"\s+", " ", str(j.get("kt",""))).strip()
             if len(kt) >= 5:  # 한국어 번역 제목으로 교체 (원제목은 otitle에 보존)
                 item["otitle"] = item["title"]; item["title"] = kt[:90]
@@ -698,7 +701,7 @@ def update_company_history(items):
         if c not in HIST_COMPANIES: continue
         e = {"date": a["date"], "title": a["title"][:90], "url": a.get("url",""),
              "source": a.get("source","")[:40], "evt": a.get("evt","") or "기타",
-             "tgt": a.get("tgt",""), "imp": a.get("importance",3),
+             "tgt": a.get("tgt",""), "imp": a.get("importance",3), "kw": a.get("kw",""),
              "sum": re.sub(r"\s+"," ", a.get("summary",""))[:160]}
         lst = hist.setdefault(c, [])
         rep = next((x for x in lst if dup(e, x)), None)
@@ -843,7 +846,7 @@ def main():
     latest = [{k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt","rel")} for a in latest]
     arch_items = [{k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
                   for a in pool if a["importance"] >= ARCHIVE_MIN_IMP]
-    hist_items = [{k: a.get(k, "") for k in ("title","summary","source","date","url","importance","subj","evt","tgt")}
+    hist_items = [{k: a.get(k, "") for k in ("title","summary","source","date","url","importance","subj","evt","tgt","kw")}
                   for a in pool if a.get("subj","") in HIST_COMPANIES and a["importance"] >= HIST_MIN_IMP]
     shown = [a for arr in data.values() for a in arr] + latest + arch_items + hist_items
     resolve_google_links(shown)

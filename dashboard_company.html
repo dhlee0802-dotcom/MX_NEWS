@@ -277,16 +277,26 @@ function render(){
     ${tops.length?tops.map(a=>artCard(a)).join(""):'<div class="empty">최근 6개월 내 주요 이슈 없음</div>'}
   </div></div>`;
 
-  /* ── 분기별 주요 사건: 분기를 칩으로 고르면 카테고리별 대표 사건을 전폭 행으로 표시 ── */
+  /* ── 분기별 주요 사건: 분기×카테고리 매트릭스, 셀은 키워드 요약 ── */
   const qs=[...new Set(all.map(a=>quarterOf(a.date)))].sort().reverse().slice(0,5);
   if(qs.length){
-    if(!issueQ||!qs.includes(issueQ)) issueQ=qs[0];
-    const qchips=`<div class="ctrl">`+qs.map(qt=>`<div class="rchip${qt===issueQ?" on":""}" onclick="setIssueQ('${qt}')">${esc(qt)}</div>`).join("")+`</div>`;
-    const picks=EVTS.map(e=>all.filter(a=>quarterOf(a.date)===issueQ&&a.evt===e)
-        .sort((x,y)=>(y.imp-x.imp)||(y.date||"").localeCompare(x.date||""))[0])
-      .filter(Boolean).sort((x,y)=>(y.imp-x.imp)||(y.date||"").localeCompare(x.date||""));
-    const list=picks.length?picks.map(a=>artCard({...a})).join(""):`<div class="empty">해당 분기 사건 없음</div>`;
-    h+=`<div class="block"><div class="blk-hd"><h3>분기별 주요 사건</h3><span class="cnt">${esc(issueQ)} · 카테고리별 대표 1건</span></div><div class="blk-body">${qchips}${list}</div></div>`;
+    const kwOf=a=>a.kw||(a.title.length>16?a.title.slice(0,15)+"…":a.title);  // 구 데이터는 제목 축약 폴백
+    const evts=EVTS.filter(e=>all.some(a=>a.evt===e));
+    let tbl=`<table><tr><th>분기</th>`+evts.map(e=>`<th>${esc(evLabel(e))}</th>`).join("")+`</tr>`;
+    for(const qt of qs){
+      tbl+=`<tr><th>${esc(qt)}</th>`+evts.map(e=>{
+        const hits=all.filter(a=>quarterOf(a.date)===qt&&a.evt===e)
+          .sort((x,y)=>(y.imp-x.imp)||(y.date||"").localeCompare(x.date||""));
+        if(!hits.length)return"<td></td>";
+        const a=hits[0];
+        const cell=`${a.url?`<a href="${esc(a.url)}" target="_blank" rel="noopener" title="${esc(a.title)}">${esc(kwOf(a))}</a>`:`<span title="${esc(a.title)}">${esc(kwOf(a))}</span>`}`
+          +((a.imp||0)>=5?` <span style="color:var(--crit);font-weight:800">!</span>`:"")
+          +(hits.length>1?` <span style="color:var(--low);font-size:10.5px" title="${esc(hits.slice(1,4).map(x=>kwOf(x)).join(" / "))}">+${hits.length-1}</span>`:"");
+        return `<td>${cell}</td>`;
+      }).join("")+`</tr>`;
+    }
+    tbl+=`</table>`;
+    h+=`<div class="block"><div class="blk-hd"><h3>분기별 주요 사건</h3><span class="cnt">키워드 요약 · 셀 클릭 시 원문, ! = 긴급, +N = 동일 분기 추가 사건</span></div><div class="blk-body tbl-wrap">${tbl}</div></div>`;
   }
 
   /* ── 타임라인 ── */
