@@ -191,7 +191,9 @@ def crawl():
                 except Exception: continue
                 src = ""
                 if hasattr(e, "source"): src = clean(e.source.get("title",""))
-                add(e.get("title",""), e.get("description",""), src, pub, e.get("link",""), False)
+                t = e.get("title","")
+                if src and t.endswith(" - " + src): t = t[:-(len(src)+3)]  # GN 제목 꼬리(- 매체명) 제거
+                add(t, e.get("description",""), src, pub, e.get("link",""), False)
         except Exception as ex:
             print(f"경고: Google News 실패({q}) - {ex}")
     # ── 네이버 뉴스 검색 (NAVER API HUB, 키 등록 시에만 동작) ──
@@ -345,25 +347,29 @@ def _tokens(t):
     return set(re.findall(r"[a-z0-9가-힣]+", t.lower()))
 
 def dedupe_topics(items):
-    """1차: 동일 이슈명 1건만. 2차: 이슈명 단어가 50% 이상 겹치면 같은 사건으로 간주.
-       3차: 제목 단어가 55% 이상 겹치면 중복. (한/영 혼재·묶음 분할로 이슈명이 갈리는 경우 대비)"""
+    """1차: 동일 이슈명 1건만. 2차: 이슈명 단어 50%+ 겹침. 3차: 제목 단어 55%+ 겹침.
+       중복으로 합쳐질 때 대표 기사가 구글 중계 링크면 중복 기사의 원문 직링크를 채택"""
     out, seen_topics, kept_topic_toks, kept_title_toks = [], set(), [], []
     for a in items:
         t = a.get("topic","")
-        if t and t in seen_topics: continue
         ttk = _tokens(t) if t else set()
-        dup = False
-        if ttk:
-            for x in kept_topic_toks:
-                if x and len(ttk & x) / max(1, min(len(ttk), len(x))) >= 0.6: dup = True; break
-        if not dup:
-            tk = _tokens(a.get("title",""))
-            for x in kept_title_toks:
-                if len(tk & x) / max(1, len(tk | x)) >= 0.55: dup = True; break
-        if dup: continue
+        tk = _tokens(a.get("title",""))
+        rep = None
+        if t and t in seen_topics:
+            rep = next((b for b in out if b.get("topic")==t), None)
+        if rep is None and ttk:
+            for j, x in enumerate(kept_topic_toks):
+                if x and len(ttk & x) / max(1, min(len(ttk), len(x))) >= 0.6: rep = out[j]; break
+        if rep is None:
+            for j, x in enumerate(kept_title_toks):
+                if len(tk & x) / max(1, len(tk | x)) >= 0.55: rep = out[j]; break
+        if rep is not None:
+            if "news.google.com" in rep.get("url","") and a.get("url") and "news.google.com" not in a["url"]:
+                rep["url"] = a["url"]; rep["source"] = a.get("source", rep.get("source",""))
+            continue
         if t: seen_topics.add(t)
         kept_topic_toks.append(ttk)
-        kept_title_toks.append(_tokens(a.get("title","")))
+        kept_title_toks.append(tk)
         out.append(a)
     return out
 

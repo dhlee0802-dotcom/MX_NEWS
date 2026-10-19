@@ -273,7 +273,9 @@ def crawl():
                 except Exception: continue
                 src = ""
                 if hasattr(e, "source"): src = clean(e.source.get("title",""))
-                add(e.get("title",""), e.get("description",""), src, pub, e.get("link",""), False)
+                t = e.get("title","")
+                if src and t.endswith(" - " + src): t = t[:-(len(src)+3)]  # GN 제목 꼬리(- 매체명) 제거
+                add(t, e.get("description",""), src, pub, e.get("link",""), False)
         except Exception as ex:
             print(f"경고: Google News 실패({q}) - {ex}")
     # ── 네이버 뉴스 검색 (NAVER API HUB, 키 등록 시에만 동작) ──
@@ -503,6 +505,8 @@ def dedupe_topics(items):
         rep = next((b for b in out if is_dup_pair(a, b)), None)
         if rep is not None:
             rep["rel"] = rep.get("rel", 1) + 1
+            if "news.google.com" in rep.get("url","") and a.get("url") and "news.google.com" not in a["url"]:
+                rep["url"] = a["url"]; rep["source"] = a.get("source", rep.get("source",""))  # 중계 대신 직링크 채택
             continue
         a["rel"] = a.get("rel", 1)
         out.append(a)
@@ -618,6 +622,8 @@ def update_archive(items):
               or next((x for x in arch.get(prev_day, []) if _arch_dup(a, x)), None)
         if rep is not None:
             rep["rel"] = rep.get("rel", 1) + 1   # 같은 날짜·전날의 같은 사건은 대표에 관련 보도 수만 누적
+            if "news.google.com" in rep.get("url","") and a.get("url") and "news.google.com" not in a["url"]:
+                rep["url"] = a["url"]; rep["source"] = a.get("source", rep.get("source",""))
             continue
         rec = {k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
         rec["rel"] = 1
