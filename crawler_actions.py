@@ -151,6 +151,33 @@ def crawl():
         except Exception as ex:
             print(f"경고: {src} 실패 - {ex}")
 
+    # ── Bing News (원문 직링크 제공) — Google News보다 먼저 수집해 같은 기사면 직링크가 우선되게 함 ──
+    from urllib.parse import urlparse, parse_qs, unquote
+    bing_n = 0
+    for q in GN_QUERIES:
+        ko = bool(re.search(r"[가-힣]", q))
+        mkt = "ko-KR" if ko else "en-US"
+        url = f"https://www.bing.com/news/search?q={quote(q)}&format=RSS&mkt={mkt}&qft=interval%3d%228%22"
+        try:
+            feed = feedparser.parse(url)
+            for e in feed.entries:
+                try: pub = datetime(*e.published_parsed[:6], tzinfo=timezone.utc)
+                except Exception: continue
+                link = e.get("link","")
+                if "apiclick" in link:  # Bing 중계형 링크면 url 파라미터에서 원문 추출
+                    try:
+                        qs = parse_qs(urlparse(link).query)
+                        if qs.get("url"): link = unquote(qs["url"][0])
+                    except Exception: pass
+                if "bing.com" in link: continue   # 원문 추출 실패분은 버림 (중계 링크 유입 방지)
+                src = urlparse(link).netloc.replace("www.","") if link else ""
+                before = len(pool)
+                add(e.get("title",""), e.get("description",""), src, pub, link, False)
+                bing_n += len(pool) - before
+        except Exception as ex:
+            print(f"경고: Bing News 실패({q}) - {str(ex)[:80]}")
+    print(f"Bing News 수집 완료: {bing_n}건 (원문 직링크)")
+
     for q in GN_QUERIES:
         ko = bool(re.search(r"[가-힣]", q))
         hl, gl, ceid = ("ko","KR","KR:ko") if ko else ("en-US","US","US:en")
@@ -338,26 +365,53 @@ def dedupe_topics(items):
         out.append(a)
     return out
 
+GN_CACHE_FILE, GN_CACHE_MAX, GN_DECODE_BUDGET = "gn_url_cache_mx.json", 3000, 40
+
 def resolve_google_links(all_items):
-    """news.google.com 중계 주소를 원문 기사 주소로 변환 (변환 실패 시 원래 링크 유지)"""
+    """news.google.com 중계 주소를 원문 기사 주소로 변환 (실패 시 원래 링크 유지).
+    성공분은 파일 캐시에 저장, 실행당 신규 변환은 상한 적용 (구글의 Actions발 차단 대응)"""
     targets = [a for a in all_items if "news.google.com" in a.get("url","")]
     if not targets: return
+    cache = {}
+    if os.path.exists(GN_CACHE_FILE):
+        try: cache = json.loads(open(GN_CACHE_FILE, encoding="utf-8").read())
+        except Exception: cache = {}
+    pend = []
+    for a in targets:
+        u = a["url"]
+        if u in cache: a["url"] = cache[u]
+        else: pend.append(a)
+    hit = len(targets) - len(pend)
+    if not pend:
+        print(f"구글 뉴스 링크 원본 변환: 캐시 {hit}건 / 신규 0건"); return
     try:
         from googlenewsdecoder import gnewsdecoder
     except Exception:
         print("안내: googlenewsdecoder 미설치 - 구글 링크 원본 변환 생략"); return
-    cache, n = {}, 0
-    for a in targets:
+    n, fail, skipped, first_err = 0, 0, 0, ""
+    run, seen_urls = {}, set()
+    for a in pend:
         u = a["url"]
-        if u in cache:
-            a["url"] = cache[u]; continue
+        if u in run: a["url"] = run[u]; continue
+        if u in seen_urls: continue
+        if n + fail >= GN_DECODE_BUDGET: skipped += 1; continue
         try:
             r = gnewsdecoder(u, interval=1)
             if isinstance(r, dict) and r.get("status") and r.get("decoded_url"):
-                cache[u] = r["decoded_url"]; a["url"] = cache[u]; n += 1
-        except Exception:
-            pass
-    print(f"구글 뉴스 링크 원본 변환: {n}/{len(targets)}건")
+                run[u] = r["decoded_url"]; a["url"] = run[u]; n += 1; continue
+            if not first_err and isinstance(r, dict): first_err = str(r.get("message",""))[:100]
+        except Exception as ex:
+            if not first_err: first_err = str(ex)[:100]
+        fail += 1; seen_urls.add(u)
+    cache.update(run)
+    if len(cache) > GN_CACHE_MAX:
+        cache = dict(list(cache.items())[-GN_CACHE_MAX:])
+    try: open(GN_CACHE_FILE, "w", encoding="utf-8").write(json.dumps(cache, ensure_ascii=False))
+    except Exception: pass
+    msg = f"구글 뉴스 링크 원본 변환: 캐시 {hit}건 / 신규 성공 {n}건 / 실패 {fail}건"
+    if skipped: msg += f" / 이월 {skipped}건"
+    if fail and first_err: msg += f" (첫 실패: {first_err})"
+    print(msg)
 
 def notify_urgent(pool):
     """중요도 5 신규 기사를 ntfy 푸시로 알림 (NTFY_TOPIC 미설정 시 생략, 회차당 최대 3건)"""
