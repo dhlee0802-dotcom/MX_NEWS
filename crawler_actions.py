@@ -7,6 +7,8 @@ MX 뉴스 크롤러 - GitHub Actions판
 필요 환경변수: GEMINI_API_KEY (없으면 키워드 분류로 동작)
 """
 import feedparser, json, re, html, os, sys
+import socket
+socket.setdefaulttimeout(20)   # 느린 피드·사이트가 실행을 오래 붙잡지 않도록 전역 타임아웃
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
@@ -365,7 +367,7 @@ def dedupe_topics(items):
         out.append(a)
     return out
 
-GN_CACHE_FILE, GN_CACHE_MAX, GN_DECODE_BUDGET = "gn_url_cache_mx.json", 3000, 40
+GN_CACHE_FILE, GN_CACHE_MAX, GN_DECODE_BUDGET = "gn_url_cache_mx.json", 3000, 15
 
 def resolve_google_links(all_items):
     """news.google.com 중계 주소를 원문 기사 주소로 변환 (실패 시 원래 링크 유지).
@@ -394,7 +396,7 @@ def resolve_google_links(all_items):
         u = a["url"]
         if u in run: a["url"] = run[u]; continue
         if u in seen_urls: continue
-        if n + fail >= GN_DECODE_BUDGET: skipped += 1; continue
+        if n + fail >= GN_DECODE_BUDGET or (n == 0 and fail >= 5): skipped += 1; continue  # 연속 실패(차단 감지) 시 조기 중단
         try:
             r = gnewsdecoder(u, interval=1)
             if isinstance(r, dict) and r.get("status") and r.get("decoded_url"):

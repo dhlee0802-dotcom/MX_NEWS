@@ -7,6 +7,8 @@ Network 뉴스 크롤러 - GitHub Actions판 (MX crawler_actions.py 기반 이�
 필요 환경변수: GEMINI_API_KEY (없으면 키워드 분류로 동작), NAVER_CLIENT_ID/SECRET(선택)
 """
 import feedparser, json, re, html, os, sys
+import socket
+socket.setdefaulttimeout(20)   # 느린 피드·사이트가 실행을 오래 붙잡지 않도록 전역 타임아웃
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
@@ -507,7 +509,7 @@ def dedupe_topics(items):
     return out
 
 GN_CACHE_FILE, GN_CACHE_MAX = "gn_url_cache_network.json", 3000
-GN_DECODE_BUDGET = 40    # 실행당 신규 변환 상한 (구글이 Actions발 변환을 차단 중이라 소량만 시도)
+GN_DECODE_BUDGET = 15    # 실행당 신규 변환 상한 (구글이 Actions발 변환을 차단 중 — 연속 5회 실패 시 조기 중단)
 
 def resolve_google_links(all_items):
     """news.google.com 중계 주소를 원문 기사 주소로 변환 (변환 실패 시 원래 링크 유지).
@@ -541,8 +543,8 @@ def resolve_google_links(all_items):
         if u in run:
             a["url"] = run[u]; continue
         if u in seen_urls: continue   # 이번 실행에서 이미 실패한 주소는 재시도 생략
-        if n + fail >= GN_DECODE_BUDGET:
-            skipped += 1; continue    # 상한 초과분은 다음 실행에서 캐시를 이어서 채움
+        if n + fail >= GN_DECODE_BUDGET or (n == 0 and fail >= 5):
+            skipped += 1; continue    # 상한 초과 또는 연속 실패(차단 감지) 시 이번 실행은 중단
         ok = False
         try:
             r = gnewsdecoder(u, interval=1)

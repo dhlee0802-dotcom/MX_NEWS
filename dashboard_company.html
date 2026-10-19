@@ -280,12 +280,17 @@ function render(){
   /* ── 분기별 주요 사건: 분기×카테고리 매트릭스, 셀은 키워드 요약 ── */
   const qs=[...new Set(all.map(a=>quarterOf(a.date)))].sort().reverse().slice(0,5);
   if(qs.length){
-    const kwOf=a=>a.kw||(a.title.length>16?a.title.slice(0,15)+"…":a.title);  // 구 데이터는 제목 축약 폴백
-    const evts=EVTS.filter(e=>all.some(a=>a.evt===e));
-    let tbl=`<table><tr><th>분기</th>`+evts.map(e=>`<th>${esc(evLabel(e))}</th>`).join("")+`</tr>`;
-    for(const qt of qs){
-      tbl+=`<tr><th>${esc(qt)}</th>`+evts.map(e=>{
-        const hits=all.filter(a=>quarterOf(a.date)===qt&&a.evt===e)
+    const kwOf=a=>a.kw||(a.title.length>23?a.title.slice(0,22)+"…":a.title);  // 구 데이터는 제목 축약 폴백
+    // 열 구성: M&A와 투자는 통합, 실적은 상단 재무 도표가 담당하므로 제외
+    const COLS=[["신제품",["신제품"]],["수주·공급",["수주공급"]],["M&A·투자",["인수합병","투자"]],
+                ["경영진·거점",["경영진거점"]],["규제·주파수",["규제주파수"]],["장애",["장애"]],
+                ["위성",["위성"]],["요금제",["요금제"]],["기타",["기타"]]];
+    const evts=COLS.filter(([,g])=>all.some(a=>g.includes(a.evt)));
+    let tbl=`<table><tr><th>분기</th>`+evts.map(([lb])=>`<th>${esc(lb)}</th>`).join("")+`</tr>`;
+    const qsShown=qs.filter(qt=>all.some(a=>quarterOf(a.date)===qt&&evts.some(([,g])=>g.includes(a.evt))));
+    for(const qt of qsShown){
+      tbl+=`<tr><th>${esc(qt)}</th>`+evts.map(([,g])=>{
+        const hits=all.filter(a=>quarterOf(a.date)===qt&&g.includes(a.evt))
           .sort((x,y)=>(y.imp-x.imp)||(y.date||"").localeCompare(x.date||""));
         if(!hits.length)return"<td></td>";
         const a=hits[0];
