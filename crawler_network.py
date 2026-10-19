@@ -340,7 +340,7 @@ carrier = 통신사 동향. 대상: 한국 SKT·KT·LG유플러스 / 미국 Veri
 satellite = 위성통신(Starlink, AST SpaceMobile, Amazon Leo/Kuiper, Direct-to-Cell, 저궤도 위성) 및 6G(기술·표준화·연구개발·상용화 준비)
 policy = 통신 정책·규제(FCC, 과기정통부, Digital Networks Act, EU Cybersecurity Act, 망중립성, 주파수 경매 등)
 outage = 위에 나열한 이동통신사의 통신망(무선망·유선 인터넷) 장애 발생·확산·복구 보도만 해당
-none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰 단말·요금제 프로모션·소비자 마케팅·연예 기사는 none. 원자력·건설·에너지·조선·바이오 등 통신과 무관한 산업 기사는 회사명이 겹쳐도 none — 삼성물산·삼성SDI·삼성중공업 등 삼성전자가 아닌 삼성 계열사 기사, 그리고 삼성전자 기사라도 반도체·가전·스마트폰 등 네트워크사업 외 분야 기사는 모두 none
+none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외. 판단이 애매한 통신·네트워크 관련 기사는 none으로 버리지 말고 가장 가까운 섹션에 imp 2로 분류할 것. 특히 스마트폰 단말·요금제 프로모션·소비자 마케팅·연예 기사는 none. 원자력·건설·에너지·조선·바이오 등 통신과 무관한 산업 기사는 회사명이 겹쳐도 none — 삼성물산·삼성SDI·삼성중공업 등 삼성전자가 아닌 삼성 계열사 기사, 그리고 삼성전자 기사라도 반도체·가전·스마트폰 등 네트워크사업 외 분야 기사는 모두 none
 
 판정 규칙: sec=outage는 위 명단의 특정 이동통신사가 운영하는 통신망에서 실제로 발생한 장애의 발생·확산·복구 보도만 해당하며, 이 경우 통신사 이름이 있어도 반드시 outage로 분류. 통신장애를 언급만 하는 기사는 outage가 아님 — 통신장애 관련 제도·법령·책임 범위·보상 기준 논의, 의료·재난·행정 등 다른 주제의 기사에서 통신장애를 부수적으로 언급하는 경우, 과거 장애의 회고·통계 기사는 실제 장애 발생 보도가 아니므로 outage 금지(내용에 따라 policy·carrier 또는 none). 통신사가 아닌 서비스의 장애 — ChatGPT 등 AI 서비스, AWS·Azure·Google Cloud·Cloudflare 등 클라우드/CDN, 앱·플랫폼·게임·금융·SNS 서비스 장애 — 는 outage가 절대 아니며 none으로 제외("outage"라는 단어가 있어도 통신사 통신망 장애가 아니면 제외). 해킹·보안사고 기사는 그로 인해 통신 서비스 중단·장애가 실제 발생한 경우에만 outage이며, 서비스 영향이 없는 단순 해킹·개인정보 유출·보안 취약점 기사는 none으로 제외. 다음도 outage가 절대 아님 — 장애인(disability) 복지·요금제·접근성 기사(무관하면 none), 축제·행사·재난 대비 통신 지원이나 트래픽 증설 기사(carrier 또는 none), 장애 예방 훈련·점검·모의훈련 기사. 장애 기사의 중요도는 둘 중 하나만 가능 — 전국 단위 대규모 장애(전국 규모 또는 수백만 가입자, 수 시간 이상 지속)면 imp=5, 그 외 지역·일부 서비스·경미한 장애는 imp=3 이하. 장애 기사에 imp=4는 부여 금지.
 
@@ -435,6 +435,7 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
     cands = list(dict.fromkeys(c for c in cands if c))
 
     import time
+    diag = ["avail: " + ", ".join(avail)]
     for model in cands:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
         try:
@@ -459,12 +460,18 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
                 if ci < len(chunks) - 1: time.sleep(5)   # 분당 호출 제한 배려
             print(f"Gemini 판정 적용: 총 {total}건 / {len(chunks)}묶음")
             open("gemini_model_nw.txt","w",encoding="utf-8").write(model)
+            diag.append(f"선택: {model}")
+            open("gemini_diag.txt","w",encoding="utf-8").write("\n".join(diag))
             return f"Gemini 분류 ({model})"
         except urllib.error.HTTPError as ex:
+            diag.append(f"{model}: HTTP {ex.code}")
             if ex.code == 404: print(f"  {model} 사용 불가(404) -> 다음 모델")
             else: print(f"경고: {model} 실패 - HTTP {ex.code} -> 다음 모델")
         except Exception as ex:
+            diag.append(f"{model}: {str(ex)[:80]}")
             print(f"경고: {model} 실패 - {ex} -> 다음 모델")
+    diag.append("선택: 없음(키워드 분류)")
+    open("gemini_diag.txt","w",encoding="utf-8").write("\n".join(diag))
     print("경고: 모든 Gemini 모델 실패 - 키워드 분류로 대체")
     return None
 

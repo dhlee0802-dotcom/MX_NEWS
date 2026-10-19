@@ -39,6 +39,7 @@ jobs:
           git add docs/network.html || true
           git add docs/briefing.html || true
           git add gemini_model_nw.txt || true
+          git add gemini_diag.txt || true
           git add network_archive.json || true
           git add briefings_network.json || true
           git add topics_seen_network.json || true
