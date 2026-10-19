@@ -847,16 +847,18 @@ def update_briefings(pool):
         try: briefs = json.loads(open(BRIEF_FILE, encoding="utf-8").read())
         except Exception: briefs = []
     now = datetime.now(KST)
-    slot = None
-    if now.hour == 6 and now.minute < 30:
-        slot = ("모닝", now.replace(hour=6, minute=0, second=0, microsecond=0),
-                (now - timedelta(days=1)).replace(hour=17, minute=0, second=0, microsecond=0))
-    elif now.hour == 17 and now.minute < 30:
-        slot = ("이브닝", now.replace(hour=17, minute=0, second=0, microsecond=0),
-                now.replace(hour=6, minute=0, second=0, microsecond=0))
-    if not slot:
-        if briefs: return briefs
-        slot = ("초기", now, now - timedelta(hours=24))  # 최초 배포 직후 확인용 1회
+    # 캐치업 방식: 가장 최근에 지난 발행 시각(06시/17시)의 회차가 아직 없으면,
+    # 크롤이 몇 시에 돌든 그 회차를 소급 생성 (스케줄 지연으로 창을 놓쳐도 결번 없음)
+    t6 = now.replace(hour=6, minute=0, second=0, microsecond=0)
+    t17 = now.replace(hour=17, minute=0, second=0, microsecond=0)
+    if now >= t17:
+        slot = ("이브닝", t17, t6)
+    elif now >= t6:
+        slot = ("모닝", t6, t17 - timedelta(days=1))
+    else:
+        slot = ("이브닝", t17 - timedelta(days=1), t6 - timedelta(days=1))
+    if not briefs and slot is None:
+        slot = ("초기", now, now - timedelta(hours=24))
     label, end_dt, start_dt = slot
     bid = end_dt.strftime("%Y-%m-%d %H:%M") + " " + label
     if any(b.get("id") == bid for b in briefs): return briefs
