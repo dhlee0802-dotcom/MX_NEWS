@@ -231,6 +231,34 @@ def crawl():
         except Exception as ex:
             print(f"경고: {src} 실패 - {ex}")
 
+    # ── Bing News (원문 직링크 제공) — Google News보다 먼저 수집해 같은 기사면 직링크가 우선되게 함 ──
+    from urllib.parse import urlparse, parse_qs, unquote
+    bing_n = 0
+    for q in GN_QUERIES:
+        ko = bool(re.search(r"[가-힣]", q))
+        ja = bool(re.search(r"[ぁ-んァ-ヶ一-龯]", q))
+        mkt = "ko-KR" if ko else "ja-JP" if ja else "en-US"
+        url = f"https://www.bing.com/news/search?q={quote(q)}&format=RSS&mkt={mkt}&qft=interval%3d%228%22"
+        try:
+            feed = feedparser.parse(url)
+            for e in feed.entries:
+                try: pub = datetime(*e.published_parsed[:6], tzinfo=timezone.utc)
+                except Exception: continue
+                link = e.get("link","")
+                if "apiclick" in link:  # Bing 중계형 링크면 url 파라미터에서 원문 추출
+                    try:
+                        qs = parse_qs(urlparse(link).query)
+                        if qs.get("url"): link = unquote(qs["url"][0])
+                    except Exception: pass
+                if "bing.com" in link: continue   # 원문 추출 실패분은 버림 (중계 링크 유입 방지)
+                src = urlparse(link).netloc.replace("www.","") if link else ""
+                before = len(pool)
+                add(e.get("title",""), e.get("description",""), src, pub, link, False)
+                bing_n += len(pool) - before
+        except Exception as ex:
+            print(f"경고: Bing News 실패({q}) - {str(ex)[:80]}")
+    print(f"Bing News 수집 완료: {bing_n}건 (원문 직링크)")
+
     for q in GN_QUERIES:
         ko = bool(re.search(r"[가-힣]", q))
         ja = bool(re.search(r"[ぁ-んァ-ヶ一-龯]", q))
@@ -479,7 +507,7 @@ def dedupe_topics(items):
     return out
 
 GN_CACHE_FILE, GN_CACHE_MAX = "gn_url_cache_network.json", 3000
-GN_DECODE_BUDGET = 120   # 실행당 신규 변환 상한 — 초과분은 다음 실행에서 처리 (실행 시간 폭주 방지)
+GN_DECODE_BUDGET = 40    # 실행당 신규 변환 상한 (구글이 Actions발 변환을 차단 중이라 소량만 시도)
 
 def resolve_google_links(all_items):
     """news.google.com 중계 주소를 원문 기사 주소로 변환 (변환 실패 시 원래 링크 유지).
@@ -516,15 +544,13 @@ def resolve_google_links(all_items):
         if n + fail >= GN_DECODE_BUDGET:
             skipped += 1; continue    # 상한 초과분은 다음 실행에서 캐시를 이어서 채움
         ok = False
-        for attempt in range(2):      # 실패 시 1회 재시도 (rate limit 완화 대기 후)
-            try:
-                r = gnewsdecoder(u, interval=1)
-                if isinstance(r, dict) and r.get("status") and r.get("decoded_url"):
-                    run[u] = r["decoded_url"]; a["url"] = run[u]; n += 1; ok = True; break
-                if not first_err and isinstance(r, dict): first_err = str(r.get("message",""))[:120]
-            except Exception as ex:
-                if not first_err: first_err = str(ex)[:120]
-            if attempt == 0: time.sleep(3)
+        try:
+            r = gnewsdecoder(u, interval=1)
+            if isinstance(r, dict) and r.get("status") and r.get("decoded_url"):
+                run[u] = r["decoded_url"]; a["url"] = run[u]; n += 1; ok = True
+            elif not first_err and isinstance(r, dict): first_err = str(r.get("message",""))[:120]
+        except Exception as ex:
+            if not first_err: first_err = str(ex)[:120]
         if not ok:
             fail += 1; seen_urls.add(u)
     cache.update(run)
