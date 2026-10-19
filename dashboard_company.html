@@ -82,6 +82,11 @@
   .est a{color:var(--ink);text-decoration:none;font-weight:700}
   .est a:hover{color:var(--blue)}
   .est .src{font-size:11px;color:var(--low);margin-top:2px}
+  .stock-wrap{position:relative}
+  .stock-tip{position:absolute;z-index:30;background:var(--navy);color:#fff;border-radius:8px;padding:9px 11px;font-size:12px;max-width:260px;box-shadow:0 4px 14px rgba(15,42,92,.3);display:none;pointer-events:none}
+  .stock-tip .tt-date{font-size:10.5px;opacity:.75;margin-bottom:2px}
+  .stock-tip .tt-title{font-weight:700;line-height:1.4}
+  .stock-tip .tt-ev{display:inline-block;font-size:10px;font-weight:700;background:rgba(255,255,255,.2);border-radius:4px;padding:1px 6px;margin-bottom:3px}
 </style>
 </head>
 <body>
@@ -301,9 +306,82 @@ function render(){
       tl+=artCard(a);
     }
   }
-  h+=`<div class="block"><div class="blk-hd"><h3>이슈 타임라인</h3><span class="cnt">${list.length}건</span></div><div class="blk-body">${tl}</div></div>`;
+  h+=`<div class="block"><div class="blk-hd"><h3>이슈 타임라인</h3><span class="cnt">${list.length}건</span></div><div class="blk-body">${stockChart(cur,all)}${tl}</div></div>`;
   el.innerHTML=h;
 }
+/* ── 주가 + 이벤트 차트 ── */
+const STOCK=(typeof COMPANY_STOCK!=="undefined"&&COMPANY_STOCK.series)?COMPANY_STOCK.series:{};
+const MARK_EVTS=new Set(["실적","수주공급","인수합병","경영진거점","장애"]);
+let TIPS=[];
+function stockChart(c,all){
+  const s=STOCK[c];
+  if(!s||!(s.dates||[]).length)return"";
+  const dates=s.dates, closes=s.closes, n=dates.length;
+  const W=680,H=230,padL=44,padR=10,padT=14,padB=22;
+  let min=Math.min(...closes),max=Math.max(...closes);
+  const pad=(max-min)*0.08||1; min-=pad; max+=pad;
+  const X=i=>padL+(W-padL-padR)*i/(n-1), Y=v=>padT+(max-v)/(max-min)*(H-padT-padB);
+  const idxOf=d=>{ // 이벤트 날짜 → 가장 가까운 거래일 인덱스 (범위 밖이면 -1)
+    if(d<dates[0]||d>dates[n-1])return -1;
+    let lo=0,hi=n-1;
+    while(lo<hi){const m=(lo+hi)>>1; if(dates[m]<d)lo=m+1; else hi=m;}
+    return lo;
+  };
+  // 주요 이벤트: 핵심 유형 또는 긴급(5점), 중요도 우선 상한 24개
+  const evs=all.filter(a=>MARK_EVTS.has(a.evt)||(a.imp||0)>=5)
+    .map(a=>({...a,_i:idxOf((a.date||"").slice(0,10))})).filter(a=>a._i>=0)
+    .sort((a,b)=>(b.imp-a.imp)||(b.date||"").localeCompare(a.date||"")).slice(0,24)
+    .sort((a,b)=>a._i-b._i);
+  // 날짜가 가까워 점이 겹치는 이벤트는 한 점으로 묶음 (터치 대상 확보)
+  const clusters=[];
+  for(const a of evs){
+    const last=clusters[clusters.length-1];
+    if(last&&X(a._i)-X(last.i)<22){last.items.push(a);}
+    else clusters.push({i:a._i,items:[a]});
+  }
+  TIPS=clusters;
+  let p="";
+  closes.forEach((v,i)=>{p+=(i?"L":"M")+X(i).toFixed(1)+","+Y(v).toFixed(1);});
+  const ticks=[max-pad,(max+min)/2,min+pad];
+  let svg=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block" role="img">`;
+  for(const t of ticks){
+    svg+=`<line x1="${padL}" x2="${W-padR}" y1="${Y(t)}" y2="${Y(t)}" stroke="#e4e8f0" stroke-width="1"/>`;
+    svg+=`<text x="${padL-5}" y="${Y(t)+4}" text-anchor="end" font-size="10" fill="#8a94a6">${t>=1000?Math.round(t).toLocaleString():t.toFixed(t>=100?0:1)}</text>`;
+  }
+  for(let i=0;i<n;i+=Math.ceil(n/5)){
+    svg+=`<text x="${X(i)}" y="${H-6}" text-anchor="middle" font-size="10" fill="#8a94a6">${dates[i].slice(2,7)}</text>`;
+  }
+  svg+=`<path d="${p}" fill="none" stroke="${C_REV}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  clusters.forEach((cl,k)=>{
+    const x=X(cl.i),y=Y(closes[cl.i]),m=cl.items.length;
+    svg+=`<circle cx="${x}" cy="${y}" r="${m>1?8.5:7}" fill="#fff"/><circle cx="${x}" cy="${y}" r="${m>1?6.5:5}" fill="${C_OP}"/>`+
+         (m>1?`<text x="${x}" y="${y+3}" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">${m}</text>`:"")+
+         `<circle cx="${x}" cy="${y}" r="10" fill="transparent" style="cursor:pointer" onmouseenter="showTip(event,${k})" onmouseleave="hideTip()" onclick="showTip(event,${k});event.stopPropagation()"/>`;
+  });
+  svg+=`</svg>`;
+  const last=closes[n-1], first=closes[0], chg=((last-first)/first*100).toFixed(1);
+  return `<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:2px">
+      <div style="font-size:12px;font-weight:800;color:var(--navy)">주가 1년 (${esc(s.ticker)} · ${esc(s.currency)})</div>
+      <div style="font-size:11.5px;color:${chg>=0?"#1e8e4e":"var(--crit)"};font-weight:700">${last>=1000?Math.round(last).toLocaleString():last} · 1년 ${chg>=0?"+":""}${chg}%</div></div>
+    <div class="stock-wrap" onclick="hideTip()">${svg}<div class="stock-tip" id="stockTip"></div></div>
+    <div style="font-size:10.5px;color:var(--low);margin:2px 0 10px">● 주요 이벤트 (실적·수주/공급·M&A·경영진/거점·장애) — 점에 마우스를 올리거나 터치하면 내용 표시</div>`;
+}
+function showTip(ev,k){
+  const cl=TIPS[k]; if(!cl)return;
+  const tip=document.getElementById("stockTip"); if(!tip)return;
+  tip.innerHTML=cl.items.slice(0,4).map(a=>
+    `<div style="margin-bottom:6px"><div class="tt-date">${esc((a.date||"").slice(0,10))} · ${esc(a.source||"")}</div>
+     <span class="tt-ev">${esc(evLabel(a.evt))} · 중요도 ${a.imp}</span><div class="tt-title">${esc(a.title)}</div></div>`).join("")
+    +(cl.items.length>4?`<div class="tt-date">외 ${cl.items.length-4}건 — 아래 타임라인 참조</div>`:"");
+  const wrap=tip.parentElement, r=wrap.getBoundingClientRect();
+  let x=(ev.touches?ev.touches[0].clientX:ev.clientX)-r.left, y=(ev.touches?ev.touches[0].clientY:ev.clientY)-r.top;
+  tip.style.display="block";
+  const tw=tip.offsetWidth, th=tip.offsetHeight;
+  x=Math.max(4,Math.min(x-tw/2,r.width-tw-4)); y=y-th-16; if(y<0)y=y+th+28;
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+function hideTip(){const t=document.getElementById("stockTip");if(t)t.style.display="none";}
+
 function sel(c){cur=c;evtFilter="";q="";issueQ="";render();window.scrollTo(0,0);}
 function setIssueQ(qt){issueQ=qt;render();}
 function setPeriod(d){period=d;render();}

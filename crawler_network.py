@@ -327,9 +327,10 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
 대상(tgt): 사건의 상대방(수주공급의 발주 통신사, 인수합병의 피인수사, 제재의 대상국 등)이 기사에 명시된 경우에만 위 표준 표기(또는 국가명 한 단어)로 기재하고, 없거나 불분명하면 빈 문자열 "". 같은 주체+사건이라도 대상이 다르면 별개 사건으로 구분하기 위한 필드임.
 과거(past): 기사가 보도하는 핵심 사건이 이미 발생한 지 수개월~수년이 지난 과거 사건이면 1, 최근 발생했거나 진행 중인 사건이면 0. 회고·기념·연재·분석 기사, 그리고 스팸성 사이트가 과거의 유명 기사를 최신 날짜로 재발행한 경우(발행일은 최신이어도 내용은 옛 사건)는 반드시 1. 특히 과거의 대규모 통신장애(예: 2021년 NTT 도코모 200만 명 장애, 2022년 KDDI 장애, 2018년 KT 아현 화재)를 다룬 기사를 현재 발생한 장애로 오인하지 말 것 — 기사 속 연도, "당시", "그해", 이미 종결된 사건의 사과·복구 완료 서술 등이 단서. past=1 기사는 전량 자동 제외됨. 현재 장애 기사가 과거 사례를 비교·인용만 하는 경우는 0.
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 영어·일본어·중국어 등 어떤 언어의 기사라도 이슈명은 반드시 한국어 표기(에릭슨, 노키아, 화웨이, 버라이즌, 도이치텔레콤 등)로 쓸 것 — 같은 사건을 다룬 다국어 기사가 전부 동일 이슈명으로 묶여야 함. 특정 회사가 주체가 아닌 사건(공항·지역 통신장애, 정책 발표 등)은 "지역/기관 사건" 형식으로 통일(예: 같은 공항 통신장애를 다룬 한국어·영어·일본어 기사 전부 → "미국공항 통신장애" 하나로). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 특히 같은 행사·발표·컨퍼런스·국정감사·정책 브리핑에서 파생된 기사들은 세부 주제가 조금씩 달라도 전부 하나의 동일 이슈명으로 묶을 것(예: 국정감사에서 나온 통신 관련 기사 전부 → "과기정통부 국감"). 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
+번역제목(kt): 기사 제목의 자연스러운 한국어 번역. 이미 한국어 제목이면 그대로 기재. 원제목의 의미를 유지하고 과장 금지, 매체명·불필요한 수식어는 제거, 80자 이내. 모든 기사에 반드시 기재.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 메신저 보고에 바로 붙여 쓸 수 있는 개조식으로 작성: "- "로 시작하는 불릿 2~4개, 불릿 사이는 줄바꿈(\\n), 각 불릿은 명사형 종결(예: 계약 체결, 출시 발표, 대응 필요). 순서는 핵심 사실 → 수치·배경 → 경쟁 구도·사업적 의미. 기사에 인용된 수치·금액·비율·규모는 최대한 그대로 포함할 것. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 불릿 1개만 작성.
 
-모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","sum":"..."}}]
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
@@ -369,6 +370,9 @@ none = 삼성전자 네트워크사업과 무관 → 제외. 특히 스마트폰
             except Exception: pass
             if j.get("sum"): item["summary"] = str(j["sum"])
             if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
+            kt = re.sub(r"\s+", " ", str(j.get("kt",""))).strip()
+            if len(kt) >= 5:  # 한국어 번역 제목으로 교체 (원제목은 otitle에 보존)
+                item["otitle"] = item["title"]; item["title"] = kt[:90]
             for f in ("subj","evt","tgt"):  # 구조화 키: 공백 제거·소문자 정규화로 표기 흔들림 최소화
                 if j.get(f): item[f] = re.sub(r"\s+","",str(j[f])).strip().lower()
             applied += 1
@@ -716,6 +720,73 @@ def update_company_history(items):
     print(f"기업 히스토리 갱신: 신규 {added}건 / {sum(len(v) for v in hist.values())}건 보존")
     return hist
 
+# ── 상장사 주가 수집 (기업 페이지 이벤트 차트용) ──
+STOCK_FILE, STOCK_TTL_H = "stock_prices.json", 20
+STOCK_TICKERS = {   # subj 키 → (야후 티커, 기본 통화)
+    "에릭슨": ("ERIC","USD"), "노키아": ("NOK","USD"), "zte": ("0763.HK","HKD"),
+    "버라이즌": ("VZ","USD"), "kddi": ("9433.T","JPY"), "ast": ("ASTS","USD"),
+    "skt": ("017670.KS","KRW"), "kt": ("030200.KS","KRW"), "lg유플러스": ("032640.KS","KRW"),
+}
+STOOQ_MAP = {"ERIC":"eric.us","NOK":"nok.us","VZ":"vz.us","ASTS":"asts.us","9433.T":"9433.jp","0763.HK":"0763.hk"}
+
+def update_stock_prices():
+    """상장 9개사의 1년 일별 종가를 하루 1회 갱신 (Yahoo 1차, Stooq 2차). 실패 시 기존 캐시 유지"""
+    data = {"fetched_at": "", "series": {}}
+    if os.path.exists(STOCK_FILE):
+        try: data = json.loads(open(STOCK_FILE, encoding="utf-8").read())
+        except Exception: pass
+    try:
+        last = datetime.strptime(data.get("fetched_at",""), "%Y-%m-%d %H:%M").replace(tzinfo=KST)
+        if datetime.now(KST) - last < timedelta(hours=STOCK_TTL_H) and data.get("series"):
+            return data
+    except Exception: pass
+    import time
+    ok, fail = 0, 0
+    for comp, (tk, curr) in STOCK_TICKERS.items():
+        series = None
+        try:  # 1차: Yahoo Finance chart API
+            req = urllib.request.Request(
+                f"https://query1.finance.yahoo.com/v8/finance/chart/{quote(tk)}?range=1y&interval=1d",
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
+            with urllib.request.urlopen(req, timeout=25) as r:
+                res = json.loads(r.read().decode("utf-8"))["chart"]["result"][0]
+            ts = res.get("timestamp") or []
+            cl = res["indicators"]["quote"][0].get("close") or []
+            pts = [(datetime.fromtimestamp(t, tz=KST).strftime("%Y-%m-%d"), round(c, 3))
+                   for t, c in zip(ts, cl) if c is not None]
+            if len(pts) >= 30:
+                series = {"ticker": tk, "currency": res.get("meta", {}).get("currency") or curr,
+                          "dates": [p[0] for p in pts], "closes": [p[1] for p in pts]}
+        except Exception as ex:
+            print(f"  주가 Yahoo 실패({tk}): {str(ex)[:80]}")
+        if series is None and tk in STOOQ_MAP:
+            try:  # 2차: Stooq CSV
+                req = urllib.request.Request(f"https://stooq.com/q/d/l/?s={STOOQ_MAP[tk]}&i=d",
+                                             headers={"User-Agent": "Mozilla/5.0"})
+                with urllib.request.urlopen(req, timeout=25) as r:
+                    lines = r.read().decode("utf-8").strip().splitlines()[1:]
+                pts = []
+                for ln in lines[-260:]:
+                    f = ln.split(",")
+                    if len(f) >= 5 and f[4]: pts.append((f[0], round(float(f[4]), 3)))
+                if len(pts) >= 30:
+                    series = {"ticker": tk, "currency": curr,
+                              "dates": [p[0] for p in pts], "closes": [p[1] for p in pts]}
+            except Exception as ex:
+                print(f"  주가 Stooq 실패({tk}): {str(ex)[:80]}")
+        if series:
+            series["dates"] = series["dates"][-260:]; series["closes"] = series["closes"][-260:]
+            data.setdefault("series", {})[comp] = series; ok += 1
+        else:
+            fail += 1  # 실패 시 기존 캐시 항목 유지
+        time.sleep(1)
+    data["fetched_at"] = datetime.now(KST).strftime("%Y-%m-%d %H:%M")
+    try:
+        open(STOCK_FILE, "w", encoding="utf-8").write(json.dumps(data, ensure_ascii=False))
+    except Exception: pass
+    print(f"주가 갱신: 성공 {ok} / 실패 {fail} (캐시 보존)")
+    return data
+
 BRIEF_FILE, BRIEF_KEEP = "briefings_network.json", 28  # 하루 2회 x 14일
 
 def update_briefings(pool):
@@ -827,9 +898,11 @@ def main():
     if os.path.exists("company_financials.json"):
         try: cfin = json.loads(open("company_financials.json", encoding="utf-8").read())
         except Exception: print("경고: company_financials.json 파싱 실패")
+    cstock = update_stock_prices()
     cjs = ("const COMPANY_META = " + json.dumps(cmeta, ensure_ascii=False) + ";\n"
            + "const COMPANY_DATA = " + json.dumps(company_hist, ensure_ascii=False) + ";\n"
-           + "const COMPANY_FIN = " + json.dumps(cfin, ensure_ascii=False) + ";\n").replace("</", "<\\/")
+           + "const COMPANY_FIN = " + json.dumps(cfin, ensure_ascii=False) + ";\n"
+           + "const COMPANY_STOCK = " + json.dumps(cstock, ensure_ascii=False) + ";\n").replace("</", "<\\/")
     cjs = cjs.replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     cinj = "<script>\n" + cjs + "</script>"
     ctpl = open("dashboard_company.html", encoding="utf-8").read()
