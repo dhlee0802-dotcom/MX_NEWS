@@ -1,1 +1,1 @@
-gemini-flash-latest
+gemini-3.7-flash
