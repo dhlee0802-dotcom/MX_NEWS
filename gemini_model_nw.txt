@@ -1,1 +1,1 @@
-gemini-flash-latest
+gemini-flash-lite-latest
