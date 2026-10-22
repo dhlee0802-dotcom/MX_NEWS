@@ -639,7 +639,7 @@ def update_archive(items):
             if "news.google.com" in rep.get("url","") and a.get("url") and "news.google.com" not in a["url"]:
                 rep["url"] = a["url"]; rep["source"] = a.get("source", rep.get("source",""))
             continue
-        rec = {k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
+        rec = {k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
         rec["rel"] = 1
         lst.append(rec)
         added += 1
@@ -747,7 +747,7 @@ def update_company_history(items):
     for a in items:
         c = a.get("subj","")
         if c not in HIST_COMPANIES: continue
-        e = {"date": a["date"], "title": a["title"][:90], "url": a.get("url",""),
+        e = {"date": a["date"], "title": a["title"][:90], "otitle": a.get("otitle",""), "url": a.get("url",""),
              "source": a.get("source","")[:40], "evt": a.get("evt","") or "기타",
              "tgt": a.get("tgt",""), "imp": a.get("importance",3), "kw": a.get("kw",""),
              "sum": re.sub(r"\s+"," ", a.get("summary",""))[:160]}
@@ -887,16 +887,16 @@ def main():
         items.sort(key=lambda a: (a["importance"], a["date"]), reverse=True)  # 중요도 -> 최신순
         items = dedupe_topics(items)
         cap = 60 if sid == "carrier" else 30   # 통신사는 지역 필터용으로 넉넉히 보관
-        data[sid] = [{k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","wl","topic","subj","evt","tgt","rel")} for a in items[:cap]]
+        data[sid] = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","wl","topic","subj","evt","tgt","rel")} for a in items[:cap]]
         print(f"{name}: {len(items)}건 -> {len(data[sid])}건")
     # 최신 탭: 소규모 장애(outage & imp<5)는 제외 — 대규모 장애(imp=5)만 주요·최신에 노출
     latest = sorted([a for a in pool if not (a["sid"] == "outage" and a["importance"] < 5)],
                     key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
-    latest = [{k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt","rel")} for a in latest]
-    arch_items = [{k: a.get(k, "") for k in ("title","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
+    latest = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt","rel")} for a in latest]
+    arch_items = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
                   for a in pool if a["importance"] >= ARCHIVE_MIN_IMP]
-    hist_items = [{k: a.get(k, "") for k in ("title","summary","source","date","url","importance","subj","evt","tgt","kw")}
+    hist_items = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","importance","subj","evt","tgt","kw")}
                   for a in pool if a.get("subj","") in HIST_COMPANIES and a["importance"] >= HIST_MIN_IMP]
     shown = [a for arr in data.values() for a in arr] + latest + arch_items + hist_items
     resolve_google_links(shown)

@@ -254,7 +254,12 @@ function artCard(a){
     <div class="art-tags">${impBadge(a.imp)}<span class="ev ${esc(a.evt)}">${esc(evLabel(a.evt))}</span></div>
     ${a.url?`<a class="art-title" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)}</a>`:`<div class="art-title">${esc(a.title)}</div>`}
     ${a.sum?`<div class="art-sum">${esc(a.sum)}</div>`:""}
-    <div class="art-src">${esc(a.source||"")} · ${esc((a.date||"").slice(0,10))}</div></div>`;
+    <div class="art-src">${esc(a.source||"")} · ${esc((a.date||"").slice(0,10))}${srchLink(a)}</div></div>`;
+}
+function srchLink(a){
+  if(!((a.url||"").includes("news.google.com")))return"";
+  const q=encodeURIComponent('"'+(a.otitle||a.title||"").slice(0,80)+'"');
+  return ` · <a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700" title="링크가 차단될 때 제목으로 원문 검색">원문 검색</a>`;
 }
 
 function render(){

@@ -190,7 +190,13 @@ function artCard(a,showSec){
     <div class="art-tags">${box}${impBadge(a.importance)}<span class="cat ${a.category}">${CAT_LABEL[a.category]||a.category}</span>${showSec&&a._sid?`<span class="sec-tag">${SEC_NAME[a._sid]||a._sid}</span>`:""}${(a.rel||1)>1?`<span class="rel-tag">관련 보도 ${a.rel}건</span>`:""}</div>
     <a class="art-title" href="${esc(a.url)}" target="_blank">${esc(a.title)}</a>
     <div class="art-sum">${esc(a.summary||"")}</div>
-    <div class="art-src">${esc(a.source)} · ${esc(a.date)}</div></div>`;
+    <div class="art-src">${esc(a.source)} · ${esc(a.date)}${srchLink(a)}</div></div>`;
+}
+function srchLink(a){
+  // 구글 중계 링크는 사내망 등에서 차단될 수 있어 제목 검색 폴백 제공 (검색어는 번역 전 원제목 우선)
+  if(!((a.url||"").includes("news.google.com")))return"";
+  const q=encodeURIComponent('"'+(a.otitle||a.title||"").slice(0,80)+'"');
+  return ` · <a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700" title="링크가 차단될 때 제목으로 원문 검색">원문 검색</a>`;
 }
 function block(title,cnt,inner,isImp){
   return `<div class="block"><div class="blk-hd${isImp?" imp":""}"><h3>${title}</h3><span class="cnt">${cnt}</span></div><div class="blk-body">${inner||'<div class="empty">해당 기사 없음</div>'}</div></div>`;
