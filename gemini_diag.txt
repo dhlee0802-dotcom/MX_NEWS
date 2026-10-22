@@ -3,6 +3,6 @@ gemini-2.5-flash: HTTP 404
 gemini-flash-latest: HTTP 503
 gemini-3.5-flash: HTTP 503
 gemini-3.6-flash: HTTP 503
-gemini-3.7-flash: HTTP 503
-gemini-3.8-flash: HTTP 503
+gemini-3.7-flash: HTTP 429
+gemini-3.8-flash: HTTP 429
 선택: gemini-flash-lite-latest
