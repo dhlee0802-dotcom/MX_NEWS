@@ -4,20 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>기업 히스토리</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
+<meta name="color-scheme" content="dark">
 <style>
   :root{
-    --navy:#0f2a5c; --blue:#1e5eff; --blue-soft:#eef3ff;
-    --ink:#1a2233; --sub:#5b6577; --line:#e4e8f0;
-    --bg:#f6f8fb; --card:#ffffff;
-    --crit:#d63031; --crit-bg:#fdeeee; --high:#e67e22; --high-bg:#fdf3e7;
-    --mid:#2f80ed; --mid-bg:#ebf3fe; --low:#8a94a6; --low-bg:#f1f3f7;
+    --navy:#dbe6ff; --blue:#5b8cff; --blue-soft:rgba(91,140,255,.14);
+    --ink:#e7ecf7; --sub:#8e9bb8; --line:rgba(150,170,215,.14);
+    --bg:#0d1528; --card:#141d33; --raised:#1b2742; --raised2:#223052;
+    --crit:#ff5d73; --crit-bg:rgba(255,93,115,.16); --high:#ffb347; --high-bg:rgba(255,179,71,.16);
+    --mid:#5b8cff; --mid-bg:rgba(91,140,255,.16); --low:#8e9bb8; --low-bg:#223052;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55}
-  header{background:var(--card);border-bottom:1px solid var(--line);padding:14px 18px}
+  html{background:var(--bg)}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(91,140,255,.14), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(57,198,185,.08), transparent 60%),
+    var(--bg);background-repeat:no-repeat;min-height:100vh;color:var(--ink);font-size:14px;line-height:1.55}
+  header{background:rgba(13,21,40,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:14px 18px}
   .hd-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
   h1{font-size:18px;font-weight:800;color:var(--navy);letter-spacing:-.3px}
-  h1 span{color:var(--blue)}
+  h1 span{color:var(--sub);font-weight:600}
   .hd-meta{font-size:11.5px;color:var(--sub);margin-top:2px}
   .btn{flex:0 0 auto;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;text-decoration:none;display:inline-block}
   main{padding:14px 16px 50px;max-width:900px;margin:0 auto}
@@ -28,8 +34,8 @@
   .rchip{flex:0 0 auto;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;white-space:nowrap}
   .rchip.on{background:var(--blue);border-color:var(--blue);color:#fff}
   .rchip .n{margin-left:4px;font-size:10.5px;opacity:.65}
-  .block{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}
-  .blk-hd{padding:11px 14px;border-bottom:1px solid var(--line);background:#fbfcfe;display:flex;align-items:baseline;gap:8px}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px -18px rgba(0,0,0,.7);margin:14px 0}
+  .blk-hd{padding:11px 14px;border-bottom:1px solid var(--line);background:#182340;display:flex;align-items:baseline;gap:8px}
   .blk-hd h3{font-size:14px;font-weight:800;color:var(--navy)}
   .blk-hd .cnt{font-size:11px;color:var(--sub);font-weight:500}
   .blk-body{padding:10px 14px}
@@ -39,32 +45,32 @@
   .stat .v{font-size:13.5px;font-weight:800;color:var(--navy);margin-top:3px;line-height:1.4}
   table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:560px}
   th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
-  th{background:#fbfcfe;font-size:11.5px;color:var(--sub);white-space:nowrap}
+  th{background:#182340;font-size:11.5px;color:var(--sub);white-space:nowrap}
   td a{color:var(--ink);text-decoration:none}
   td a:hover{color:var(--blue)}
   .tbl-wrap{overflow-x:auto}
   .ctrl{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:8px;-webkit-overflow-scrolling:touch}
   .ctrl::-webkit-scrollbar{display:none}
-  .search{width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;font-family:inherit;margin-bottom:4px}
+  .search{width:100%;padding:9px 12px;border:1px solid rgba(150,170,215,.26);background:#0a1020;color:var(--ink);outline:none;border-radius:8px;font-size:13.5px;font-family:inherit;margin-bottom:4px}
   .month-hd{font-size:12px;font-weight:800;color:var(--sub);margin:14px 0 2px;padding-bottom:4px;border-bottom:2px solid var(--line)}
   .art{padding:10px 0;border-top:1px solid var(--line)}
   .art:first-of-type{border-top:none}
   .art-tags{display:flex;gap:5px;margin-bottom:4px;flex-wrap:wrap;align-items:center}
   .imp{font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:4px}
-  .imp.i5{background:var(--crit);color:#fff}
+  .imp.i5{background:var(--crit);color:#0d1528}
   .imp.i4{background:var(--crit-bg);color:var(--crit)}
   .imp.i3{background:var(--high-bg);color:var(--high)}
   .ev{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--low-bg);color:var(--sub)}
   .ev.장애{background:var(--crit-bg);color:var(--crit)}
   .ev.실적{background:var(--mid-bg);color:var(--mid)}
-  .ev.수주공급{background:#e8f8ef;color:#1e8e4e}
-  .ev.신제품{background:#f0ebfa;color:#6c3fc5}
-  .ev.인수합병{background:#e5ecf8;color:var(--navy)}
-  .ev.투자{background:var(--high-bg);color:#c46a10}
-  .ev.경영진거점{background:#fff6d9;color:#9a7b00}
+  .ev.수주공급{background:rgba(57,198,185,.16);color:#7fe3d8}
+  .ev.신제품{background:rgba(167,139,250,.16);color:#c7b5ff}
+  .ev.인수합병{background:rgba(91,140,255,.16);color:#a9c1ff}
+  .ev.투자{background:var(--high-bg);color:#ffd08a}
+  .ev.경영진거점{background:rgba(250,204,21,.14);color:#f3dd7a}
   .ev.규제주파수{background:var(--blue-soft);color:var(--blue)}
-  .ev.위성{background:#e0f5f4;color:#0e8378}
-  .ev.요금제{background:#fdeef5;color:#b8367f}
+  .ev.위성{background:rgba(56,189,248,.16);color:#8fd8ff}
+  .ev.요금제{background:rgba(244,114,182,.16);color:#f9a8d4}
   .art-title{font-size:13.5px;font-weight:700;color:var(--ink);text-decoration:none;display:block}
   .art-title:hover{color:var(--blue)}
   .art-sum{font-size:12.5px;color:var(--sub);margin-top:3px}
@@ -83,7 +89,7 @@
   .est a:hover{color:var(--blue)}
   .est .src{font-size:11px;color:var(--low);margin-top:2px}
   .stock-wrap{position:relative}
-  .stock-tip{position:absolute;z-index:30;background:var(--navy);color:#fff;border-radius:8px;padding:9px 11px;font-size:12px;max-width:260px;box-shadow:0 4px 14px rgba(15,42,92,.3);display:none;pointer-events:none}
+  .stock-tip{position:absolute;z-index:30;background:#223052;color:#fff;border:1px solid rgba(150,170,215,.26);border-radius:8px;padding:9px 11px;font-size:12px;max-width:260px;box-shadow:0 4px 14px rgba(0,0,0,.55);display:none;pointer-events:none}
   .stock-tip .tt-date{font-size:10.5px;opacity:.75;margin-bottom:2px}
   .stock-tip .tt-title{font-weight:700;line-height:1.4}
   .stock-tip .tt-ev{display:inline-block;font-size:10px;font-weight:700;background:rgba(255,255,255,.2);border-radius:4px;padding:1px 6px;margin-bottom:3px}
@@ -120,13 +126,13 @@ const FIN=(typeof COMPANY_FIN!=="undefined")?COMPANY_FIN:{};
 let cur=null, period=365, evtFilter="", q="", finView="annual", segView="y", issueQ="";
 function esc(s){const d=document.createElement("div");d.textContent=s||"";return d.innerHTML;}
 function evLabel(e){return EVT_LABEL[e]||e;}
-function impBadge(n){const t=n>=5?"긴급":n>=4?"중요":"주목";return `<span class="imp i${Math.min(5,Math.max(3,n))}">${t} ${n}</span>`;}
+function impBadge(n){const t=n>=5?"긴급 90+":n>=4?"중요 75+":"주목 50+";return `<span class="imp i${Math.min(5,Math.max(3,n))}">${t}</span>`;}
 function items(c){return (DATA[c]||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));}
 function daysAgo(d){try{return (Date.now()-new Date(d.slice(0,10)))/864e5;}catch(e){return 9999;}}
 function quarterOf(d){const y=d.slice(0,4),m=+d.slice(5,7);return y+" Q"+Math.ceil(m/3);}
 
 /* ── 재무 실적 (USD 환산) ── */
-const C_REV="#1e5eff", C_OP="#e67e22";
+const C_REV="#5b8cff", C_OP="#ffb347";
 function usdFmt(m){ // $M 값 → 읽기 좋은 표기
   if(m===null||m===undefined||isNaN(m))return"–";
   const neg=m<0, v=Math.abs(m);
@@ -145,7 +151,7 @@ function barPanel(rows,title,color){
   const span=max-min, y=v=>padT+(max-v)/span*(H-padT-padB), y0=y(0);
   const bw=Math.min(24,Math.floor((W-padL-padR)/rows.length)-14);
   let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block" role="img">`;
-  s+=`<line x1="${padL}" x2="${W-padR}" y1="${y0}" y2="${y0}" stroke="#e4e8f0" stroke-width="1"/>`;
+  s+=`<line x1="${padL}" x2="${W-padR}" y1="${y0}" y2="${y0}" stroke="rgba(150,170,215,.18)" stroke-width="1"/>`;
   rows.forEach((r,i)=>{
     const cx=padL+(W-padL-padR)*(i+0.5)/rows.length, x=cx-bw/2, v=r.v;
     if(v!==null&&!isNaN(v)){
@@ -153,9 +159,9 @@ function barPanel(rows,title,color){
       const d=up?`M${x},${top+rx} a${rx},${rx} 0 0 1 ${rx},-${rx} h${bw-2*rx} a${rx},${rx} 0 0 1 ${rx},${rx} v${h-rx} h${-bw} z`
                 :`M${x},${top} h${bw} v${h-rx} a${rx},${rx} 0 0 1 -${rx},${rx} h${-(bw-2*rx)} a${rx},${rx} 0 0 1 -${rx},-${rx} z`;
       s+=`<path d="${d}" fill="${color}"><title>${esc(r.label)} · ${usdFmt(v)}</title></path>`;
-      s+=`<text x="${cx}" y="${up?top-5:top+h+11}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a2233">${usdFmt(v)}</text>`;
+      s+=`<text x="${cx}" y="${up?top-5:top+h+11}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#e7ecf7">${usdFmt(v)}</text>`;
     }
-    s+=`<text x="${cx}" y="${H-6}" text-anchor="middle" font-size="11" fill="#5b6577">${esc(r.label)}</text>`;
+    s+=`<text x="${cx}" y="${H-6}" text-anchor="middle" font-size="11" fill="#8e9bb8">${esc(r.label)}</text>`;
   });
   s+=`</svg>`;
   return `<div style="flex:1;min-width:270px"><div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:2px"><span class="sw" style="background:${color}"></span>${esc(title)}</div>${s}</div>`;
@@ -204,8 +210,8 @@ function segBars(items){
   return items.map(x=>{
     const w=Math.max(2,(x.revenue||0)/max*100);
     return `<div style="margin:7px 0">
-      <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:3px"><span style="font-weight:700">${esc(x.name)}</span><span style="color:#5b6577;font-weight:700">${usdFmt(x.usd)}</span></div>
-      <div style="background:#f1f3f7;border-radius:4px;height:14px"><div style="width:${w}%;height:14px;border-radius:4px;background:${C_REV}" title="${esc(x.name)} ${usdFmt(x.usd)}"></div></div></div>`;
+      <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:3px"><span style="font-weight:700">${esc(x.name)}</span><span style="color:#8e9bb8;font-weight:700">${usdFmt(x.usd)}</span></div>
+      <div style="background:#223052;border-radius:4px;height:14px"><div style="width:${w}%;height:14px;border-radius:4px;background:${C_REV}" title="${esc(x.name)} ${usdFmt(x.usd)}"></div></div></div>`;
   }).join("");
 }
 function finBlock(c){
@@ -394,16 +400,16 @@ function stockChart(c,all){
   const ticks=[max-pad,(max+min)/2,min+pad];
   let svg=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block" role="img">`;
   for(const t of ticks){
-    svg+=`<line x1="${padL}" x2="${W-padR}" y1="${Y(t)}" y2="${Y(t)}" stroke="#e4e8f0" stroke-width="1"/>`;
-    svg+=`<text x="${padL-5}" y="${Y(t)+4}" text-anchor="end" font-size="10" fill="#8a94a6">${t>=1000?Math.round(t).toLocaleString():t.toFixed(t>=100?0:1)}</text>`;
+    svg+=`<line x1="${padL}" x2="${W-padR}" y1="${Y(t)}" y2="${Y(t)}" stroke="rgba(150,170,215,.18)" stroke-width="1"/>`;
+    svg+=`<text x="${padL-5}" y="${Y(t)+4}" text-anchor="end" font-size="10" fill="#8e9bb8">${t>=1000?Math.round(t).toLocaleString():t.toFixed(t>=100?0:1)}</text>`;
   }
   for(let i=0;i<n;i+=Math.ceil(n/5)){
-    svg+=`<text x="${X(i)}" y="${H-6}" text-anchor="middle" font-size="10" fill="#8a94a6">${dates[i].slice(2,7)}</text>`;
+    svg+=`<text x="${X(i)}" y="${H-6}" text-anchor="middle" font-size="10" fill="#8e9bb8">${dates[i].slice(2,7)}</text>`;
   }
   // 실적 발표 세로 기준선 (마커는 차트 상단, 호버/터치 토글)
   earnCl.forEach((cl,k)=>{
     const x=X(cl.i);
-    svg+=`<line x1="${x}" x2="${x}" y1="${padT+8}" y2="${H-padB}" stroke="#8a94a6" stroke-width="1" stroke-dasharray="3,3"/>`+
+    svg+=`<line x1="${x}" x2="${x}" y1="${padT+8}" y2="${H-padB}" stroke="#8e9bb8" stroke-width="1" stroke-dasharray="3,3"/>`+
          `<rect x="${x-6}" y="${padT-6}" width="12" height="12" rx="3" fill="var(--navy)"/>`+
          `<text x="${x}" y="${padT+3.5}" text-anchor="middle" font-size="8" font-weight="800" fill="#fff">E</text>`+
          `<circle cx="${x}" cy="${padT}" r="11" fill="transparent" style="cursor:pointer" onmouseenter="showTip(event,${k})" onmouseleave="hideTip()" onclick="showTip(event,${k});event.stopPropagation()"/>`;
@@ -412,21 +418,21 @@ function stockChart(c,all){
   const base=earnCl.length;
   clusters.forEach((cl,k)=>{
     const x=X(cl.i),y=Y(closes[cl.i]),m=cl.items.length;
-    svg+=`<circle cx="${x}" cy="${y}" r="${m>1?8.5:7}" fill="#fff"/><circle cx="${x}" cy="${y}" r="${m>1?6.5:5}" fill="${C_OP}"/>`+
+    svg+=`<circle cx="${x}" cy="${y}" r="${m>1?8.5:7}" fill="#141d33"/><circle cx="${x}" cy="${y}" r="${m>1?6.5:5}" fill="${C_OP}"/>`+
          (m>1?`<text x="${x}" y="${y+3}" text-anchor="middle" font-size="8.5" font-weight="800" fill="#fff">${m}</text>`:"")+
          `<circle cx="${x}" cy="${y}" r="10" fill="transparent" style="cursor:pointer" onmouseenter="showTip(event,${base+k})" onmouseleave="hideTip()" onclick="showTip(event,${base+k});event.stopPropagation()"/>`;
   });
   const base2=base+clusters.length;
   moveCl.forEach((cl,k)=>{
     const x=X(cl.i),y=Y(closes[cl.i]);
-    svg+=`<circle cx="${x}" cy="${y}" r="7" fill="#fff"/><circle cx="${x}" cy="${y}" r="5" fill="var(--crit)"/>`+
+    svg+=`<circle cx="${x}" cy="${y}" r="7" fill="#141d33"/><circle cx="${x}" cy="${y}" r="5" fill="var(--crit)"/>`+
          `<circle cx="${x}" cy="${y}" r="10" fill="transparent" style="cursor:pointer" onmouseenter="showTip(event,${base2+k})" onmouseleave="hideTip()" onclick="showTip(event,${base2+k});event.stopPropagation()"/>`;
   });
   svg+=`</svg>`;
   const last=closes[n-1], first=closes[0], chg=((last-first)/first*100).toFixed(1);
   return `<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:2px">
       <div style="font-size:12px;font-weight:800;color:var(--navy)">주가 1년 (${esc(s.ticker)} · ${esc(s.currency)})</div>
-      <div style="font-size:11.5px;color:${chg>=0?"#1e8e4e":"var(--crit)"};font-weight:700">${last>=1000?Math.round(last).toLocaleString():last} · 1년 ${chg>=0?"+":""}${chg}%</div></div>
+      <div style="font-size:11.5px;color:${chg>=0?"#39c6b9":"var(--crit)"};font-weight:700">${last>=1000?Math.round(last).toLocaleString():last} · 1년 ${chg>=0?"+":""}${chg}%</div></div>
     <div class="stock-wrap" onclick="hideTip()">${svg}<div class="stock-tip" id="stockTip"></div></div>
     <div style="font-size:10.5px;color:var(--low);margin:2px 0 10px"><span style="color:var(--navy);font-weight:800">E│</span> 실적 발표 · <span style="color:${C_OP}">●</span> 주요 이벤트 (수주/공급·M&A·경영진/거점·장애) · <span style="color:var(--crit)">●</span> 주가 급변동 연계 보도 — 마커에 마우스/터치 시 내용 표시</div>`;
 }
@@ -437,7 +443,7 @@ function showTip(ev,k){
             :cl.kind==="earn"?`<div style="font-weight:800;margin-bottom:4px;opacity:.85">실적 발표</div>`:"";
   tip.innerHTML=head+cl.items.slice(0,4).map(a=>
     `<div style="margin-bottom:6px"><div class="tt-date">${esc((a.date||"").slice(0,10))} · ${esc(a.source||"")}</div>
-     <span class="tt-ev">${esc(evLabel(a.evt))} · 중요도 ${a.imp}</span><div class="tt-title">${esc(a.title)}</div></div>`).join("")
+     <span class="tt-ev">${esc(evLabel(a.evt))} · ${a.imp>=5?'긴급':a.imp>=4?'중요':'주목'}</span><div class="tt-title">${esc(a.title)}</div></div>`).join("")
     +(cl.items.length>4?`<div class="tt-date">외 ${cl.items.length-4}건 — 아래 타임라인 참조</div>`:"");
   const wrap=tip.parentElement, r=wrap.getBoundingClientRect();
   let x=(ev.touches?ev.touches[0].clientX:ev.clientX)-r.left, y=(ev.touches?ev.touches[0].clientY:ev.clientY)-r.top;

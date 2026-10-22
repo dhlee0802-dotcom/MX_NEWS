@@ -4,19 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>네트워크 뉴스 브리핑</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
+<meta name="color-scheme" content="dark">
 <style>
   :root{
-    --navy:#0f2a5c; --blue:#1e5eff; --blue-soft:#eef3ff;
-    --ink:#1a2233; --sub:#5b6577; --line:#e4e8f0;
-    --bg:#f6f8fb; --card:#ffffff;
-    --crit:#d63031;
+    --navy:#dbe6ff; --blue:#5b8cff; --blue-soft:rgba(91,140,255,.14);
+    --ink:#e7ecf7; --sub:#8e9bb8; --line:rgba(150,170,215,.14);
+    --bg:#0d1528; --card:#141d33; --raised:#1b2742; --raised2:#223052;
+    --crit:#ff5d73;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
-  header{background:var(--card);border-bottom:1px solid var(--line);padding:14px 18px}
+  html{background:var(--bg)}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(91,140,255,.14), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(57,198,185,.08), transparent 60%),
+    var(--bg);background-repeat:no-repeat;min-height:100vh;color:var(--ink);font-size:14px;line-height:1.6}
+  header{background:rgba(13,21,40,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:14px 18px}
   .hd-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
   h1{font-size:18px;font-weight:800;color:var(--navy);letter-spacing:-.3px}
-  h1 span{color:var(--blue)}
+  h1 span{color:var(--sub);font-weight:600}
   .hd-meta{font-size:11.5px;color:var(--sub);margin-top:2px}
   .btn{flex:0 0 auto;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;text-decoration:none;display:inline-block}
   .btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
@@ -25,8 +31,8 @@
   .subbar::-webkit-scrollbar{display:none}
   .rchip{flex:0 0 auto;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;white-space:nowrap}
   .rchip.on{background:var(--blue);border-color:var(--blue);color:#fff}
-  .block{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
-  .blk-hd{padding:12px 16px;border-bottom:1px solid var(--line);background:#fbfcfe;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px -18px rgba(0,0,0,.7);margin-bottom:14px}
+  .blk-hd{padding:12px 16px;border-bottom:1px solid var(--line);background:#182340;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
   .blk-hd h3{font-size:15px;font-weight:800;color:var(--navy)}
   .blk-hd .cnt{font-size:11.5px;color:var(--sub);font-weight:500}
   .blk-body{padding:16px}
@@ -41,7 +47,7 @@
     <h1>Samsung Network <span>브리핑</span></h1>
     <a class="btn" href="network.html">📊 대시보드</a>
   </div>
-  <div class="hd-meta">매일 06시 모닝 · 17시 이브닝 발행 — 그 사이 수집된 중요 기사(4점 이상) 중 경영진 관심 사안 선별</div>
+  <div class="hd-meta">매일 06시 모닝 · 17시 이브닝 발행 — 그 사이 수집된 중요 기사(75점 이상) 중 경영진 관심 사안 선별</div>
 </header>
 <main>
   <div id="chips" class="subbar"></div>

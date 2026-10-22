@@ -44,6 +44,7 @@ jobs:
           git add briefings_network.json || true
           git add topics_seen_network.json || true
           git add gn_url_cache_network.json || true
+          git add impact_cache_network.json || true
           git add company_history.json || true
           git add docs/company.html || true
           git add stock_prices.json || true

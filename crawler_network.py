@@ -315,8 +315,19 @@ def crawl():
         if before - len(pool):
             print(f"제외어 2차 필터(요약 기준): {before - len(pool)}건 제외")
     pool[:] = [a for a in pool if a["sid"] not in ("unknown","drop")]
+    for a in pool:   # 100점 점수 미부여(키워드 분류·누락) 기사는 등급 중앙값으로 보정
+        if not isinstance(a.get("score"), int): a["score"] = default_score(a["importance"])
     filter_stale_topics(pool)
     return pool, engine
+
+SCORE_BAND = {5: (90, 100), 4: (75, 89), 3: (50, 74), 2: (30, 49), 1: (0, 29)}
+def clamp_score(imp, sc):
+    """100점 점수를 1~5등급 구간 안으로 고정 (등급·점수 불일치 방지)"""
+    lo, hi = SCORE_BAND.get(int(imp or 3), (50, 74))
+    return max(lo, min(hi, int(sc)))
+def default_score(imp):
+    lo, hi = SCORE_BAND.get(int(imp or 3), (50, 74))
+    return (lo + hi) // 2
 
 def gemini_call(url, payload=None, timeout=120):
     req = urllib.request.Request(url, method="POST" if payload else "GET")
@@ -352,6 +363,7 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
 2 = 참고 수준
 1 = 단순 정보·홍보성
 회사 이름이 크더라도 단순 언급·제품 소개·인터뷰·시황 전망 기사는 3 이하.
+점수(score): 0~100 정수로 imp 등급 안에서 세분화. 반드시 등급 구간을 지킬 것 — imp5: 90~100, imp4: 75~89, imp3: 50~74, imp2: 30~49, imp1: 0~29. 구간 안에서는 ①삼성전자 네트워크사업과의 직접 관련성(당사 고객사·경쟁사 당사자 여부) ②사업 영향 규모(금액·가입자·시장 범위) ③확정성(확정 보도 > 협상·검토 > 루머·전망) ④시급성(즉시 대응 필요 여부)이 높을수록 높은 점수. 모든 기사에 반드시 기재.
 주체(subj): 사건의 주체를 아래 표준 표기 중에서만 골라 기재 (다른 표기·번역·영문 절대 금지):
 에릭슨, 노키아, 화웨이, ZTE, 마베니어, 원피니티, 후지쯔, 라쿠텐심포니, 삼성, 버라이즌, AT&T, T모바일, 에코스타, US셀룰러, 차터, SKT, KT, LG유플러스, 도코모, KDDI, 소프트뱅크, 라쿠텐모바일, 지오, 에어텔, 보다폰아이디어, 텔러스, 비디오트론, 사스크텔, 로저스, 벨, 보다폰, 도이치텔레콤, 오렌지, 텔레포니카, 스타링크, AST, 아마존, FCC, 과기정통부, EU
 어떤 언어의 기사든 같은 회사·기관이면 반드시 같은 표준 표기를 쓸 것(Ericsson도 エリクソン도 전부 "에릭슨"). 목록에 없는 주체(특정 공항, 지역, 타 정부기관 등)는 짧은 한국어 명사 하나로 통일해 기재(예: "미국공항", "인도정부").
@@ -363,7 +375,7 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
 번역제목(kt): 기사 제목의 자연스러운 한국어 번역. 이미 한국어 제목이면 그대로 기재. 원제목의 의미를 유지하고 과장 금지, 매체명·불필요한 수식어는 제거, 80자 이내. 모든 기사에 반드시 기재.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 메신저 보고에 바로 붙여 쓸 수 있는 개조식으로 작성: "- "로 시작하는 불릿 2~4개, 불릿 사이는 줄바꿈(\\n), 각 불릿은 명사형 종결(예: 계약 체결, 출시 발표, 대응 필요). 순서는 핵심 사실 → 수치·배경 → 경쟁 구도·사업적 의미. 기사에 인용된 수치·금액·비율·규모는 최대한 그대로 포함할 것. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 불릿 1개만 작성.
 
-모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kw":"버라이즌 5G 계약 체결","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"score":62,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kw":"버라이즌 5G 계약 체결","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
@@ -400,6 +412,10 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
             try:
                 imp = int(j.get("imp", 0))
                 if 1 <= imp <= 5: item["importance"] = imp
+            except Exception: pass
+            try:
+                sc = int(float(j.get("score", -1)))
+                if 0 <= sc <= 100: item["score"] = clamp_score(item["importance"], sc)
             except Exception: pass
             if j.get("sum"): item["summary"] = str(j["sum"])
             if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
@@ -639,7 +655,7 @@ def update_archive(items):
             if "news.google.com" in rep.get("url","") and a.get("url") and "news.google.com" not in a["url"]:
                 rep["url"] = a["url"]; rep["source"] = a.get("source", rep.get("source",""))
             continue
-        rec = {k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
+        rec = {k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","score","impact","sid","topic","subj","evt","tgt")}
         rec["rel"] = 1
         lst.append(rec)
         added += 1
@@ -714,6 +730,112 @@ script 작성 규칙 (음성 재생용 구어체 원고):
     except Exception as ex:
         print(f"경고: 브리핑 생성 실패 - {ex} -> 단순 원고로 대체")
     return fallback
+
+# ── 기사별 사업 영향 분석 (대시보드에서 기사 클릭 시 표시) ──
+IMPACT_FILE, IMPACT_MIN_IMP, IMPACT_MAX_PER_RUN, IMPACT_TTL_DAYS = "impact_cache_network.json", 3, 40, 14
+IMPACT_AREAS = ["수주·영업", "제품·기술", "가격·수익성", "공급망·제재", "고객관계", "규제·정책", "경쟁구도", "위성·신사업"]
+
+def _impact_key(a):
+    return (a.get("url") or a.get("title") or "")[:300]
+
+def gemini_impact(groups):
+    """중요도 3점(50점) 이상 기사에 대해 '왜 사업적 영향이 있는지 / 어느 분야에 어떻게 / 필요한 조치'를 생성.
+    결과는 URL 기준으로 캐시(14일)하여 매 크롤마다 같은 기사를 다시 분석하지 않음.
+    groups: 기사 dict 리스트들의 리스트 (같은 기사의 복제본이 여러 목록에 있어도 캐시로 모두 채움)"""
+    cache = {}
+    if os.path.exists(IMPACT_FILE):
+        try: cache = json.loads(open(IMPACT_FILE, encoding="utf-8").read())
+        except Exception: cache = {}
+    now = datetime.now(KST)
+    cutoff = (now - timedelta(days=IMPACT_TTL_DAYS)).strftime("%Y-%m-%d")
+    cache = {k: v for k, v in cache.items() if v.get("t", "") >= cutoff}
+
+    todo, seen = [], set()
+    for lst in groups:
+        for a in lst:
+            k = _impact_key(a)
+            if not k or k in cache or k in seen: continue
+            if a.get("importance", 0) < IMPACT_MIN_IMP: continue
+            seen.add(k); todo.append(a)
+    todo.sort(key=lambda a: (a.get("score", 0), a.get("date", "")), reverse=True)
+    todo = todo[:IMPACT_MAX_PER_RUN]
+
+    key = os.environ.get("GEMINI_API_KEY")
+    if todo and key:
+        model = "gemini-2.0-flash"
+        if os.path.exists("gemini_model_nw.txt"):
+            m = open("gemini_model_nw.txt", encoding="utf-8").read().strip()
+            if m: model = m
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
+        done = 0
+        for ci in range(0, len(todo), 10):
+            batch = todo[ci:ci+10]
+            flat = lambda s: re.sub(r"\s+", " ", str(s or "")).strip()[:400]
+            lines = [f"{i} | [{a.get('score',0)}점/{a.get('sid','')}] {a['title']} | {flat(a.get('summary',''))}"
+                     for i, a in enumerate(batch)]
+            prompt = f"""당신은 삼성전자 네트워크사업부(기지국·vRAN·Open RAN·5G/6G 장비, 주요 고객: 버라이즌·SKT·KT·LG유플러스·KDDI·도코모·라쿠텐·지오·에어텔·보다폰·텔러스 등, 주요 경쟁사: 에릭슨·노키아·화웨이·ZTE·마베니어) CFO 조직의 경쟁정보(CI) 분석가입니다.
+아래 각 기사(번호 | 점수/섹션 | 제목 | 요약)에 대해 삼성전자 네트워크사업 관점의 사업 영향 분석을 작성하세요. 100% 한국어, 개조식(명사형 종결), 추측은 "가능성"·"예상"으로 표시하고 기사 범위를 벗어난 단정 금지.
+
+각 기사별 출력 필드:
+- why: 이 기사가 당사에 사업적으로 중요한 이유. 불릿 2~3개, 각 60자 이내, "- "로 시작하고 줄바꿈(\\n)으로 구분. 기사 속 수치·금액·규모를 포함.
+- areas: 영향 받는 분야 2~4개. 분야명(a)은 반드시 다음 중에서만: {", ".join(IMPACT_AREAS)}. 방향(d)은 "+"(당사에 기회), "-"(당사에 위협/부정), "±"(혼재·관찰 필요) 중 하나. 설명(t)은 그 분야에 구체적으로 어떤 영향이 어떻게 예상되는지 한 줄(70자 이내).
+- actions: 당사가 취해야 할 조치 2~3개, 각 60자 이내. 담당 조직 관점이 드러나게 구체적으로(예: "버라이즌 vRAN 2차 물량 협상 시 가격 방어 논리 준비", "에릭슨 신제품 스펙 비교표 작성 후 영업 공유"). 단순 "모니터링"만으로 끝내지 말 것.
+- horizon: 영향 시점 — "즉시", "단기(3개월)", "중기(1년)", "장기" 중 하나.
+- conf: 분석 확신도 — "높음", "중간", "낮음" 중 하나(기사 정보가 제목뿐이거나 루머 단계면 낮음).
+
+JSON 배열만 출력: [{{"i":0,"why":"- ...\\n- ...","areas":[{{"a":"수주·영업","d":"-","t":"..."}}],"actions":["...","..."],"horizon":"단기(3개월)","conf":"중간"}}]
+
+기사 목록:
+{chr(10).join(lines)}"""
+            payload = {"contents":[{"parts":[{"text":prompt}]}],
+                       "generationConfig":{"response_mime_type":"application/json","temperature":0.2}}
+            try:
+                r = gemini_call(url, payload, timeout=180)
+                raw = r["candidates"][0]["content"]["parts"][0]["text"]
+                try: judged = json.loads(raw)
+                except Exception:
+                    judged = []
+                    for mm in re.finditer(r"\{(?:[^{}]|\{[^{}]*\})*\}", raw):
+                        try: judged.append(json.loads(mm.group()))
+                        except Exception: pass
+                for j in judged:
+                    try: idx = int(j["i"])
+                    except Exception: continue
+                    if not (0 <= idx < len(batch)): continue
+                    why = str(j.get("why", "")).strip()
+                    areas = []
+                    for ar in (j.get("areas") or [])[:4]:
+                        if not isinstance(ar, dict): continue
+                        nm = str(ar.get("a", "")).strip()
+                        if nm not in IMPACT_AREAS:   # 유사 표기 보정
+                            nm = next((x for x in IMPACT_AREAS if nm and (nm in x or x.split("·")[0] in nm)), nm[:8])
+                        d = str(ar.get("d", "±")).strip()
+                        if d not in ("+", "-", "±"): d = "±"
+                        areas.append({"a": nm, "d": d, "t": str(ar.get("t", "")).strip()[:120]})
+                    actions = [str(x).strip()[:120] for x in (j.get("actions") or []) if str(x).strip()][:3]
+                    if len(why) < 10 and not areas: continue
+                    cache[_impact_key(batch[idx])] = {
+                        "t": now.strftime("%Y-%m-%d"), "why": why[:600], "areas": areas, "actions": actions,
+                        "horizon": str(j.get("horizon", "")).strip()[:12], "conf": str(j.get("conf", "")).strip()[:4]}
+                    done += 1
+            except Exception as ex:
+                print(f"경고: 영향 분석 실패({model}, {ci//10+1}묶음) - {ex}")
+                break
+            if ci + 10 < len(todo):
+                import time; time.sleep(3)
+        print(f"영향 분석 생성: {done}/{len(todo)}건 (캐시 보유 {len(cache)}건)")
+    elif todo:
+        print("안내: GEMINI_API_KEY 없음 - 영향 분석 생략")
+
+    filled = 0
+    for lst in groups:
+        for a in lst:
+            c = cache.get(_impact_key(a))
+            if c:
+                a["impact"] = {k: c[k] for k in ("why","areas","actions","horizon","conf") if k in c}; filled += 1
+    try: open(IMPACT_FILE, "w", encoding="utf-8").write(json.dumps(cache, ensure_ascii=False))
+    except Exception as ex: print(f"경고: 영향 분석 캐시 저장 실패 - {ex}")
+    return filled
 
 # ── 기업별 히스토리 누적 (company.html용) ──
 HIST_FILE, HIST_DAYS, HIST_MIN_IMP, HIST_PER_CAP = "company_history.json", 400, 3, 150
@@ -887,14 +1009,14 @@ def main():
         items.sort(key=lambda a: (a["importance"], a["date"]), reverse=True)  # 중요도 -> 최신순
         items = dedupe_topics(items)
         cap = 60 if sid == "carrier" else 30   # 통신사는 지역 필터용으로 넉넉히 보관
-        data[sid] = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","wl","topic","subj","evt","tgt","rel")} for a in items[:cap]]
+        data[sid] = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","score","impact","wl","topic","subj","evt","tgt","rel")} for a in items[:cap]]
         print(f"{name}: {len(items)}건 -> {len(data[sid])}건")
     # 최신 탭: 소규모 장애(outage & imp<5)는 제외 — 대규모 장애(imp=5)만 주요·최신에 노출
     latest = sorted([a for a in pool if not (a["sid"] == "outage" and a["importance"] < 5)],
                     key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
-    latest = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt","rel")} for a in latest]
-    arch_items = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","sid","topic","subj","evt","tgt")}
+    latest = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","score","impact","sid","topic","subj","evt","tgt","rel")} for a in latest]
+    arch_items = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","score","impact","sid","topic","subj","evt","tgt")}
                   for a in pool if a["importance"] >= ARCHIVE_MIN_IMP]
     hist_items = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","importance","subj","evt","tgt","kw")}
                   for a in pool if a.get("subj","") in HIST_COMPANIES and a["importance"] >= HIST_MIN_IMP]
@@ -902,6 +1024,13 @@ def main():
     resolve_google_links(shown)
     company_hist = update_company_history(hist_items)
     archive = update_archive(arch_items)
+    # 기사별 사업 영향 분석: 현재 노출 기사 + 일자별 아카이브(캐시 기준으로 채움, 신규 분석은 1회 40건 한도)
+    gemini_impact(list(data.values()) + [latest] + list(archive.values()))
+    for d in archive:   # 아카이브 레코드에 score가 없던 구형 저장분 보정
+        for a in archive[d]:
+            if not isinstance(a.get("score"), int): a["score"] = default_score(a.get("importance", 3))
+    try: open(ARCHIVE_FILE, "w", encoding="utf-8").write(json.dumps(archive, ensure_ascii=False))
+    except Exception: pass
     # 과거 저장분(일자별 탭)에 남은 미변환 구글 링크도 소급 변환 후 재저장
     arch_flat = [a for arr in archive.values() for a in arr]
     if any("news.google.com" in a.get("url","") for a in arch_flat):
