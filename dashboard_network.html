@@ -280,17 +280,34 @@ function toggleSel(k){
   document.querySelectorAll(`.art[data-k]`).forEach(el=>{if(el.dataset.k===k){el.classList.toggle("sel",SEL.has(k));const c=el.querySelector(".selbox");if(c)c.checked=SEL.has(k);}});
 }
 function updateRepCnt(){const el=document.getElementById("repCnt");if(el)el.textContent="선택 "+SEL.size+"건";}
+function toBullets(sum){
+  // 개조식 요약("- " 불릿)은 그대로, 문장형 요약은 문장 단위로 쪼개 3~5개 불릿으로
+  let s=String(sum||"").trim(); if(!s) return [];
+  let items=s.split(/\n+/).map(x=>x.replace(/^[-•·▪]\s*/,"").trim()).filter(Boolean);
+  if(items.length<2){
+    const body=s.replace(/^[-•·▪]\s*/,"");
+    items=body.split(/(?<=[.!?])\s+(?=[^\s])/).map(x=>x.trim()).filter(x=>x.length>3);
+    if(items.length<2) items=body.split(/(?<=[다요음됨함임])\s+(?=[^\s])/).map(x=>x.trim()).filter(x=>x.length>3);
+  }
+  return items.map(x=>x.replace(/\.$/,"")).slice(0,5);
+}
 function buildReport(){
   if(!SEL.size){alert("보고할 기사를 먼저 선택해 주세요.");return;}
   const arts=[...SEL].map(k=>REG[k]).filter(Boolean).sort((a,b)=>scoreOf(b)-scoreOf(a)||(b.date||"").localeCompare(a.date||""));
   const now=new Date(), days=["일","월","화","수","목","금","토"];
   const head=`[네트워크 동향 보고] ${String(now.getMonth()+1).padStart(2,"0")}.${String(now.getDate()).padStart(2,"0")}(${days[now.getDay()]})`;
   const body=arts.map(a=>{
-    let sum=(a.summary||"").trim();
-    if(sum && !sum.startsWith("-")) sum="- "+sum;
-    let act="";
-    if(a.impact&&a.impact.actions&&a.impact.actions.length) act="\n▶ 조치: "+a.impact.actions[0];
-    return `■ ${a.title} (${scoreOf(a)}점)\n${sum}${act}\n(${a.source}, ${(a.date||"").slice(5,10)})`;
+    const bullets=toBullets(a.summary);
+    let impl="";
+    if(a.impact&&a.impact.actions&&a.impact.actions.length) impl=a.impact.actions[0];
+    else if(a.impact&&a.impact.areas&&a.impact.areas.length) impl=a.impact.areas[0].t;
+    else if(bullets.length>=2) impl=bullets.pop();         // 요약 마지막 불릿(사업적 의미)을 시사점으로
+    const lines=[`■ ${a.title} (${scoreOf(a)}점)`];
+    lines.push("[기사 내용]"); if(bullets.length) bullets.slice(0,5).forEach(b=>lines.push("- "+b)); else lines.push("- 요약 미생성 (원문 참조)");
+    if(impl){ lines.push("[시사점/대응]"); lines.push("- "+impl); }
+    lines.push(`(${a.source}, ${(a.date||"").slice(5,10)})`);
+    lines.push("🔗 "+(a.url||""));
+    return lines.join("\n");
   }).join("\n\n");
   document.getElementById("repText").value=head+"\n\n"+body;
   openModal("repModal");
