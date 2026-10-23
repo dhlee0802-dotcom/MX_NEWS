@@ -226,7 +226,18 @@ def crawl():
     if use_gemini and pool:
         engine = gemini_judge(pool) or engine
     pool[:] = [a for a in pool if a["sid"] not in ("unknown","drop")]
+    for a in pool:   # 100점 점수 미부여(키워드 분류·누락) 기사는 등급 중앙값으로 보정
+        if not isinstance(a.get("score"), int): a["score"] = default_score(a["importance"])
     return pool, engine
+
+SCORE_BAND = {5: (90, 100), 4: (75, 89), 3: (50, 74), 2: (30, 49), 1: (0, 29)}
+def clamp_score(imp, sc):
+    """100점 점수를 1~5등급 구간 안으로 고정 (등급·점수 불일치 방지)"""
+    lo, hi = SCORE_BAND.get(int(imp or 3), (50, 74))
+    return max(lo, min(hi, int(sc)))
+def default_score(imp):
+    lo, hi = SCORE_BAND.get(int(imp or 3), (50, 74))
+    return (lo + hi) // 2
 
 def gemini_call(url, payload=None, timeout=120):
     req = urllib.request.Request(url, method="POST" if payload else "GET")
@@ -247,11 +258,13 @@ def gemini_judge(pool):
 섹션(sec): phone(스마트폰) tablet(태블릿) pc(노트북/PC) watch(스마트워치) tws(무선이어폰) glasses(XR/AI글래스) wallet(결제/월렛) health(디지털헬스) memchina(메모리 가격·중국 스마트폰 제조사 동향) none(MX사업과 무관→제외)
 카테고리(cat): quality launch price exec policy community other
 중요도(imp): 5=삼성 MX에 즉각 대응 필요한 긴급, 4=경영진 보고 필요, 3=주시, 2=참고, 1=단순 정보
+점수(score): 0~100 정수로 imp 등급 안에서 세분화. 반드시 등급 구간을 지킬 것 — imp5: 90~100, imp4: 75~89, imp3: 50~74, imp2: 30~49, imp1: 0~29. 구간 안에서는 ①삼성 MX사업과의 직접 관련성(당사 제품·서비스 당사자 여부, 직접 경쟁 제품 여부) ②사업 영향 규모(판매량·시장·금액 범위) ③확정성(공식 발표·조치 > 협상·검토 > 루머·유출·전망) ④시급성(즉시 대응 필요 여부)이 높을수록 높은 점수. 모든 기사에 반드시 기재.
 알람(alert): true/false. 다음 세 조건을 모두 충족할 때만 true — ① 루머·전망·유출이 아닌 실제 발생 사건(공식 발표·판결·사고·조치), ② 삼성 MX사업에 직접 영향(당사 제품 품질·안전 사고/리콜, 당사 대상 소송·규제·판매금지, 당사 제품·서비스 보안사고, 관세·수출규제 등 정부 조치 확정), ③ 당일 인지가 필요한 시급성. 신제품 유출·루머·리뷰·전망·점유율 통계·예고된 이벤트는 중요도가 높아도 반드시 false. 확실하지 않으면 false.
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "제품명 사건" 형식으로, 제품명을 첫 단어로 동일하게 표기할 것(예: "북6 출시", "북6 리뷰", "북6 가격" — 제품명 표기는 전부 통일). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 같은 제품의 출시·공개·발표·리뷰 보도는 원칙적으로 하나의 이슈로 묶을 것. 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
+번역제목(kt): 기사 제목의 자연스러운 한국어 번역. 이미 한국어 제목이면 그대로 기재. 원제목의 의미를 유지하고 과장 금지, 매체명·불필요한 수식어는 제거, 80자 이내. 모든 기사에 반드시 기재.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장이나 영어 원문 요약을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 4~5문장 300자 내외로, 핵심 사실 → 배경·수치 → 경쟁 구도 → 사업적 의미 순으로 충실히 작성. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 억지로 늘리지 말고 짧게 유지.
 
-모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"phone","cat":"launch","imp":3,"alert":false,"topic":"언팩 초청장","sum":"..."}}]
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"phone","cat":"launch","imp":3,"score":62,"alert":false,"topic":"언팩 초청장","kt":"갤럭시 언팩 초청장 발송","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
@@ -285,9 +298,16 @@ def gemini_judge(pool):
                 imp = int(j.get("imp", 0))
                 if 1 <= imp <= 5: item["importance"] = imp
             except Exception: pass
+            try:
+                sc = int(float(j.get("score", -1)))
+                if 0 <= sc <= 100: item["score"] = clamp_score(item["importance"], sc)
+            except Exception: pass
             if j.get("sum"): item["summary"] = str(j["sum"])
             if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
             item["alert"] = (j.get("alert") is True)
+            kt = re.sub(r"\s+", " ", str(j.get("kt",""))).strip()
+            if len(kt) >= 5:  # 한국어 번역 제목으로 교체 (원제목은 otitle에 보존)
+                item["otitle"] = item["title"]; item["title"] = kt[:90]
             applied += 1
         return applied
 
@@ -441,7 +461,7 @@ def notify_urgent(pool):
     sent = 0
     with open("notified.txt", "a", encoding="utf-8") as f:
         for a in urgent:
-            key = norm_key(a["title"])
+            key = norm_key(a.get("otitle") or a["title"])
             if key in notified: continue
             f.write(key + "\n"); notified.add(key)
             if sent >= 3: continue   # 알림 폭주 방지 (기록은 남기되 전송은 3건까지)
@@ -503,6 +523,112 @@ def semantic_dedupe(data, latest):
     except Exception as ex:
         print(f"경고: 의미 기반 중복 제거 생략 - {ex}")
 
+# ── 기사별 사업 영향 분석 (대시보드에서 기사 클릭 시 표시) ──
+IMPACT_FILE, IMPACT_MIN_IMP, IMPACT_MAX_PER_RUN, IMPACT_TTL_DAYS = "impact_cache_mx.json", 4, 40, 14
+IMPACT_AREAS = ["제품·기술", "가격·판매", "품질·안전", "공급망·부품", "규제·관세", "경쟁구도", "서비스·생태계", "브랜드·마케팅"]
+
+def _impact_key(a):
+    return (a.get("url") or a.get("title") or "")[:300]
+
+def gemini_impact(groups):
+    """중요도 4점(75점) 이상 기사에 대해 '왜 사업적 영향이 있는지 / 어느 분야에 어떻게 / 필요한 조치'를 생성.
+    결과는 URL 기준으로 캐시(14일)하여 매 크롤마다 같은 기사를 다시 분석하지 않음.
+    groups: 기사 dict 리스트들의 리스트 (같은 기사의 복제본이 여러 목록에 있어도 캐시로 모두 채움)"""
+    cache = {}
+    if os.path.exists(IMPACT_FILE):
+        try: cache = json.loads(open(IMPACT_FILE, encoding="utf-8").read())
+        except Exception: cache = {}
+    now = datetime.now(KST)
+    cutoff = (now - timedelta(days=IMPACT_TTL_DAYS)).strftime("%Y-%m-%d")
+    cache = {k: v for k, v in cache.items() if v.get("t", "") >= cutoff}
+
+    todo, seen = [], set()
+    for lst in groups:
+        for a in lst:
+            k = _impact_key(a)
+            if not k or k in cache or k in seen: continue
+            if a.get("importance", 0) < IMPACT_MIN_IMP: continue
+            seen.add(k); todo.append(a)
+    todo.sort(key=lambda a: (a.get("score", 0), a.get("date", "")), reverse=True)
+    todo = todo[:IMPACT_MAX_PER_RUN]
+
+    key = os.environ.get("GEMINI_API_KEY")
+    if todo and key:
+        model = "gemini-2.0-flash"
+        if os.path.exists("gemini_model.txt"):
+            m = open("gemini_model.txt", encoding="utf-8").read().strip()
+            if m: model = m
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
+        done = 0
+        for ci in range(0, len(todo), 10):
+            batch = todo[ci:ci+10]
+            flat = lambda s: re.sub(r"\s+", " ", str(s or "")).strip()[:400]
+            lines = [f"{i} | [{a.get('score',0)}점/{a.get('sid','')}] {a['title']} | {flat(a.get('summary',''))}"
+                     for i, a in enumerate(batch)]
+            prompt = f"""당신은 삼성전자 MX사업부(갤럭시 스마트폰·태블릿·PC·워치·TWS·XR·삼성월렛·삼성헬스, 주요 경쟁사: 애플·샤오미·오포·비보·아너·화웨이·구글·모토로라, 핵심 변수: 메모리 가격·관세·중국 시장) CFO 조직의 경쟁정보(CI) 분석가입니다.
+아래 각 기사(번호 | 점수/섹션 | 제목 | 요약)에 대해 삼성전자 MX사업 관점의 사업 영향 분석을 작성하세요. 100% 한국어, 개조식(명사형 종결), 추측은 "가능성"·"예상"으로 표시하고 기사 범위를 벗어난 단정 금지.
+
+각 기사별 출력 필드:
+- why: 이 기사가 당사에 사업적으로 중요한 이유. 불릿 2~3개, 각 60자 이내, "- "로 시작하고 줄바꿈(\\n)으로 구분. 기사 속 수치·금액·규모를 포함.
+- areas: 영향 받는 분야 2~4개. 분야명(a)은 반드시 다음 중에서만: {", ".join(IMPACT_AREAS)}. 방향(d)은 "+"(당사에 기회), "-"(당사에 위협/부정), "±"(혼재·관찰 필요) 중 하나. 설명(t)은 그 분야에 구체적으로 어떤 영향이 어떻게 예상되는지 한 줄(70자 이내).
+- actions: 당사가 취해야 할 조치 2~3개, 각 60자 이내. 담당 조직 관점이 드러나게 구체적으로(예: "미국 관세 인상분의 S26 가격 전가 시나리오별 손익 시뮬레이션", "아이폰 신기능 대비 갤럭시 AI 차별점 비교표 작성 후 마케팅 공유"). 단순 "모니터링"만으로 끝내지 말 것.
+- horizon: 영향 시점 — "즉시", "단기(3개월)", "중기(1년)", "장기" 중 하나.
+- conf: 분석 확신도 — "높음", "중간", "낮음" 중 하나(기사 정보가 제목뿐이거나 루머 단계면 낮음).
+
+JSON 배열만 출력: [{{"i":0,"why":"- ...\\n- ...","areas":[{{"a":"가격·판매","d":"-","t":"..."}}],"actions":["...","..."],"horizon":"단기(3개월)","conf":"중간"}}]
+
+기사 목록:
+{chr(10).join(lines)}"""
+            payload = {"contents":[{"parts":[{"text":prompt}]}],
+                       "generationConfig":{"response_mime_type":"application/json","temperature":0.2}}
+            try:
+                r = gemini_call(url, payload, timeout=180)
+                raw = r["candidates"][0]["content"]["parts"][0]["text"]
+                try: judged = json.loads(raw)
+                except Exception:
+                    judged = []
+                    for mm in re.finditer(r"\{(?:[^{}]|\{[^{}]*\})*\}", raw):
+                        try: judged.append(json.loads(mm.group()))
+                        except Exception: pass
+                for j in judged:
+                    try: idx = int(j["i"])
+                    except Exception: continue
+                    if not (0 <= idx < len(batch)): continue
+                    why = str(j.get("why", "")).strip()
+                    areas = []
+                    for ar in (j.get("areas") or [])[:4]:
+                        if not isinstance(ar, dict): continue
+                        nm = str(ar.get("a", "")).strip()
+                        if nm not in IMPACT_AREAS:   # 유사 표기 보정
+                            nm = next((x for x in IMPACT_AREAS if nm and (nm in x or x.split("·")[0] in nm)), nm[:8])
+                        d = str(ar.get("d", "±")).strip()
+                        if d not in ("+", "-", "±"): d = "±"
+                        areas.append({"a": nm, "d": d, "t": str(ar.get("t", "")).strip()[:120]})
+                    actions = [str(x).strip()[:120] for x in (j.get("actions") or []) if str(x).strip()][:3]
+                    if len(why) < 10 and not areas: continue
+                    cache[_impact_key(batch[idx])] = {
+                        "t": now.strftime("%Y-%m-%d"), "why": why[:600], "areas": areas, "actions": actions,
+                        "horizon": str(j.get("horizon", "")).strip()[:12], "conf": str(j.get("conf", "")).strip()[:4]}
+                    done += 1
+            except Exception as ex:
+                print(f"경고: 영향 분석 실패({model}, {ci//10+1}묶음) - {ex}")
+                break
+            if ci + 10 < len(todo):
+                import time; time.sleep(3)
+        print(f"영향 분석 생성: {done}/{len(todo)}건 (캐시 보유 {len(cache)}건)")
+    elif todo:
+        print("안내: GEMINI_API_KEY 없음 - 영향 분석 생략")
+
+    filled = 0
+    for lst in groups:
+        for a in lst:
+            c = cache.get(_impact_key(a))
+            if c:
+                a["impact"] = {k: c[k] for k in ("why","areas","actions","horizon","conf") if k in c}; filled += 1
+    try: open(IMPACT_FILE, "w", encoding="utf-8").write(json.dumps(cache, ensure_ascii=False))
+    except Exception as ex: print(f"경고: 영향 분석 캐시 저장 실패 - {ex}")
+    return filled
+
 def update_archive(pool):
     """중요도 4 이상 기사를 날짜별로 archive.json에 누적 (7일 보관, 일자당 50건 상한)"""
     arch = {}
@@ -514,7 +640,7 @@ def update_archive(pool):
     for a in cand:
         day = (a.get("date","") or "")[:10]
         if not day: continue
-        item = {k: a.get(k,"") for k in ("title","summary","source","date","url","category","importance","sid","topic")}
+        item = {k: a.get(k,"") for k in ("title","otitle","summary","source","date","url","category","importance","score","impact","sid","topic")}
         arch.setdefault(day, []).append(item)
     # 일자별: 중요도순 정렬 후 중복 제거, 50건 상한
     for day in list(arch.keys()):
@@ -536,15 +662,23 @@ def main():
         items = [a for a in pool if a["sid"] == sid]
         items.sort(key=lambda a: (a["wl"], a["importance"], a["date"]), reverse=True)
         items = dedupe_topics(items)
-        data[sid] = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","wl","topic","alert")} for a in items[:30]]
+        data[sid] = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","score","impact","wl","topic","alert")} for a in items[:30]]
         print(f"{name}: {len(items)}건 -> {len(data[sid])}건")
     latest = sorted(pool, key=lambda a: a["date"], reverse=True)
     latest = dedupe_topics(latest)[:LATEST_N]
-    latest = [{k: a[k] for k in ("title","summary","source","date","url","category","importance","sid","topic","alert")} for a in latest]
+    latest = [{k: a.get(k, "") for k in ("title","otitle","summary","source","date","url","category","importance","score","impact","sid","topic","alert")} for a in latest]
     semantic_dedupe(data, latest)
     shown = [a for arr in data.values() for a in arr] + latest
     resolve_google_links(shown)
     archive = update_archive(pool)
+    # 기사별 사업 영향 분석(75점 이상): 현재 노출 기사 + 일자별 아카이브(캐시 기준으로 채움, 신규 분석은 1회 40건 한도)
+    gemini_impact(list(data.values()) + [latest] + list(archive.values()))
+    for d in archive:
+        for a in archive[d]:
+            if not isinstance(a.get("score"), int): a["score"] = default_score(a.get("importance", 3))
+    try:
+        with open("archive.json", "w", encoding="utf-8") as f: json.dump(archive, f, ensure_ascii=False)
+    except Exception: pass
     notify_urgent(pool)
     meta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M") + " · " + engine,
             "sections": [{"id": s[0], "name": s[1]} for s in [next(x for x in SEC_DEFS if x[0]==o) for o in ORDER]]}
@@ -552,10 +686,11 @@ def main():
           + "const NEWS_DATA = " + json.dumps(data, ensure_ascii=False) + ";\n"
           + "const NEWS_LATEST = " + json.dumps(latest, ensure_ascii=False) + ";\n"
           + "const NEWS_ARCHIVE = " + json.dumps(archive, ensure_ascii=False) + ";\n")
+    js = js.replace("</", "<\\/").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")  # 기사 본문이 스크립트를 깨지 않게
     tpl = open("dashboard_local.html", encoding="utf-8").read()
     inline = "<script>\n" + js + "</script>"
     # 표식(<script src="news_data.js">)이 다소 변형돼 있어도 찾아서 교체, 없으면 </body> 앞에 삽입
-    out, n = re.subn(r'<script[^>]*news_data\.js[^>]*>\s*</script>', inline, tpl, count=1)
+    out, n = re.subn(r'<script[^>]*news_data\.js[^>]*>\s*</script>', lambda m: inline, tpl, count=1)
     if n == 0:
         if "</body>" in out:
             out = out.replace("</body>", inline + "\n</body>", 1)

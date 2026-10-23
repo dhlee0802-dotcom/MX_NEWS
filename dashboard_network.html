@@ -199,6 +199,7 @@
       <button class="hbtn" id="repBtn" onclick="toggleReport()">📋<span class="lb">보고</span></button>
       <a class="hbtn" href="company.html">🏢<span class="lb">기업</span></a>
       <a class="hbtn" href="briefing.html">📄<span class="lb">브리핑</span></a>
+      <a class="hbtn" href="index.html">📱<span class="lb">MX</span></a>
       <button class="hbtn" id="notiBtn" onclick="toggleNoti()">🔕<span class="lb">알림 꺼짐</span></button>
     </div>
   </div>
@@ -371,7 +372,7 @@ function openDetail(k){
     }
     if(im.conf) h+=`<div class="conf" style="margin-top:10px">분석 확신도 ${esc(im.conf)} · 기사 제목·요약 범위에서 자동 생성된 분석으로, 의사결정 전 원문 확인 권장</div>`;
   }else{
-    h+=`<div class="sec-h">사업 영향 분석</div><div class="noimp">${s>=50?"이 기사의 영향 분석은 다음 수집 주기(30분 이내)에 생성됩니다.":"영향 분석은 50점 이상 기사에 자동 생성됩니다. 이 기사는 참고 수준으로 분류되었습니다."}</div>`;
+    h+=`<div class="sec-h">사업 영향 분석</div><div class="noimp">${s>=75?"이 기사의 영향 분석은 다음 수집 주기(30분 이내)에 생성됩니다.":"영향 분석은 75점 이상(중요·긴급) 기사에 자동 생성됩니다."}</div>`;
   }
   h+=`<div class="sec-h">기사 요약</div><div class="det-sum">${esc(a.summary||"요약 없음")}</div>`;
   if(a.otitle&&a.otitle!==a.title) h+=`<div class="conf" style="margin-top:8px">원제: ${esc(a.otitle)}</div>`;

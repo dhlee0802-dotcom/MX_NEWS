@@ -732,14 +732,14 @@ script 작성 규칙 (음성 재생용 구어체 원고):
     return fallback
 
 # ── 기사별 사업 영향 분석 (대시보드에서 기사 클릭 시 표시) ──
-IMPACT_FILE, IMPACT_MIN_IMP, IMPACT_MAX_PER_RUN, IMPACT_TTL_DAYS = "impact_cache_network.json", 3, 40, 14
+IMPACT_FILE, IMPACT_MIN_IMP, IMPACT_MAX_PER_RUN, IMPACT_TTL_DAYS = "impact_cache_network.json", 4, 40, 14
 IMPACT_AREAS = ["수주·영업", "제품·기술", "가격·수익성", "공급망·제재", "고객관계", "규제·정책", "경쟁구도", "위성·신사업"]
 
 def _impact_key(a):
     return (a.get("url") or a.get("title") or "")[:300]
 
 def gemini_impact(groups):
-    """중요도 3점(50점) 이상 기사에 대해 '왜 사업적 영향이 있는지 / 어느 분야에 어떻게 / 필요한 조치'를 생성.
+    """중요도 4점(75점) 이상 기사에 대해 '왜 사업적 영향이 있는지 / 어느 분야에 어떻게 / 필요한 조치'를 생성.
     결과는 URL 기준으로 캐시(14일)하여 매 크롤마다 같은 기사를 다시 분석하지 않음.
     groups: 기사 dict 리스트들의 리스트 (같은 기사의 복제본이 여러 목록에 있어도 캐시로 모두 채움)"""
     cache = {}
@@ -1024,7 +1024,7 @@ def main():
     resolve_google_links(shown)
     company_hist = update_company_history(hist_items)
     archive = update_archive(arch_items)
-    # 기사별 사업 영향 분석: 현재 노출 기사 + 일자별 아카이브(캐시 기준으로 채움, 신규 분석은 1회 40건 한도)
+    # 기사별 사업 영향 분석(75점 이상): 현재 노출 기사 + 일자별 아카이브(캐시 기준으로 채움, 신규 분석은 1회 40건 한도)
     gemini_impact(list(data.values()) + [latest] + list(archive.values()))
     for d in archive:   # 아카이브 레코드에 score가 없던 구형 저장분 보정
         for a in archive[d]:

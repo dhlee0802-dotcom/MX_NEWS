@@ -26,7 +26,9 @@
   h1 span{color:var(--sub);font-weight:600}
   .hd-meta{font-size:11.5px;color:var(--sub);margin-top:2px}
   .btn{flex:0 0 auto;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;text-decoration:none;display:inline-block}
-  main{padding:14px 16px 50px;max-width:900px;margin:0 auto}
+  main{padding:14px 16px 50px;max-width:1280px;margin:0 auto}
+  .cols{display:grid;grid-template-columns:1fr;gap:0 14px;align-items:start}
+  @media(min-width:960px){.cols{grid-template-columns:1fr 1fr}.col{min-width:0}}
   .grp{display:flex;align-items:center;gap:8px;margin-bottom:8px}
   .grp-label{flex:0 0 64px;font-size:11.5px;font-weight:700;color:var(--sub);text-align:right}
   .chips{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex:1}
@@ -274,9 +276,9 @@ function render(){
   const el=document.getElementById("content");
   if(!cur){el.innerHTML='<div class="empty">위에서 회사를 선택하면 현황 요약, 분기별 매트릭스, 이슈 타임라인이 표시됩니다.</div>';return;}
   const all=items(cur);
-  let h="";
+  let h="", hR="";
 
-  /* ── 재무 실적 (첫 블록) ── */
+  /* ── 재무 실적 (첫 블록, 좌측 열) ── */
   h+=finBlock(cur);
 
   /* ── 현황 요약 (최신순) ── */
@@ -284,7 +286,7 @@ function render(){
   const recent=all.filter(a=>daysAgo(a.date)<=180);           // all은 이미 최신순 정렬
   let tops=recent.filter(a=>(a.imp||0)>=4).slice(0,3);
   if(tops.length<3) tops=tops.concat(recent.filter(a=>!tops.includes(a)).sort((a,b)=>(b.imp-a.imp)||(b.date||"").localeCompare(a.date||"")).slice(0,3-tops.length)).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-  h+=`<div class="block"><div class="blk-hd"><h3>${esc(NAME[cur]||cur)} 주요 이슈</h3><span class="cnt">최근 90일 ${d90.length}건${d90.filter(a=>a.imp>=5).length?` · 긴급 ${d90.filter(a=>a.imp>=5).length}건`:""}</span></div><div class="blk-body">
+  hR+=`<div class="block"><div class="blk-hd"><h3>${esc(NAME[cur]||cur)} 주요 이슈</h3><span class="cnt">최근 90일 ${d90.length}건${d90.filter(a=>a.imp>=5).length?` · 긴급 ${d90.filter(a=>a.imp>=5).length}건`:""}</span></div><div class="blk-body">
     ${tops.length?tops.map(a=>artCard(a)).join(""):'<div class="empty">최근 6개월 내 주요 이슈 없음</div>'}
   </div></div>`;
 
@@ -332,8 +334,8 @@ function render(){
       tl+=artCard(a);
     }
   }
-  h+=`<div class="block"><div class="blk-hd"><h3>이슈 타임라인</h3><span class="cnt">${list.length}건</span></div><div class="blk-body">${stockChart(cur,all)}${tl}</div></div>`;
-  el.innerHTML=h;
+  hR+=`<div class="block"><div class="blk-hd"><h3>이슈 타임라인</h3><span class="cnt">${list.length}건</span></div><div class="blk-body">${stockChart(cur,all)}${tl}</div></div>`;
+  el.innerHTML=`<div class="cols"><div class="col">${h}</div><div class="col">${hR}</div></div>`;
 }
 /* ── 주가 + 이벤트 차트 ── */
 const STOCK=(typeof COMPANY_STOCK!=="undefined"&&COMPANY_STOCK.series)?COMPANY_STOCK.series:{};
