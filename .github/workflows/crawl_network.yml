@@ -11,11 +11,15 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   crawl:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
+      - name: Mark start
+        run: echo "START_TS=$(date +%s)" >> $GITHUB_ENV
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
@@ -45,6 +49,7 @@ jobs:
           git add topics_seen_network.json || true
           git add gn_url_cache_network.json || true
           git add impact_cache_network.json || true
+          git add gemini_cooldown_nw.json || true
           git add company_history.json || true
           git add docs/company.html || true
           git add stock_prices.json || true
@@ -60,3 +65,14 @@ jobs:
           done
           echo "push 3회 모두 실패 (GitHub 서버 오류 가능성) - 다음 크롤에서 자동 반영됨"
           exit 1
+
+      - name: Schedule next run (30분 주기 자가 예약)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          elapsed=$(( $(date +%s) - START_TS ))
+          wait=$(( 1800 - elapsed )); [ $wait -lt 60 ] && wait=60
+          echo "다음 회차까지 ${wait}초 대기"
+          sleep $wait
+          gh workflow run crawl_network.yml --ref main -R "$GITHUB_REPOSITORY" && echo "다음 회차 예약 완료"

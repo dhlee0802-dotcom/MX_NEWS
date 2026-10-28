@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: crawl
@@ -15,7 +16,10 @@ concurrency:
 jobs:
   crawl:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     steps:
+      - name: Mark start
+        run: echo "START_TS=$(date +%s)" >> $GITHUB_ENV
       - uses: actions/checkout@v5
 
       - uses: actions/setup-python@v6
@@ -40,6 +44,7 @@ jobs:
           git add docs/index.html gemini_model.txt notified.txt archive.json || true
           git add gn_url_cache_mx.json || true
           git add impact_cache_mx.json || true
+          git add gemini_cooldown_mx.json || true
           if git diff --cached --quiet; then
             echo "변경 없음 - 커밋 생략"
             exit 0
@@ -48,3 +53,16 @@ jobs:
           # 원격에 새 커밋이 있으면 당겨오되, docs/index.html 충돌은 방금 생성한 최신본으로 자동 해소
           git pull --rebase -X theirs origin main
           git push origin main
+
+      # GitHub cron은 혼잡 시 몇 시간씩 밀리므로(실측 4~6시간 간격), 실행 종료 후 스스로 다음 회차를 예약해
+      # 30분 주기를 보장. cron은 체인이 끊겼을 때의 백업 역할. 중단하려면 Actions 탭에서 워크플로 비활성화.
+      - name: Schedule next run (30분 주기 자가 예약)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          elapsed=$(( $(date +%s) - START_TS ))
+          wait=$(( 1800 - elapsed )); [ $wait -lt 60 ] && wait=60
+          echo "다음 회차까지 ${wait}초 대기"
+          sleep $wait
+          gh workflow run crawl.yml --ref main -R "$GITHUB_REPOSITORY" && echo "다음 회차 예약 완료"

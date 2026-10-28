@@ -451,6 +451,23 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
     cands = list(dict.fromkeys(c for c in cands if c))
 
     import time
+    # 실패 모델 쿨다운: 503·타임아웃이 반복되는 모델을 매 크롤마다 다시 찔러 20분 이상 허비하지 않도록
+    # 실패 시 3시간(404는 24시간) 동안 후보에서 제외. 전부 제외되면 마지막 두 후보(lite)라도 시도
+    cd_file = "gemini_cooldown_nw.json"
+    cooldown = {}
+    if os.path.exists(cd_file):
+        try: cooldown = json.loads(open(cd_file, encoding="utf-8").read())
+        except Exception: cooldown = {}
+    now_ts = time.time()
+    skipped = [m for m in cands if cooldown.get(m, 0) > now_ts]
+    live = [m for m in cands if cooldown.get(m, 0) <= now_ts]
+    if skipped: print("쿨다운 중 건너뜀: " + ", ".join(skipped))
+    cands = live or cands[-2:]
+    def mark(model, hours):
+        if hours: cooldown[model] = now_ts + hours * 3600
+        else: cooldown.pop(model, None)
+        try: open(cd_file, "w", encoding="utf-8").write(json.dumps(cooldown))
+        except Exception: pass
     diag = ["avail: " + ", ".join(avail)]
     for model in cands:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
@@ -480,15 +497,18 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
                 if ci < len(chunks) - 1: time.sleep(5)   # 분당 호출 제한 배려
             print(f"Gemini 판정 적용: 총 {total}건 / {len(chunks)}묶음")
             open("gemini_model_nw.txt","w",encoding="utf-8").write(model)
+            mark(model, 0)
             diag.append(f"선택: {model}")
             open("gemini_diag.txt","w",encoding="utf-8").write("\n".join(diag))
             return f"Gemini 분류 ({model})"
         except urllib.error.HTTPError as ex:
             diag.append(f"{model}: HTTP {ex.code}")
+            mark(model, 24 if ex.code == 404 else 3)
             if ex.code == 404: print(f"  {model} 사용 불가(404) -> 다음 모델")
             else: print(f"경고: {model} 실패 - HTTP {ex.code} -> 다음 모델")
         except Exception as ex:
             diag.append(f"{model}: {str(ex)[:80]}")
+            mark(model, 3)
             print(f"경고: {model} 실패 - {ex} -> 다음 모델")
     diag.append("선택: 없음(키워드 분류)")
     open("gemini_diag.txt","w",encoding="utf-8").write("\n".join(diag))
