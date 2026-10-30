@@ -80,6 +80,13 @@
   .empty{color:var(--low);font-size:12.5px;padding:16px 0;text-align:center}
   .legend{display:flex;gap:14px;margin:2px 0 6px;font-size:12px;color:var(--sub);font-weight:700}
   .legend .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .kpi-wrap{position:relative}
+  .kpi-tip{position:absolute;z-index:30;background:#223052;color:#fff;border:1px solid rgba(150,170,215,.26);border-radius:8px;padding:7px 10px;font-size:12px;box-shadow:0 4px 14px rgba(0,0,0,.55);display:none;pointer-events:none;white-space:nowrap}
+  .kpi-tip b{font-variant-numeric:tabular-nums}
+  .kpi-h{font-size:12px;font-weight:800;color:var(--navy);margin:14px 0 2px;display:flex;align-items:baseline;gap:8px}
+  .kpi-h:first-child{margin-top:0}
+  .kpi-h span{font-size:11px;color:var(--sub);font-weight:600}
+  .kpi-def{font-size:11px;color:var(--low);margin-bottom:4px}
   .fin-note{font-size:11px;color:var(--low);margin-top:8px}
   .fin-tbl{margin-top:10px}
   .fin-tbl table{min-width:0}
@@ -216,6 +223,113 @@ function segBars(items){
       <div style="background:#223052;border-radius:4px;height:14px"><div style="width:${w}%;height:14px;border-radius:4px;background:${C_REV}" title="${esc(x.name)} ${usdFmt(x.usd)}"></div></div></div>`;
   }).join("");
 }
+/* ── 통신사 KPI: CAPEX(연간 5년+가이던스 / 분기), ARPU·해지율(분기 3년) ── */
+let kpiCapexView="annual";
+function setKpiCapex(k){kpiCapexView=k;render();}
+const C_CAPEX="#39c6b9", C_ARPU="#5b8cff", C_CHURN="#ffb347";
+function numFmt(v,unit){
+  if(v===null||v===undefined||isNaN(v))return"–";
+  const a=Math.abs(v);
+  const s=a>=10000?Math.round(a).toLocaleString():a>=100?a.toLocaleString(undefined,{maximumFractionDigits:0}):a>=10?a.toFixed(1):a.toFixed(2);
+  return (v<0?"-":"")+s+(unit?" "+unit:"");
+}
+function kpiTip(ev,html){
+  const wrap=ev.currentTarget.closest(".kpi-wrap"); if(!wrap)return;
+  const tip=wrap.querySelector(".kpi-tip"); if(!tip)return;
+  tip.innerHTML=html; tip.style.display="block";
+  const r=wrap.getBoundingClientRect();
+  let x=(ev.touches?ev.touches[0].clientX:ev.clientX)-r.left, y=(ev.touches?ev.touches[0].clientY:ev.clientY)-r.top;
+  const tw=tip.offsetWidth, th=tip.offsetHeight;
+  x=Math.max(0,Math.min(x+12,r.width-tw)); y=Math.max(0,y-th-12);
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+function kpiHide(ev){const w=ev.currentTarget.closest(".kpi-wrap");const t=w&&w.querySelector(".kpi-tip");if(t)t.style.display="none";}
+function capexBars(rows,unit,color){
+  // rows: [{label,v,lo,hi,guidance}] — 가이던스는 윤곽선(점선) 막대로 구분, 범위면 lo~hi 라벨
+  const W=Math.max(320,rows.length*72), H=200, padL=6, padR=6, padT=26, padB=22;
+  const vals=rows.map(r=>r.v!=null?r.v:(r.hi!=null?r.hi:null)).filter(v=>v!==null&&!isNaN(v));
+  if(!vals.length) return `<div class="empty" style="padding:8px 0">데이터 없음</div>`;
+  const max=Math.max(...vals)*1.02, y=v=>padT+(max-v)/max*(H-padT-padB), y0=y(0);
+  const bw=Math.min(28,Math.floor((W-padL-padR)/rows.length)-16);
+  let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block" role="img">`;
+  s+=`<line x1="${padL}" x2="${W-padR}" y1="${y0}" y2="${y0}" stroke="rgba(150,170,215,.18)"/>`;
+  rows.forEach((r,i)=>{
+    const cx=padL+(W-padL-padR)*(i+0.5)/rows.length, x=cx-bw/2;
+    const v=r.v!=null?r.v:(r.lo!=null&&r.hi!=null?(r.lo+r.hi)/2:null);
+    if(v!==null&&!isNaN(v)){
+      const top=y(v), h=Math.max(2,y0-top), rx=4;
+      const d=`M${x},${top+rx} a${rx},${rx} 0 0 1 ${rx},-${rx} h${bw-2*rx} a${rx},${rx} 0 0 1 ${rx},${rx} v${h-rx} h${-bw} z`;
+      const lbl=r.guidance&&r.lo!=null&&r.hi!=null?`${numFmt(r.lo)}~${numFmt(r.hi)}`:numFmt(v);
+      const tip=`${esc(r.label)}<br><b>${lbl} ${esc(unit)}</b>${r.guidance?" · 가이던스":""}`.replace(/"/g,"&quot;");
+      if(r.guidance){
+        s+=`<path d="${d}" fill="${color}" fill-opacity=".18" stroke="${color}" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+        if(r.lo!=null&&r.hi!=null&&r.hi>r.lo) s+=`<line x1="${cx}" x2="${cx}" y1="${y(r.hi)}" y2="${y(r.lo)}" stroke="${color}" stroke-width="2"/><line x1="${cx-5}" x2="${cx+5}" y1="${y(r.hi)}" y2="${y(r.hi)}" stroke="${color}" stroke-width="2"/><line x1="${cx-5}" x2="${cx+5}" y1="${y(r.lo)}" y2="${y(r.lo)}" stroke="${color}" stroke-width="2"/>`;
+      }else s+=`<path d="${d}" fill="${color}"/>`;
+      s+=`<text x="${cx}" y="${(r.guidance&&r.hi!=null?y(r.hi):top)-6}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#e7ecf7">${lbl}</text>`;
+      s+=`<rect x="${cx-(W-padL-padR)/rows.length/2}" y="${padT-10}" width="${(W-padL-padR)/rows.length}" height="${H-padT+10-padB}" fill="transparent" onmousemove="kpiTip(event,'${tip.replace(/'/g,"\\'")}')" onmouseleave="kpiHide(event)" ontouchstart="kpiTip(event,'${tip.replace(/'/g,"\\'")}')"/>`;
+    }
+    s+=`<text x="${cx}" y="${H-6}" text-anchor="middle" font-size="10.5" fill="${r.guidance?"#c7d4f2":"#8e9bb8"}" font-weight="${r.guidance?700:400}">${esc(shortLabel(r.label))}</text>`;
+  });
+  return s+`</svg>`;
+}
+function lineChart(rows,unit,color,decimals){
+  // rows: [{label,v}] — 단일 계열 선 차트, 호버 크로스헤어+툴팁, 첫/마지막/최대/최소만 직접 라벨
+  const pts=rows.map((r,i)=>({...r,i})).filter(r=>r.v!==null&&r.v!==undefined&&!isNaN(r.v));
+  if(pts.length<2) return `<div class="empty" style="padding:8px 0">데이터 부족</div>`;
+  const W=Math.max(320,rows.length*52), H=170, padL=8, padR=8, padT=22, padB=24;
+  const vals=pts.map(p=>p.v); let lo=Math.min(...vals), hi=Math.max(...vals); const pad=(hi-lo)||Math.abs(hi)||1; lo-=pad*.25; hi+=pad*.25;
+  const X=i=>padL+(W-padL-padR)*(rows.length===1?.5:i/(rows.length-1)), Y=v=>padT+(hi-v)/(hi-lo)*(H-padT-padB);
+  const f=v=>v.toFixed(decimals);
+  let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block;overflow:visible" role="img">`;
+  [0,.5,1].forEach(t=>{const v=lo+(hi-lo)*t; s+=`<line x1="${padL}" x2="${W-padR}" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(150,170,215,.14)"/>`;});
+  s+=`<path d="${pts.map((p,k)=>(k?"L":"M")+X(p.i)+","+Y(p.v)).join(" ")}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  const iMax=pts.reduce((m,p)=>p.v>m.v?p:m,pts[0]), iMin=pts.reduce((m,p)=>p.v<m.v?p:m,pts[0]);
+  const labelSet=new Set([pts[0].i,pts[pts.length-1].i,iMax.i,iMin.i]);
+  pts.forEach(p=>{
+    s+=`<circle cx="${X(p.i)}" cy="${Y(p.v)}" r="3.5" fill="${color}" stroke="#141d33" stroke-width="2"/>`;
+    if(labelSet.has(p.i)) s+=`<text x="${X(p.i)}" y="${p.i===iMin.i&&p.i!==iMax.i?Y(p.v)+14:Y(p.v)-8}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#e7ecf7">${f(p.v)}</text>`;
+  });
+  rows.forEach((r,i)=>{
+    const every=rows.length>8?2:1;
+    if(i%every===0||i===rows.length-1) s+=`<text x="${X(i)}" y="${H-6}" text-anchor="middle" font-size="10" fill="#8e9bb8">${esc(shortLabel(r.label))}</text>`;
+    const v=r.v, tip=(v===null||v===undefined||isNaN(v))?`${esc(r.label)}<br>미공시`:`${esc(r.label)}<br><b>${f(v)} ${esc(unit)}</b>`;
+    const w=(W-padL-padR)/Math.max(1,rows.length-1);
+    s+=`<rect x="${X(i)-w/2}" y="${padT-10}" width="${w}" height="${H-padT+10-padB}" fill="transparent" onmousemove="kpiTip(event,'${tip.replace(/'/g,"\\'")}')" onmouseleave="kpiHide(event)" ontouchstart="kpiTip(event,'${tip.replace(/'/g,"\\'")}')"/>`;
+  });
+  return s+`</svg>`;
+}
+function kpiBlock(c){
+  const f=FIN.companies?FIN.companies[c]:null; const k=f&&f.kpi; if(!k)return"";
+  let body="";
+  const hasQ=!!(k.capex_quarterly&&k.capex_quarterly.length), hasA=!!(k.capex_annual&&k.capex_annual.length);
+  if(hasA||hasQ){
+    const cv=(kpiCapexView==="quarterly"&&!hasQ)?"annual":kpiCapexView;
+    const rows=cv==="quarterly"?k.capex_quarterly:k.capex_annual;
+    const guide=(k.capex_annual||[]).find(r=>r.guidance);
+    body+=`<div class="kpi-h">CAPEX <span>${esc(k.capex_unit||"")}${guide?" · 점선 막대 = 회사 가이던스":""}</span></div>`;
+    body+=`<div class="ctrl">`+[["annual","연간 5년"+(guide?"+가이던스":"")],["quarterly","분기"]].filter(([x])=>x!=="quarterly"||hasQ)
+      .map(([x,lb])=>`<div class="rchip${x===cv?" on":""}" onclick="setKpiCapex('${x}')">${lb}</div>`).join("")+`</div>`;
+    if(k.capex_def) body+=`<div class="kpi-def">${esc(k.capex_def)}</div>`;
+    body+=`<div class="kpi-wrap">${capexBars(rows,k.capex_unit||"",C_CAPEX)}<div class="kpi-tip"></div></div>`;
+  }
+  if(k.arpu_quarterly&&k.arpu_quarterly.length){
+    const last=[...k.arpu_quarterly].reverse().find(r=>r.v!=null);
+    const dec=(k.arpu_unit||"").includes("USD")?2:0;
+    body+=`<div class="kpi-h">ARPU <span>${esc(k.arpu_unit||"")} · 최근 ${last?esc(last.label)+" "+Number(last.v).toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec}):""}</span></div>`;
+    if(k.arpu_def) body+=`<div class="kpi-def">${esc(k.arpu_def)}</div>`;
+    body+=`<div class="kpi-wrap">${lineChart(k.arpu_quarterly,k.arpu_unit||"",C_ARPU,dec)}<div class="kpi-tip"></div></div>`;
+  }
+  if(k.churn_quarterly&&k.churn_quarterly.length){
+    const last=[...k.churn_quarterly].reverse().find(r=>r.v!=null);
+    body+=`<div class="kpi-h">해지율 (Churn) <span>%/월 · 최근 ${last?esc(last.label)+" "+last.v.toFixed(2)+"%":""}</span></div>`;
+    if(k.churn_def) body+=`<div class="kpi-def">${esc(k.churn_def)}</div>`;
+    body+=`<div class="kpi-wrap">${lineChart(k.churn_quarterly,"%",C_CHURN,2)}<div class="kpi-tip"></div></div>`;
+  }
+  if(!body)return"";
+  const srcs=(k.sources||[]).map(x=>`<a href="${esc(x.url)}" target="_blank" rel="noopener" style="color:var(--sub)">${esc(x.label)}</a>`).join(" · ");
+  body+=`<div class="fin-note">${esc(k.note||"")}${srcs?" · 출처: "+srcs:""}</div>`;
+  return `<div class="block"><div class="blk-hd"><h3>통신 KPI <span style="font-size:11px;color:var(--sub);font-weight:600">현지통화</span></h3><span class="cnt">회사 IR 공시 기준</span></div><div class="blk-body">${body}</div></div>`;
+}
 function finBlock(c){
   const f=FIN.companies?FIN.companies[c]:null;
   if(!f)return"";
@@ -280,6 +394,7 @@ function render(){
 
   /* ── 재무 실적 (첫 블록, 좌측 열) ── */
   h+=finBlock(cur);
+  h+=kpiBlock(cur);
 
   /* ── 현황 요약 (최신순) ── */
   const d90=all.filter(a=>daysAgo(a.date)<=90);
