@@ -1114,6 +1114,21 @@ def main():
         print("경고: company 자리표시자를 찾지 못해 head에 강제 주입")
     open("docs/company.html","w",encoding="utf-8").write(cout)
     print("완료 -> docs/company.html 생성")
+    # ── 글로벌 벤더 맵 페이지 생성 (정적 데이터 vendor_map.json 주입) ──
+    vmap = {"countries": []}
+    if os.path.exists("vendor_map.json"):
+        try: vmap = json.loads(open("vendor_map.json", encoding="utf-8").read())
+        except Exception: print("경고: vendor_map.json 파싱 실패")
+    if os.path.exists("dashboard_vendors.html"):
+        vjs = ("const VENDOR_MAP = " + json.dumps(vmap, ensure_ascii=False) + ";\n").replace("</", "<\\/")
+        vjs = vjs.replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
+        vinj = "<script>\n" + vjs + "</script>"
+        vtpl = open("dashboard_vendors.html", encoding="utf-8").read()
+        vout, vn = re.subn(r'<script\s+src=["\']news_data\.js["\']\s*>\s*</script>', lambda m: vinj, vtpl, count=1)
+        if vn == 0:
+            vout = vtpl.replace("</head>", vinj + "\n</head>", 1) if "</head>" in vtpl else vinj + vtpl
+        open("docs/vendors.html","w",encoding="utf-8").write(vout)
+        print("완료 -> docs/vendors.html 생성")
 
 if __name__ == "__main__":
     main()
