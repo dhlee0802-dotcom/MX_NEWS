@@ -183,7 +183,7 @@ function finCharts(rows,opName){
     `</div>`;
 }
 function shortLabel(l){
-  return String(l).replace(/^FY20(\d\d)$/,"FY$1").replace(/^20(\d\d)\s*Q(\d)$/,"$1Q$2").replace(/^20(\d\d)\s*H(\d)$/,"$1H$2");
+  return String(l).replace(/\s*\([^)]*\)/g,"").replace(/^FY20(\d\d)/,"FY$1").replace(/^20(\d\d)\s*Q(\d)$/,"$1Q$2").replace(/^20(\d\d)\s*H(\d)$/,"$1H$2").replace(/ 가이던스$/," 가이던스");
 }
 function segSection(f){
   // 세그먼트별 연간/분기 비교: 세그먼트마다 자체 축의 미니 막대차트 (매출끼리 비교)
