@@ -46,6 +46,7 @@
   .mapbox .c.has:hover{filter:brightness(1.25)}
   .mapbox .c.sel{stroke:#fff;stroke-width:1.2}
   .mapbox.zoomed .c:not(.sel){opacity:.45}
+  .mapbox.zoomed .legend{display:none}
   .maptip{position:absolute;z-index:5;background:#223052;color:#fff;border:1px solid var(--line2);border-radius:10px;padding:9px 12px;font-size:12px;box-shadow:0 6px 20px rgba(0,0,0,.55);display:none;pointer-events:none;max-width:320px}
   .maptip .t{font-weight:800;font-size:13px;margin-bottom:4px}
   .maptip .r{display:flex;gap:6px;align-items:baseline;margin:2px 0;flex-wrap:wrap}
@@ -140,8 +141,8 @@ let selIso=null, vendorFilter=null;
 function leadVendor(c){
   const score={};
   c.carriers.forEach(k=>{
-    const sh=(k.share||[]).filter(s=>s.pct!=null);
-    if(sh.length){sh.forEach(s=>{const b=vbase(s.vendor);score[b]=(score[b]||0)+s.pct;});}
+    let sh=(k.share||[]).filter(s=>s.pct!=null);
+    if(sh.length){const latest=sh.map(s=>s.asof||"").sort().pop(); sh=sh.filter(s=>(s.asof||"")===latest); sh.forEach(s=>{const b=vbase(s.vendor);score[b]=(score[b]||0)+s.pct;});}
     else{((k.ran||{})["5g"]||[]).filter(v=>!/종료/.test(v)).forEach((v,i)=>{const b=vbase(v);score[b]=(score[b]||0)+(10-i);});}
   });
   let best=null;for(const v in score){if(!best||score[v]>score[best])best=v;}return best;
@@ -222,13 +223,17 @@ document.getElementById("map").addEventListener("click",()=>{if(selIso)selectCou
 /* 상세 패널 */
 const GEN_LABEL={"2g":"2G","3g":"3G","4g":"4G LTE","5g":"5G"}, CORE_LABEL={"epc":"4G EPC","5gc":"5G Core","ims":"IMS·음성"};
 function shareBar(sh){
+  // 같은 기준·시점끼리 한 막대로 묶고, 최신 시점부터 최대 3개 표시
   const rows=sh.filter(s=>s.pct!=null); if(!rows.length)return"";
-  const tot=rows.reduce((a,s)=>a+s.pct,0); const scale=tot>100?100/tot:1;
-  const basis=[...new Set(rows.map(s=>`${s.basis||""}${s.asof?" · "+s.asof:""}${s.type==="estimate"?" · 추정":s.type==="official"?" · 공식":""}`))].join(" / ");
-  const src=rows.find(s=>s.source);
-  return `<div class="share">${rows.map(s=>`<div style="--c:${vcol(s.vendor)};width:${s.pct*scale}%" title="${esc(s.vendor)} ${s.pct}%"></div>`).join("")}${tot<100?`<div style="--c:#2a3651;width:${100-tot}%" title="기타/미확인 ${100-tot}%"></div>`:""}</div>
-    <div class="share-lg">${rows.map(s=>`<span style="--c:${vcol(s.vendor)}">${esc(vbase(s.vendor))} <b>${s.pct}%</b>${s.sites?` <span style="color:var(--dim)">(${Number(s.sites).toLocaleString()} 사이트)</span>`:""}</span>`).join("")}${tot<100?`<span style="--c:#2a3651">기타/미확인 ${Math.round((100-tot)*10)/10}%</span>`:""}</div>
-    <div class="basis">${esc(basis)}${src?` <a class="sl" href="${esc(src.source)}" target="_blank" rel="noopener">근거 ↗</a>`:""}</div>`;
+  const groups={}; rows.forEach(s=>{const k=(s.asof||"")+"|"+(s.basis||"");(groups[k]=groups[k]||[]).push(s);});
+  const keys=Object.keys(groups).sort((a,b)=>b.localeCompare(a)).slice(0,3);
+  return keys.map(k=>{
+    const g=groups[k]; const tot=g.reduce((a,s)=>a+s.pct,0); const scale=tot>100?100/tot:1;
+    const s0=g[0]; const src=g.find(s=>s.source);
+    return `<div style="margin-bottom:10px"><div class="basis" style="margin:0 0 4px">${esc(s0.asof||"")}${s0.basis?" · "+esc(s0.basis):""}${s0.type==="estimate"?" · 추정":s0.type==="official"?" · 공식":""}${src?` <a class="sl" href="${esc(src.source)}" target="_blank" rel="noopener">근거 ↗</a>`:""}</div>
+    <div class="share">${g.map(s=>`<div style="--c:${vcol(s.vendor)};width:${s.pct*scale}%" title="${esc(s.vendor)} ${s.pct}%"></div>`).join("")}${tot<100?`<div style="--c:#2a3651;width:${100-tot}%" title="기타/미확인 ${Math.round((100-tot)*10)/10}%"></div>`:""}</div>
+    <div class="share-lg">${g.map(s=>`<span style="--c:${vcol(s.vendor)}">${esc(vbase(s.vendor))} <b>${s.pct}%</b>${s.sites?` <span style="color:var(--dim)">(${Number(s.sites).toLocaleString()} 사이트)</span>`:""}</span>`).join("")}${tot<100?`<span style="--c:#2a3651">기타/미확인 ${Math.round((100-tot)*10)/10}%</span>`:""}</div></div>`;
+  }).join("");
 }
 function carrierCard(k,i){
   const gens=["2g","3g","4g","5g"].filter(g=>(k.ran||{})[g]&&k.ran[g].length);
