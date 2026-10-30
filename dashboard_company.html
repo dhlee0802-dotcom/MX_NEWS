@@ -170,7 +170,7 @@ function barPanel(rows,title,color){
       s+=`<path d="${d}" fill="${color}"><title>${esc(r.label)} · ${usdFmt(v)}</title></path>`;
       s+=`<text x="${cx}" y="${up?top-5:top+h+11}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#e7ecf7">${usdFmt(v)}</text>`;
     }
-    s+=`<text x="${cx}" y="${H-6}" text-anchor="middle" font-size="11" fill="#8e9bb8">${esc(r.label)}</text>`;
+    s+=`<text x="${cx}" y="${H-6}" text-anchor="middle" font-size="11" fill="#8e9bb8">${esc(shortLabel(r.label))}</text>`;
   });
   s+=`</svg>`;
   return `<div style="flex:1;min-width:270px"><div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:2px"><span class="sw" style="background:${color}"></span>${esc(title)}</div>${s}</div>`;
@@ -268,6 +268,7 @@ function capexBars(rows,unit,color){
       s+=`<text x="${cx}" y="${(r.guidance&&r.hi!=null?y(r.hi):top)-6}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#e7ecf7">${lbl}</text>`;
       s+=`<rect x="${cx-(W-padL-padR)/rows.length/2}" y="${padT-10}" width="${(W-padL-padR)/rows.length}" height="${H-padT+10-padB}" fill="transparent" onmousemove="kpiTip(event,'${tip.replace(/'/g,"\\'")}')" onmouseleave="kpiHide(event)" ontouchstart="kpiTip(event,'${tip.replace(/'/g,"\\'")}')"/>`;
     }
+    else s+=`<text x="${cx}" y="${y0-8}" text-anchor="middle" font-size="10" fill="#5f6c8a">미공시</text>`;
     s+=`<text x="${cx}" y="${H-6}" text-anchor="middle" font-size="10.5" fill="${r.guidance?"#c7d4f2":"#8e9bb8"}" font-weight="${r.guidance?700:400}">${esc(shortLabel(r.label))}</text>`;
   });
   return s+`</svg>`;
@@ -309,25 +310,25 @@ function kpiBlock(c){
     body+=`<div class="kpi-h">CAPEX <span>${esc(k.capex_unit||"")}${guide?" · 점선 막대 = 회사 가이던스":""}</span></div>`;
     body+=`<div class="ctrl">`+[["annual","연간 5년"+(guide?"+가이던스":"")],["quarterly","분기"]].filter(([x])=>x!=="quarterly"||hasQ)
       .map(([x,lb])=>`<div class="rchip${x===cv?" on":""}" onclick="setKpiCapex('${x}')">${lb}</div>`).join("")+`</div>`;
-    if(k.capex_def) body+=`<div class="kpi-def">${esc(k.capex_def)}</div>`;
+    if(k.capex_def) body+=`<div class="kpi-def" title="${esc(k.capex_def)}">${esc(k.capex_def.length>90?k.capex_def.slice(0,89)+"…":k.capex_def)}</div>`;
     body+=`<div class="kpi-wrap">${capexBars(rows,k.capex_unit||"",C_CAPEX)}<div class="kpi-tip"></div></div>`;
   }
   if(k.arpu_quarterly&&k.arpu_quarterly.length){
     const last=[...k.arpu_quarterly].reverse().find(r=>r.v!=null);
     const dec=(k.arpu_unit||"").includes("USD")?2:0;
     body+=`<div class="kpi-h">ARPU <span>${esc(k.arpu_unit||"")} · 최근 ${last?esc(last.label)+" "+Number(last.v).toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec}):""}</span></div>`;
-    if(k.arpu_def) body+=`<div class="kpi-def">${esc(k.arpu_def)}</div>`;
+    if(k.arpu_def) body+=`<div class="kpi-def" title="${esc(k.arpu_def)}">${esc(k.arpu_def.length>90?k.arpu_def.slice(0,89)+"…":k.arpu_def)}</div>`;
     body+=`<div class="kpi-wrap">${lineChart(k.arpu_quarterly,k.arpu_unit||"",C_ARPU,dec)}<div class="kpi-tip"></div></div>`;
   }
   if(k.churn_quarterly&&k.churn_quarterly.length){
     const last=[...k.churn_quarterly].reverse().find(r=>r.v!=null);
     body+=`<div class="kpi-h">해지율 (Churn) <span>%/월 · 최근 ${last?esc(last.label)+" "+last.v.toFixed(2)+"%":""}</span></div>`;
-    if(k.churn_def) body+=`<div class="kpi-def">${esc(k.churn_def)}</div>`;
+    if(k.churn_def) body+=`<div class="kpi-def" title="${esc(k.churn_def)}">${esc(k.churn_def.length>90?k.churn_def.slice(0,89)+"…":k.churn_def)}</div>`;
     body+=`<div class="kpi-wrap">${lineChart(k.churn_quarterly,"%",C_CHURN,2)}<div class="kpi-tip"></div></div>`;
   }
   if(!body)return"";
   const srcs=(k.sources||[]).map(x=>`<a href="${esc(x.url)}" target="_blank" rel="noopener" style="color:var(--sub)">${esc(x.label)}</a>`).join(" · ");
-  body+=`<div class="fin-note">${esc(k.note||"")}${srcs?" · 출처: "+srcs:""}</div>`;
+  body+=`<details class="fin-note" style="margin-top:10px"><summary style="cursor:pointer;color:var(--sub)">정의 변경·산출 방식·출처 보기</summary><div style="margin-top:6px;line-height:1.6">${esc(k.note||"")}${srcs?"<br>출처: "+srcs:""}</div></details>`;
   return `<div class="block"><div class="blk-hd"><h3>통신 KPI <span style="font-size:11px;color:var(--sub);font-weight:600">현지통화</span></h3><span class="cnt">회사 IR 공시 기준</span></div><div class="blk-body">${body}</div></div>`;
 }
 function finBlock(c){

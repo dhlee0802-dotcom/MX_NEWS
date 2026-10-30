@@ -1,1 +1,3792 @@
-{"fx_date": "2026-10-02", "fx_note": "FRED H.10 기준 환산", "mult": {"SEK": 0.099317, "EUR": 1.1259, "CNY": 0.149169, "JPY": 0.006337, "USD": 1, "INR": 0.010383, "KRW_B": 0.74308}, "companies": {"에릭슨": {"company": "에릭슨", "currency": "SEK", "op_metric": "조정 EBIT(구조조정비용 제외)", "annual": [{"label": "FY2023", "revenue": 263351, "op": -13805}, {"label": "FY2024", "revenue": 247880, "op": 9325}, {"label": "FY2025", "revenue": 236681, "op": 40971}], "quarterly": [{"label": "2025 Q3", "revenue": 56239, "op": 15454}, {"label": "2025 Q4", "revenue": 69285, "op": 12258}, {"label": "2026 Q1", "revenue": 49332, "op": 5211}, {"label": "2026 Q2", "revenue": 52691, "op": 6520}], "segments": {"label": "FY2025", "items": [{"name": "Networks", "revenue": 151000}, {"name": "Cloud Software and Services", "revenue": 62700}, {"name": "Enterprise", "revenue": 21100}, {"name": "Other", "revenue": 1800}]}, "source": "Ericsson Q4/FY2025 보고서(2026-01 공시, cision PDF), Q2 2026 실적 보도자료(2026-07), FY2023·FY2024 실적 보도자료", "url": "https://news.cision.com/ericsson/r/ericsson-reports-fourth-quarter-results-and-full-year-results-2025,c4296598", "note": "조정 EBIT는 구조조정비용 제외 기준이며 손상차손은 포함: FY2023 -13,805에는 Vonage 영업권 손상 31.9십억 SEK 포함(손상까지 제외 시 18,093), FY2024 9,325에는 무형자산 손상 15.3십억 SEK 포함(손상 제외 시 24,658). 보고 기준 EBIT: FY2023 -20,326 / FY2024 4,313 / FY2025 38,634; 분기 보고 EBIT: 25Q3 15,151 / 25Q4 11,161 / 26Q1 1,443 / 26Q2 5,919. FY2025 Enterprise EBIT에 iconectiv 매각차익 7.6십억 SEK 포함. 세그먼트 매출은 보고서상 십억 SEK 1자리 반올림 수치를 백만 단위 환산(합계 236.7십억).", "segments_annual": [{"label": "FY2023", "items": [{"name": "Networks", "revenue": 171400}, {"name": "Cloud Software and Services", "revenue": 63600}, {"name": "Enterprise", "revenue": 25700}, {"name": "Other", "revenue": 2500}]}, {"label": "FY2024", "items": [{"name": "Networks", "revenue": 158207}, {"name": "Cloud Software and Services", "revenue": 62635}, {"name": "Enterprise", "revenue": 24863}, {"name": "Other", "revenue": 2175}]}, {"label": "FY2025", "items": [{"name": "Networks", "revenue": 151014}, {"name": "Cloud Software and Services", "revenue": 62715}, {"name": "Enterprise", "revenue": 21117}, {"name": "Other", "revenue": 1835}]}], "segments_quarterly": [{"label": "2025 Q3", "items": [{"name": "Networks", "revenue": 35424}, {"name": "Cloud Software and Services", "revenue": 15346}, {"name": "Enterprise", "revenue": 5058}, {"name": "Other", "revenue": 411}]}, {"label": "2025 Q4", "items": [{"name": "Networks", "revenue": 44200}, {"name": "Cloud Software and Services", "revenue": 20031}, {"name": "Enterprise", "revenue": 4578}, {"name": "Other", "revenue": 476}]}, {"label": "2026 Q1", "items": [{"name": "Networks", "revenue": 32937}, {"name": "Cloud Software and Services", "revenue": 11833}, {"name": "Enterprise", "revenue": 4168}, {"name": "Other", "revenue": 393}]}, {"label": "2026 Q2", "items": [{"name": "Networks", "revenue": 33047}, {"name": "Cloud Software and Services", "revenue": 14732}, {"name": "Enterprise", "revenue": 4490}, {"name": "Other", "revenue": 422}]}], "seg_note": "단위: SEK 백만. FY2024·FY2025 및 분기 수치는 보고서 Note 2의 정확한 백만 단위 수치. FY2023은 2024년 중 조직개편(Enterprise Wireless Solutions의 Networks 편입 등)을 반영해 재작성된 비교치로, Q4 2024 보고서에 10억"}, "노키아": {"company": "노키아", "currency": "EUR", "op_metric": "비교(comparable) 영업이익", "annual": [{"label": "FY2023", "revenue": 22258, "op": 2375}, {"label": "FY2024", "revenue": 19220, "op": 2584}, {"label": "FY2025", "revenue": 19889, "op": 2024}], "quarterly": [{"label": "2025 Q3", "revenue": 4828, "op": 435}, {"label": "2025 Q4", "revenue": 6125, "op": 1058}, {"label": "2026 Q1", "revenue": 4433, "op": 301}, {"label": "2026 Q2", "revenue": 4815, "op": 434}], "segments": {"label": "FY2025", "items": [{"name": "Network Infrastructure", "revenue": 7986}, {"name": "Mobile Networks", "revenue": 7806}, {"name": "Cloud and Network Services", "revenue": 2606}, {"name": "Nokia Technologies", "revenue": 1501}, {"name": "Group Common and Other", "revenue": 17}]}, "source": "Nokia Q4/FY2025 재무보고서(2026-01 공시, Note 2 세그먼트), Q2·반기 2026 보고서(2026-07), Q3 2025 중간보고서, Q4/FY2023 재무보고서", "url": "https://www.nokia.com/newsroom/nokia-corporation-financial-report-for-q4-2025-and-full-year-2025/", "note": "비교(comparable) 기준 영업이익. 보고 기준 영업이익: FY2023 1,688 / FY2024 1,970 / FY2025 885 / 25Q3 239 / 25Q4 540 / 26Q2 -50. FY2024는 벤처펀드 손익 재분류 반영 수치. 2026 Q1은 Q2 2026 보고서의 상반기 수치(매출 9,248, 비교 영업이익 735)에서 Q2를 차감해 산출한 계속영업 기준. 2026년 2분기부터 FWA CPE·Enterprise Campus Edge 사업은 중단영업으로 재분류, 세그먼트도 Network Infrastructure/Mobile Infrastructure/Portfolio Businesses 체계로 개편(FY2025 세그먼트는 구 체계 기준). FY2025 Network Infrastructure에는 2025-02-28 종결된 Infinera 인수 효과 포함.", "segments_annual": [{"label": "FY2023", "items": [{"name": "Network Infrastructure", "revenue": 6917}, {"name": "Mobile Networks", "revenue": 9797}, {"name": "Cloud and Network Services", "revenue": 3220}, {"name": "Nokia Technologies", "revenue": 1085}, {"name": "Group Common and Other", "revenue": 130}]}, {"label": "FY2024", "items": [{"name": "Network Infrastructure", "revenue": 6518}, {"name": "Mobile Networks", "revenue": 8158}, {"name": "Cloud and Network Services", "revenue": 2589}, {"name": "Nokia Technologies", "revenue": 1928}, {"name": "Group Common and Other", "revenue": 34}]}, {"label": "FY2025", "items": [{"name": "Network Infrastructure", "revenue": 7986}, {"name": "Mobile Networks", "revenue": 7806}, {"name": "Cloud and Network Services", "revenue": 2606}, {"name": "Nokia Technologies", "revenue": 1501}, {"name": "Group Common and Other", "revenue": 17}]}], "segments_quarterly": [{"label": "2025 Q3", "items": [{"name": "Network Infrastructure", "revenue": 1850}, {"name": "Mobile Infrastructure", "revenue": 2755}, {"name": "Portfolio Businesses", "revenue": 97}]}, {"label": "2025 Q4", "items": [{"name": "Network Infrastructure", "revenue": 2332}, {"name": "Mobile Infrastructure", "revenue": 3579}, {"name": "Portfolio Businesses", "revenue": 113}]}, {"label": "2026 Q1", "items": [{"name": "Network Infrastructure", "revenue": 1829}, {"name": "Mobile Infrastructure", "revenue": 2503}, {"name": "Portfolio Businesses", "revenue": 100}]}, {"label": "2026 Q2", "items": [{"name": "Network Infrastructure", "revenue": 2037}, {"name": "Mobile Infrastructure", "revenue": 2680}, {"name": "Portfolio Businesses", "revenue": 94}]}], "seg_note": "단위: EUR 백만. [연간] 구(舊) 4개 사업그룹 체계 기준. FY2025·FY2024는 Q4 2025 보고서 기준(FY2024는 Managed Services의 CNS→Mobile Networks 이관을 소급 반영한 recast치; 당초 공시치는 MN 7,725/CNS 3,022)"}, "화웨이": {"company": "화웨이", "currency": "CNY", "op_metric": "net_profit (화웨이는 분기/반기 영업이익을 공시하지 않아 순이익 사용. 참고: FY2025 영업이익은 96,900 별도 공시, +22.1%)", "annual": [{"label": "FY2023", "revenue": 704200, "op": 87000}, {"label": "FY2024", "revenue": 862100, "op": 62600}, {"label": "FY2025", "revenue": 880900, "op": 68000}], "quarterly": [{"label": "2024 H2", "revenue": 444600, "op": 7500}, {"label": "2025 H1", "revenue": 427000, "op": 37000}, {"label": "2025 H2", "revenue": 453900, "op": 31000}, {"label": "2026 H1", "revenue": 467820, "op": 23810}], "segments": {"label": "FY2025", "items": [{"name": "ICT 인프라", "revenue": 375000}, {"name": "단말(컨슈머)", "revenue": 344500}, {"name": "디지털 에너지", "revenue": 77300}, {"name": "지능형 자동차 솔루션", "revenue": 45000}, {"name": "클라우드 컴퓨팅", "revenue": 32100}]}, "source": "Huawei 2025 Annual Report 보도자료(2026-03), Huawei H1 2026 실적 보도(2026-08, telecomlead), Huawei H1 2024/2025 business results, Wallstreetcn 財報見聞(월스트리트견문, 세그먼트)", "url": "https://www.huawei.com/en/news/2026/3/annual-report-2025", "note": "반기 데이터 중 2024 H2·2025 H2는 연간-상반기 차감 산출(derived). 2024 H1 순이익 55,100은 공시 순이익률 13.2%x매출 417,500 기반. 2025 H1 순이익은 '370억 위안(-32%)' 보도 기준. 2026 H1은 매출 467,820/순이익 23,810(-36%) 공시. 세그먼트 중 ICT인프라 375,000은 보도 기준 근사치(총매출의 42.6%, +2.6%), 클라우드는 전년비 -3.5%. 연간 수치는 공시 반올림 값(억 단위).", "segments_annual": [{"label": "FY2023", "items": [{"name": "ICT인프라", "revenue": 352756}, {"name": "단말(컨슈머)", "revenue": 245134}, {"name": "클라우드", "revenue": 35514}, {"name": "디지털에너지", "revenue": 55229}, {"name": "지능형차량솔루션", "revenue": 4588}, {"name": "기타", "revenue": 10953}]}, {"label": "FY2024", "items": [{"name": "ICT인프라", "revenue": 369903}, {"name": "단말(컨슈머)", "revenue": 339006}, {"name": "클라우드", "revenue": 38523}, {"name": "디지털에너지", "revenue": 68678}, {"name": "지능형차량솔루션", "revenue": 26353}, {"name": "기타", "revenue": 19609}]}, {"label": "FY2025", "items": [{"name": "ICT인프라", "revenue": 375014}, {"name": "단말(컨슈머)", "revenue": 344473}, {"name": "클라우드", "revenue": 32161}, {"name": "디지털에너지", "revenue": 77312}, {"name": "지능형차량솔루션", "revenue": 45018}, {"name": "기타", "revenue": 6963}]}], "seg_note": "단위: 백만 CNY. 연간 총매출 FY2023 704,174 / FY2024 862,072 / FY2025 880,941. FY2023 수치는 2024 연차보고서의 재분류(restated) 비교치 기준(2023년 보고서 원수치와 일부 상이: 당시 클라우드 55,290 등). 클라우드는 "}, "zte": {"company": "zte", "currency": "CNY", "op_metric": "net_profit_attributable (모회사 귀속 순이익)", "annual": [{"label": "FY2023", "revenue": 124250, "op": 9330}, {"label": "FY2024", "revenue": 121300, "op": 8420}, {"label": "FY2025", "revenue": 133900, "op": 5620}], "quarterly": [{"label": "2025 Q3", "revenue": 28970, "op": 264}, {"label": "2025 Q4", "revenue": 33380, "op": 300}, {"label": "2026 Q1", "revenue": 35000, "op": 1310}, {"label": "2026 Q2", "revenue": 43025, "op": 1443}], "segments": {"label": "FY2025", "items": [{"name": "캐리어 네트워크(Operator Network)", "revenue": 62860}, {"name": "정부·기업(Government & Enterprise)", "revenue": 37220}, {"name": "컨슈머(Consumer)", "revenue": 33820}]}, "source": "ZTE 공식 실적 보도자료(FY2023/FY2024/FY2025), ZTE Q3 2025 보고(9M 누적 100,520/5,320), ZTE Q1 2026 보고(매출 350억, 순이익 13.1억, -46.6%), ZTE 2026 반기보고서(매출 78,025, 귀속순이익 2,753, -45.6%)", "url": "https://www.zte.com.cn/global/about/news/ZTE-Reports-2025-Revenue-of-RMB-133-90-Billion-Advancing-Full-stack-AI-Capabilities.html", "note": "2025 Q4는 FY2025-9M2025 차감 산출(derived), 2026 Q2는 H1 2026-Q1 2026 차감 산출(derived, Q1 매출은 공시 반올림 350억 기준). 2025 Q3 순이익 264(-87.8%) 공시. FY2025 순이익 5,620(-33.3%), 매출 +10.4%. 정부·기업 부문 FY2025 매출은 전년비 약 2배(컴퓨팅/서버 급성장).", "segments_annual": [{"label": "FY2023", "items": [{"name": "캐리어", "revenue": 82760}, {"name": "정부기업", "revenue": 13580}, {"name": "컨슈머", "revenue": 27910}]}, {"label": "FY2024", "items": [{"name": "캐리어", "revenue": 70330}, {"name": "정부기업", "revenue": 18560}, {"name": "컨슈머", "revenue": 32410}]}, {"label": "FY2025", "items": [{"name": "캐리어", "revenue": 62860}, {"name": "정부기업", "revenue": 37220}, {"name": "컨슈머", "revenue": 33820}]}], "segments_quarterly": [{"label": "2024 H2", "items": [{"name": "캐리어", "revenue": 33030}, {"name": "정부기업", "revenue": 9390}, {"name": "컨슈머", "revenue": 16390}]}, {"label": "2025 H1", "items": [{"name": "캐리어", "revenue": 35060}, {"name": "정부기업", "revenue": 19250}, {"name": "컨슈머", "revenue": 17240}]}, {"label": "2025 H2", "items": [{"name": "캐리어", "revenue": 27800}, {"name": "정부기업", "revenue": 17970}, {"name": "컨슈머", "revenue": 16580}]}, {"label": "2026 H1", "items": [{"name": "캐리어", "revenue": 31770}, {"name": "정부기업", "revenue": 27630}, {"name": "컨슈머", "revenue": 18630}]}], "seg_note": "단위: 백만 CNY(공시가 십억 단위 소수 2자리라 백만 단위는 ±10 수준 반올림 오차 가능). ZTE 부문별 공시는 반기 기준이라 반기로 기재. 2024 H2와 2025 H2는 공시된 연간−상반기 차감 산출값(파생치), 2025 H1(캐리어 35,060/정부기업 19,250/컨슈머 "}, "ast": {"company": "ast", "currency": "USD", "op_metric": "영업이익", "annual": [{"label": "FY2023", "revenue": 0.0, "op": -222.4}, {"label": "FY2024", "revenue": 4.4, "op": -242.8}, {"label": "FY2025", "revenue": 70.9, "op": -287.7}], "quarterly": [{"label": "Q3 FY2025", "revenue": 14.7, "op": -79.7}, {"label": "Q4 FY2025", "revenue": 54.3, "op": -72.3}, {"label": "Q1 FY2026", "revenue": 14.7, "op": -149.4}, {"label": "Q2 FY2026", "revenue": 31.5, "op": -297.6}], "segments": null, "source": "AST SpaceMobile Q4/FY2025 실적 보도자료(2026-03-02) 및 Q2 2026 8-K(Ex-99.1, SEC)", "url": "https://www.sec.gov/Archives/edgar/data/0001780312/000119312526342540/asts-ex99_1.htm", "note": "실적 공시는 영업손실 라인을 별도 표기하지 않아 영업이익 = 총매출 - 총영업비용으로 산출. Q3 FY2025와 Q1 FY2026은 연간/반기/분기 공시치 차감으로 도출(공시 수치 기반 정확 계산). Q2 FY2026 영업비용 급증($329.1M)은 위성 제조 램프업 등 비용 확대 반영 — GAAP 순손실 $230.9M. FY2023 매출 0, FY2022는 $13.8M이었음."}, "스타링크": {"company": "스타링크", "private": true, "currency": "USD", "op_metric": "영업이익", "annual": null, "quarterly": null, "segments": null, "estimates": [{"label": "2023 스타링크 매출(추정, Quilty Space)", "value": 2900, "source": "Via Satellite (2025-01-22)", "url": "https://satellitetoday.com/finance/2025/01/22/quilty-space-issues-estimate-on-spacexs-starlink-2024-revenue-growth"}, {"label": "2024 스타링크 매출(추정, Quilty Space)", "value": 7800, "source": "Via Satellite (2025-01-22)", "url": "https://satellitetoday.com/finance/2025/01/22/quilty-space-issues-estimate-on-spacexs-starlink-2024-revenue-growth"}, {"label": "2024 SpaceX 전사 매출(추정)", "value": 13100, "source": "Motley Fool/Yahoo Finance (2026-01-31)", "url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"}, {"label": "2025 스타링크 매출(추정, Payload Space)", "value": 10400, "source": "Motley Fool/Yahoo Finance (2026-01-31)", "url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"}, {"label": "2025 스타링크 매출(추정)", "value": 11800, "source": "Tesorb — Quilty Space 인용, S-1 공개치로 보도 (2026-04)", "url": "https://tesorb.com/starlink-revenue-forecast-2026-quilty-space/"}, {"label": "2025 SpaceX 전사 매출(추정)", "value": 15000, "source": "Motley Fool/Yahoo Finance (2026-01-31, 약 $15B; New Space Economy 2026-01-06은 ~$15.5B)", "url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"}, {"label": "2026 스타링크 매출 전망(Quilty Space, 2026-04-13 상향)", "value": 20000, "source": "Tesorb — Quilty Space 전망 (기존 $15.9B에서 25% 상향)", "url": "https://tesorb.com/starlink-revenue-forecast-2026-quilty-space/"}, {"label": "2026 SpaceX 전사 매출 전망(Payload Space)", "value": 23800, "source": "Motley Fool/Yahoo Finance (2026-01-31)", "url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"}], "note": "비상장 — 언론·리서치사(Quilty Space, Payload Space) 추정치. 2025년 스타링크 매출 추정은 $10.4B~$11.8B(전사 약 $15B~15.5B)로 소스별 편차 존재. 가입자 추정(Payload): 2024년말 460만 → 2025년말 920만."}, "아마존": {"company": "아마존", "private": true, "currency": "USD", "op_metric": "영업이익", "annual": null, "quarterly": null, "segments": null, "estimates": [{"label": "초기 투자 계획(2020, 아마존 자체)", "value": 10000, "source": "Motley Fool via Nasdaq (2026-04-19)", "url": "https://www.nasdaq.com/articles/amazon-spending-116-billion-compete-spacex"}, {"label": "총 구축비용 추정(Quilty Space, $16.5B~20B의 상단)", "value": 20000, "source": "GeekWire — Quilty Space 시장 분석 (2024-09-11)", "url": "https://www.geekwire.com/2024/market-study-amazon-cost-project-kuiper-satellite-quilty/"}, {"label": "2028~29 증분 매출 전망(Cantor Fitzgerald, $2.5B~5B의 상단)", "value": 5000, "source": "Yahoo Finance — Cantor Fitzgerald Deepak Mathivanan (2025-08-22)", "url": "https://finance.yahoo.com/news/amazon-amzn-stock-gets-280-005600619.html"}, {"label": "Globalstar 인수 금액(2026-04 발표, 약 $10.8B)", "value": 10800, "source": "TIKR (2026 Q1 실적 분석)", "url": "https://www.tikr.com/blog/amazon-q1-2026-beat-hides-its-most-exciting-new-revenue-engine"}, {"label": "장기 매출 시나리오(Quilty Space — 가입자 1억명·ARPU $30 가정 시 연매출)", "value": 36000, "source": "GeekWire — Quilty Space (2024-09-11)", "url": "https://www.geekwire.com/2024/market-study-amazon-cost-project-kuiper-satellite-quilty/"}], "note": "비상장(아마존 사업부) — 별도 재무 공시 없음, 언론·애널리스트 추정치. 2025.11 'Project Kuiper'에서 'Amazon Leo'로 리브랜딩. 2026 Q1 콜에서 Jassy CEO는 '수십억 달러(many-billion-dollar) 매출 사업' 가능성 언급(구체 수치 없음). Leo 위성 제조 관련 비용 2026 Q2 전년比 약 $1B 증가 가이던스. 2026년 상업 서비스 Q3 개시 목표, 위성 241기 배치(목표 3,000기+)."}, "버라이즌": {"company": "버라이즌", "currency": "USD", "op_metric": "operating income", "annual": [{"label": "FY2023", "revenue": 133974, "op": 22877}, {"label": "FY2024", "revenue": 134788, "op": 28686}, {"label": "FY2025", "revenue": 138191, "op": 29259}], "quarterly": [{"label": "3Q25 (2025.7-9)", "revenue": 33821, "op": 8105}, {"label": "4Q25 (2025.10-12)", "revenue": 36381, "op": 5004}, {"label": "1Q26 (2026.1-3)", "revenue": 34440, "op": 8242}, {"label": "2Q26 (2026.4-6)", "revenue": 34253, "op": 7179}], "segments": {"label": "FY2025 세그먼트 매출 (total operating revenues)", "items": [{"name": "Consumer", "revenue": 106807}, {"name": "Business", "revenue": 29069}]}, "source": "Verizon 8-K earnings exhibits (SEC EDGAR)", "url": "https://www.sec.gov/Archives/edgar/data/732712/000073271226000003/a2025q4exhibit99.htm", "note": "역년(1-12월) 회계연도. FY2023-2024는 4Q24 exhibit, FY2025·4Q25·세그먼트는 4Q25 exhibit, 3Q25는 3Q25 exhibit, 1Q26·2Q26은 2026년 분기 exhibit 기준(1Q26은 2Q26 exhibit의 6개월 누계-2Q 차감과 1Q26 exhibit 공시 일치 확인). FY2025 세그먼트 외 잔여분은 Corporate and other.", "segments_annual": [{"label": "FY2023", "items": [{"name": "Consumer(컨슈머)", "revenue": 101626}, {"name": "Business(법인)", "revenue": 30122}]}, {"label": "FY2024", "items": [{"name": "Consumer(컨슈머)", "revenue": 102904}, {"name": "Business(법인)", "revenue": 29531}]}, {"label": "FY2025", "items": [{"name": "Consumer(컨슈머)", "revenue": 106807}, {"name": "Business(법인)", "revenue": 29069}]}], "segments_quarterly": [{"label": "2025Q3(7-9월)", "items": [{"name": "Consumer(컨슈머)", "revenue": 26105}, {"name": "Business(법인)", "revenue": 7142}]}, {"label": "2025Q4(10-12월)", "items": [{"name": "Consumer(컨슈머)", "revenue": 28436}, {"name": "Business(법인)", "revenue": 7366}]}, {"label": "2026Q1(1-3월)", "items": [{"name": "Consumer(컨슈머)", "revenue": 26453}, {"name": "Business(법인)", "revenue": 7130}]}, {"label": "2026Q2(4-6월)", "items": [{"name": "Consumer(컨슈머)", "revenue": 26242}, {"name": "Business(법인)", "revenue": 7155}]}], "seg_note": "회계연도=역년(1-12월), 단위 백만 USD, 세그먼트 총영업수익 기준. FY2023·FY2024는 2024년 세그먼트 재편(recast) 반영치(4Q2024 Exhibit 99). 분기 중 2025Q4는 FY2025 연간(10-K)에서 9개월 누적(3Q2025 Exhibit 99) "}, "kddi": {"company": "kddi", "currency": "JPY", "op_metric": "operating income (IFRS 영업이익)", "annual": [{"label": "FY2023 (2024.3월기)", "revenue": 5754047, "op": 961584}, {"label": "FY2024 (2025.3월기)", "revenue": 5835525, "op": 1087468}, {"label": "FY2025 (2026.3월기)", "revenue": 6071915, "op": 1099125}], "quarterly": [{"label": "FY25 2Q (2025.7-9)", "revenue": 1547427, "op": 317683}, {"label": "FY25 3Q (2025.10-12)", "revenue": 1508635, "op": 279537}, {"label": "FY25 4Q (2026.1-3)", "revenue": 1600119, "op": 242432}, {"label": "FY26 1Q (2026.4-6)", "revenue": 1487316, "op": 314248}], "segments": {"label": "2026.3월기 세그먼트 매출 (operating revenue)", "items": [{"name": "퍼스널 (Personal Services)", "revenue": 4812737}, {"name": "비즈니스 (Business Services)", "revenue": 1527914}]}, "source": "KDDI 결산단신 (Financial Statements Summary, IFRS)", "url": "https://newsroom.kddi.com/english/ir-news/detail/kddi_ir-1148_4476.html", "note": "일본 회계연도(4월-익년 3월). FY2024(2025.3월기)는 자회사 가공거래(架空取引, 가공거래) 정정 반영 후 수치(2026.3월기 결산단신 비교치, 정정 전 원공시는 매출 5,917,953 / 영업이익 1,118,674). FY2023(2024.3월기)은 2025.5월 결산단신의 정정 전 공시 수치. 분기값은 누적 공시(1Q·상반기·9개월·연간) 차감으로 산출, FY26 1Q는 2027.3월기 1Q 결산단신 직접 공시. 2026.4-6월기부터 세그먼트가 Telecom Core/Personal Growth/Business Growth로 개편(1Q: 1,083,671/280,820/165,152).", "segments_annual": [{"label": "2024.3월기", "items": [{"name": "퍼스널(Personal)", "revenue": 4747034}, {"name": "비즈니스(Business)", "revenue": 1289552}]}, {"label": "2025.3월기", "items": [{"name": "퍼스널(Personal)", "revenue": 4795618}, {"name": "비즈니스(Business)", "revenue": 1399787}]}, {"label": "2026.3월기", "items": [{"name": "퍼스널(Personal)", "revenue": 4812737}, {"name": "비즈니스(Business)", "revenue": 1527914}]}], "segments_quarterly": [{"label": "FY26.3 1Q(2025.4-6)", "items": [{"name": "퍼스널(Personal)", "revenue": 1134787}, {"name": "비즈니스(Business)", "revenue": 349748}]}, {"label": "FY26.3 2Q(2025.7-9)", "items": [{"name": "퍼스널(Personal)", "revenue": 1201754}, {"name": "비즈니스(Business)", "revenue": 367959}]}, {"label": "FY26.3 3Q(2025.10-12)", "items": [{"name": "퍼스널(Personal)", "revenue": 1239016}, {"name": "비즈니스(Business)", "revenue": 383814}]}, {"label": "FY26.3 4Q(2026.1-3)", "items": [{"name": "퍼스널(Personal)", "revenue": 1237180}, {"name": "비즈니스(Business)", "revenue": 426393}]}], "seg_note": "3월 결산, 단위 백만 JPY, 세그먼트 매출(내부거래 포함, 합산치가 연결매출 초과). 2024.3월기·2025.3월기는 2025.3월기 결산단신 기준, 2026.3월기는 당기 결산단신 기준(동 공시에서 2025.3월기는 관계회사 세그먼트 변경으로 퍼스널 4,709,292 / 비즈니스"}, "도코모": {"company": "도코모", "currency": "JPY", "op_metric": "operating profit (IFRS 영업이익)", "annual": [{"label": "FY2023 (2024.3월기)", "revenue": 6140000, "op": 1144400}, {"label": "FY2024 (2025.3월기)", "revenue": 6213100, "op": 1020500}, {"label": "FY2025 (2026.3월기)", "revenue": 6458100, "op": 942100}], "quarterly": [{"label": "FY25 2Q (2025.7-9)", "revenue": 1542600, "op": 235000}, {"label": "FY25 3Q (2025.10-12)", "revenue": 1627000, "op": 270700}, {"label": "FY25 4Q (2026.1-3)", "revenue": 1798400, "op": 196700}, {"label": "FY26 1Q (2026.4-6)", "revenue": 1617000, "op": 246200}], "segments": {"label": "FY2025 (2026.3월기) 세그먼트 매출 (operating revenues)", "items": [{"name": "컨슈머 통신 (Consumer Communications)", "revenue": 3284600}, {"name": "스마트라이프 (Smart Life)", "revenue": 1432700}, {"name": "법인 (Enterprise)", "revenue": 2024600}]}, "source": "NTT DOCOMO Group Financial Position and Results / 결산 프레젠테이션 (도코모 IR)", "url": "https://www.docomo.ne.jp/english/corporate/ir/binary/pdf/library/presentation/260508/nttdocomogroup_financial_position_and_results_fy2025_4q_e.pdf", "note": "NTT 연결이 아닌 NTT도코모그룹(신도코모그룹: 도코모+NTT컴+NTT콤웨어 포함) 사업 기준. 도코모 비상장으로 해당 재무제표는 '비감사 참고정보(non-audit reference)'로 공시됨. 수치는 10억엔 단위 공시를 백만엔 환산(정밀도 1억엔). 분기값은 1Q·상반기·9개월·연간 누적 공시 차감 산출, FY26 1Q는 2026.8월 공시 직접 수치. 세그먼트 매출은 세그먼트간 거래 포함이라 합계가 연결매출과 불일치.", "segments_annual": [{"label": "2024.3월기", "items": [{"name": "컨슈머통신", "revenue": 3424800}, {"name": "스마트라이프", "revenue": 1090800}, {"name": "법인", "revenue": 1881700}]}, {"label": "2025.3월기", "items": [{"name": "컨슈머통신", "revenue": 3354500}, {"name": "스마트라이프", "revenue": 1227900}, {"name": "법인", "revenue": 1902700}]}, {"label": "2026.3월기", "items": [{"name": "컨슈머통신", "revenue": 3284600}, {"name": "스마트라이프", "revenue": 1432700}, {"name": "법인", "revenue": 2024600}]}], "segments_quarterly": [{"label": "FY2025 2Q(2025.7-9)", "items": [{"name": "컨슈머통신", "revenue": 806700}, {"name": "스마트라이프", "revenue": 323800}, {"name": "법인", "revenue": 482000}]}, {"label": "FY2025 3Q(2025.10-12)", "items": [{"name": "컨슈머통신", "revenue": 822800}, {"name": "스마트라이프", "revenue": 387000}, {"name": "법인", "revenue": 488000}]}, {"label": "FY2025 4Q(2026.1-3)", "items": [{"name": "컨슈머통신", "revenue": 855400}, {"name": "스마트라이프", "revenue": 420800}, {"name": "법인", "revenue": 598600}]}, {"label": "FY2026 1Q(2026.4-6)", "items": [{"name": "컨슈머통신", "revenue": 792800}, {"name": "스마트라이프", "revenue": 418400}, {"name": "법인", "revenue": 479600}]}], "seg_note": "3월 결산(도코모 표기 FY2023=2024.3월기), 단위 백만 JPY(공시 억엔×100 환산), IFRS·비감사 사내관리 수치. 컨슈머통신+스마트라이프=컨슈머 부문(참고 분해치). 분기 수치 중 FY2025 2Q~4Q는 누적 공시 차감 산출(2Q=상반기−1Q, 3Q=9개월−상반기, "}, "지오": {"company": "지오", "currency": "INR", "op_metric": "EBITDA (revenue는 revenue from operations 기준)", "annual": [{"label": "FY24 (2024.3월 종료)", "revenue": 1095580, "op": 549590}, {"label": "FY25 (2025.3월 종료)", "revenue": 1282180, "op": 641700}, {"label": "FY26 (2026.3월 종료)", "revenue": 1468850, "op": 762550}], "quarterly": [{"label": "FY26 2Q (2025.7-9)", "revenue": 363320, "op": 187570}, {"label": "FY26 3Q (2025.10-12)", "revenue": 372620, "op": 193030}, {"label": "FY26 4Q (2026.1-3)", "revenue": 382590, "op": 200600}, {"label": "FY27 1Q (2026.4-6)", "revenue": 391730, "op": 208650}], "segments": null, "source": "Reliance Industries 분기 Media Release / Analyst Presentation", "url": "https://www.ril.com/sites/default/files/2026-04/24042026_Media_Release_RIL_Q4_FY2025-26_Financial_and_Operational_Performance.pdf", "note": "Jio Platforms Limited(JPL) 연결 기준(RJIL 단독 아님, 디지털 서비스 포함). 인도 회계연도(4월-익년 3월), FY26은 2026.3월로 종료 완료. 원공시 크로어(crore)를 백만 INR로 환산(x10). 영업이익 미공시로 EBITDA 사용. 총매출(gross revenue, 간접세 포함) 기준 FY26 1,723,170 / FY27 1Q 459,610. FY27 1Q 순이익 77,640 (PAT)."}, "skt": {"company": "skt", "currency": "KRW_B", "op_metric": "영업이익", "annual": [{"label": "FY2023", "revenue": 17608.5, "op": 1753.2}, {"label": "FY2024", "revenue": 17940.6, "op": 1823.4}, {"label": "FY2025", "revenue": 17099.2, "op": 1073.2}], "quarterly": [{"label": "2025 Q3", "revenue": 3978.1, "op": 48.4}, {"label": "2025 Q4", "revenue": 4328.7, "op": 119.1}, {"label": "2026 Q1", "revenue": 4392.3, "op": 537.6}, {"label": "2026 Q2", "revenue": 4359.1, "op": 566.0}], "segments": {"label": "FY2025", "items": [{"name": "SKT 별도(이동통신 중심)", "revenue": 12051.0}, {"name": "SK브로드밴드(유선)", "revenue": 4533.6}, {"name": "기타 자회사", "revenue": 514.8}]}, "source": "SK텔레콤 4Q25 실적발표 보도자료(2026-02-05) 및 2Q26 Investor Briefing(2026-08-05), 세그먼트는 IBK투자증권 리포트(2026-02-06, 회사 잠정공시 기준)", "url": "https://www.sktelecom.com/img/kor/qua/20260205/PressRelease4Q25_Kor.pdf", "note": "연결 기준. FY2025 영업이익 -41.1% 급감은 2025년 4월 유심 해킹 사고 여파(위약금 면제·고객 보상 등)로 3Q25 영업이익 484억원까지 하락 후 2026년 들어 분기 5천억원대로 회복. 2Q26 AIDC 매출 전년비 +92.5%. 세그먼트 합계(17,099.4)는 연결 매출과 일치(잠정치 반올림 차이 존재).", "segments_annual": [{"label": "FY2023", "items": [{"name": "SKT 별도(무선)", "revenue": 12589}, {"name": "SK브로드밴드(유선)", "revenue": 4279}, {"name": "기타(기타 자회사·연결조정, 산출)", "revenue": 741}, {"name": "연결 매출 합계", "revenue": 17609}]}, {"label": "FY2024", "items": [{"name": "SKT 별도(무선)", "revenue": 12774.1}, {"name": "SK브로드밴드(유선)", "revenue": 4411.0}, {"name": "기타(기타 자회사·연결조정, 산출)", "revenue": 755.5}, {"name": "연결 매출 합계", "revenue": 17940.6}]}, {"label": "FY2025", "items": [{"name": "SKT 별도(무선)", "revenue": 12051.1}, {"name": "SK브로드밴드(유선)", "revenue": 4533.6}, {"name": "기타(기타 자회사·연결조정, 산출)", "revenue": 514.5}, {"name": "연결 매출 합계", "revenue": 17099.2}]}], "segments_quarterly": [{"label": "2025 Q3", "items": [{"name": "SKT 별도(무선)", "revenue": 2664.7}, {"name": "SK브로드밴드(유선)", "revenue": 1142.6}, {"name": "기타(산출)", "revenue": 170.8}, {"name": "연결 매출 합계", "revenue": 3978.1}]}, {"label": "2025 Q4", "items": [{"name": "SKT 별도(무선)", "revenue": 3083.7}, {"name": "SK브로드밴드(유선)", "revenue": 1157.3}, {"name": "기타(산출)", "revenue": 87.7}, {"name": "연결 매출 합계", "revenue": 4328.7}]}, {"label": "2026 Q1", "items": [{"name": "SKT 별도(무선)", "revenue": 3105.8}, {"name": "SK브로드밴드(유선)", "revenue": 1149.8}, {"name": "기타(산출)", "revenue": 136.7}, {"name": "연결 매출 합계", "revenue": 4392.3}]}, {"label": "2026 Q2", "items": [{"name": "SKT 별도(무선)", "revenue": 3117.0}, {"name": "SK브로드밴드(유선)", "revenue": 1160.3}, {"name": "기타(산출)", "revenue": 81.8}, {"name": "연결 매출 합계", "revenue": 4359.1}]}], "seg_note": "SKT IR은 연결/별도(무선 중심)/SK브로드밴드(유선)로 공시. '기타'는 연결 매출에서 별도·SKB를 차감한 산출값(기타 자회사 및 연결조정 포함)으로 IR 직접 공시 항목이 아님. FY2023 SKB(4,279)는 4Q23 Investor Briefing의 SKB 연결 기준. F"}, "kt": {"company": "kt", "currency": "KRW_B", "op_metric": "영업이익", "annual": [{"label": "FY2023", "revenue": 26376.3, "op": 1649.8}, {"label": "FY2024", "revenue": 26431.2, "op": 809.5}, {"label": "FY2025", "revenue": 28244.2, "op": 2469.1}], "quarterly": [{"label": "2025 Q3", "revenue": 7126.7, "op": 538.2}, {"label": "2025 Q4", "revenue": 6845.0, "op": 227.3}, {"label": "2026 Q1", "revenue": 6778.4, "op": 482.7}, {"label": "2026 Q2", "revenue": 6679.9, "op": 648.3}], "segments": {"label": "FY2025", "items": [{"name": "무선(별도)", "revenue": 7155.4}, {"name": "초고속인터넷(별도)", "revenue": 2533.5}, {"name": "유선전화(별도)", "revenue": 658.9}, {"name": "미디어(별도)", "revenue": null}, {"name": "기업서비스/B2B(별도)", "revenue": null}, {"name": "KT클라우드(그룹사)", "revenue": 997.5}, {"name": "KT에스테이트(그룹사)", "revenue": 719.3}]}, "source": "KT 2025년 4분기 및 연간 실적발표(2026-02-10, 잠정) — 4Q25 어닝콜 스크립트 및 인더뉴스·한국경제 보도, 3Q25는 KT IR 자료", "url": "https://corp.kt.com/eng/attach/record/2025/KT%204Q25%20PT_SCRIPT_F.pdf", "note": "연결 기준(세그먼트는 별도·그룹사 기준). FY2025 영업이익 +205%는 광화문 사옥 개발 분양이익 등 일회성 이익과 FY2024 희망퇴직 일회성 인건비(4Q24 적자)의 기저효과가 겹친 결과. 4Q25에는 해킹 대응 유심 구입비 등 일회성 비용 반영. FY2025 미디어(+1.7%)·기업서비스(+1.3%)는 증가율만 공개되어 절대액 null. 참고: FY2024 별도 세그먼트는 무선 6,959.9 / 유선 5,268.8 / 기업서비스 3,560.6.", "segments_annual": [{"label": "FY2023", "items": [{"name": "무선", "revenue": 6869.6}, {"name": "초고속인터넷", "revenue": 2460.0}, {"name": "미디어(IPTV)", "revenue": 2057.1}, {"name": "유선전화", "revenue": 754.1}, {"name": "기업서비스(B2B)", "revenue": 3460.4}, {"name": "연결 영업수익 합계", "revenue": 26376.3}]}, {"label": "FY2024", "items": [{"name": "무선", "revenue": 6959.9}, {"name": "초고속인터넷", "revenue": 2486.9}, {"name": "미디어(IPTV)", "revenue": 2082.6}, {"name": "유선전화", "revenue": 699.4}, {"name": "기업서비스(B2B)", "revenue": 3560.6}, {"name": "연결 영업수익 합계", "revenue": 26431.2}]}, {"label": "FY2025", "items": [{"name": "무선", "revenue": 7155.4}, {"name": "초고속인터넷", "revenue": 2533.5}, {"name": "미디어(IPTV)", "revenue": 2118.8}, {"name": "유선전화", "revenue": 658.9}, {"name": "기업서비스(B2B)", "revenue": 3606.2}, {"name": "연결 영업수익 합계", "revenue": 28244.2}]}], "segments_quarterly": [{"label": "2025 Q3", "items": [{"name": "무선", "revenue": 1809.6}, {"name": "초고속인터넷", "revenue": 636.7}, {"name": "미디어(IPTV)", "revenue": 534.4}, {"name": "유선전화", "revenue": 160.9}, {"name": "기업서비스(B2B)", "revenue": 932.7}, {"name": "단말수익", "revenue": 929.1}, {"name": "연결 영업수익 합계", "revenue": 7126.7}]}, {"label": "2025 Q4", "items": [{"name": "무선", "revenue": 1811.0}, {"name": "초고속인터넷", "revenue": 636.8}, {"name": "미디어(IPTV)", "revenue": 538.3}, {"name": "유선전화", "revenue": 157.9}, {"name": "기업서비스(B2B)", "revenue": 858.6}, {"name": "단말수익", "revenue": 637.7}, {"name": "연결 영업수익 합계", "revenue": 6845.0}]}, {"label": "2026 Q1", "items": [{"name": "무선", "revenue": 1757.4}, {"name": "초고속인터넷", "revenue": 640.2}, {"name": "미디어(IPTV)", "revenue": 526.0}, {"name": "유선전화", "revenue": 155.4}, {"name": "기업서비스(B2B)", "revenue": 872.4}, {"name": "단말수익", "revenue": 765.5}, {"name": "연결 영업수익 합계", "revenue": 6778.4}]}, {"label": "2026 Q2", "items": [{"name": "무선", "revenue": 1749.7}, {"name": "초고속인터넷", "revenue": 638.0}, {"name": "미디어(IPTV)", "revenue": 524.5}, {"name": "유선전화", "revenue": 152.3}, {"name": "기업서비스(B2B)", "revenue": 901.1}, {"name": "단말수익", "revenue": 444.2}, {"name": "연결 영업수익 합계", "revenue": 6679.9}]}], "seg_note": "부문별 매출(무선=무선서비스+접속, 초고속인터넷, 미디어, 유선전화, 기업서비스, 단말)은 KT 별도 기준이며 '연결 영업수익 합계'만 연결 기준(KT IR 공시 방식 그대로). FY2025 무선(7,155.4)·초고속인터넷(2,533.5)·유선전화(658.9)·연결(28,244.2)은"}, "lg유플러스": {"company": "lg유플러스", "currency": "KRW_B", "op_metric": "영업이익", "annual": [{"label": "FY2023", "revenue": 14372.6, "op": 998.0}, {"label": "FY2024", "revenue": 14625.2, "op": 863.1}, {"label": "FY2025", "revenue": 15451.7, "op": 892.1}], "quarterly": [{"label": "2025 Q3", "revenue": 4010.8, "op": 161.7}, {"label": "2025 Q4", "revenue": 3849.0, "op": 170.5}, {"label": "2026 Q1", "revenue": 3803.7, "op": 272.3}, {"label": "2026 Q2", "revenue": 3694.9, "op": 344.5}], "segments": {"label": "FY2025", "items": [{"name": "모바일", "revenue": 6667.1}, {"name": "스마트홈(인터넷·IPTV)", "revenue": 2589.8}, {"name": "기업인프라", "revenue": 1807.8}]}, "source": "LG유플러스 2025년 연간 경영실적 보도자료(2026-02-05) 및 분기 실적발표 보도(뉴시스 3Q25, 데일리안 1Q26, 이투데이 2Q26)", "url": "https://lg.co.kr/media/release/29836", "note": "연결 기준, 영업수익(매출). 3Q25 영업이익 급감(-34.3%)은 희망퇴직 일회성 비용 약 1,500억원 반영 탓(제외 시 3,117억원). 2Q26 영업이익 3,445억원은 역대 분기 최대(AIDC 견인). 2025 Q4 수치는 공시 잠정실적 집계(연간 확정치-1~3분기와 정합, 매출 약 3.85조·영업이익 1,705억원). 세그먼트 3개 부문 외 전화수익·단말수익 등은 부문 합계에서 제외.", "segments_annual": [{"label": "FY2023", "items": [{"name": "모바일", "revenue": 6311.3}, {"name": "스마트홈", "revenue": 2417.1}, {"name": "기업인프라", "revenue": 1684.4}, {"name": "연결 영업수익 합계", "revenue": 14372.6}]}, {"label": "FY2024", "items": [{"name": "모바일", "revenue": 6427.5}, {"name": "스마트홈", "revenue": 2506.0}, {"name": "기업인프라", "revenue": 1705.5}, {"name": "연결 영업수익 합계", "revenue": 14625.2}]}, {"label": "FY2025", "items": [{"name": "모바일", "revenue": 6667.1}, {"name": "스마트홈", "revenue": 2589.8}, {"name": "기업인프라", "revenue": 1807.8}, {"name": "연결 영업수익 합계", "revenue": 15451.7}]}], "segments_quarterly": [{"label": "2025 Q3", "items": [{"name": "모바일", "revenue": 1711.4}, {"name": "스마트홈", "revenue": 673.4}, {"name": "기업인프라", "revenue": 427.9}, {"name": "연결 영업수익 합계", "revenue": 4010.8}]}, {"label": "2025 Q4", "items": [{"name": "모바일", "revenue": 1689.4}, {"name": "스마트홈", "revenue": 649.2}, {"name": "기업인프라", "revenue": 542.5}, {"name": "연결 영업수익 합계", "revenue": 3848.4}]}, {"label": "2026 Q1", "items": [{"name": "모바일", "revenue": 1652.6}, {"name": "스마트홈", "revenue": 656.3}, {"name": "기업인프라", "revenue": 435.6}, {"name": "연결 영업수익 합계", "revenue": 3803.7}]}, {"label": "2026 Q2", "items": [{"name": "모바일", "revenue": 1660.2}, {"name": "스마트홈", "revenue": 663.8}, {"name": "기업인프라", "revenue": 464.4}, {"name": "연결 영업수익 합계", "revenue": 3694.9}]}], "seg_note": "LGU+ IR 공시 부문: 모바일(무선, 접속수익 포함) / 스마트홈(IPTV+초고속인터넷) / 기업인프라(AIDC·솔루션·기업회선). 모두 K-IFRS 연결 기준이며 부문 합계는 서비스수익 기준이라 단말수익 등이 포함된 연결 영업수익 합계와 차이. 2025 Q4 부문값은 IR 공시 연"}}}
+{
+"fx_date": "2026-10-02",
+"fx_note": "FRED H.10 기준 환산",
+"mult": {
+"SEK": 0.099317,
+"EUR": 1.1259,
+"CNY": 0.149169,
+"JPY": 0.006337,
+"USD": 1,
+"INR": 0.010383,
+"KRW_B": 0.74308
+},
+"companies": {
+"에릭슨": {
+"company": "에릭슨",
+"currency": "SEK",
+"op_metric": "조정 EBIT(구조조정비용 제외)",
+"annual": [
+{
+"label": "FY2023",
+"revenue": 263351,
+"op": -13805
+},
+{
+"label": "FY2024",
+"revenue": 247880,
+"op": 9325
+},
+{
+"label": "FY2025",
+"revenue": 236681,
+"op": 40971
+}
+],
+"quarterly": [
+{
+"label": "2025 Q3",
+"revenue": 56239,
+"op": 15454
+},
+{
+"label": "2025 Q4",
+"revenue": 69285,
+"op": 12258
+},
+{
+"label": "2026 Q1",
+"revenue": 49332,
+"op": 5211
+},
+{
+"label": "2026 Q2",
+"revenue": 52691,
+"op": 6520
+}
+],
+"segments": {
+"label": "FY2025",
+"items": [
+{
+"name": "Networks",
+"revenue": 151000
+},
+{
+"name": "Cloud Software and Services",
+"revenue": 62700
+},
+{
+"name": "Enterprise",
+"revenue": 21100
+},
+{
+"name": "Other",
+"revenue": 1800
+}
+]
+},
+"source": "Ericsson Q4/FY2025 보고서(2026-01 공시, cision PDF), Q2 2026 실적 보도자료(2026-07), FY2023·FY2024 실적 보도자료",
+"url": "https://news.cision.com/ericsson/r/ericsson-reports-fourth-quarter-results-and-full-year-results-2025,c4296598",
+"note": "조정 EBIT는 구조조정비용 제외 기준이며 손상차손은 포함: FY2023 -13,805에는 Vonage 영업권 손상 31.9십억 SEK 포함(손상까지 제외 시 18,093), FY2024 9,325에는 무형자산 손상 15.3십억 SEK 포함(손상 제외 시 24,658). 보고 기준 EBIT: FY2023 -20,326 / FY2024 4,313 / FY2025 38,634; 분기 보고 EBIT: 25Q3 15,151 / 25Q4 11,161 / 26Q1 1,443 / 26Q2 5,919. FY2025 Enterprise EBIT에 iconectiv 매각차익 7.6십억 SEK 포함. 세그먼트 매출은 보고서상 십억 SEK 1자리 반올림 수치를 백만 단위 환산(합계 236.7십억).",
+"segments_annual": [
+{
+"label": "FY2023",
+"items": [
+{
+"name": "Networks",
+"revenue": 171400
+},
+{
+"name": "Cloud Software and Services",
+"revenue": 63600
+},
+{
+"name": "Enterprise",
+"revenue": 25700
+},
+{
+"name": "Other",
+"revenue": 2500
+}
+]
+},
+{
+"label": "FY2024",
+"items": [
+{
+"name": "Networks",
+"revenue": 158207
+},
+{
+"name": "Cloud Software and Services",
+"revenue": 62635
+},
+{
+"name": "Enterprise",
+"revenue": 24863
+},
+{
+"name": "Other",
+"revenue": 2175
+}
+]
+},
+{
+"label": "FY2025",
+"items": [
+{
+"name": "Networks",
+"revenue": 151014
+},
+{
+"name": "Cloud Software and Services",
+"revenue": 62715
+},
+{
+"name": "Enterprise",
+"revenue": 21117
+},
+{
+"name": "Other",
+"revenue": 1835
+}
+]
+}
+],
+"segments_quarterly": [
+{
+"label": "2025 Q3",
+"items": [
+{
+"name": "Networks",
+"revenue": 35424
+},
+{
+"name": "Cloud Software and Services",
+"revenue": 15346
+},
+{
+"name": "Enterprise",
+"revenue": 5058
+},
+{
+"name": "Other",
+"revenue": 411
+}
+]
+},
+{
+"label": "2025 Q4",
+"items": [
+{
+"name": "Networks",
+"revenue": 44200
+},
+{
+"name": "Cloud Software and Services",
+"revenue": 20031
+},
+{
+"name": "Enterprise",
+"revenue": 4578
+},
+{
+"name": "Other",
+"revenue": 476
+}
+]
+},
+{
+"label": "2026 Q1",
+"items": [
+{
+"name": "Networks",
+"revenue": 32937
+},
+{
+"name": "Cloud Software and Services",
+"revenue": 11833
+},
+{
+"name": "Enterprise",
+"revenue": 4168
+},
+{
+"name": "Other",
+"revenue": 393
+}
+]
+},
+{
+"label": "2026 Q2",
+"items": [
+{
+"name": "Networks",
+"revenue": 33047
+},
+{
+"name": "Cloud Software and Services",
+"revenue": 14732
+},
+{
+"name": "Enterprise",
+"revenue": 4490
+},
+{
+"name": "Other",
+"revenue": 422
+}
+]
+}
+],
+"seg_note": "단위: SEK 백만. FY2024·FY2025 및 분기 수치는 보고서 Note 2의 정확한 백만 단위 수치. FY2023은 2024년 중 조직개편(Enterprise Wireless Solutions의 Networks 편입 등)을 반영해 재작성된 비교치로, Q4 2024 보고서에 10억"
+},
+"노키아": {
+"company": "노키아",
+"currency": "EUR",
+"op_metric": "비교(comparable) 영업이익",
+"annual": [
+{
+"label": "FY2023",
+"revenue": 22258,
+"op": 2375
+},
+{
+"label": "FY2024",
+"revenue": 19220,
+"op": 2584
+},
+{
+"label": "FY2025",
+"revenue": 19889,
+"op": 2024
+}
+],
+"quarterly": [
+{
+"label": "2025 Q3",
+"revenue": 4828,
+"op": 435
+},
+{
+"label": "2025 Q4",
+"revenue": 6125,
+"op": 1058
+},
+{
+"label": "2026 Q1",
+"revenue": 4433,
+"op": 301
+},
+{
+"label": "2026 Q2",
+"revenue": 4815,
+"op": 434
+}
+],
+"segments": {
+"label": "FY2025",
+"items": [
+{
+"name": "Network Infrastructure",
+"revenue": 7986
+},
+{
+"name": "Mobile Networks",
+"revenue": 7806
+},
+{
+"name": "Cloud and Network Services",
+"revenue": 2606
+},
+{
+"name": "Nokia Technologies",
+"revenue": 1501
+},
+{
+"name": "Group Common and Other",
+"revenue": 17
+}
+]
+},
+"source": "Nokia Q4/FY2025 재무보고서(2026-01 공시, Note 2 세그먼트), Q2·반기 2026 보고서(2026-07), Q3 2025 중간보고서, Q4/FY2023 재무보고서",
+"url": "https://www.nokia.com/newsroom/nokia-corporation-financial-report-for-q4-2025-and-full-year-2025/",
+"note": "비교(comparable) 기준 영업이익. 보고 기준 영업이익: FY2023 1,688 / FY2024 1,970 / FY2025 885 / 25Q3 239 / 25Q4 540 / 26Q2 -50. FY2024는 벤처펀드 손익 재분류 반영 수치. 2026 Q1은 Q2 2026 보고서의 상반기 수치(매출 9,248, 비교 영업이익 735)에서 Q2를 차감해 산출한 계속영업 기준. 2026년 2분기부터 FWA CPE·Enterprise Campus Edge 사업은 중단영업으로 재분류, 세그먼트도 Network Infrastructure/Mobile Infrastructure/Portfolio Businesses 체계로 개편(FY2025 세그먼트는 구 체계 기준). FY2025 Network Infrastructure에는 2025-02-28 종결된 Infinera 인수 효과 포함.",
+"segments_annual": [
+{
+"label": "FY2023",
+"items": [
+{
+"name": "Network Infrastructure",
+"revenue": 6917
+},
+{
+"name": "Mobile Networks",
+"revenue": 9797
+},
+{
+"name": "Cloud and Network Services",
+"revenue": 3220
+},
+{
+"name": "Nokia Technologies",
+"revenue": 1085
+},
+{
+"name": "Group Common and Other",
+"revenue": 130
+}
+]
+},
+{
+"label": "FY2024",
+"items": [
+{
+"name": "Network Infrastructure",
+"revenue": 6518
+},
+{
+"name": "Mobile Networks",
+"revenue": 8158
+},
+{
+"name": "Cloud and Network Services",
+"revenue": 2589
+},
+{
+"name": "Nokia Technologies",
+"revenue": 1928
+},
+{
+"name": "Group Common and Other",
+"revenue": 34
+}
+]
+},
+{
+"label": "FY2025",
+"items": [
+{
+"name": "Network Infrastructure",
+"revenue": 7986
+},
+{
+"name": "Mobile Networks",
+"revenue": 7806
+},
+{
+"name": "Cloud and Network Services",
+"revenue": 2606
+},
+{
+"name": "Nokia Technologies",
+"revenue": 1501
+},
+{
+"name": "Group Common and Other",
+"revenue": 17
+}
+]
+}
+],
+"segments_quarterly": [
+{
+"label": "2025 Q3",
+"items": [
+{
+"name": "Network Infrastructure",
+"revenue": 1850
+},
+{
+"name": "Mobile Infrastructure",
+"revenue": 2755
+},
+{
+"name": "Portfolio Businesses",
+"revenue": 97
+}
+]
+},
+{
+"label": "2025 Q4",
+"items": [
+{
+"name": "Network Infrastructure",
+"revenue": 2332
+},
+{
+"name": "Mobile Infrastructure",
+"revenue": 3579
+},
+{
+"name": "Portfolio Businesses",
+"revenue": 113
+}
+]
+},
+{
+"label": "2026 Q1",
+"items": [
+{
+"name": "Network Infrastructure",
+"revenue": 1829
+},
+{
+"name": "Mobile Infrastructure",
+"revenue": 2503
+},
+{
+"name": "Portfolio Businesses",
+"revenue": 100
+}
+]
+},
+{
+"label": "2026 Q2",
+"items": [
+{
+"name": "Network Infrastructure",
+"revenue": 2037
+},
+{
+"name": "Mobile Infrastructure",
+"revenue": 2680
+},
+{
+"name": "Portfolio Businesses",
+"revenue": 94
+}
+]
+}
+],
+"seg_note": "단위: EUR 백만. [연간] 구(舊) 4개 사업그룹 체계 기준. FY2025·FY2024는 Q4 2025 보고서 기준(FY2024는 Managed Services의 CNS→Mobile Networks 이관을 소급 반영한 recast치; 당초 공시치는 MN 7,725/CNS 3,022)"
+},
+"화웨이": {
+"company": "화웨이",
+"currency": "CNY",
+"op_metric": "net_profit (화웨이는 분기/반기 영업이익을 공시하지 않아 순이익 사용. 참고: FY2025 영업이익은 96,900 별도 공시, +22.1%)",
+"annual": [
+{
+"label": "FY2023",
+"revenue": 704200,
+"op": 87000
+},
+{
+"label": "FY2024",
+"revenue": 862100,
+"op": 62600
+},
+{
+"label": "FY2025",
+"revenue": 880900,
+"op": 68000
+}
+],
+"quarterly": [
+{
+"label": "2024 H2",
+"revenue": 444600,
+"op": 7500
+},
+{
+"label": "2025 H1",
+"revenue": 427000,
+"op": 37000
+},
+{
+"label": "2025 H2",
+"revenue": 453900,
+"op": 31000
+},
+{
+"label": "2026 H1",
+"revenue": 467820,
+"op": 23810
+}
+],
+"segments": {
+"label": "FY2025",
+"items": [
+{
+"name": "ICT 인프라",
+"revenue": 375000
+},
+{
+"name": "단말(컨슈머)",
+"revenue": 344500
+},
+{
+"name": "디지털 에너지",
+"revenue": 77300
+},
+{
+"name": "지능형 자동차 솔루션",
+"revenue": 45000
+},
+{
+"name": "클라우드 컴퓨팅",
+"revenue": 32100
+}
+]
+},
+"source": "Huawei 2025 Annual Report 보도자료(2026-03), Huawei H1 2026 실적 보도(2026-08, telecomlead), Huawei H1 2024/2025 business results, Wallstreetcn 財報見聞(월스트리트견문, 세그먼트)",
+"url": "https://www.huawei.com/en/news/2026/3/annual-report-2025",
+"note": "반기 데이터 중 2024 H2·2025 H2는 연간-상반기 차감 산출(derived). 2024 H1 순이익 55,100은 공시 순이익률 13.2%x매출 417,500 기반. 2025 H1 순이익은 '370억 위안(-32%)' 보도 기준. 2026 H1은 매출 467,820/순이익 23,810(-36%) 공시. 세그먼트 중 ICT인프라 375,000은 보도 기준 근사치(총매출의 42.6%, +2.6%), 클라우드는 전년비 -3.5%. 연간 수치는 공시 반올림 값(억 단위).",
+"segments_annual": [
+{
+"label": "FY2023",
+"items": [
+{
+"name": "ICT인프라",
+"revenue": 352756
+},
+{
+"name": "단말(컨슈머)",
+"revenue": 245134
+},
+{
+"name": "클라우드",
+"revenue": 35514
+},
+{
+"name": "디지털에너지",
+"revenue": 55229
+},
+{
+"name": "지능형차량솔루션",
+"revenue": 4588
+},
+{
+"name": "기타",
+"revenue": 10953
+}
+]
+},
+{
+"label": "FY2024",
+"items": [
+{
+"name": "ICT인프라",
+"revenue": 369903
+},
+{
+"name": "단말(컨슈머)",
+"revenue": 339006
+},
+{
+"name": "클라우드",
+"revenue": 38523
+},
+{
+"name": "디지털에너지",
+"revenue": 68678
+},
+{
+"name": "지능형차량솔루션",
+"revenue": 26353
+},
+{
+"name": "기타",
+"revenue": 19609
+}
+]
+},
+{
+"label": "FY2025",
+"items": [
+{
+"name": "ICT인프라",
+"revenue": 375014
+},
+{
+"name": "단말(컨슈머)",
+"revenue": 344473
+},
+{
+"name": "클라우드",
+"revenue": 32161
+},
+{
+"name": "디지털에너지",
+"revenue": 77312
+},
+{
+"name": "지능형차량솔루션",
+"revenue": 45018
+},
+{
+"name": "기타",
+"revenue": 6963
+}
+]
+}
+],
+"seg_note": "단위: 백만 CNY. 연간 총매출 FY2023 704,174 / FY2024 862,072 / FY2025 880,941. FY2023 수치는 2024 연차보고서의 재분류(restated) 비교치 기준(2023년 보고서 원수치와 일부 상이: 당시 클라우드 55,290 등). 클라우드는 "
+},
+"zte": {
+"company": "zte",
+"currency": "CNY",
+"op_metric": "net_profit_attributable (모회사 귀속 순이익)",
+"annual": [
+{
+"label": "FY2023",
+"revenue": 124250,
+"op": 9330
+},
+{
+"label": "FY2024",
+"revenue": 121300,
+"op": 8420
+},
+{
+"label": "FY2025",
+"revenue": 133900,
+"op": 5620
+}
+],
+"quarterly": [
+{
+"label": "2025 Q3",
+"revenue": 28970,
+"op": 264
+},
+{
+"label": "2025 Q4",
+"revenue": 33380,
+"op": 300
+},
+{
+"label": "2026 Q1",
+"revenue": 35000,
+"op": 1310
+},
+{
+"label": "2026 Q2",
+"revenue": 43025,
+"op": 1443
+}
+],
+"segments": {
+"label": "FY2025",
+"items": [
+{
+"name": "캐리어 네트워크(Operator Network)",
+"revenue": 62860
+},
+{
+"name": "정부·기업(Government & Enterprise)",
+"revenue": 37220
+},
+{
+"name": "컨슈머(Consumer)",
+"revenue": 33820
+}
+]
+},
+"source": "ZTE 공식 실적 보도자료(FY2023/FY2024/FY2025), ZTE Q3 2025 보고(9M 누적 100,520/5,320), ZTE Q1 2026 보고(매출 350억, 순이익 13.1억, -46.6%), ZTE 2026 반기보고서(매출 78,025, 귀속순이익 2,753, -45.6%)",
+"url": "https://www.zte.com.cn/global/about/news/ZTE-Reports-2025-Revenue-of-RMB-133-90-Billion-Advancing-Full-stack-AI-Capabilities.html",
+"note": "2025 Q4는 FY2025-9M2025 차감 산출(derived), 2026 Q2는 H1 2026-Q1 2026 차감 산출(derived, Q1 매출은 공시 반올림 350억 기준). 2025 Q3 순이익 264(-87.8%) 공시. FY2025 순이익 5,620(-33.3%), 매출 +10.4%. 정부·기업 부문 FY2025 매출은 전년비 약 2배(컴퓨팅/서버 급성장).",
+"segments_annual": [
+{
+"label": "FY2023",
+"items": [
+{
+"name": "캐리어",
+"revenue": 82760
+},
+{
+"name": "정부기업",
+"revenue": 13580
+},
+{
+"name": "컨슈머",
+"revenue": 27910
+}
+]
+},
+{
+"label": "FY2024",
+"items": [
+{
+"name": "캐리어",
+"revenue": 70330
+},
+{
+"name": "정부기업",
+"revenue": 18560
+},
+{
+"name": "컨슈머",
+"revenue": 32410
+}
+]
+},
+{
+"label": "FY2025",
+"items": [
+{
+"name": "캐리어",
+"revenue": 62860
+},
+{
+"name": "정부기업",
+"revenue": 37220
+},
+{
+"name": "컨슈머",
+"revenue": 33820
+}
+]
+}
+],
+"segments_quarterly": [
+{
+"label": "2024 H2",
+"items": [
+{
+"name": "캐리어",
+"revenue": 33030
+},
+{
+"name": "정부기업",
+"revenue": 9390
+},
+{
+"name": "컨슈머",
+"revenue": 16390
+}
+]
+},
+{
+"label": "2025 H1",
+"items": [
+{
+"name": "캐리어",
+"revenue": 35060
+},
+{
+"name": "정부기업",
+"revenue": 19250
+},
+{
+"name": "컨슈머",
+"revenue": 17240
+}
+]
+},
+{
+"label": "2025 H2",
+"items": [
+{
+"name": "캐리어",
+"revenue": 27800
+},
+{
+"name": "정부기업",
+"revenue": 17970
+},
+{
+"name": "컨슈머",
+"revenue": 16580
+}
+]
+},
+{
+"label": "2026 H1",
+"items": [
+{
+"name": "캐리어",
+"revenue": 31770
+},
+{
+"name": "정부기업",
+"revenue": 27630
+},
+{
+"name": "컨슈머",
+"revenue": 18630
+}
+]
+}
+],
+"seg_note": "단위: 백만 CNY(공시가 십억 단위 소수 2자리라 백만 단위는 ±10 수준 반올림 오차 가능). ZTE 부문별 공시는 반기 기준이라 반기로 기재. 2024 H2와 2025 H2는 공시된 연간−상반기 차감 산출값(파생치), 2025 H1(캐리어 35,060/정부기업 19,250/컨슈머 "
+},
+"ast": {
+"company": "ast",
+"currency": "USD",
+"op_metric": "영업이익",
+"annual": [
+{
+"label": "FY2023",
+"revenue": 0.0,
+"op": -222.4
+},
+{
+"label": "FY2024",
+"revenue": 4.4,
+"op": -242.8
+},
+{
+"label": "FY2025",
+"revenue": 70.9,
+"op": -287.7
+}
+],
+"quarterly": [
+{
+"label": "Q3 FY2025",
+"revenue": 14.7,
+"op": -79.7
+},
+{
+"label": "Q4 FY2025",
+"revenue": 54.3,
+"op": -72.3
+},
+{
+"label": "Q1 FY2026",
+"revenue": 14.7,
+"op": -149.4
+},
+{
+"label": "Q2 FY2026",
+"revenue": 31.5,
+"op": -297.6
+}
+],
+"segments": null,
+"source": "AST SpaceMobile Q4/FY2025 실적 보도자료(2026-03-02) 및 Q2 2026 8-K(Ex-99.1, SEC)",
+"url": "https://www.sec.gov/Archives/edgar/data/0001780312/000119312526342540/asts-ex99_1.htm",
+"note": "실적 공시는 영업손실 라인을 별도 표기하지 않아 영업이익 = 총매출 - 총영업비용으로 산출. Q3 FY2025와 Q1 FY2026은 연간/반기/분기 공시치 차감으로 도출(공시 수치 기반 정확 계산). Q2 FY2026 영업비용 급증($329.1M)은 위성 제조 램프업 등 비용 확대 반영 — GAAP 순손실 $230.9M. FY2023 매출 0, FY2022는 $13.8M이었음."
+},
+"스타링크": {
+"company": "스타링크",
+"private": true,
+"currency": "USD",
+"op_metric": "영업이익",
+"annual": null,
+"quarterly": null,
+"segments": null,
+"estimates": [
+{
+"label": "2023 스타링크 매출(추정, Quilty Space)",
+"value": 2900,
+"source": "Via Satellite (2025-01-22)",
+"url": "https://satellitetoday.com/finance/2025/01/22/quilty-space-issues-estimate-on-spacexs-starlink-2024-revenue-growth"
+},
+{
+"label": "2024 스타링크 매출(추정, Quilty Space)",
+"value": 7800,
+"source": "Via Satellite (2025-01-22)",
+"url": "https://satellitetoday.com/finance/2025/01/22/quilty-space-issues-estimate-on-spacexs-starlink-2024-revenue-growth"
+},
+{
+"label": "2024 SpaceX 전사 매출(추정)",
+"value": 13100,
+"source": "Motley Fool/Yahoo Finance (2026-01-31)",
+"url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"
+},
+{
+"label": "2025 스타링크 매출(추정, Payload Space)",
+"value": 10400,
+"source": "Motley Fool/Yahoo Finance (2026-01-31)",
+"url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"
+},
+{
+"label": "2025 스타링크 매출(추정)",
+"value": 11800,
+"source": "Tesorb — Quilty Space 인용, S-1 공개치로 보도 (2026-04)",
+"url": "https://tesorb.com/starlink-revenue-forecast-2026-quilty-space/"
+},
+{
+"label": "2025 SpaceX 전사 매출(추정)",
+"value": 15000,
+"source": "Motley Fool/Yahoo Finance (2026-01-31, 약 $15B; New Space Economy 2026-01-06은 ~$15.5B)",
+"url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"
+},
+{
+"label": "2026 스타링크 매출 전망(Quilty Space, 2026-04-13 상향)",
+"value": 20000,
+"source": "Tesorb — Quilty Space 전망 (기존 $15.9B에서 25% 상향)",
+"url": "https://tesorb.com/starlink-revenue-forecast-2026-quilty-space/"
+},
+{
+"label": "2026 SpaceX 전사 매출 전망(Payload Space)",
+"value": 23800,
+"source": "Motley Fool/Yahoo Finance (2026-01-31)",
+"url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"
+}
+],
+"note": "비상장 — 언론·리서치사(Quilty Space, Payload Space) 추정치. 2025년 스타링크 매출 추정은 $10.4B~$11.8B(전사 약 $15B~15.5B)로 소스별 편차 존재. 가입자 추정(Payload): 2024년말 460만 → 2025년말 920만."
+},
+"아마존": {
+"company": "아마존",
+"private": true,
+"currency": "USD",
+"op_metric": "영업이익",
+"annual": null,
+"quarterly": null,
+"segments": null,
+"estimates": [
+{
+"label": "초기 투자 계획(2020, 아마존 자체)",
+"value": 10000,
+"source": "Motley Fool via Nasdaq (2026-04-19)",
+"url": "https://www.nasdaq.com/articles/amazon-spending-116-billion-compete-spacex"
+},
+{
+"label": "총 구축비용 추정(Quilty Space, $16.5B~20B의 상단)",
+"value": 20000,
+"source": "GeekWire — Quilty Space 시장 분석 (2024-09-11)",
+"url": "https://www.geekwire.com/2024/market-study-amazon-cost-project-kuiper-satellite-quilty/"
+},
+{
+"label": "2028~29 증분 매출 전망(Cantor Fitzgerald, $2.5B~5B의 상단)",
+"value": 5000,
+"source": "Yahoo Finance — Cantor Fitzgerald Deepak Mathivanan (2025-08-22)",
+"url": "https://finance.yahoo.com/news/amazon-amzn-stock-gets-280-005600619.html"
+},
+{
+"label": "Globalstar 인수 금액(2026-04 발표, 약 $10.8B)",
+"value": 10800,
+"source": "TIKR (2026 Q1 실적 분석)",
+"url": "https://www.tikr.com/blog/amazon-q1-2026-beat-hides-its-most-exciting-new-revenue-engine"
+},
+{
+"label": "장기 매출 시나리오(Quilty Space — 가입자 1억명·ARPU $30 가정 시 연매출)",
+"value": 36000,
+"source": "GeekWire — Quilty Space (2024-09-11)",
+"url": "https://www.geekwire.com/2024/market-study-amazon-cost-project-kuiper-satellite-quilty/"
+}
+],
+"note": "비상장(아마존 사업부) — 별도 재무 공시 없음, 언론·애널리스트 추정치. 2025.11 'Project Kuiper'에서 'Amazon Leo'로 리브랜딩. 2026 Q1 콜에서 Jassy CEO는 '수십억 달러(many-billion-dollar) 매출 사업' 가능성 언급(구체 수치 없음). Leo 위성 제조 관련 비용 2026 Q2 전년比 약 $1B 증가 가이던스. 2026년 상업 서비스 Q3 개시 목표, 위성 241기 배치(목표 3,000기+)."
+},
+"버라이즌": {
+"company": "버라이즌",
+"currency": "USD",
+"op_metric": "operating income",
+"annual": [
+{
+"label": "FY2023",
+"revenue": 133974,
+"op": 22877
+},
+{
+"label": "FY2024",
+"revenue": 134788,
+"op": 28686
+},
+{
+"label": "FY2025",
+"revenue": 138191,
+"op": 29259
+}
+],
+"quarterly": [
+{
+"label": "3Q25 (2025.7-9)",
+"revenue": 33821,
+"op": 8105
+},
+{
+"label": "4Q25 (2025.10-12)",
+"revenue": 36381,
+"op": 5004
+},
+{
+"label": "1Q26 (2026.1-3)",
+"revenue": 34440,
+"op": 8242
+},
+{
+"label": "2Q26 (2026.4-6)",
+"revenue": 34253,
+"op": 7179
+}
+],
+"segments": {
+"label": "FY2025 세그먼트 매출 (total operating revenues)",
+"items": [
+{
+"name": "Consumer",
+"revenue": 106807
+},
+{
+"name": "Business",
+"revenue": 29069
+}
+]
+},
+"source": "Verizon 8-K earnings exhibits (SEC EDGAR)",
+"url": "https://www.sec.gov/Archives/edgar/data/732712/000073271226000003/a2025q4exhibit99.htm",
+"note": "역년(1-12월) 회계연도. FY2023-2024는 4Q24 exhibit, FY2025·4Q25·세그먼트는 4Q25 exhibit, 3Q25는 3Q25 exhibit, 1Q26·2Q26은 2026년 분기 exhibit 기준(1Q26은 2Q26 exhibit의 6개월 누계-2Q 차감과 1Q26 exhibit 공시 일치 확인). FY2025 세그먼트 외 잔여분은 Corporate and other.",
+"segments_annual": [
+{
+"label": "FY2023",
+"items": [
+{
+"name": "Consumer(컨슈머)",
+"revenue": 101626
+},
+{
+"name": "Business(법인)",
+"revenue": 30122
+}
+]
+},
+{
+"label": "FY2024",
+"items": [
+{
+"name": "Consumer(컨슈머)",
+"revenue": 102904
+},
+{
+"name": "Business(법인)",
+"revenue": 29531
+}
+]
+},
+{
+"label": "FY2025",
+"items": [
+{
+"name": "Consumer(컨슈머)",
+"revenue": 106807
+},
+{
+"name": "Business(법인)",
+"revenue": 29069
+}
+]
+}
+],
+"segments_quarterly": [
+{
+"label": "2025Q3(7-9월)",
+"items": [
+{
+"name": "Consumer(컨슈머)",
+"revenue": 26105
+},
+{
+"name": "Business(법인)",
+"revenue": 7142
+}
+]
+},
+{
+"label": "2025Q4(10-12월)",
+"items": [
+{
+"name": "Consumer(컨슈머)",
+"revenue": 28436
+},
+{
+"name": "Business(법인)",
+"revenue": 7366
+}
+]
+},
+{
+"label": "2026Q1(1-3월)",
+"items": [
+{
+"name": "Consumer(컨슈머)",
+"revenue": 26453
+},
+{
+"name": "Business(법인)",
+"revenue": 7130
+}
+]
+},
+{
+"label": "2026Q2(4-6월)",
+"items": [
+{
+"name": "Consumer(컨슈머)",
+"revenue": 26242
+},
+{
+"name": "Business(법인)",
+"revenue": 7155
+}
+]
+}
+],
+"seg_note": "회계연도=역년(1-12월), 단위 백만 USD, 세그먼트 총영업수익 기준. FY2023·FY2024는 2024년 세그먼트 재편(recast) 반영치(4Q2024 Exhibit 99). 분기 중 2025Q4는 FY2025 연간(10-K)에서 9개월 누적(3Q2025 Exhibit 99) ",
+"kpi": {
+"capex_unit": "백만 USD",
+"capex_def": "Capital expenditures (including capitalized software) — 연결 현금흐름표 기준",
+"arpu_unit": "USD/월",
+"arpu_def": "Total wireless retail postpaid ARPA (average service revenue per retail postpaid account, Consumer+Business 합산). 요청 지표인 Consumer wireless retail postpaid ARPA는 2026년 1분기 실적부터 미공시(2025Q4까지만 공시)되어, 전 기간 일관 비교가 가능한 가장 근접한 공식 지표인 Total retail postpaid ARPA를 사용함(Consumer ARPA 수치는 note 참조)",
+"churn_def": "Consumer wireless retail postpaid phone churn (월간 해지율, %). 2025Q4까지는 실적 발표 Consumer 세그먼트 통계표, 2026Q1~Q3는 실적 발표 본문·공식 실적발표 콜 트랜스크립트(verizon.com) 기재 수치",
+"note": "[CAPEX] 연간 5개년은 4Q25 실적발표 Free Cash Flow 표(2020~2025 연간 capex) 기준. FY2026 가이던스 $16.0~16.5B는 2026-01-30 4Q25 실적발표에서 제시(AI Connect 성과연동 투자 포함), 1Q26·2Q26·3Q26(2026-10-26) 발표에서 재확인. 분기 capex: 1Q·3Q(2025, 2026)와 2Q26은 발표문의 3개월 수치, 2024Q2~Q4·2025Q2·2025Q4는 누계(6개월·9개월·연간) 차감 산출('누계 차감 산출'); 2025Q2 3,808은 2Q26 발표의 전년 비교치와도 일치. 3Q26 실적은 2026-10-26 발표 완료되어 포함. [ARPU] Verizon은 2026년 1분기 실적부터 Consumer 세그먼트 운영통계표(Consumer ARPA·churn)를 발표문에서 삭제하고 Total(Consumer+Business) wireless retail postpaid ARPA·churn만 표로 공시 → 시계열 일관성을 위해 Total retail postpaid ARPA 사용. 참고용 Consumer wireless retail postpaid ARPA(USD/월, 2025년 재분류 기준): 2024Q1 141.31, 2024Q2 144.15, 2024Q3 144.94, 2024Q4 145.61, 2025Q1 146.46, 2025Q2 147.50, 2025Q3 147.91, 2025Q4 147.36 (2026년은 미공시). 정의 변경: 2025년 1분기부터 반복적 단말보험(device protection/insurance) 관련 요금 수익을 other revenue에서 wireless service revenue로 재분류하여 ARPA가 상향 recast됨(예: Consumer 4Q24 ARPA 원공시 139.77 → recast 145.61). 2024년 분기값은 모두 2025년 발표의 recast 비교치를 사용. 2023Q4는 recast 기준 수치가 미공시되어 null 처리(구기준 원공시: Consumer ARPA 134.10, Consumer phone churn 0.88%, Total phone churn 0.93%). [Churn] 2025Q4까지 Consumer wireless retail postpaid phone churn 표 수치(2024년은 recast 비교치, 4Q24 원공시 0.89%→recast 0.88%). 2026Q1 0.90%·2026Q2 0.84%는 공식 실적발표 콜 트랜스크립트(CEO/CFO 발언), 2026Q3 0.87%는 3Q26 발표문 본문 기재. 참고 Total wireless retail postpaid phone churn: 2024Q1 0.89, Q2 0.85, Q3 0.88, Q4 0.92, 2025Q1 0.95, Q2 0.97, Q3 0.98, Q4 1.02, 2026Q1 0.97, Q2 0.92, Q3 0.94. 세그먼트 변경: 2026Q1부터 세그먼트 수익 표시방식 변경(세그먼트 구성 변동 없음), 2026Q2 국제 유선·매니지드 네트워크 사업을 Business→Corporate and other로 재분류(KPI 영향 없음). SEC EDGAR 직접 접속(data.sec.gov)은 세션 프록시에서 차단되어 Archives 문서를 WebFetch로 확인함.",
+"fiscal_year_end": "12월",
+"capex_annual": [
+{
+"label": "FY2021",
+"v": 20286
+},
+{
+"label": "FY2022",
+"v": 23087
+},
+{
+"label": "FY2023",
+"v": 18767
+},
+{
+"label": "FY2024",
+"v": 17090
+},
+{
+"label": "FY2025",
+"v": 17011
+},
+{
+"label": "FY2026 가이던스",
+"v": null,
+"lo": 16000,
+"hi": 16500,
+"guidance": true
+}
+],
+"capex_quarterly": [
+{
+"label": "2024Q1",
+"v": 4376
+},
+{
+"label": "2024Q2",
+"v": 3695
+},
+{
+"label": "2024Q3",
+"v": 3948
+},
+{
+"label": "2024Q4",
+"v": 5071
+},
+{
+"label": "2025Q1",
+"v": 4145
+},
+{
+"label": "2025Q2",
+"v": 3808
+},
+{
+"label": "2025Q3",
+"v": 4310
+},
+{
+"label": "2025Q4",
+"v": 4748
+},
+{
+"label": "2026Q1",
+"v": 4201
+},
+{
+"label": "2026Q2",
+"v": 4009
+},
+{
+"label": "2026Q3",
+"v": 3716
+}
+],
+"arpu_quarterly": [
+{
+"label": "2023Q4",
+"v": null
+},
+{
+"label": "2024Q1",
+"v": 164.27
+},
+{
+"label": "2024Q2",
+"v": 167.38
+},
+{
+"label": "2024Q3",
+"v": 168.44
+},
+{
+"label": "2024Q4",
+"v": 168.96
+},
+{
+"label": "2025Q1",
+"v": 169.81
+},
+{
+"label": "2025Q2",
+"v": 170.79
+},
+{
+"label": "2025Q3",
+"v": 171.27
+},
+{
+"label": "2025Q4",
+"v": 170.61
+},
+{
+"label": "2026Q1",
+"v": 166.66
+},
+{
+"label": "2026Q2",
+"v": 168.35
+},
+{
+"label": "2026Q3",
+"v": 168.08
+}
+],
+"churn_quarterly": [
+{
+"label": "2023Q4",
+"v": null
+},
+{
+"label": "2024Q1",
+"v": 0.83
+},
+{
+"label": "2024Q2",
+"v": 0.79
+},
+{
+"label": "2024Q3",
+"v": 0.83
+},
+{
+"label": "2024Q4",
+"v": 0.88
+},
+{
+"label": "2025Q1",
+"v": 0.9
+},
+{
+"label": "2025Q2",
+"v": 0.9
+},
+{
+"label": "2025Q3",
+"v": 0.91
+},
+{
+"label": "2025Q4",
+"v": 0.95
+},
+{
+"label": "2026Q1",
+"v": 0.9
+},
+{
+"label": "2026Q2",
+"v": 0.84
+},
+{
+"label": "2026Q3",
+"v": 0.87
+}
+],
+"sources": [
+{
+"label": "Verizon 3Q26 Earnings Release (8-K Ex.99, 2026-10-26)",
+"url": "https://www.sec.gov/Archives/edgar/data/0000732712/000073271226000049/a2026q3exhibit99.htm"
+},
+{
+"label": "Verizon 2Q26 Earnings Release (8-K Ex.99, 2026-07-24)",
+"url": "https://www.sec.gov/Archives/edgar/data/0000732712/000073271226000040/a2026q2exhibit99.htm"
+},
+{
+"label": "Verizon 1Q26 Earnings Release (8-K Ex.99, 2026-04-27)",
+"url": "https://www.sec.gov/Archives/edgar/data/0000732712/000073271226000019/a2026q1exhibit99.htm"
+},
+{
+"label": "Verizon 4Q25/FY2025 Earnings Release (8-K Ex.99, 2026-01-30)",
+"url": "https://www.sec.gov/Archives/edgar/data/732712/000073271226000003/a2025q4exhibit99.htm"
+},
+{
+"label": "Verizon 3Q25 Earnings Release (8-K Ex.99, 2025-10-29)",
+"url": "https://www.sec.gov/Archives/edgar/data/732712/000073271225000114/a2025q3exhibit99.htm"
+},
+{
+"label": "Verizon 2Q25 Earnings Release (8-K Ex.99, 2025-07-21)",
+"url": "https://www.sec.gov/Archives/edgar/data/732712/000073271225000083/a2025q2exhibit99.htm"
+},
+{
+"label": "Verizon 1Q25 Earnings Release (8-K Ex.99, 2025-04-22)",
+"url": "https://www.sec.gov/Archives/edgar/data/732712/000073271225000021/a2025q1exhibit99.htm"
+},
+{
+"label": "Verizon 4Q24/FY2024 Earnings Release (8-K Ex.99.1, 2025-01-24)",
+"url": "https://www.sec.gov/Archives/edgar/data/732712/000073271225000003/a2024q4exhibit991.htm"
+},
+{
+"label": "Verizon 1Q26 Earnings Call Transcript (verizon.com, 2026-04-27)",
+"url": "https://www.verizon.com/about/sites/default/files/2026-06/vz_1q26_transcript_042726rm.pdf"
+},
+{
+"label": "Verizon 2Q26 Earnings Call Transcript (verizon.com, 2026-07-24)",
+"url": "https://www.verizon.com/about/sites/default/files/2026-08/vz_2q2026_transcript_072426rm.pdf"
+},
+{
+"label": "Verizon Investor Relations",
+"url": "https://www.verizon.com/about/investors"
+}
+]
+}
+},
+"kddi": {
+"company": "kddi",
+"currency": "JPY",
+"op_metric": "operating income (IFRS 영업이익)",
+"annual": [
+{
+"label": "FY2023 (2024.3월기)",
+"revenue": 5754047,
+"op": 961584
+},
+{
+"label": "FY2024 (2025.3월기)",
+"revenue": 5835525,
+"op": 1087468
+},
+{
+"label": "FY2025 (2026.3월기)",
+"revenue": 6071915,
+"op": 1099125
+}
+],
+"quarterly": [
+{
+"label": "FY25 2Q (2025.7-9)",
+"revenue": 1547427,
+"op": 317683
+},
+{
+"label": "FY25 3Q (2025.10-12)",
+"revenue": 1508635,
+"op": 279537
+},
+{
+"label": "FY25 4Q (2026.1-3)",
+"revenue": 1600119,
+"op": 242432
+},
+{
+"label": "FY26 1Q (2026.4-6)",
+"revenue": 1487316,
+"op": 314248
+}
+],
+"segments": {
+"label": "2026.3월기 세그먼트 매출 (operating revenue)",
+"items": [
+{
+"name": "퍼스널 (Personal Services)",
+"revenue": 4812737
+},
+{
+"name": "비즈니스 (Business Services)",
+"revenue": 1527914
+}
+]
+},
+"source": "KDDI 결산단신 (Financial Statements Summary, IFRS)",
+"url": "https://newsroom.kddi.com/english/ir-news/detail/kddi_ir-1148_4476.html",
+"note": "일본 회계연도(4월-익년 3월). FY2024(2025.3월기)는 자회사 가공거래(架空取引, 가공거래) 정정 반영 후 수치(2026.3월기 결산단신 비교치, 정정 전 원공시는 매출 5,917,953 / 영업이익 1,118,674). FY2023(2024.3월기)은 2025.5월 결산단신의 정정 전 공시 수치. 분기값은 누적 공시(1Q·상반기·9개월·연간) 차감으로 산출, FY26 1Q는 2027.3월기 1Q 결산단신 직접 공시. 2026.4-6월기부터 세그먼트가 Telecom Core/Personal Growth/Business Growth로 개편(1Q: 1,083,671/280,820/165,152).",
+"segments_annual": [
+{
+"label": "2024.3월기",
+"items": [
+{
+"name": "퍼스널(Personal)",
+"revenue": 4747034
+},
+{
+"name": "비즈니스(Business)",
+"revenue": 1289552
+}
+]
+},
+{
+"label": "2025.3월기",
+"items": [
+{
+"name": "퍼스널(Personal)",
+"revenue": 4795618
+},
+{
+"name": "비즈니스(Business)",
+"revenue": 1399787
+}
+]
+},
+{
+"label": "2026.3월기",
+"items": [
+{
+"name": "퍼스널(Personal)",
+"revenue": 4812737
+},
+{
+"name": "비즈니스(Business)",
+"revenue": 1527914
+}
+]
+}
+],
+"segments_quarterly": [
+{
+"label": "FY26.3 1Q(2025.4-6)",
+"items": [
+{
+"name": "퍼스널(Personal)",
+"revenue": 1134787
+},
+{
+"name": "비즈니스(Business)",
+"revenue": 349748
+}
+]
+},
+{
+"label": "FY26.3 2Q(2025.7-9)",
+"items": [
+{
+"name": "퍼스널(Personal)",
+"revenue": 1201754
+},
+{
+"name": "비즈니스(Business)",
+"revenue": 367959
+}
+]
+},
+{
+"label": "FY26.3 3Q(2025.10-12)",
+"items": [
+{
+"name": "퍼스널(Personal)",
+"revenue": 1239016
+},
+{
+"name": "비즈니스(Business)",
+"revenue": 383814
+}
+]
+},
+{
+"label": "FY26.3 4Q(2026.1-3)",
+"items": [
+{
+"name": "퍼스널(Personal)",
+"revenue": 1237180
+},
+{
+"name": "비즈니스(Business)",
+"revenue": 426393
+}
+]
+}
+],
+"seg_note": "3월 결산, 단위 백만 JPY, 세그먼트 매출(내부거래 포함, 합산치가 연결매출 초과). 2024.3월기·2025.3월기는 2025.3월기 결산단신 기준, 2026.3월기는 당기 결산단신 기준(동 공시에서 2025.3월기는 관계회사 세그먼트 변경으로 퍼스널 4,709,292 / 비즈니스",
+"kpi": {
+"capex_unit": "억 엔",
+"capex_def": "設備投資額（支払）/ Capex (cash flow basis) — 연결 기준 유형·무형자산 취득 지급액. KDDI는 決算詳細資料(Data Book)·決算短信에서 지급(현금)기준만 공시하며 発生ベース(accrual) CAPEX 행은 별도 공시하지 않음",
+"arpu_unit": "엔/월",
+"arpu_def": "モバイルARPU (Mobile ARPU, 연결): 모바일 통신수입(데이터·기본료·음성료·각종 할인·단말 보상서비스·콘텐츠 등) ÷ 主要回線(main subscriptions: 스마트폰·피처폰·태블릿·라우터 등) 평균 회선수. FY2025(2026.3期)부터 도입된 KPI로, 종전 パーソナルセグメント 'マルチブランド通信ARPU(収入)'(au·UQ mobile·povo 통신 ARPU)를 대체",
+"churn_def": "主要回線解約率 (Main subscriptions churn rate, 월간 %): 해지 회선수 ÷ 전월말 主要回線 누계. au·UQ mobile·povo 간 MNP 이동에 따른 해지는 제외. FY2025(2026.3期)부터 도입, 과거치는 KDDI가 FY2022(2023.3期)까지 소급 산출(참고 페이지)",
+"note": "[최신 공시] 최근 공표 분기는 FY2026(2027.3期) 1Q(2026.4-6, 2026.8.7 발표). 2Q(2026.7-9) 실적은 2026.10.30 기준 미발표(예년 11월 초 발표)로 미포함. [CAPEX] KDDI는 Data Book·決算短信에서 '設備投資額（支払）'(현금 지급기준)만 공시하고 発生ベース 행은 없음(2026.5 및 2026.8 Data Book, 결산설명회 자료 확인) → 지급기준으로 수집. 백만엔 공시치를 ÷100 하여 억엔 반올림(FY2021 676,461 / FY2022 627,544 / FY2023 749,297 / FY2024 682,931 / FY2025 679,005 백만엔). FY2024(2025.3期) 연간·분기치는 2026.5 Data Book 재표시치(restated) 사용 — 2025.5 Data Book 원공시치는 678,907(분기 150,223/143,317/169,919/215,448). 분기 CAPEX는 KDDI가 분기별로 직접 공시(누계 차감 불필요). FY2026(2027.3期) CAPEX 가이던스 7,200억엔(支払 기준)은 2026.5.12 결산 발표 시 공표, 2026.8.7 1Q Data Book에서 유지. [ARPU] FY2025(2026.3期)부터 KPI를 パーソナル세그먼트 'マルチブランド通信ARPU'(FY2023 3,930~3,990엔, FY2024 3,930~3,970엔)에서 연결 'モバイルARPU'로 변경하고 FY2022(2023.3期)까지 소급 산출(2025.8 Data Book 참고 페이지). 또한 FY2026(2027.3期) 세그먼트 재편(テレコムコア/パーソナルグロース/ビジネスグロース)에 따라 종전 パーソナル에서 その他로 이관된 서비스를 ARPU에서 제외, FY2025(2026.3期) 4개 분기를 재표시(원공시 4,340/4,460/4,550/4,420 → 재표시 4,240/4,350/4,440/4,310; 연간 4,440→4,330). 본 표는 FY2025 분기에 재표시치를 적용했으나 FY2023~FY2024 분기는 KDDI가 재표시치를 공표하지 않아 구정의 그대로이므로 2025.1-3→2025.4-6 구간은 완전 비교 불가. [Churn] FY2025(2026.3期)부터 '主要回線解約率'로 변경(종전 'マルチブランド解約率': FY2023 0.96/0.99/1.04/1.21, FY2024 1.11/1.15/1.30/1.55). 참고로 'うちスマートフォン解約率'는 FY23 2Q~FY26 1Q 순으로 0.95/1.00/1.19/1.06/1.09/1.24/1.46/1.23/1.21/1.23/1.48/1.17. ARPU·Churn에 대한 FY2026 가이던스는 미공표('-'). [자료] KDDI IR 라이브러리의 Excel Data Book은 결산 페이지에 링크되지 않아 PDF Data Book 사용. PDF 텍스트 추출 특성상 행·열 매핑은 분기 합계=연간 일치 등으로 검증함.",
+"fiscal_year_end": "3월",
+"capex_annual": [
+{
+"label": "FY2021(~2022.3)",
+"v": 6765
+},
+{
+"label": "FY2022(~2023.3)",
+"v": 6275
+},
+{
+"label": "FY2023(~2024.3)",
+"v": 7493
+},
+{
+"label": "FY2024(~2025.3)",
+"v": 6829
+},
+{
+"label": "FY2025(~2026.3)",
+"v": 6790
+},
+{
+"label": "FY2026(~2027.3) 가이던스",
+"v": 7200,
+"guidance": true
+}
+],
+"capex_quarterly": [
+{
+"label": "FY23 2Q(2023.7-9)",
+"v": 2724
+},
+{
+"label": "FY23 3Q(2023.10-12)",
+"v": 1602
+},
+{
+"label": "FY23 4Q(2024.1-3)",
+"v": 1774
+},
+{
+"label": "FY24 1Q(2024.4-6)",
+"v": 1522
+},
+{
+"label": "FY24 2Q(2024.7-9)",
+"v": 1427
+},
+{
+"label": "FY24 3Q(2024.10-12)",
+"v": 1710
+},
+{
+"label": "FY24 4Q(2025.1-3)",
+"v": 2171
+},
+{
+"label": "FY25 1Q(2025.4-6)",
+"v": 1545
+},
+{
+"label": "FY25 2Q(2025.7-9)",
+"v": 1198
+},
+{
+"label": "FY25 3Q(2025.10-12)",
+"v": 1838
+},
+{
+"label": "FY25 4Q(2026.1-3)",
+"v": 2208
+},
+{
+"label": "FY26 1Q(2026.4-6)",
+"v": 1559
+}
+],
+"arpu_quarterly": [
+{
+"label": "FY23 2Q(2023.7-9)",
+"v": 4280
+},
+{
+"label": "FY23 3Q(2023.10-12)",
+"v": 4330
+},
+{
+"label": "FY23 4Q(2024.1-3)",
+"v": 4290
+},
+{
+"label": "FY24 1Q(2024.4-6)",
+"v": 4280
+},
+{
+"label": "FY24 2Q(2024.7-9)",
+"v": 4320
+},
+{
+"label": "FY24 3Q(2024.10-12)",
+"v": 4360
+},
+{
+"label": "FY24 4Q(2025.1-3)",
+"v": 4380
+},
+{
+"label": "FY25 1Q(2025.4-6)",
+"v": 4240
+},
+{
+"label": "FY25 2Q(2025.7-9)",
+"v": 4350
+},
+{
+"label": "FY25 3Q(2025.10-12)",
+"v": 4440
+},
+{
+"label": "FY25 4Q(2026.1-3)",
+"v": 4310
+},
+{
+"label": "FY26 1Q(2026.4-6)",
+"v": 4400
+}
+],
+"churn_quarterly": [
+{
+"label": "FY23 2Q(2023.7-9)",
+"v": 1.04
+},
+{
+"label": "FY23 3Q(2023.10-12)",
+"v": 1.07
+},
+{
+"label": "FY23 4Q(2024.1-3)",
+"v": 1.26
+},
+{
+"label": "FY24 1Q(2024.4-6)",
+"v": 1.13
+},
+{
+"label": "FY24 2Q(2024.7-9)",
+"v": 1.14
+},
+{
+"label": "FY24 3Q(2024.10-12)",
+"v": 1.26
+},
+{
+"label": "FY24 4Q(2025.1-3)",
+"v": 1.5
+},
+{
+"label": "FY25 1Q(2025.4-6)",
+"v": 1.27
+},
+{
+"label": "FY25 2Q(2025.7-9)",
+"v": 1.25
+},
+{
+"label": "FY25 3Q(2025.10-12)",
+"v": 1.26
+},
+{
+"label": "FY25 4Q(2026.1-3)",
+"v": 1.54
+},
+{
+"label": "FY26 1Q(2026.4-6)",
+"v": 1.21
+}
+],
+"sources": [
+{
+"label": "KDDI 2027年3月期 第1四半期 決算詳細資料(Data Book) 2026.8.7",
+"url": "https://newsroom.kddi.com/ir-news/assets/2026/kddi_ir-1210_4659/kddi_260807_data_448JP6.pdf"
+},
+{
+"label": "KDDI 2027年3月期 第1四半期 決算短信 2026.8.7",
+"url": "https://newsroom.kddi.com/ir-news/assets/2026/kddi_ir-1210_4659/kddi_2027_1qc_fRT19b.pdf"
+},
+{
+"label": "KDDI 2026年3月期 決算詳細資料(Data Book) 2026.5.12",
+"url": "https://newsroom.kddi.com/ir-news/assets/2026/kddi_ir-1148_4471/kddi_260512_data_LBXYp4.pdf"
+},
+{
+"label": "KDDI FY2026.3 Presentation (English) 2026.5.12",
+"url": "https://newsroom.kddi.com/english/ir-news/assets/2026/kddi_ir-1148_4476/kddi_260512_e_main_AOyaWA.pdf"
+},
+{
+"label": "KDDI 2026年3月期 第1四半期 決算詳細資料(Data Book) 2025.8.1",
+"url": "https://newsroom.kddi.com/ir-news/assets/2025/kddi_ir-1021_4033/kddi_250801_data_AouoRG.pdf"
+},
+{
+"label": "KDDI Data Book FY2025.3 (English) 2025.5.14",
+"url": "https://newsroom.kddi.com/english/ir-news/assets/2025/kddi_ir-927_3874/kddi_250514_e_data_PdsQR1.pdf"
+},
+{
+"label": "KDDI Data Book FY2024.3 (English) 2024.5.10",
+"url": "https://news.kddi.com/kddi/corporate/english/ir-news/2024/05/10/pdf/kddi_240510_e_data_E0fqCl.pdf"
+},
+{
+"label": "KDDI Data Book FY2023.3 (English) 2023.5.11",
+"url": "https://news.kddi.com/kddi/corporate/english/ir-news/2023/05/11/pdf/kddi_230511_e_data_Himuij.pdf"
+},
+{
+"label": "KDDI IR Library (Presentation materials / Data Book)",
+"url": "https://www.kddi.com/english/corporate/ir/ir-library/presentation/"
+}
+]
+}
+},
+"도코모": {
+"company": "도코모",
+"currency": "JPY",
+"op_metric": "operating profit (IFRS 영업이익)",
+"annual": [
+{
+"label": "FY2023 (2024.3월기)",
+"revenue": 6140000,
+"op": 1144400
+},
+{
+"label": "FY2024 (2025.3월기)",
+"revenue": 6213100,
+"op": 1020500
+},
+{
+"label": "FY2025 (2026.3월기)",
+"revenue": 6458100,
+"op": 942100
+}
+],
+"quarterly": [
+{
+"label": "FY25 2Q (2025.7-9)",
+"revenue": 1542600,
+"op": 235000
+},
+{
+"label": "FY25 3Q (2025.10-12)",
+"revenue": 1627000,
+"op": 270700
+},
+{
+"label": "FY25 4Q (2026.1-3)",
+"revenue": 1798400,
+"op": 196700
+},
+{
+"label": "FY26 1Q (2026.4-6)",
+"revenue": 1617000,
+"op": 246200
+}
+],
+"segments": {
+"label": "FY2025 (2026.3월기) 세그먼트 매출 (operating revenues)",
+"items": [
+{
+"name": "컨슈머 통신 (Consumer Communications)",
+"revenue": 3284600
+},
+{
+"name": "스마트라이프 (Smart Life)",
+"revenue": 1432700
+},
+{
+"name": "법인 (Enterprise)",
+"revenue": 2024600
+}
+]
+},
+"source": "NTT DOCOMO Group Financial Position and Results / 결산 프레젠테이션 (도코모 IR)",
+"url": "https://www.docomo.ne.jp/english/corporate/ir/binary/pdf/library/presentation/260508/nttdocomogroup_financial_position_and_results_fy2025_4q_e.pdf",
+"note": "NTT 연결이 아닌 NTT도코모그룹(신도코모그룹: 도코모+NTT컴+NTT콤웨어 포함) 사업 기준. 도코모 비상장으로 해당 재무제표는 '비감사 참고정보(non-audit reference)'로 공시됨. 수치는 10억엔 단위 공시를 백만엔 환산(정밀도 1억엔). 분기값은 1Q·상반기·9개월·연간 누적 공시 차감 산출, FY26 1Q는 2026.8월 공시 직접 수치. 세그먼트 매출은 세그먼트간 거래 포함이라 합계가 연결매출과 불일치.",
+"segments_annual": [
+{
+"label": "2024.3월기",
+"items": [
+{
+"name": "컨슈머통신",
+"revenue": 3424800
+},
+{
+"name": "스마트라이프",
+"revenue": 1090800
+},
+{
+"name": "법인",
+"revenue": 1881700
+}
+]
+},
+{
+"label": "2025.3월기",
+"items": [
+{
+"name": "컨슈머통신",
+"revenue": 3354500
+},
+{
+"name": "스마트라이프",
+"revenue": 1227900
+},
+{
+"name": "법인",
+"revenue": 1902700
+}
+]
+},
+{
+"label": "2026.3월기",
+"items": [
+{
+"name": "컨슈머통신",
+"revenue": 3284600
+},
+{
+"name": "스마트라이프",
+"revenue": 1432700
+},
+{
+"name": "법인",
+"revenue": 2024600
+}
+]
+}
+],
+"segments_quarterly": [
+{
+"label": "FY2025 2Q(2025.7-9)",
+"items": [
+{
+"name": "컨슈머통신",
+"revenue": 806700
+},
+{
+"name": "스마트라이프",
+"revenue": 323800
+},
+{
+"name": "법인",
+"revenue": 482000
+}
+]
+},
+{
+"label": "FY2025 3Q(2025.10-12)",
+"items": [
+{
+"name": "컨슈머통신",
+"revenue": 822800
+},
+{
+"name": "스마트라이프",
+"revenue": 387000
+},
+{
+"name": "법인",
+"revenue": 488000
+}
+]
+},
+{
+"label": "FY2025 4Q(2026.1-3)",
+"items": [
+{
+"name": "컨슈머통신",
+"revenue": 855400
+},
+{
+"name": "스마트라이프",
+"revenue": 420800
+},
+{
+"name": "법인",
+"revenue": 598600
+}
+]
+},
+{
+"label": "FY2026 1Q(2026.4-6)",
+"items": [
+{
+"name": "컨슈머통신",
+"revenue": 792800
+},
+{
+"name": "스마트라이프",
+"revenue": 418400
+},
+{
+"name": "법인",
+"revenue": 479600
+}
+]
+}
+],
+"seg_note": "3월 결산(도코모 표기 FY2023=2024.3월기), 단위 백만 JPY(공시 억엔×100 환산), IFRS·비감사 사내관리 수치. 컨슈머통신+스마트라이프=컨슈머 부문(참고 분해치). 분기 수치 중 FY2025 2Q~4Q는 누적 공시 차감 산출(2Q=상반기−1Q, 3Q=9개월−상반기, ",
+"kpi": {
+"capex_unit": "억 엔",
+"capex_def": "設備投資(IFRS, 발생주의 기준 유형자산·무형자산 취득액) — 도코모그룹(NTT 총합ICT사업 세그먼트) 기준",
+"arpu_unit": "엔/월",
+"arpu_def": "モバイル通信ARPU(모바일 통신 ARPU, 법인명의 포함) — 통신모듈·MVNO 도매 등 제외한 계약수 기준 1계약당 월평균 수입",
+"churn_def": "ハンドセット解約率(핸드셋 해약률, 월평균 %, 법인명의 포함) — 음성통화 가능 요금플랜의 해약률(2in1 제외, MVNO 제외)",
+"note": "① 범위: 도코모는 2020.12 상장폐지 후 NTT 100% 자회사이나 결산설명자료를 자체 공시하며, 데이터집(ARPU·해약률·분기 설비투자 표)은 FY2021부터 NTT 決算補足資料(결산보충자료)로 이관됨. 연간 CAPEX FY2021~FY2025는 도코모그룹(NTT Com·NTT Comware 포함, NTT 총합ICT사업 세그먼트와 동일) 기준이며, 도코모 단체(株式会社NTTドコモ) 기준 FY2021은 5,481억엔. ② FY2026 CAPEX 가이던스 8,570억엔은 2026.5.8 발표(단일값, 전년 대비 ▲5억엔). FY2025 당초 가이던스는 8,750억엔(2025.5.9)이었고 실적 8,575억엔. ③ 분기 CAPEX: FY2024·FY2025·FY2026 1Q는 NTT 보충자료 분기표(단위 10억엔→억엔 환산, 소수 1자리). FY2023 2Q~4Q는 도코모 설명자료의 누계(1Q 1,214 / 상반기 2,601 / 3Q누계 4,185 / 연간 7,054)에서 누계 차감 산출. FY2025 분기 합계 8,576 vs 연간 8,575는 반올림 차이. ④ ARPU 정의 변경: FY2021까지는 総合ARPU(모바일ARPU+ドコモ光ARPU, 월 4,000엔대 초반)를 공시했으나, 2022.1 신도코모그룹 출범 이후 'モバイル通信ARPU(법인명의 포함)'로 공시 체계가 바뀌어 総合ARPU는 더 이상 공시되지 않음 — 본 시계열은 모두 モバイル通信ARPU. FY2025 1Q~FY2026 1Q는 NTT 2026.8.6 보충자료 ARPU표(신규 게재) 값, FY2024 1Q·2Q·3Q는 도코모 설명자료 차트(FY24 1Q는 FY25 1Q·FY26 1Q 자료의 3,920 사용; FY24 2Q 자료 텍스트는 3,910으로 추출돼 불일치 가능). FY2023 2Q(4,000)·3Q(3,990)은 FY2024 3Q 설명자료에 표기된 전년동기비(▲90엔, ▲70엔)로 역산한 값. FY2023 4Q·FY2024 4Q 분기값은 공식자료에서 확인 불가(null; 연간 ARPU는 FY23 3,980 / FY24 3,940 / FY25 3,960, FY26 목표 4,010). ⑤ 해약률: 도코모 설명자료 각주 'ハンドセット解約率(全名義)', NTT 보충자료 각주 '음성통화 가능 요금플랜의 해약률(2in1 제외), MVNO 제외'. FY2024 1Q~FY2026 1Q는 NTT 보충자료 표 값, FY2023 2Q~4Q는 도코모 FY2024 3Q 설명자료 차트(FY23 1Q~FY24 3Q 순서, FY24 구간이 NTT 표와 일치함을 확인) 값. 연간 평균 FY24 0.67% / FY25 0.76%. FY2025 4Q(0.93%)·FY2026 1Q(0.96%) 상승은 도코모 자료에서 별도 설명 없음. ⑥ 도코모 자체 설명자료는 FY2025 2Q 이후 해약률·분기 ARPU 차트를 생략하고 MNP·포트인 지표로 대체하는 추세.",
+"fiscal_year_end": "3월",
+"capex_annual": [
+{
+"label": "FY2021",
+"v": 6986
+},
+{
+"label": "FY2022",
+"v": 7063
+},
+{
+"label": "FY2023",
+"v": 7054
+},
+{
+"label": "FY2024",
+"v": 7143
+},
+{
+"label": "FY2025",
+"v": 8575
+},
+{
+"label": "FY2026 가이던스",
+"v": 8570,
+"guidance": true
+}
+],
+"capex_quarterly": [
+{
+"label": "FY23 2Q(2023.7-9)",
+"v": 1387
+},
+{
+"label": "FY23 3Q(2023.10-12)",
+"v": 1584
+},
+{
+"label": "FY23 4Q(2024.1-3)",
+"v": 2869
+},
+{
+"label": "FY24 1Q(2024.4-6)",
+"v": 1200
+},
+{
+"label": "FY24 2Q(2024.7-9)",
+"v": 1375
+},
+{
+"label": "FY24 3Q(2024.10-12)",
+"v": 1756
+},
+{
+"label": "FY24 4Q(2025.1-3)",
+"v": 2812
+},
+{
+"label": "FY25 1Q(2025.4-6)",
+"v": 1849
+},
+{
+"label": "FY25 2Q(2025.7-9)",
+"v": 1707
+},
+{
+"label": "FY25 3Q(2025.10-12)",
+"v": 2103
+},
+{
+"label": "FY25 4Q(2026.1-3)",
+"v": 2917
+},
+{
+"label": "FY26 1Q(2026.4-6)",
+"v": 1970
+}
+],
+"arpu_quarterly": [
+{
+"label": "FY23 2Q(2023.7-9)",
+"v": 4000
+},
+{
+"label": "FY23 3Q(2023.10-12)",
+"v": 3990
+},
+{
+"label": "FY23 4Q(2024.1-3)",
+"v": null
+},
+{
+"label": "FY24 1Q(2024.4-6)",
+"v": 3920
+},
+{
+"label": "FY24 2Q(2024.7-9)",
+"v": 3910
+},
+{
+"label": "FY24 3Q(2024.10-12)",
+"v": 3920
+},
+{
+"label": "FY24 4Q(2025.1-3)",
+"v": null
+},
+{
+"label": "FY25 1Q(2025.4-6)",
+"v": 3920
+},
+{
+"label": "FY25 2Q(2025.7-9)",
+"v": 3960
+},
+{
+"label": "FY25 3Q(2025.10-12)",
+"v": 3990
+},
+{
+"label": "FY25 4Q(2026.1-3)",
+"v": 3980
+},
+{
+"label": "FY26 1Q(2026.4-6)",
+"v": 3990
+}
+],
+"churn_quarterly": [
+{
+"label": "FY23 2Q(2023.7-9)",
+"v": 0.59
+},
+{
+"label": "FY23 3Q(2023.10-12)",
+"v": 0.6
+},
+{
+"label": "FY23 4Q(2024.1-3)",
+"v": 0.7
+},
+{
+"label": "FY24 1Q(2024.4-6)",
+"v": 0.7
+},
+{
+"label": "FY24 2Q(2024.7-9)",
+"v": 0.6
+},
+{
+"label": "FY24 3Q(2024.10-12)",
+"v": 0.63
+},
+{
+"label": "FY24 4Q(2025.1-3)",
+"v": 0.75
+},
+{
+"label": "FY25 1Q(2025.4-6)",
+"v": 0.69
+},
+{
+"label": "FY25 2Q(2025.7-9)",
+"v": 0.69
+},
+{
+"label": "FY25 3Q(2025.10-12)",
+"v": 0.74
+},
+{
+"label": "FY25 4Q(2026.1-3)",
+"v": 0.93
+},
+{
+"label": "FY26 1Q(2026.4-6)",
+"v": 0.96
+}
+],
+"sources": [
+{
+"label": "NTT 2026年度 第1四半期決算補足資料 (2026.8.6) — 設備投資·ハンドセット解約率·ARPU 분기표",
+"url": "https://group.ntt/jp/newsrelease/2026/08/06/pdf/260806ac.pdf"
+},
+{
+"label": "NTT 2025年度 決算補足資料 (2026.5.8) — FY24·FY25 분기 해약률",
+"url": "https://group.ntt/jp/newsrelease/2026/05/08/pdf/260508ac.pdf"
+},
+{
+"label": "NTT 2025年度 第2四半期決算補足資料 (2025.11.4) — FY24 분기 設備投資·해약률",
+"url": "https://group.ntt/jp/newsrelease/2025/11/04/pdf/251104ac.pdf"
+},
+{
+"label": "NTT 決算短信 FY2024 (2025.5.9, 영문) — 총합ICT 세그먼트 설비투자 FY2023·FY2024",
+"url": "https://group.ntt/en/newsrelease/2025/05/09/pdf/250509ac.pdf"
+},
+{
+"label": "NTT도코모 財務ハイライト (주요 재무데이터 FY2020–FY2025)",
+"url": "https://www.docomo.ne.jp/corporate/ir/binary/pdf/library/finance/highlight/highlight.pdf"
+},
+{
+"label": "NTT도코모 2026年度 第1四半期決算説明資料 (2026.8.6)",
+"url": "https://www.docomo.ne.jp/corporate/ir/binary/pdf/library/presentation/260806/presentation_fy2026_1q.pdf"
+},
+{
+"label": "NTT도코모 2025年度決算·2026年度業績予想 説明資料 (2026.5.8) — FY2026 CAPEX 가이던스 8,570억엔",
+"url": "https://www.docomo.ne.jp/corporate/ir/binary/pdf/library/presentation/260508/presentation_fy2025_4q.pdf"
+},
+{
+"label": "NTT도코모 2025年度 第1四半期決算説明資料 (2025.8.6)",
+"url": "https://www.docomo.ne.jp/corporate/ir/binary/pdf/library/presentation/250806/presentation_fy2025_1q.pdf"
+},
+{
+"label": "NTT도코모 2024年度決算説明資料 (2025.5.9)",
+"url": "https://cas.docomo.ne.jp/corporate/ir/binary/pdf/library/presentation/250509/presentation_fy2024_4q.pdf"
+},
+{
+"label": "NTT도코모 2024年度 第3四半期決算説明資料 (2025.2.7) — 분기 ARPU·해약률 차트",
+"url": "https://cas.docomo.ne.jp/corporate/ir/binary/pdf/library/presentation/250207/presentation_fy2024_3q.pdf"
+},
+{
+"label": "NTT도코모 2024年度 第2四半期決算説明資料 (2024.11.7)",
+"url": "https://cas.docomo.ne.jp/corporate/ir/binary/pdf/library/presentation/241107/presentation_fy2024_2q.pdf"
+},
+{
+"label": "NTT도코모 2024年度 第1四半期決算説明資料 (2024.8.7)",
+"url": "https://www.docomo.ne.jp/corporate/ir/binary/pdf/library/presentation/240807/presentation_fy2024_1q.pdf"
+},
+{
+"label": "NTT도코모 2023年度 第2四半期決算説明資料 (2023.11.7)",
+"url": "https://www.docomo.ne.jp/corporate/ir/binary/pdf/library/presentation/231107/presentation_fy2023_2q.pdf"
+},
+{
+"label": "NTT도코모 IR 결산설명자료 아카이브 FY2025 (데이터집은 FY2021부터 NTT 補足資料로 이관 안내)",
+"url": "https://www.docomo.ne.jp/corporate/ir/library/presentation/archive/fy2025.html"
+}
+]
+}
+},
+"지오": {
+"company": "지오",
+"currency": "INR",
+"op_metric": "EBITDA (revenue는 revenue from operations 기준)",
+"annual": [
+{
+"label": "FY24 (2024.3월 종료)",
+"revenue": 1095580,
+"op": 549590
+},
+{
+"label": "FY25 (2025.3월 종료)",
+"revenue": 1282180,
+"op": 641700
+},
+{
+"label": "FY26 (2026.3월 종료)",
+"revenue": 1468850,
+"op": 762550
+}
+],
+"quarterly": [
+{
+"label": "FY26 2Q (2025.7-9)",
+"revenue": 363320,
+"op": 187570
+},
+{
+"label": "FY26 3Q (2025.10-12)",
+"revenue": 372620,
+"op": 193030
+},
+{
+"label": "FY26 4Q (2026.1-3)",
+"revenue": 382590,
+"op": 200600
+},
+{
+"label": "FY27 1Q (2026.4-6)",
+"revenue": 391730,
+"op": 208650
+}
+],
+"segments": null,
+"source": "Reliance Industries 분기 Media Release / Analyst Presentation",
+"url": "https://www.ril.com/sites/default/files/2026-04/24042026_Media_Release_RIL_Q4_FY2025-26_Financial_and_Operational_Performance.pdf",
+"note": "Jio Platforms Limited(JPL) 연결 기준(RJIL 단독 아님, 디지털 서비스 포함). 인도 회계연도(4월-익년 3월), FY26은 2026.3월로 종료 완료. 원공시 크로어(crore)를 백만 INR로 환산(x10). 영업이익 미공시로 EBITDA 사용. 총매출(gross revenue, 간접세 포함) 기준 FY26 1,723,170 / FY27 1Q 459,610. FY27 1Q 순이익 77,640 (PAT).",
+"kpi": {
+"capex_unit": "억 루피(₹ crore)",
+"capex_def": "Jio Platforms Ltd. 'Cash Capex' — 유형자산·주파수(spectrum)·기타 무형자산 취득 현금지출(처분수입 차감). RIL 분기 실적자료는 연결 CAPEX(주파수 제외)만 공시하고 Jio/Digital Services 세그먼트 CAPEX는 미공시",
+"arpu_unit": "루피/월",
+"arpu_def": "Jio Platforms(RJIL Connectivity) ARPU — ₹ per subscriber per month (RIL 분기 실적 Media Release 'Jio Platforms Operational Data' 표 기준)",
+"churn_def": "Jio 무선 가입자 월평균 해지율(Monthly churn, %) — RIL 분기 Media Release / Analyst Presentation 'Monthly Churn %' 기준(소수 1자리 공시)",
+"note": "① 최신 공시 분기: 1Q FY27(2026.4-6, 2026.7.17 발표). 2Q FY27(2026.7-9) 실적은 Jio Platforms 상장(2026.10.28 NSE/BSE 상장, IPO 공모가 ₹1,119) 후 첫 실적으로 2026.10.30(금) 장 마감 후 발표 예정 — 본 수집 시점(2026.10.30 13:30 IST) 기준 미발표라 제외. ② CAPEX: RIL은 분기·연간 실적자료에서 연결 CAPEX(주파수 제외; FY22 99,472 / FY23 141,809 / FY24 131,769 / FY25 131,107 / FY26 144,271 crore)만 공시하고 Jio/Digital Services 세그먼트 CAPEX는 분기·연간 모두 미공시 → 분기 CAPEX 전부 null. 연간 FY24~FY26 값은 Jio Platforms IPO 공시서류(Abridged Prospectus/DRHP) KPI표의 EBITDA와 'EBITDA less Cash Capex'(₹ million: FY24 549,587/14,491, FY25 641,700/199,020, FY26 762,554/420,711) 차감으로 산출(Cash Capex = EBITDA − (EBITDA less Cash Capex); ₹ million→crore 환산). Cash Capex는 주파수 포함 현금지출 기준이므로 RIL 연결 CAPEX(주파수 제외)와 정의가 다름. FY22·FY23은 공식 Jio 단독 CAPEX 공시를 확보하지 못해 null(RJIL 재무제표 현금흐름표 수치는 회사 공시 'CAPEX' 정의가 아니므로 미기재). FY2027 CAPEX 가이던스: RIL·JPL 모두 수치 가이던스 미발표. ③ ARPU: 전 기간 동일 정의(₹/subscriber/month). 2Q FY24~1Q FY25 4개 분기 연속 181.7. ④ Churn: RIL 자료는 소수 1자리(%)로 공시. 4Q FY24(2024.1-3) 1.52%는 RIL 4Q FY24 Media Release(ril.com 원본 접근 불가)를 대신해 JPL 공시서류의 FY24 결산분기(exit quarter) 월간 해지율을 사용 — 소수 2자리라 타 분기와 정밀도 상이(동 서류상 FY25 1.81%, FY26 1.67%는 RIL 공시 1.8%/1.7%와 일치). 2Q FY24(2023.7-9)·2Q FY25(2024.7-9) 해지율은 해당 분기 RIL Media Release 원본 PDF를 열 수 없고 Analyst Presentation·콜 트랜스크립트에도 수치가 없어 null(2Q FY25는 요금 인상 후 SIM 통합으로 해지율 상승을 정성적으로만 언급). ⑤ Jio Platforms IR 연락처: jpl.investorrelations@jio.com (상장 직후로 별도 IR 실적 페이지 미확인).",
+"fiscal_year_end": "3월",
+"capex_annual": [
+{
+"label": "FY2022",
+"v": null
+},
+{
+"label": "FY2023",
+"v": null
+},
+{
+"label": "FY2024",
+"v": 53509.6
+},
+{
+"label": "FY2025",
+"v": 44268.0
+},
+{
+"label": "FY2026",
+"v": 34184.3
+}
+],
+"arpu_quarterly": [
+{
+"label": "FY24 2Q(2023.7-9)",
+"v": 181.7
+},
+{
+"label": "FY24 3Q(2023.10-12)",
+"v": 181.7
+},
+{
+"label": "FY24 4Q(2024.1-3)",
+"v": 181.7
+},
+{
+"label": "FY25 1Q(2024.4-6)",
+"v": 181.7
+},
+{
+"label": "FY25 2Q(2024.7-9)",
+"v": 195.1
+},
+{
+"label": "FY25 3Q(2024.10-12)",
+"v": 203.3
+},
+{
+"label": "FY25 4Q(2025.1-3)",
+"v": 206.2
+},
+{
+"label": "FY26 1Q(2025.4-6)",
+"v": 208.8
+},
+{
+"label": "FY26 2Q(2025.7-9)",
+"v": 211.4
+},
+{
+"label": "FY26 3Q(2025.10-12)",
+"v": 213.7
+},
+{
+"label": "FY26 4Q(2026.1-3)",
+"v": 214.0
+},
+{
+"label": "FY27 1Q(2026.4-6)",
+"v": 215.6
+}
+],
+"churn_quarterly": [
+{
+"label": "FY24 2Q(2023.7-9)",
+"v": null
+},
+{
+"label": "FY24 3Q(2023.10-12)",
+"v": 1.7
+},
+{
+"label": "FY24 4Q(2024.1-3)",
+"v": 1.52
+},
+{
+"label": "FY25 1Q(2024.4-6)",
+"v": 1.7
+},
+{
+"label": "FY25 2Q(2024.7-9)",
+"v": null
+},
+{
+"label": "FY25 3Q(2024.10-12)",
+"v": 2.0
+},
+{
+"label": "FY25 4Q(2025.1-3)",
+"v": 1.8
+},
+{
+"label": "FY26 1Q(2025.4-6)",
+"v": 1.8
+},
+{
+"label": "FY26 2Q(2025.7-9)",
+"v": 1.9
+},
+{
+"label": "FY26 3Q(2025.10-12)",
+"v": 1.8
+},
+{
+"label": "FY26 4Q(2026.1-3)",
+"v": 1.7
+},
+{
+"label": "FY27 1Q(2026.4-6)",
+"v": 1.6
+}
+],
+"sources": [
+{
+"label": "RIL 1Q FY27 Analyst Meeting Presentation (2026.7.17) — ARPU/Churn 1Q FY26·4Q FY26·1Q FY27, 연결 CAPEX",
+"url": "https://www.ril.com/sites/default/files/2026-07/Presentation_for_RIL_Analyst_Meeting_v17072026.pdf"
+},
+{
+"label": "RIL Media Release 4Q FY26 (2026.4.24) — ARPU 4Q FY26·3Q FY26·4Q FY25, Churn 4Q FY26, 연결 CAPEX FY26",
+"url": "https://www.ril.com/sites/default/files/2026-04/24042026_Media_Release_RIL_Q4_FY2025-26_Financial_and_Operational_Performance.pdf"
+},
+{
+"label": "RIL FY2025-26 Analyst Meeting Presentation (2026.4.24) — Churn 4Q FY25·3Q FY26·4Q FY26",
+"url": "https://www.ril.com/sites/default/files/2026-04/FY2025-26_RIL_Analyst_Meeting.pdf"
+},
+{
+"label": "RIL Media Release 3Q FY26 (2026.1.16) — ARPU 3Q FY26·2Q FY26·3Q FY25, Churn 3Q FY26",
+"url": "https://www.ril.com/sites/default/files/2026-01/SE_16012026_MR.pdf"
+},
+{
+"label": "RIL Media Release 2Q FY26 (2025.10.17) — ARPU 2Q FY26·1Q FY26·2Q FY25, Churn 2Q FY26",
+"url": "https://www.ril.com/sites/default/files/2025-10/Media_Release_RIL_Q2_FY2025-26_Financial_and_Operational_Performance.pdf"
+},
+{
+"label": "RIL Media Release 4Q FY25 (2025.4.25) — ARPU 4Q FY25·3Q FY25·4Q FY24, Churn 4Q FY25",
+"url": "https://www.ril.com/sites/default/files/2025-04/25042025_Media_Release_RIL_Q4_FY2024_25_Financial_and_Operational_Performance.pdf"
+},
+{
+"label": "RIL 4Q FY25 Analyst Presentation (2025.4.25)",
+"url": "https://www.ril.com/sites/default/files/2025-04/RIL_4Q_FY25_Analyst_Presentation_25Apr25.pdf"
+},
+{
+"label": "RIL Media Release 3Q FY25 (2025.1.16) — ARPU 3Q FY25·2Q FY25·3Q FY24, Churn 3Q FY25",
+"url": "https://www.ril.com/sites/default/files/2025-01/16012025-Media_Release-RIL_Q3_FY2024-25Financial_and_Operational_Performance.pdf"
+},
+{
+"label": "RIL 2Q FY25 Analyst Presentation (2024.10.14, NSE 공시) — ARPU 2Q FY25·1Q FY25·2Q FY24",
+"url": "https://nsearchives.nseindia.com/corporate/RELIANCE_14102024213242_Presentation.pdf"
+},
+{
+"label": "RIL Media Release 1Q FY25 (2024.7.19) — ARPU 1Q FY25·4Q FY24·1Q FY24, Churn 1Q FY25 (ril.com 원본 PDF 미개방으로 동일 PDF 사본 인용)",
+"url": "https://www.communicationstoday.co.in/wp-content/uploads/2024/07/19072024-Media-Release-RIL-Q1-FY2024-25-Financial-and-Operational-Performance.pdf"
+},
+{
+"label": "RIL Media Release 3Q FY24 (2024.1.19, BSE 공시) — ARPU 3Q FY24·2Q FY24·3Q FY23, Churn 3Q FY24",
+"url": "https://bseindia.com/xml-data/corpfiling/AttachHis/2564cf88-3a20-46c2-8c29-95b6e8c62b97.pdf"
+},
+{
+"label": "Jio Platforms Ltd. Abridged Prospectus / DRHP KPI (SEBI 게재, 2026.6) — FY24·FY25·FY26 EBITDA, 'EBITDA less Cash Capex', 결산 분기 ARPU·Churn(1.52%/1.81%/1.67%)",
+"url": "https://www.sebi.gov.in/sebi_data/commondocs/jun-2026/Jio%20Platforms%20Ltd_p.PDF"
+},
+{
+"label": "Jio Platforms Ltd. Draft Abridged Prospectus (BofA 공식 게재본, 동일 KPI)",
+"url": "https://business.bofa.com/content/dam/flagship/in/en/investment-banking/Jio-Platforms-Limited-Draft-Abridged-Prospectus.pdf"
+},
+{
+"label": "RIL Investor Relations (실적자료 원본 페이지)",
+"url": "https://www.ril.com/investors/financial-reporting"
+}
+]
+}
+},
+"skt": {
+"company": "skt",
+"currency": "KRW_B",
+"op_metric": "영업이익",
+"annual": [
+{
+"label": "FY2023",
+"revenue": 17608.5,
+"op": 1753.2
+},
+{
+"label": "FY2024",
+"revenue": 17940.6,
+"op": 1823.4
+},
+{
+"label": "FY2025",
+"revenue": 17099.2,
+"op": 1073.2
+}
+],
+"quarterly": [
+{
+"label": "2025 Q3",
+"revenue": 3978.1,
+"op": 48.4
+},
+{
+"label": "2025 Q4",
+"revenue": 4328.7,
+"op": 119.1
+},
+{
+"label": "2026 Q1",
+"revenue": 4392.3,
+"op": 537.6
+},
+{
+"label": "2026 Q2",
+"revenue": 4359.1,
+"op": 566.0
+}
+],
+"segments": {
+"label": "FY2025",
+"items": [
+{
+"name": "SKT 별도(이동통신 중심)",
+"revenue": 12051.0
+},
+{
+"name": "SK브로드밴드(유선)",
+"revenue": 4533.6
+},
+{
+"name": "기타 자회사",
+"revenue": 514.8
+}
+]
+},
+"source": "SK텔레콤 4Q25 실적발표 보도자료(2026-02-05) 및 2Q26 Investor Briefing(2026-08-05), 세그먼트는 IBK투자증권 리포트(2026-02-06, 회사 잠정공시 기준)",
+"url": "https://www.sktelecom.com/img/kor/qua/20260205/PressRelease4Q25_Kor.pdf",
+"note": "연결 기준. FY2025 영업이익 -41.1% 급감은 2025년 4월 유심 해킹 사고 여파(위약금 면제·고객 보상 등)로 3Q25 영업이익 484억원까지 하락 후 2026년 들어 분기 5천억원대로 회복. 2Q26 AIDC 매출 전년비 +92.5%. 세그먼트 합계(17,099.4)는 연결 매출과 일치(잠정치 반올림 차이 존재).",
+"segments_annual": [
+{
+"label": "FY2023",
+"items": [
+{
+"name": "SKT 별도(무선)",
+"revenue": 12589
+},
+{
+"name": "SK브로드밴드(유선)",
+"revenue": 4279
+},
+{
+"name": "기타(기타 자회사·연결조정, 산출)",
+"revenue": 741
+},
+{
+"name": "연결 매출 합계",
+"revenue": 17609
+}
+]
+},
+{
+"label": "FY2024",
+"items": [
+{
+"name": "SKT 별도(무선)",
+"revenue": 12774.1
+},
+{
+"name": "SK브로드밴드(유선)",
+"revenue": 4411.0
+},
+{
+"name": "기타(기타 자회사·연결조정, 산출)",
+"revenue": 755.5
+},
+{
+"name": "연결 매출 합계",
+"revenue": 17940.6
+}
+]
+},
+{
+"label": "FY2025",
+"items": [
+{
+"name": "SKT 별도(무선)",
+"revenue": 12051.1
+},
+{
+"name": "SK브로드밴드(유선)",
+"revenue": 4533.6
+},
+{
+"name": "기타(기타 자회사·연결조정, 산출)",
+"revenue": 514.5
+},
+{
+"name": "연결 매출 합계",
+"revenue": 17099.2
+}
+]
+}
+],
+"segments_quarterly": [
+{
+"label": "2025 Q3",
+"items": [
+{
+"name": "SKT 별도(무선)",
+"revenue": 2664.7
+},
+{
+"name": "SK브로드밴드(유선)",
+"revenue": 1142.6
+},
+{
+"name": "기타(산출)",
+"revenue": 170.8
+},
+{
+"name": "연결 매출 합계",
+"revenue": 3978.1
+}
+]
+},
+{
+"label": "2025 Q4",
+"items": [
+{
+"name": "SKT 별도(무선)",
+"revenue": 3083.7
+},
+{
+"name": "SK브로드밴드(유선)",
+"revenue": 1157.3
+},
+{
+"name": "기타(산출)",
+"revenue": 87.7
+},
+{
+"name": "연결 매출 합계",
+"revenue": 4328.7
+}
+]
+},
+{
+"label": "2026 Q1",
+"items": [
+{
+"name": "SKT 별도(무선)",
+"revenue": 3105.8
+},
+{
+"name": "SK브로드밴드(유선)",
+"revenue": 1149.8
+},
+{
+"name": "기타(산출)",
+"revenue": 136.7
+},
+{
+"name": "연결 매출 합계",
+"revenue": 4392.3
+}
+]
+},
+{
+"label": "2026 Q2",
+"items": [
+{
+"name": "SKT 별도(무선)",
+"revenue": 3117.0
+},
+{
+"name": "SK브로드밴드(유선)",
+"revenue": 1160.3
+},
+{
+"name": "기타(산출)",
+"revenue": 81.8
+},
+{
+"name": "연결 매출 합계",
+"revenue": 4359.1
+}
+]
+}
+],
+"seg_note": "SKT IR은 연결/별도(무선 중심)/SK브로드밴드(유선)로 공시. '기타'는 연결 매출에서 별도·SKB를 차감한 산출값(기타 자회사 및 연결조정 포함)으로 IR 직접 공시 항목이 아님. FY2023 SKB(4,279)는 4Q23 Investor Briefing의 SKB 연결 기준. F",
+"kpi": {
+"capex_unit": "억 원",
+"capex_def": "CAPEX (SKT+SKB 합산, 실적발표 자료 Operating Data 'SKT+SKB' 행; 2Q23 이후 SKT 별도 CAPEX 미공시). 원자료 단위 십억원 → 억원 환산(×10)",
+"arpu_unit": "원/월",
+"arpu_def": "이동통신 ARPU(SKT 별도): SKT 이동전화수익 기준(2G/3G/LTE/5G 및 IoT 포함) — 음성·데이터수익(가입비·접속수익 제외), 부가서비스수익 포함, 매출할인(약정·결합) 반영, MVNO 관련 매출 제외 / 분모는 과기정통부 과금회선 분기평균 가입자(3Q23부터 휴대폰 내 기타회선 제외). IoT 포함, MVNO 제외.",
+"churn_def": "월평균 해지율(%) — SKT 이동전화(핸드셋) 가입자 기준; 과기정통부 가입자통계 양식 변경으로 3Q23부터 IoT·태블릿 제외한 순수 휴대폰 기준. 소수 첫째자리까지만 공시",
+"note": "[CAPEX 기준] 요청은 '별도 기준'이었으나 SKT는 2Q23 실적부터 SKT 별도/SKB CAPEX 분리 공시를 중단하고 'SKT+SKB' 합산 단일 행만 공시함. 시계열 일관성을 위해 연간·분기 모두 SKT+SKB 기준으로 기재. 참고로 분리 공시 마지막 시점의 SKT 별도 CAPEX: FY2021 21,790억(SKB 8,230억), FY2022 22,150억(SKB 8,200억), 1Q23 1,340억(SKB 780억). FY2021·FY2022 연간은 4Q22 자료의 연간치(3,001·3,035십억원), FY2023~FY2025 연간은 자료에 연간 합계 행이 없어 분기치 합산(2,742·2,393·2,129십억원)으로 산출(분기 합산 산출). 1Q26 CAPEX는 Operating Data 137 / 연결요약 136.5십억원 — 137 채택. [2026 CAPEX 가이던스] 2025년 연간 실적 자료(2026-02-05)·1Q26·2Q26 자료 모두 2026년 CAPEX 수치 가이던스 미발표(수치 미제시) → guidance 항목 미추가. [ARPU] 2Q26 자료에서 '일부 인증서비스 관련 수익을 이동통신매출에서 기타수익으로 재분류'하며 ARPU 전 분기 소급 재산정(1Q24~2Q26는 재분류 후 기준, 예: 1Q26 29,261→29,103원). 2023Q3·2023Q4는 재분류 전 기준(소급치 미공시)이므로 약 100~150원 수준의 기준 단절 있음. ARPU는 IoT 포함·MVNO 제외 기준(회사는 별도로 'MVNO 포함 청구기준 ARPU'도 공시: 2Q26 27,202원). 2025Q3 ARPU 23,999원 급락은 회사 자료에 사유 미기재이나 3Q25 이동전화수익이 2,113십억원으로 전후 분기(약 2,520~2,610십억원) 대비 급감한 분기(2025년 8월 유심 해킹 사고 관련 고객감사 패키지 요금할인 시행 분기)임. [해지율] 2025Q2 1.6%·2025Q3 1.2%는 유심 해킹 사고 이후 이탈 급증 분기. 4Q23 자료에는 4Q23 해지율 0.8%로 표기되었으나 이후 자료(3Q24·1Q26)에서 0.9%로 표기 → 최신 자료 채택. [3Q26] 2026-10-30 기준 3Q26 실적 미발표(통상 11월 초) → 미포함.",
+"fiscal_year_end": "12월",
+"capex_annual": [
+{
+"label": "FY2021",
+"v": 30010
+},
+{
+"label": "FY2022",
+"v": 30350
+},
+{
+"label": "FY2023",
+"v": 27420
+},
+{
+"label": "FY2024",
+"v": 23930
+},
+{
+"label": "FY2025",
+"v": 21290
+}
+],
+"capex_quarterly": [
+{
+"label": "2024Q1",
+"v": 3170
+},
+{
+"label": "2024Q2",
+"v": 3880
+},
+{
+"label": "2024Q3",
+"v": 4610
+},
+{
+"label": "2024Q4",
+"v": 12270
+},
+{
+"label": "2025Q1",
+"v": 1060
+},
+{
+"label": "2025Q2",
+"v": 6350
+},
+{
+"label": "2025Q3",
+"v": 4570
+},
+{
+"label": "2025Q4",
+"v": 9310
+},
+{
+"label": "2026Q1",
+"v": 1370
+},
+{
+"label": "2026Q2",
+"v": 4870
+}
+],
+"arpu_quarterly": [
+{
+"label": "2023Q3",
+"v": 29917
+},
+{
+"label": "2023Q4",
+"v": 29566
+},
+{
+"label": "2024Q1",
+"v": 29152
+},
+{
+"label": "2024Q2",
+"v": 29203
+},
+{
+"label": "2024Q3",
+"v": 29283
+},
+{
+"label": "2024Q4",
+"v": 29384
+},
+{
+"label": "2025Q1",
+"v": 29085
+},
+{
+"label": "2025Q2",
+"v": 29083
+},
+{
+"label": "2025Q3",
+"v": 23999
+},
+{
+"label": "2025Q4",
+"v": 28712
+},
+{
+"label": "2026Q1",
+"v": 29103
+},
+{
+"label": "2026Q2",
+"v": 29098
+}
+],
+"churn_quarterly": [
+{
+"label": "2023Q3",
+"v": 0.9
+},
+{
+"label": "2023Q4",
+"v": 0.9
+},
+{
+"label": "2024Q1",
+"v": 0.9
+},
+{
+"label": "2024Q2",
+"v": 0.8
+},
+{
+"label": "2024Q3",
+"v": 0.8
+},
+{
+"label": "2024Q4",
+"v": 0.8
+},
+{
+"label": "2025Q1",
+"v": 0.7
+},
+{
+"label": "2025Q2",
+"v": 1.6
+},
+{
+"label": "2025Q3",
+"v": 1.2
+},
+{
+"label": "2025Q4",
+"v": 0.9
+},
+{
+"label": "2026Q1",
+"v": 0.9
+},
+{
+"label": "2026Q2",
+"v": 0.8
+}
+],
+"sources": [
+{
+"label": "SKT 2Q26 Investor Briefing (국문, 2026-08-05) — 1Q24~2Q26 CAPEX·ARPU(재분류 기준)·해지율",
+"url": "https://www.sktelecom.com/img/kor/qua/20260805/2Q26InvestorBriefingKOR.pdf"
+},
+{
+"label": "SKT 2Q26 Investor Briefing (영문, 2026-08-05) — 교차검증",
+"url": "https://www.sktelecom.com/img/eng/qua/20260805/2Q26InvestorBriefingENG.pdf"
+},
+{
+"label": "SKT 1Q26 Investor Briefing (국문, 2026-05-07) — 4Q23~1Q26 (ARPU 재분류 전 기준)",
+"url": "https://www.sktelecom.com/img/kor/qua/20260507/1Q26InvestorBriefingKOR.pdf"
+},
+{
+"label": "SKT 3Q24 Investor Briefing (영문, 2024-11-06) — 1Q23~3Q24 CAPEX·ARPU·해지율",
+"url": "https://sktelecom.com/img/eng/qua/20241106/3Q24InvestorBriefingENG.pdf"
+},
+{
+"label": "SKT 4Q23 Investor Briefing (국문, 2024-02-05) — 2022·2023 연간 CAPEX",
+"url": "https://www.sktelecom.com/img/kor/qua/20240205/4Q23InvestorBriefingKOR.pdf"
+},
+{
+"label": "SKT 4Q22 Investor Briefing (영문) — 2021·2022 연간 CAPEX (SKT 별도/SKB 분리)",
+"url": "https://www.sktelecom.com/img/eng/presen/20240802/InvestorBriefing4Q22Eng.pdf"
+},
+{
+"label": "SKT 1Q23 Investor Briefing (영문) — SKT 별도 CAPEX 분리 공시 마지막 분기(1Q23)",
+"url": "https://www.sktelecom.com/img/eng/presen/20240802/1Q23InvestorBriefingEng.pdf"
+},
+{
+"label": "SKT 뉴스룸 2025년 연간 실적 보도자료 (2026-02-05) — 2026 CAPEX 수치 가이던스 없음 확인",
+"url": "https://news.sktelecom.com/221619"
+},
+{
+"label": "SKT 뉴스룸 실적발표 목록 — 3Q26 미발표 확인(2026-10-30 기준)",
+"url": "https://news.sktelecom.com/tag/%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C"
+}
+]
+}
+},
+"kt": {
+"company": "kt",
+"currency": "KRW_B",
+"op_metric": "영업이익",
+"annual": [
+{
+"label": "FY2023",
+"revenue": 26376.3,
+"op": 1649.8
+},
+{
+"label": "FY2024",
+"revenue": 26431.2,
+"op": 809.5
+},
+{
+"label": "FY2025",
+"revenue": 28244.2,
+"op": 2469.1
+}
+],
+"quarterly": [
+{
+"label": "2025 Q3",
+"revenue": 7126.7,
+"op": 538.2
+},
+{
+"label": "2025 Q4",
+"revenue": 6845.0,
+"op": 227.3
+},
+{
+"label": "2026 Q1",
+"revenue": 6778.4,
+"op": 482.7
+},
+{
+"label": "2026 Q2",
+"revenue": 6679.9,
+"op": 648.3
+}
+],
+"segments": {
+"label": "FY2025",
+"items": [
+{
+"name": "무선(별도)",
+"revenue": 7155.4
+},
+{
+"name": "초고속인터넷(별도)",
+"revenue": 2533.5
+},
+{
+"name": "유선전화(별도)",
+"revenue": 658.9
+},
+{
+"name": "미디어(별도)",
+"revenue": null
+},
+{
+"name": "기업서비스/B2B(별도)",
+"revenue": null
+},
+{
+"name": "KT클라우드(그룹사)",
+"revenue": 997.5
+},
+{
+"name": "KT에스테이트(그룹사)",
+"revenue": 719.3
+}
+]
+},
+"source": "KT 2025년 4분기 및 연간 실적발표(2026-02-10, 잠정) — 4Q25 어닝콜 스크립트 및 인더뉴스·한국경제 보도, 3Q25는 KT IR 자료",
+"url": "https://corp.kt.com/eng/attach/record/2025/KT%204Q25%20PT_SCRIPT_F.pdf",
+"note": "연결 기준(세그먼트는 별도·그룹사 기준). FY2025 영업이익 +205%는 광화문 사옥 개발 분양이익 등 일회성 이익과 FY2024 희망퇴직 일회성 인건비(4Q24 적자)의 기저효과가 겹친 결과. 4Q25에는 해킹 대응 유심 구입비 등 일회성 비용 반영. FY2025 미디어(+1.7%)·기업서비스(+1.3%)는 증가율만 공개되어 절대액 null. 참고: FY2024 별도 세그먼트는 무선 6,959.9 / 유선 5,268.8 / 기업서비스 3,560.6.",
+"segments_annual": [
+{
+"label": "FY2023",
+"items": [
+{
+"name": "무선",
+"revenue": 6869.6
+},
+{
+"name": "초고속인터넷",
+"revenue": 2460.0
+},
+{
+"name": "미디어(IPTV)",
+"revenue": 2057.1
+},
+{
+"name": "유선전화",
+"revenue": 754.1
+},
+{
+"name": "기업서비스(B2B)",
+"revenue": 3460.4
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 26376.3
+}
+]
+},
+{
+"label": "FY2024",
+"items": [
+{
+"name": "무선",
+"revenue": 6959.9
+},
+{
+"name": "초고속인터넷",
+"revenue": 2486.9
+},
+{
+"name": "미디어(IPTV)",
+"revenue": 2082.6
+},
+{
+"name": "유선전화",
+"revenue": 699.4
+},
+{
+"name": "기업서비스(B2B)",
+"revenue": 3560.6
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 26431.2
+}
+]
+},
+{
+"label": "FY2025",
+"items": [
+{
+"name": "무선",
+"revenue": 7155.4
+},
+{
+"name": "초고속인터넷",
+"revenue": 2533.5
+},
+{
+"name": "미디어(IPTV)",
+"revenue": 2118.8
+},
+{
+"name": "유선전화",
+"revenue": 658.9
+},
+{
+"name": "기업서비스(B2B)",
+"revenue": 3606.2
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 28244.2
+}
+]
+}
+],
+"segments_quarterly": [
+{
+"label": "2025 Q3",
+"items": [
+{
+"name": "무선",
+"revenue": 1809.6
+},
+{
+"name": "초고속인터넷",
+"revenue": 636.7
+},
+{
+"name": "미디어(IPTV)",
+"revenue": 534.4
+},
+{
+"name": "유선전화",
+"revenue": 160.9
+},
+{
+"name": "기업서비스(B2B)",
+"revenue": 932.7
+},
+{
+"name": "단말수익",
+"revenue": 929.1
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 7126.7
+}
+]
+},
+{
+"label": "2025 Q4",
+"items": [
+{
+"name": "무선",
+"revenue": 1811.0
+},
+{
+"name": "초고속인터넷",
+"revenue": 636.8
+},
+{
+"name": "미디어(IPTV)",
+"revenue": 538.3
+},
+{
+"name": "유선전화",
+"revenue": 157.9
+},
+{
+"name": "기업서비스(B2B)",
+"revenue": 858.6
+},
+{
+"name": "단말수익",
+"revenue": 637.7
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 6845.0
+}
+]
+},
+{
+"label": "2026 Q1",
+"items": [
+{
+"name": "무선",
+"revenue": 1757.4
+},
+{
+"name": "초고속인터넷",
+"revenue": 640.2
+},
+{
+"name": "미디어(IPTV)",
+"revenue": 526.0
+},
+{
+"name": "유선전화",
+"revenue": 155.4
+},
+{
+"name": "기업서비스(B2B)",
+"revenue": 872.4
+},
+{
+"name": "단말수익",
+"revenue": 765.5
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 6778.4
+}
+]
+},
+{
+"label": "2026 Q2",
+"items": [
+{
+"name": "무선",
+"revenue": 1749.7
+},
+{
+"name": "초고속인터넷",
+"revenue": 638.0
+},
+{
+"name": "미디어(IPTV)",
+"revenue": 524.5
+},
+{
+"name": "유선전화",
+"revenue": 152.3
+},
+{
+"name": "기업서비스(B2B)",
+"revenue": 901.1
+},
+{
+"name": "단말수익",
+"revenue": 444.2
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 6679.9
+}
+]
+}
+],
+"seg_note": "부문별 매출(무선=무선서비스+접속, 초고속인터넷, 미디어, 유선전화, 기업서비스, 단말)은 KT 별도 기준이며 '연결 영업수익 합계'만 연결 기준(KT IR 공시 방식 그대로). FY2025 무선(7,155.4)·초고속인터넷(2,533.5)·유선전화(658.9)·연결(28,244.2)은",
+"kpi": {
+"capex_unit": "억 원",
+"capex_def": "KT 별도 CAPEX (K-IFRS, 별도 기준): 가입자망·기간망·기업통신(B2B) 등. 주요 그룹사(금융·미디어·DC/Cloud·부동산 등) CAPEX 제외",
+"arpu_unit": "원/월",
+"arpu_def": "무선 ARPU = 무선수익 / 무선가입자. 무선수익: 3G·LTE·5G 음성/데이터 수익(가입비·접속수익 제외), 부가서비스 수익, 약정·결합할인 등 매출할인 반영. 무선가입자: 과기정통부 기준 분기 평균 과금 회선(IoT/M2M 제외). MVNO(알뜰폰)·회선 공유(sharing)는 KT 각주상 명시 언급 없음",
+"churn_def": "무선(MNO) 가입자 월평균 해지율(%), IoT 제외",
+"note": "[CAPEX] KT는 분기 단독 CAPEX를 공시하지 않고 누적(1Q·1H·9M·연간) 별도 CAPEX만 공시 → 분기값은 누계 차감 산출(십억원 소수1자리 공시값 기준: 1Q24 318.1 / 1H24 960.9 / 9M24 1,416.0 / FY24 2,299.9 / 1Q25 300.0 / 1H25 845.8 / 9M25 1,329.5 / FY25 2,143.9 / 1Q26 304.2 / 1H26 718.0). 1Q24 누적치는 KT 1Q24 보도자료 전재(MarketScreener) 기준. FY2021 별도 CAPEX는 당초 4Q21 발표 28,551억원이었으나 2022년부터 Cloud/IDC 투자를 그룹사(kt cloud) CAPEX로 소급 재분류하여 27,600억원으로 재표시됨(4Q22·4Q24 자료 기준, 재표시값 채택). FY2022~2024는 차트 반올림값(십억원 정수)만 공시 → 억원 환산 시 ±10억원 오차 가능(FY24는 2,299.9 공시). 2026년 연간 CAPEX 가이던스: 4Q25 실적발표(2026-02-10)·1Q26·2Q26 자료 모두 수치 가이던스 미발표(FY26 가이던스는 연결 매출·영업이익 및 주주환원 2,500억원만) → 가이던스 항목 미추가. 연결 CAPEX(별도+그룹사) 분기값 참고: 2Q25 712.6 / 1Q26 363.7 / 2Q26 509.1 십억원. [ARPU] 정의는 2021~2026 기간 중 변경 없음(IoT/M2M 제외; MVNO·sharing 회선 처리는 각주 미명시). [Churn] 3Q25 해지율은 3Q25 실적발표 당시 1.1%였으나 4Q25·1Q26·2Q26 자료에서 1.2%로 표기 → 최신 자료값(1.2%) 채택. [공시 현황] 최신 공시 분기 2Q26(2026-08-11). 3Q26 실적은 2026-10-30 기준 미발표(11월 초 예정) → 미포함.",
+"fiscal_year_end": "12월",
+"capex_annual": [
+{
+"label": "FY2021",
+"v": 27600
+},
+{
+"label": "FY2022",
+"v": 27206
+},
+{
+"label": "FY2023",
+"v": 24120
+},
+{
+"label": "FY2024",
+"v": 22999
+},
+{
+"label": "FY2025",
+"v": 21439
+}
+],
+"capex_quarterly": [
+{
+"label": "2024Q1",
+"v": 3181
+},
+{
+"label": "2024Q2",
+"v": 6428
+},
+{
+"label": "2024Q3",
+"v": 4551
+},
+{
+"label": "2024Q4",
+"v": 8839
+},
+{
+"label": "2025Q1",
+"v": 3000
+},
+{
+"label": "2025Q2",
+"v": 5458
+},
+{
+"label": "2025Q3",
+"v": 4837
+},
+{
+"label": "2025Q4",
+"v": 8144
+},
+{
+"label": "2026Q1",
+"v": 3042
+},
+{
+"label": "2026Q2",
+"v": 4138
+}
+],
+"arpu_quarterly": [
+{
+"label": "2023Q3",
+"v": 33838
+},
+{
+"label": "2023Q4",
+"v": 34302
+},
+{
+"label": "2024Q1",
+"v": 34461
+},
+{
+"label": "2024Q2",
+"v": 34507
+},
+{
+"label": "2024Q3",
+"v": 34560
+},
+{
+"label": "2024Q4",
+"v": 34567
+},
+{
+"label": "2025Q1",
+"v": 34856
+},
+{
+"label": "2025Q2",
+"v": 35236
+},
+{
+"label": "2025Q3",
+"v": 35295
+},
+{
+"label": "2025Q4",
+"v": 35335
+},
+{
+"label": "2026Q1",
+"v": 34781
+},
+{
+"label": "2026Q2",
+"v": 34412
+}
+],
+"churn_quarterly": [
+{
+"label": "2023Q3",
+"v": 1.1
+},
+{
+"label": "2023Q4",
+"v": 1.1
+},
+{
+"label": "2024Q1",
+"v": 1.1
+},
+{
+"label": "2024Q2",
+"v": 1.0
+},
+{
+"label": "2024Q3",
+"v": 1.0
+},
+{
+"label": "2024Q4",
+"v": 1.1
+},
+{
+"label": "2025Q1",
+"v": 1.0
+},
+{
+"label": "2025Q2",
+"v": 1.0
+},
+{
+"label": "2025Q3",
+"v": 1.2
+},
+{
+"label": "2025Q4",
+"v": 1.0
+},
+{
+"label": "2026Q1",
+"v": 1.7
+},
+{
+"label": "2026Q2",
+"v": 0.9
+}
+],
+"sources": [
+{
+"label": "KT 2Q26 Earnings Release (Form 6-K Exhibit 99.1, 2026-08-11 접수)",
+"url": "https://www.sec.gov/Archives/edgar/data/892450/000162828026055923/a2q26_ktxerxptxengx0811f.htm"
+},
+{
+"label": "KT 2Q26 Earnings Release 6-K 전재 (sec.gov 원문 미접속 시 참조)",
+"url": "https://www.stocktitan.net/sec-filings/KT/6-k-kt-corp-current-report-foreign-issuer-a8e84fae24df.html"
+},
+{
+"label": "KT 1Q26 Earnings Release (2026-05-11)",
+"url": "https://corp.kt.com/eng/attach/record/2026/1Q26_KT_ER_PT_ENG_260511_FIN.pdf"
+},
+{
+"label": "KT 4Q25 (FY2025) Earnings Release (2026-02-10)",
+"url": "https://corp.kt.com/eng/attach/record/2025/4Q25_KT_ER_PT_ENG_260210_FIN.pdf"
+},
+{
+"label": "KT 3Q25 Earnings Release",
+"url": "https://corp.kt.com/eng/attach/record/2025/3Q25_KT_ER_PT_ENG_FF.pdf"
+},
+{
+"label": "KT 2Q25 Earnings Release",
+"url": "https://m.corp.kt.com/eng/attach/record/2025/2Q25_KT_ER_PT_ENG_FIN.pdf"
+},
+{
+"label": "KT 2Q25 NDR 자료(국문, ARPU·해지율 정의 각주)",
+"url": "https://corp.kt.com/attach/irdata/10839/2Q25_KT_NDR_PT_KOR_FIN.pdf"
+},
+{
+"label": "KT 1Q25 NDR Presentation",
+"url": "https://corp.kt.com/eng/attach/irdata/10825/1Q25_KT_NDR_PT_ENG_FFIN.pdf"
+},
+{
+"label": "KT 4Q24 (FY2024) NDR Presentation",
+"url": "https://corp.kt.com/eng/attach/irdata/10811/4Q24_KT_NDR_PT_ENG_FF.pdf"
+},
+{
+"label": "KT 3Q24 Earnings Release (Form 6-K, 2024-11-08)",
+"url": "https://www.sec.gov/Archives/edgar/data/892450/000119312524253662/d822936d6k.htm"
+},
+{
+"label": "KT 2Q24 NDR Presentation",
+"url": "https://corp.kt.com/eng/attach/irdata/10771/2Q24_KT_NDR_PT_ENG_FF.pdf"
+},
+{
+"label": "KT 1Q24 실적 보도자료 전재 (MarketScreener, KT 원문 PDF 미확보)",
+"url": "https://www.marketscreener.com/quote/stock/KT-CORPORATION-6494921/news/KT-2024-1Q-46685021/"
+},
+{
+"label": "KT 4Q22 (FY2022) Earnings Release",
+"url": "https://corp.kt.com/eng/attach/record/2022/KT%204Q22_ER%20PT_ENG_F.PDF"
+},
+{
+"label": "KT 4Q21 (FY2021) Earnings Release",
+"url": "https://m.corp.kt.com/eng/attach/record/2021/KT%20ER%20PT%204Q21%20ENG_FFin.pdf"
+}
+]
+}
+},
+"lg유플러스": {
+"company": "lg유플러스",
+"currency": "KRW_B",
+"op_metric": "영업이익",
+"annual": [
+{
+"label": "FY2023",
+"revenue": 14372.6,
+"op": 998.0
+},
+{
+"label": "FY2024",
+"revenue": 14625.2,
+"op": 863.1
+},
+{
+"label": "FY2025",
+"revenue": 15451.7,
+"op": 892.1
+}
+],
+"quarterly": [
+{
+"label": "2025 Q3",
+"revenue": 4010.8,
+"op": 161.7
+},
+{
+"label": "2025 Q4",
+"revenue": 3849.0,
+"op": 170.5
+},
+{
+"label": "2026 Q1",
+"revenue": 3803.7,
+"op": 272.3
+},
+{
+"label": "2026 Q2",
+"revenue": 3694.9,
+"op": 344.5
+}
+],
+"segments": {
+"label": "FY2025",
+"items": [
+{
+"name": "모바일",
+"revenue": 6667.1
+},
+{
+"name": "스마트홈(인터넷·IPTV)",
+"revenue": 2589.8
+},
+{
+"name": "기업인프라",
+"revenue": 1807.8
+}
+]
+},
+"source": "LG유플러스 2025년 연간 경영실적 보도자료(2026-02-05) 및 분기 실적발표 보도(뉴시스 3Q25, 데일리안 1Q26, 이투데이 2Q26)",
+"url": "https://lg.co.kr/media/release/29836",
+"note": "연결 기준, 영업수익(매출). 3Q25 영업이익 급감(-34.3%)은 희망퇴직 일회성 비용 약 1,500억원 반영 탓(제외 시 3,117억원). 2Q26 영업이익 3,445억원은 역대 분기 최대(AIDC 견인). 2025 Q4 수치는 공시 잠정실적 집계(연간 확정치-1~3분기와 정합, 매출 약 3.85조·영업이익 1,705억원). 세그먼트 3개 부문 외 전화수익·단말수익 등은 부문 합계에서 제외.",
+"segments_annual": [
+{
+"label": "FY2023",
+"items": [
+{
+"name": "모바일",
+"revenue": 6311.3
+},
+{
+"name": "스마트홈",
+"revenue": 2417.1
+},
+{
+"name": "기업인프라",
+"revenue": 1684.4
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 14372.6
+}
+]
+},
+{
+"label": "FY2024",
+"items": [
+{
+"name": "모바일",
+"revenue": 6427.5
+},
+{
+"name": "스마트홈",
+"revenue": 2506.0
+},
+{
+"name": "기업인프라",
+"revenue": 1705.5
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 14625.2
+}
+]
+},
+{
+"label": "FY2025",
+"items": [
+{
+"name": "모바일",
+"revenue": 6667.1
+},
+{
+"name": "스마트홈",
+"revenue": 2589.8
+},
+{
+"name": "기업인프라",
+"revenue": 1807.8
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 15451.7
+}
+]
+}
+],
+"segments_quarterly": [
+{
+"label": "2025 Q3",
+"items": [
+{
+"name": "모바일",
+"revenue": 1711.4
+},
+{
+"name": "스마트홈",
+"revenue": 673.4
+},
+{
+"name": "기업인프라",
+"revenue": 427.9
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 4010.8
+}
+]
+},
+{
+"label": "2025 Q4",
+"items": [
+{
+"name": "모바일",
+"revenue": 1689.4
+},
+{
+"name": "스마트홈",
+"revenue": 649.2
+},
+{
+"name": "기업인프라",
+"revenue": 542.5
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 3848.4
+}
+]
+},
+{
+"label": "2026 Q1",
+"items": [
+{
+"name": "모바일",
+"revenue": 1652.6
+},
+{
+"name": "스마트홈",
+"revenue": 656.3
+},
+{
+"name": "기업인프라",
+"revenue": 435.6
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 3803.7
+}
+]
+},
+{
+"label": "2026 Q2",
+"items": [
+{
+"name": "모바일",
+"revenue": 1660.2
+},
+{
+"name": "스마트홈",
+"revenue": 663.8
+},
+{
+"name": "기업인프라",
+"revenue": 464.4
+},
+{
+"name": "연결 영업수익 합계",
+"revenue": 3694.9
+}
+]
+}
+],
+"seg_note": "LGU+ IR 공시 부문: 모바일(무선, 접속수익 포함) / 스마트홈(IPTV+초고속인터넷) / 기업인프라(AIDC·솔루션·기업회선). 모두 K-IFRS 연결 기준이며 부문 합계는 서비스수익 기준이라 단말수익 등이 포함된 연결 영업수익 합계와 차이. 2025 Q4 부문값은 IR 공시 연",
+"kpi": {
+"capex_unit": "억 원",
+"capex_def": "CAPEX(설비투자) — IR 실적발표 자료 기준(LG헬로비전 제외 연결기준; 자료 원단위 십억 원을 억 원으로 환산)",
+"arpu_unit": "원/월",
+"arpu_def": "MNO 서비스 ARPU(IoT 제외) — LGU+가 보도자료에서 헤드라인으로 쓰는 지표. IoT 회선 및 MVNO 회선·매출 제외. 서비스 ARPU 정의(IR 주석): 음성·데이터수익(가입비·접속수익 제외)+부가서비스수익+매출할인(약정·결합할인 등) 포함 / MVNO 관련 매출 제외. (참고: IR 자료에는 'MNO 서비스 ARPU(IoT포함)'과 '무선 서비스 ARPU(MNO+MVNO)'도 병기됨)",
+"churn_def": "MNO 해지율(%) — MNO(자사망) 무선 가입회선 월평균 해지율, MVNO 제외 (IR 자료 라벨 'MNO해지율'; 산출식은 자료에 별도 기재 없음)",
+"note": "① 최신 공시 분기는 2Q26(2026.08.06 발표)이며 3Q26은 2026.10.30 기준 미발표. ② lguplus.com IR 사이트·DART 원문에 본 세션에서 접근 불가하여, 공식 IR 실적발표 PDF의 미러본(alphasquare company-ir, 네이버 파일 호스팅)과 LG 그룹 뉴스룸(lg.co.kr)에 게재된 LG유플러스 공식 보도자료만 사용. 2025년 4분기(FY2025 연간), 2026년 1분기, 2026년 2분기 IR 실적발표 PDF는 열리지 않아 해당 분기 CAPEX·ARPU·해지율은 null — 단, 4Q25 ARPU(35,999원)·해지율(1.00%)은 2026.02.05 보도자료 수치. 2Q26 보도자료(30429)에는 CAPEX·ARPU·해지율이 기재되지 않음. ③ FY2025 연간 CAPEX는 미확인(1Q25+2Q25+3Q25 누계 11,645억원까지만 확인). ④ 2026년 연간 CAPEX 가이던스: 확인된 공식 자료(4Q25 보도자료 등)에서 수치 가이던스를 찾지 못해 미기재(가이던스 항목 미추가). ⑤ CAPEX 단위: IR 자료 원단위 십억 원(예: 438.1)을 억 원(4,381)으로 환산; 1Q24·2Q24·FY2021·FY2022는 보도자료의 억 원 수치 그대로. 분기 합산 검증: 1Q24~4Q24 합 19,209 ≈ FY2024 19,208(반올림차). ⑥ ARPU는 'MNO 서비스 ARPU(IoT제외)'를 헤드라인으로 채택(회사 보도자료 기준). IR 자료에는 IoT포함 MNO ARPU(예: 3Q25 23,511원)와 MNO+MVNO 무선 ARPU(예: 3Q25 18,213원)도 병기되며 정의 변경은 확인된 기간 내 없음. ⑦ 해지율은 MNO 기준(MVNO 제외). 3Q25 1.32%는 SKT 해킹사태 후 번호이동 급증기와 겹치는 분기이나 자료상 사유 설명은 없음(수치만 인용). ⑧ 과기정통부 통계 기준 변경으로 25.1Q부터 5G 가입회선은 유심 기준(ARPU·해지율 정의와는 무관).",
+"fiscal_year_end": "12월",
+"capex_annual": [
+{
+"label": "FY2021",
+"v": 23455
+},
+{
+"label": "FY2022",
+"v": 24204
+},
+{
+"label": "FY2023",
+"v": 25143
+},
+{
+"label": "FY2024",
+"v": 19208
+},
+{
+"label": "FY2025",
+"v": null
+}
+],
+"capex_quarterly": [
+{
+"label": "2023Q4",
+"v": 8097
+},
+{
+"label": "2024Q1",
+"v": 3849
+},
+{
+"label": "2024Q2",
+"v": 5571
+},
+{
+"label": "2024Q3",
+"v": 4481
+},
+{
+"label": "2024Q4",
+"v": 5308
+},
+{
+"label": "2025Q1",
+"v": 3331
+},
+{
+"label": "2025Q2",
+"v": 3933
+},
+{
+"label": "2025Q3",
+"v": 4381
+},
+{
+"label": "2025Q4",
+"v": null
+},
+{
+"label": "2026Q1",
+"v": null
+},
+{
+"label": "2026Q2",
+"v": null
+}
+],
+"arpu_quarterly": [
+{
+"label": "2023Q3",
+"v": 35345
+},
+{
+"label": "2023Q4",
+"v": 35532
+},
+{
+"label": "2024Q1",
+"v": 35278
+},
+{
+"label": "2024Q2",
+"v": 35089
+},
+{
+"label": "2024Q3",
+"v": 35341
+},
+{
+"label": "2024Q4",
+"v": 35356
+},
+{
+"label": "2025Q1",
+"v": 35523
+},
+{
+"label": "2025Q2",
+"v": 35688
+},
+{
+"label": "2025Q3",
+"v": 36118
+},
+{
+"label": "2025Q4",
+"v": 35999
+},
+{
+"label": "2026Q1",
+"v": null
+},
+{
+"label": "2026Q2",
+"v": null
+}
+],
+"churn_quarterly": [
+{
+"label": "2023Q3",
+"v": 1.05
+},
+{
+"label": "2023Q4",
+"v": 1.06
+},
+{
+"label": "2024Q1",
+"v": 1.18
+},
+{
+"label": "2024Q2",
+"v": 1.12
+},
+{
+"label": "2024Q3",
+"v": 1.07
+},
+{
+"label": "2024Q4",
+"v": 1.05
+},
+{
+"label": "2025Q1",
+"v": 1.09
+},
+{
+"label": "2025Q2",
+"v": 1.06
+},
+{
+"label": "2025Q3",
+"v": 1.32
+},
+{
+"label": "2025Q4",
+"v": 1.0
+},
+{
+"label": "2026Q1",
+"v": null
+},
+{
+"label": "2026Q2",
+"v": null
+}
+],
+"sources": [
+{
+"label": "LG유플러스 2025년 3분기 실적발표 IR 자료(2025.11, 주요 경영현황 설명 배포본) — CAPEX 3Q24~3Q25, ARPU·해지율 2Q24~3Q25",
+"url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20251106LG%EC%9C%A0%ED%94%8C%EB%9F%AC%EC%8A%A4_%EC%A3%BC%EC%9A%94_%EA%B2%BD%EC%98%81%ED%98%84%ED%99%A9_%EC%84%A4%EB%AA%85.pdf"
+},
+{
+"label": "LG유플러스 2025년 2분기 실적발표 IR 자료(2Q25 ER KOR) — CAPEX 2Q24·1Q25·2Q25, ARPU·해지율 1Q24~2Q25",
+"url": "https://files-scs.pstatic.net/2025/08/11/6moSe4MBn2/2Q25_ER_KOR_f.pdf"
+},
+{
+"label": "LG유플러스 2024년 4분기 결산실적 발표 IR 자료(2025.02.06) — CAPEX 4Q23·3Q24·4Q24·FY2023·FY2024, ARPU·해지율 3Q23~4Q24",
+"url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20250206LG유플러스_2024년_4분기_결산실적_발표.pdf"
+},
+{
+"label": "LG유플러스 2025년 연간·4분기 실적 보도자료(2026.02.05, LG 그룹 뉴스룸) — 4Q25 MNO 서비스 ARPU 35,999원, MNO 해지율 1.00%",
+"url": "https://lg.co.kr/media/release/29836"
+},
+{
+"label": "LG유플러스 2026년 2분기 실적 보도자료(2026.08.06, LG 그룹 뉴스룸) — CAPEX·ARPU·해지율 미기재",
+"url": "https://www.lg.co.kr/media/release/30429"
+},
+{
+"label": "LG유플러스 2025년 3분기 실적 보도자료(2025.11.05) — 3Q25 CAPEX 4,381억원",
+"url": "https://lg.co.kr/media/release/29553"
+},
+{
+"label": "LG유플러스 2024년 2분기 실적 보도자료(2024.08.07) — 2Q24 CAPEX 5,571억원, 해지율 1.12%",
+"url": "https://www.lg.co.kr/media/release/27975"
+},
+{
+"label": "LG유플러스 2024년 1분기 실적 보도자료(2024.05.09) — 1Q24 CAPEX 3,849억원, 해지율 1.18%",
+"url": "https://www.lg.co.kr/media/release/27667"
+},
+{
+"label": "LG유플러스 2022년 연간 실적 보도자료(2023.02.03) — FY2022 CAPEX 2조 4,204억원, 4Q22 해지율 1.03%",
+"url": "https://www.lg.co.kr/media/release/25886"
+},
+{
+"label": "LG유플러스 2021년 연간 실적 보도자료(2022.01.28) — FY2021 CAPEX 2조 3,455억원",
+"url": "https://lg.co.kr/media/release/24415"
+},
+{
+"label": "LG유플러스 IR 자료 목록(2026.08.06 2Q26 경영실적 발표 등, 원문은 lguplus.com IR) — 본 세션에서 PDF 열람 불가",
+"url": "https://alphasquare.co.kr/home/stock-issue?code=032640&type=ir"
+}
+]
+}
+}
+},
+"kpi_updated": "2026-10-30"
+}
