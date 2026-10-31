@@ -1575,3 +1575,6 @@ samsunggalaxyphoneshitwithbatterylifedro
 애플직영스토어에아이폰듀오디스플레이균열결함경고
 애플매장에아이폰듀오화면균열문제공식경고전달
 갤럭시워치수면무호흡탐지유무판별에서시간당호흡방해3단계분류로바뀐다
+애플매장에아이폰듀오화면균열결함관련지침전달
+안드로이드강제다운유발죽음의sms버그발견및긴급패치예정
+samsunggalaxyzfold8ultraishereeverything
