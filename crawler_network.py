@@ -372,10 +372,11 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
 과거(past): 기사가 보도하는 핵심 사건이 이미 발생한 지 수개월~수년이 지난 과거 사건이면 1, 최근 발생했거나 진행 중인 사건이면 0. 회고·기념·연재·분석 기사, 그리고 스팸성 사이트가 과거의 유명 기사를 최신 날짜로 재발행한 경우(발행일은 최신이어도 내용은 옛 사건)는 반드시 1. 특히 과거의 대규모 통신장애(예: 2021년 NTT 도코모 200만 명 장애, 2022년 KDDI 장애, 2018년 KT 아현 화재)를 다룬 기사를 현재 발생한 장애로 오인하지 말 것 — 기사 속 연도, "당시", "그해", 이미 종결된 사건의 사과·복구 완료 서술 등이 단서. past=1 기사는 전량 자동 제외됨. 현재 장애 기사가 과거 사례를 비교·인용만 하는 경우는 0.
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 영어·일본어·중국어 등 어떤 언어의 기사라도 이슈명은 반드시 한국어 표기(에릭슨, 노키아, 화웨이, 버라이즌, 도이치텔레콤 등)로 쓸 것 — 같은 사건을 다룬 다국어 기사가 전부 동일 이슈명으로 묶여야 함. 특정 회사가 주체가 아닌 사건(공항·지역 통신장애, 정책 발표 등)은 "지역/기관 사건" 형식으로 통일(예: 같은 공항 통신장애를 다룬 한국어·영어·일본어 기사 전부 → "미국공항 통신장애" 하나로). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 특히 같은 행사·발표·컨퍼런스·국정감사·정책 브리핑에서 파생된 기사들은 세부 주제가 조금씩 달라도 전부 하나의 동일 이슈명으로 묶을 것(예: 국정감사에서 나온 통신 관련 기사 전부 → "과기정통부 국감"). 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
 키워드(kw): 문장이 아닌 순수 키워드만, 최대 12자. 조사·서술어·수식어 금지, 2~3어절 명사 나열 (예: "CEO 교체", "2Q 매출 -6%", "美 제재 확대", "D2C 계약", "R&D 거점 이전", "6G 시연"). 회사명 생략. 모든 기사에 반드시 기재.
+공급제품(prod): evt가 수주공급 또는 신제품일 때만, 공급·출시되는 제품 유형을 다음 중 하나로: "5G RAN", "4G RAN", "vRAN/Open RAN", "5G Core", "4G Core", "IMS/음성", "전송/광", "안테나/RU", "네트워크 SW/자동화", "프라이빗 5G", "위성", "기타". 해당 없으면 빈 문자열 "".
 번역제목(kt): 기사 제목의 자연스러운 한국어 번역. 이미 한국어 제목이면 그대로 기재. 원제목의 의미를 유지하고 과장 금지, 매체명·불필요한 수식어는 제거, 80자 이내. 모든 기사에 반드시 기재.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 메신저 보고에 바로 붙여 쓸 수 있는 개조식으로 작성: "- "로 시작하는 불릿 3~5개, 불릿 사이는 줄바꿈(\\n), 각 불릿은 명사형 종결(예: 계약 체결, 출시 발표, 대응 필요). 순서는 핵심 사실 → 수치·배경 → 경쟁 구도·사업적 의미. 기사에 인용된 수치·금액·비율·규모는 최대한 그대로 포함할 것. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 불릿 1개만 작성.
 
-모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"score":62,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kw":"버라이즌 5G 계약 체결","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"score":62,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kw":"버라이즌 5G 계약 체결","prod":"5G RAN","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
@@ -419,6 +420,8 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
             except Exception: pass
             if j.get("sum"): item["summary"] = str(j["sum"])
             if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
+            pr = re.sub(r"\s+", " ", str(j.get("prod",""))).strip()
+            if pr: item["prod"] = pr[:20]
             kw = re.sub(r"\s+", " ", str(j.get("kw",""))).strip()
             if kw: item["kw"] = kw[:24]
             kt = re.sub(r"\s+", " ", str(j.get("kt",""))).strip()
@@ -857,6 +860,41 @@ JSON 배열만 출력: [{{"i":0,"why":"- ...\\n- ...","areas":[{{"a":"수주·�
     except Exception as ex: print(f"경고: 영향 분석 캐시 저장 실패 - {ex}")
     return filled
 
+# ── 벤더 수주·변경 아카이브 (vendors.html용): 장비 벤더가 주체인 수주공급 기사만 누적 ──
+DEALS_FILE, DEALS_DAYS = "vendor_deals.json", 730
+VENDOR_CANON = {"에릭슨":"Ericsson","노키아":"Nokia","화웨이":"Huawei","zte":"ZTE","삼성":"Samsung","마베니어":"Mavenir",
+                "후지쯔":"Fujitsu","원피니티":"1Finity","라쿠텐심포니":"Rakuten Symphony","nec":"NEC","시스코":"Cisco"}
+CARRIER_COUNTRY = {"버라이즌":"USA","at&t":"USA","t모바일":"USA","에코스타":"USA","us셀룰러":"USA","차터":"USA",
+                   "skt":"KOR","kt":"KOR","lg유플러스":"KOR","도코모":"JPN","kddi":"JPN","소프트뱅크":"JPN","라쿠텐모바일":"JPN",
+                   "지오":"IND","에어텔":"IND","보다폰아이디어":"IND","bsnl":"IND","텔러스":"CAN","비디오트론":"CAN","사스크텔":"CAN","로저스":"CAN","벨":"CAN",
+                   "보다폰":"GBR","도이치텔레콤":"DEU","오렌지":"FRA","텔레포니카":"ESP","차이나모바일":"CHN","차이나텔레콤":"CHN","차이나유니콤":"CHN",
+                   "tim":"ITA","텔리아":"SWE","kpn":"NLD","비보":"BRA","클라로":"BRA","텔셀":"MEX"}
+def update_vendor_deals(pool):
+    deals = []
+    if os.path.exists(DEALS_FILE):
+        try: deals = json.loads(open(DEALS_FILE, encoding="utf-8").read())
+        except Exception: deals = []
+    seen = {(d.get("url") or d.get("title","")) for d in deals}
+    added = 0
+    for a in pool:
+        if a.get("evt") != "수주공급": continue
+        v = VENDOR_CANON.get(a.get("subj",""))
+        if not v or a.get("importance", 0) < 3: continue
+        key = a.get("url") or a.get("title","")
+        if key in seen: continue
+        seen.add(key)
+        tgt = a.get("tgt","")
+        deals.append({"date": a["date"], "vendor": v, "carrier": tgt, "country": CARRIER_COUNTRY.get(tgt, ""),
+                      "product": a.get("prod",""), "kw": a.get("kw",""), "title": a["title"][:120], "url": a.get("url",""),
+                      "source": a.get("source",""), "score": a.get("score", 0)})
+        added += 1
+    cutoff = (datetime.now(KST) - timedelta(days=DEALS_DAYS)).strftime("%Y-%m-%d")
+    deals = [d for d in deals if d.get("date","") >= cutoff]
+    deals.sort(key=lambda d: d.get("date",""), reverse=True)
+    open(DEALS_FILE, "w", encoding="utf-8").write(json.dumps(deals, ensure_ascii=False))
+    print(f"벤더 수주 아카이브: 신규 {added}건 / 보유 {len(deals)}건")
+    return deals
+
 # ── 기업별 히스토리 누적 (company.html용) ──
 HIST_FILE, HIST_DAYS, HIST_MIN_IMP, HIST_PER_CAP = "company_history.json", 400, 3, 150
 HIST_GROUPS = {
@@ -1043,6 +1081,7 @@ def main():
     shown = [a for arr in data.values() for a in arr] + latest + arch_items + hist_items
     resolve_google_links(shown)
     company_hist = update_company_history(hist_items)
+    vendor_deals = update_vendor_deals(pool)
     archive = update_archive(arch_items)
     # 기사별 사업 영향 분석(75점 이상): 현재 노출 기사 + 일자별 아카이브(캐시 기준으로 채움, 신규 분석은 1회 40건 한도)
     gemini_impact(list(data.values()) + [latest] + list(archive.values()))
@@ -1120,7 +1159,8 @@ def main():
         try: vmap = json.loads(open("vendor_map.json", encoding="utf-8").read())
         except Exception: print("경고: vendor_map.json 파싱 실패")
     if os.path.exists("dashboard_vendors.html"):
-        vjs = ("const VENDOR_MAP = " + json.dumps(vmap, ensure_ascii=False) + ";\n").replace("</", "<\\/")
+        vjs = ("const VENDOR_MAP = " + json.dumps(vmap, ensure_ascii=False) + ";\n"
+               + "const VENDOR_DEALS = " + json.dumps(vendor_deals, ensure_ascii=False) + ";\n").replace("</", "<\\/")
         vjs = vjs.replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
         vinj = "<script>\n" + vjs + "</script>"
         vtpl = open("dashboard_vendors.html", encoding="utf-8").read()

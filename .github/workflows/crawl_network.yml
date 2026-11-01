@@ -53,6 +53,7 @@ jobs:
           git add company_history.json || true
           git add docs/company.html || true
           git add docs/vendors.html || true
+          git add vendor_deals.json || true
           git add stock_prices.json || true
           git commit -m "network dashboard update" || { echo "no changes"; exit 0; }
           for i in 1 2 3; do
