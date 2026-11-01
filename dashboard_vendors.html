@@ -196,7 +196,10 @@ function flat(lon,lat){const [x,y]=eeRaw(lon,lat);return [CX+x*EES, CY-y*EES, 1]
 function fmt(n){return Math.round(n*10)/10;}
 function ringPath(ring,lon0,lat0){
   // 정사영: 지평선(c=0)에서 잘라 보이는 구간만 서브패스로. 평면: 전체.
-  if(proj==="flat"){return "M"+ring.map(p=>{const [x,y]=flat(p[0],p[1]);return fmt(x)+","+fmt(y);}).join("L")+"Z";}
+  if(proj==="flat"){ // 날짜변경선을 가로지르는 구간은 서브패스로 분리(러시아·피지 가로선 방지)
+    let out="",cur=[],prev=null;
+    for(const p of ring){ if(prev&&Math.abs(p[0]-prev[0])>180){ if(cur.length>2)out+="M"+cur.join("L")+"Z"; cur=[]; } const [x,y]=flat(p[0],p[1]); cur.push(fmt(x)+","+fmt(y)); prev=p; }
+    if(cur.length>2)out+="M"+cur.join("L")+"Z"; return out; }
   let out="", cur=[], prevP=null, prevV=null;
   const edge=(a,b)=>{ // a 보임, b 안보임 (또는 반대) 사이 경계점 이분탐색
     let lo=a,hi=b; for(let i=0;i<8;i++){const m=[(lo[0]+hi[0])/2,(lo[1]+hi[1])/2]; if(ortho(m[0],m[1],lon0,lat0)[2]>0)lo=m;else hi=m;} return lo;};
