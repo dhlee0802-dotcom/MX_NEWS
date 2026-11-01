@@ -1578,3 +1578,5 @@ samsunggalaxyphoneshitwithbatterylifedro
 애플매장에아이폰듀오화면균열결함관련지침전달
 안드로이드강제다운유발죽음의sms버그발견및긴급패치예정
 samsunggalaxyzfold8ultraishereeverything
+애플리테일매장에아이폰duo디스플레이균열결함관련경고전달
+안드로이드smsofdeath결함폰마비가능성수정패치임박
