@@ -295,7 +295,7 @@ svgEl.addEventListener("pointermove",e=>{
   if(!pd)return; const dx=e.clientX-pd.x, dy=e.clientY-pd.y; moved=Math.max(moved,Math.abs(dx)+Math.abs(dy));
   if(moved<4)return; dragging=true; document.getElementById("mapbox").classList.add("drag"); hideTip(); stopAnim();
   const box=svgEl.getBoundingClientRect(); const k=vb[2]/box.width;   // px → viewBox 단위
-  if(proj==="globe"){ const deg=k*(360/(2*Math.PI*R))*1.15; cLon=pd.lon+dx*deg; cLat=Math.max(-80,Math.min(80,pd.lat-dy*deg)); renderMap(); }
+  if(proj==="globe"){ const deg=k*(360/(2*Math.PI*R))*1.15; cLon=pd.lon-dx*deg; cLat=Math.max(-80,Math.min(80,pd.lat+dy*deg));  // 지구를 잡아 끄는 방향으로 회전 renderMap(); }
   else{ vb=[pd.vb[0]-dx*k,pd.vb[1]-dy*k,pd.vb[2],pd.vb[3]]; setVB(vb); }
 });
 function endDrag(e){ if(!pd)return; const wasDrag=dragging; pd=null; dragging=false; document.getElementById("mapbox").classList.remove("drag");
