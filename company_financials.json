@@ -851,63 +851,304 @@
 },
 "스타링크": {
 "company": "스타링크",
-"private": true,
+"private": false,
 "currency": "USD",
-"op_metric": "영업이익",
-"annual": null,
-"quarterly": null,
-"segments": null,
-"estimates": [
+"op_metric": "operating income (loss)",
+"annual": [
 {
-"label": "2023 스타링크 매출(추정, Quilty Space)",
-"value": 2900,
-"source": "Via Satellite (2025-01-22)",
-"url": "https://satellitetoday.com/finance/2025/01/22/quilty-space-issues-estimate-on-spacexs-starlink-2024-revenue-growth"
-},
-{
-"label": "2024 스타링크 매출(추정, Quilty Space)",
-"value": 7800,
-"source": "Via Satellite (2025-01-22)",
-"url": "https://satellitetoday.com/finance/2025/01/22/quilty-space-issues-estimate-on-spacexs-starlink-2024-revenue-growth"
-},
-{
-"label": "2024 SpaceX 전사 매출(추정)",
-"value": 13100,
-"source": "Motley Fool/Yahoo Finance (2026-01-31)",
-"url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"
-},
-{
-"label": "2025 스타링크 매출(추정, Payload Space)",
-"value": 10400,
-"source": "Motley Fool/Yahoo Finance (2026-01-31)",
-"url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"
-},
-{
-"label": "2025 스타링크 매출(추정)",
-"value": 11800,
-"source": "Tesorb — Quilty Space 인용, S-1 공개치로 보도 (2026-04)",
-"url": "https://tesorb.com/starlink-revenue-forecast-2026-quilty-space/"
-},
-{
-"label": "2025 SpaceX 전사 매출(추정)",
-"value": 15000,
-"source": "Motley Fool/Yahoo Finance (2026-01-31, 약 $15B; New Space Economy 2026-01-06은 ~$15.5B)",
-"url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"
-},
-{
-"label": "2026 스타링크 매출 전망(Quilty Space, 2026-04-13 상향)",
-"value": 20000,
-"source": "Tesorb — Quilty Space 전망 (기존 $15.9B에서 25% 상향)",
-"url": "https://tesorb.com/starlink-revenue-forecast-2026-quilty-space/"
-},
-{
-"label": "2026 SpaceX 전사 매출 전망(Payload Space)",
-"value": 23800,
-"source": "Motley Fool/Yahoo Finance (2026-01-31)",
-"url": "https://finance.yahoo.com/news/why-2026-spacex-ipo-actually-102500491.html"
+"label": "FY2025",
+"revenue": 18674,
+"op": -2589
 }
 ],
-"note": "비상장 — 언론·리서치사(Quilty Space, Payload Space) 추정치. 2025년 스타링크 매출 추정은 $10.4B~$11.8B(전사 약 $15B~15.5B)로 소스별 편차 존재. 가입자 추정(Payload): 2024년말 460만 → 2025년말 920만."
+"quarterly": [
+{
+"label": "1Q25 (2025.1-3)",
+"revenue": 4067,
+"op": 27
+},
+{
+"label": "2Q25 (2025.4-6)",
+"revenue": 4071,
+"op": -970
+},
+{
+"label": "3Q25 (2025.7-9)",
+"revenue": 5576,
+"op": -273
+},
+{
+"label": "4Q25 (2025.10-12)",
+"revenue": 4960,
+"op": -1373
+},
+{
+"label": "1Q26 (2026.1-3)",
+"revenue": 4694,
+"op": -1943
+},
+{
+"label": "2Q26 (2026.4-6)",
+"revenue": 7814,
+"op": -143
+},
+{
+"label": "3Q26 (2026.7-9)",
+"revenue": 14575,
+"op": 2791
+}
+],
+"segments": {
+"label": "FY2025 세그먼트 매출",
+"items": [
+{
+"name": "Space(우주·발사)",
+"revenue": 4086
+},
+{
+"name": "Connectivity(스타링크)",
+"revenue": 11387
+},
+{
+"name": "AI",
+"revenue": 3201
+}
+]
+},
+"segments_annual": [
+{
+"label": "FY2025",
+"items": [
+{
+"name": "Space(우주·발사)",
+"revenue": 4086
+},
+{
+"name": "Connectivity(스타링크)",
+"revenue": 11387
+},
+{
+"name": "AI",
+"revenue": 3201
+}
+]
+}
+],
+"segments_quarterly": [
+{
+"label": "2025Q2(4-6월)",
+"items": [
+{
+"name": "Space(우주·발사)",
+"revenue": 746
+},
+{
+"name": "Connectivity(스타링크)",
+"revenue": 2588
+},
+{
+"name": "AI",
+"revenue": 737
+}
+]
+},
+{
+"label": "2025Q3(7-9월)",
+"items": [
+{
+"name": "Space(우주·발사)",
+"revenue": 1666
+},
+{
+"name": "Connectivity(스타링크)",
+"revenue": 3097
+},
+{
+"name": "AI",
+"revenue": 813
+}
+]
+},
+{
+"label": "2025Q4(10-12월)",
+"items": [
+{
+"name": "Space(우주·발사)",
+"revenue": 809
+},
+{
+"name": "Connectivity(스타링크)",
+"revenue": 3228
+},
+{
+"name": "AI",
+"revenue": 923
+}
+]
+},
+{
+"label": "2026Q1(1-3월)",
+"items": [
+{
+"name": "Space(우주·발사)",
+"revenue": 619
+},
+{
+"name": "Connectivity(스타링크)",
+"revenue": 3257
+},
+{
+"name": "AI",
+"revenue": 818
+}
+]
+},
+{
+"label": "2026Q2(4-6월)",
+"items": [
+{
+"name": "Space(우주·발사)",
+"revenue": 962
+},
+{
+"name": "Connectivity(스타링크)",
+"revenue": 4291
+},
+{
+"name": "AI",
+"revenue": 2561
+}
+]
+},
+{
+"label": "2026Q3(7-9월)",
+"items": [
+{
+"name": "Space(우주·발사)",
+"revenue": 1767
+},
+{
+"name": "Connectivity(스타링크)",
+"revenue": 5248
+},
+{
+"name": "AI (3Q26부터 'SI'로 개칭)",
+"revenue": 7560
+}
+]
+}
+],
+"source": "SpaceX 8-K 실적 보도자료·10-Q·S-1 (SEC EDGAR, ir.spacex.com)",
+"url": "https://ir.spacex.com",
+"note": "2026-06-12 나스닥 상장(SPCX). 역년(1-12월) 회계연도. FY2025 매출·영업손실·세그먼트는 S-1 Prospectus Summary, 2Q25·3Q25·2Q26·3Q26은 실적 보도자료/10-Q 원문, 1Q25·4Q25는 공시 누계(6M·9M·FY) 차감 산출. FY2023·FY2024는 S-1 원문 재확인 전까지 미게재. 재무제표는 xAI·X Holdings를 공통지배 거래로 소급 결합한 수치이며, 3Q26부터 AI 세그먼트 명칭이 SI로 변경. 조정 EBITDA: FY2025 6,584 / 2Q26 3,538 / 3Q26 8,809(백만 USD).",
+"seg_note": "세그먼트: Space(발사 서비스·개발), Connectivity(Starlink 소비자·기업/정부), AI(3Q26부터 SI — 광고·AI 솔루션/인프라). 단위 백만 USD. 1Q26 세그먼트는 6M26 10-Q에서 2Q26 차감 산출.",
+"kpi": {
+"fiscal_year_end": "12월",
+"capex_unit": "백만 USD",
+"capex_def": "Capital expenditures(세그먼트 합산; AI/SI 세그먼트 데이터센터 투자 포함)",
+"capex_annual": [
+{
+"label": "FY2025",
+"v": 20737
+}
+],
+"capex_quarterly": [
+{
+"label": "1Q25 (2025.1-3)",
+"v": 4140
+},
+{
+"label": "2Q25 (2025.4-6)",
+"v": 2825
+},
+{
+"label": "3Q25 (2025.7-9)",
+"v": 6880
+},
+{
+"label": "4Q25 (2025.10-12)",
+"v": 6891
+},
+{
+"label": "1Q26 (2026.1-3)",
+"v": 10107
+},
+{
+"label": "2Q26 (2026.4-6)",
+"v": 18369
+},
+{
+"label": "3Q26 (2026.7-9)",
+"v": 19593
+}
+],
+"subs_quarterly": [
+{
+"label": "2025Q2",
+"v": 6.0
+},
+{
+"label": "2025Q3",
+"v": 7.2
+},
+{
+"label": "2026Q1",
+"v": 10.3
+},
+{
+"label": "2026Q2",
+"v": 12.0
+},
+{
+"label": "2026Q3",
+"v": 13.6
+}
+],
+"subs_def": "Starlink 가입자(기말, 백만) — 3Q26 공시부터 'Starlink consumer subscribers'로 명칭 변경(이전 'Starlink Subscribers')",
+"sources": [
+{
+"label": "Q3 2026 earnings release (8-K Ex.99.1 PDF, 2026-10-20)",
+"url": "https://s21.q4cdn.com/184289198/files/doc_financials/2026/q3/Q3-2026-8-K-Earnings-Release-2026-10-20-13-10.pdf"
+},
+{
+"label": "Q3 2026 10-Q (sec.gov)",
+"url": "https://www.sec.gov/Archives/edgar/data/0001181412/000162828026066880/spcx-20260930.htm"
+},
+{
+"label": "Q2 2026 earnings release PDF (2026-08-04)",
+"url": "https://s21.q4cdn.com/184289198/files/doc_financials/2026/q2/SpaceX-Reports-Second-Quarter-2026-Results.pdf"
+},
+{
+"label": "Q2 2026 10-Q (sec.gov)",
+"url": "https://www.sec.gov/Archives/edgar/data/0001181412/000162828026052535/spcx-20260630.htm"
+},
+{
+"label": "Form S-1 (sec.gov, filed 2026-05)",
+"url": "https://www.sec.gov/Archives/edgar/data/0001181412/000162828026036936/spaceexplorationtechnologi.htm"
+},
+{
+"label": "Form S-1/A (sec.gov)",
+"url": "https://sec.gov/Archives/edgar/data/1181412/000162828026039276/spaceexplorationtechnologi.htm"
+},
+{
+"label": "424B4 prospectus (sec.gov, 2026-06-12; not directly fetchable in this session)",
+"url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm"
+},
+{
+"label": "IR notice: Q3 2026 results date (2026-10-16)",
+"url": "https://ir.spacex.com/updates/releases-details/2026/SpaceX-to-Post-Third-Quarter-2026-Results-and-Host-Webcast-on-October-20-2026-2026-QssQGye3im/default.aspx"
+},
+{
+"label": "IR notice: Q2 2026 results date (2026-07-20)",
+"url": "https://ir.spacex.com/updates/releases-details/2026/SpaceX-to-Post-Second-Quarter-2026-Results-and-Host-Webcast-on-August-4-2026-2026-g8layJlbFm/default.aspx"
+},
+{
+"label": "SpaceX IR home",
+"url": "https://ir.spacex.com/"
+}
+],
+"note": "CAPEX 1Q25·4Q25·1Q26은 누계 차감 산출. 가입자는 공시 시점(S-1·실적 발표)에 공개된 분기 기말 값만 게재. ARPU·해지율은 미공시."
+}
 },
 "아마존": {
 "company": "아마존",
