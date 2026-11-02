@@ -955,13 +955,13 @@ def update_company_history(items):
 STOCK_FILE, STOCK_TTL_H = "stock_prices.json", 20
 STOCK_TICKERS = {   # subj 키 → (야후 티커, 기본 통화)
     "에릭슨": ("ERIC","USD"), "노키아": ("NOK","USD"), "zte": ("0763.HK","HKD"),
-    "버라이즌": ("VZ","USD"), "kddi": ("9433.T","JPY"), "ast": ("ASTS","USD"),
+    "버라이즌": ("VZ","USD"), "kddi": ("9433.T","JPY"), "ast": ("ASTS","USD"), "스타링크": ("SPCX","USD"),
     "skt": ("017670.KS","KRW"), "kt": ("030200.KS","KRW"), "lg유플러스": ("032640.KS","KRW"),
 }
-STOOQ_MAP = {"ERIC":"eric.us","NOK":"nok.us","VZ":"vz.us","ASTS":"asts.us","9433.T":"9433.jp","0763.HK":"0763.hk"}
+STOOQ_MAP = {"ERIC":"eric.us","NOK":"nok.us","VZ":"vz.us","ASTS":"asts.us","SPCX":"spcx.us","9433.T":"9433.jp","0763.HK":"0763.hk"}
 
 def update_stock_prices():
-    """상장 9개사의 1년 일별 종가를 하루 1회 갱신 (Yahoo 1차, Stooq 2차). 실패 시 기존 캐시 유지"""
+    """상장 10개사의 1년 일별 종가를 하루 1회 갱신 (Yahoo 1차, Stooq 2차). 실패 시 기존 캐시 유지"""
     data = {"fetched_at": "", "series": {}}
     if os.path.exists(STOCK_FILE):
         try: data = json.loads(open(STOCK_FILE, encoding="utf-8").read())

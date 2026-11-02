@@ -127,8 +127,8 @@ window.onerror=function(m,s,l){var e=document.getElementById("content");if(e)e.i
 <script>
 const META=(typeof COMPANY_META!=="undefined")?COMPANY_META:{generated:"데이터 없음",groups:{}};
 const DATA=(typeof COMPANY_DATA!=="undefined")?COMPANY_DATA:{};
-const NAME={"에릭슨":"Ericsson","노키아":"Nokia","화웨이":"Huawei","zte":"ZTE","스타링크":"Starlink","ast":"AST SpaceMobile","아마존":"Amazon Leo","버라이즌":"Verizon","kddi":"KDDI","도코모":"DOCOMO","skt":"SKT","kt":"KT","lg유플러스":"LG U+","지오":"Jio"};
-const KO={"에릭슨":"에릭슨","노키아":"노키아","화웨이":"화웨이","zte":"ZTE","스타링크":"스타링크","ast":"AST","아마존":"아마존 Leo","버라이즌":"버라이즌","kddi":"KDDI","도코모":"도코모","skt":"SKT","kt":"KT","lg유플러스":"LGU+","지오":"Jio"};
+const NAME={"에릭슨":"Ericsson","노키아":"Nokia","화웨이":"Huawei","zte":"ZTE","스타링크":"SpaceX (Starlink)","ast":"AST SpaceMobile","아마존":"Amazon Leo","버라이즌":"Verizon","kddi":"KDDI","도코모":"DOCOMO","skt":"SKT","kt":"KT","lg유플러스":"LG U+","지오":"Jio"};
+const KO={"에릭슨":"에릭슨","노키아":"노키아","화웨이":"화웨이","zte":"ZTE","스타링크":"SpaceX·스타링크","ast":"AST","아마존":"아마존 Leo","버라이즌":"버라이즌","kddi":"KDDI","도코모":"도코모","skt":"SKT","kt":"KT","lg유플러스":"LGU+","지오":"Jio"};
 const EVTS=["장애","신제품","수주공급","인수합병","투자","실적","경영진거점","규제주파수","위성","요금제","기타"];
 const EVT_LABEL={경영진거점:"경영진·거점",규제주파수:"규제·주파수",수주공급:"수주·공급",인수합병:"M&A"};
 const PERIODS=[["1년",365],["분기",92],["90일",90],["전체",9999]];
@@ -313,6 +313,12 @@ function kpiBlock(c){
       .map(([x,lb])=>`<div class="rchip${x===cv?" on":""}" onclick="setKpiCapex('${x}')">${lb}</div>`).join("")+`</div>`;
     if(k.capex_def) body+=`<div class="kpi-def" title="${esc(k.capex_def)}">${esc(k.capex_def.length>90?k.capex_def.slice(0,89)+"…":k.capex_def)}</div>`;
     body+=`<div class="kpi-wrap">${capexBars(rows,k.capex_unit||"",C_CAPEX)}<div class="kpi-tip"></div></div>`;
+  }
+  if(k.subs_quarterly&&k.subs_quarterly.length){
+    const last=[...k.subs_quarterly].reverse().find(r=>r.v!=null);
+    body+=`<div class="kpi-h">가입자 <span>백만 명 · 최근 ${last?esc(last.label)+" "+Number(last.v).toLocaleString():""}</span></div>`;
+    if(k.subs_def) body+=`<div class="kpi-def">${esc(k.subs_def)}</div>`;
+    body+=`<div class="kpi-wrap">${lineChart(k.subs_quarterly,"백만",C_ARPU,1)}<div class="kpi-tip"></div></div>`;
   }
   if(k.arpu_quarterly&&k.arpu_quarterly.length){
     const last=[...k.arpu_quarterly].reverse().find(r=>r.v!=null);
