@@ -1,5 +1,5 @@
 {
-"generated": "2026-11-01",
+"generated": "2026-11-03",
 "countries": [
 {
 "iso3": "KOR",
@@ -10845,5 +10845,787 @@
 }
 ]
 }
-]
+],
+"certs": {
+"USA": {
+"regulator": "FCC (Equipment Authorization)",
+"db_url": "https://apps.fcc.gov/oetcf/eas/reports/GenericSearch.cfm",
+"asof": "2026-11-03",
+"method": "FCC OET EAS 원본 DB(apps.fcc.gov)는 POST 폼 검색만 지원하고 본 세션 네트워크에서 직접 접근이 차단되어, FCC 공개 기록을 재색인한 미러 fccid.co(grantee 코드별 목록 /company/<code>, 장비등급별 목록 /equipment-class/tnb·pcb)를 1차 소스로 사용하고 fcc.report 개별 FCC ID 페이지로 보조 확인. Grantee 코드: Samsung Electronics=A3L, Ericsson AB=TA8(FCC ID 접두 TA8A·TA8B), Nokia Solutions and Networks=VBN(미국 법인) 및 2AD8U(Nokia Solutions and Networks OY), Nokia(Dallas)=2ASK5, Airspan Communications Ltd=O2J, Fujitsu Network Communications=CFD, Baicells=2AG32. 장비등급 TNB(Licensed Non-Broadcast Station Transmitter)·PCB(PCS Licensed Transmitter)·CBD(CBRS) 기지국 송신기만 필터, 단말·CPE·모듈 제외. 기간 2024-11-01~2026-11-03.",
+"items": [
+{
+"vendor": "Samsung",
+"grantee": "A3L",
+"model": "RF4435D-71A (RRU RF4435d)",
+"cert_id": "A3LRF4435D-71A",
+"date": "2024-12-18",
+"eq_class": "",
+"product": "LTE/5G 매크로 RRU(Remote Radio Unit) 저대역",
+"band": "n71 (617–652MHz) + B13 (728–746MHz)",
+"power": "",
+"use_est": "600MHz(n71)+700MHz(B13) 듀얼밴드 저대역 RRU → 미국 T-Mobile n71 / Verizon B13 커버리지 레이어. 2024-12-18 승인건은 원인증(2021-09-09) 이후 변경(Class II permissive change) 성격으로 추정",
+"type": "estimate",
+"url": "https://fcc.report/FCC-ID/A3LRF4435D-71A"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "AIR 6492 B77D (KRD 901 313)",
+"cert_id": "TA8AKRD901313",
+"date": "2026-09-30",
+"eq_class": "TNB - Licensed Non-Broadcast Station Transmitter",
+"product": "5G Massive MIMO AIR(안테나 일체형 라디오)",
+"band": "n77 C-band (3700–3980MHz)",
+"power": "최대 501.2W(100MHz, 전포트 합산 전도전력)",
+"use_est": "C-band Massive MIMO 신형(AIR 6492) → Verizon·AT&T 중대역 용량 레이어 차세대 공급 준비",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8AKRD901313"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "Radio 4472HP B71 (KRC 161 4406)",
+"cert_id": "TA8AKRC1614406",
+"date": "2026-09-22",
+"eq_class": "TNB - Licensed Non-Broadcast Station Transmitter",
+"product": "4T4R 고출력 저대역 RRU",
+"band": "n71 (617–652MHz)",
+"power": "60W/포트 ×4 (총 약 245W)",
+"use_est": "600MHz 고출력(HP) 라디오 → T-Mobile n71 커버리지 레이어 전용",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8AKRC1614406"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "KRD 901 316 (Multi-standard remote radio; TA8A 동번호 AIR 3286 B25 B66 계열)",
+"cert_id": "TA8BKRD901316",
+"date": "2026-09-02",
+"eq_class": "PCB - PCS Licensed Transmitter",
+"product": "32T32R 중대역 FDD AIR(안테나 일체형)",
+"band": "n25/B2 PCS (1930–2000MHz) + n66 AWS (2110–2200MHz)",
+"power": "32포트 합산 최대 370.8W",
+"use_est": "PCS+AWS 듀얼밴드 32T AIR → AT&T·T-Mobile·Verizon FDD 중대역 용량 증설(FCC 듀얼밴드 라디오 웨이버 2025-05 승인 이후 신제품)",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8BKRD901316"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "Radio Dot 4455/4465 B77D B25 B66 (KRY 901 523/1, /2)",
+"cert_id": "TA8BKRY901523",
+"date": "2026-07-23",
+"eq_class": "PCB - PCS Licensed Transmitter",
+"product": "실내 소형셀(Radio Dot) 라디오",
+"band": "n77 (3710–3980MHz) + n25 (1930–2000MHz) + n66 (2110–2200MHz)",
+"power": "0.5W/포트(3.7GHz), 0.2W/포트(PCS/AWS)",
+"use_est": "C-band+PCS+AWS 트라이밴드 인빌딩 Dot → 미국 MNO 실내 커버리지(기업·공공시설)",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8BKRY901523"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "Radio Dot 4469 B77D (KRY 901 515/2)",
+"cert_id": "TA8BKRY901515",
+"date": "2026-07-23",
+"eq_class": "TNB - Licensed Non-Broadcast Station Transmitter",
+"product": "실내 소형셀(Radio Dot) 라디오",
+"band": "n77 C-band (3705–3975MHz)",
+"power": "0.5W/포트",
+"use_est": "C-band 전용 Dot → Verizon·AT&T 인빌딩 5G",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8BKRY901515"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "Radio Dot 4455/4465 B77D B77G B41 (KRY 901 551/1, /2)",
+"cert_id": "TA8BKRY901551",
+"date": "2026-07-06",
+"eq_class": "TNB - Licensed Non-Broadcast Station Transmitter",
+"product": "실내 소형셀(Radio Dot) 라디오",
+"band": "n77 (3700–3980MHz) + n77 3.45GHz (3450–3550MHz) + n41 (2496–2690MHz)",
+"power": "0.5W/포트(3.7GHz), 0.4W/포트(3.45GHz·2.5GHz)",
+"use_est": "C-band+3.45GHz+2.5GHz TDD 트라이밴드 Dot → AT&T(C-band+3.45) 및 T-Mobile(n41) 인빌딩 겸용",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8BKRY901551"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "AIR 3286 B25 B66 (KRD 901 316)",
+"cert_id": "TA8AKRD901316",
+"date": "2026-06-29",
+"eq_class": "PCB - PCS Licensed Transmitter",
+"product": "32T32R 중대역 FDD AIR(안테나 일체형)",
+"band": "n25/B2 PCS (1930–1990MHz) + n66 AWS (2110–2200MHz)",
+"power": "단일포트 최대 11.4W",
+"use_est": "PCS+AWS 듀얼밴드 FDD Massive MIMO → 미국 MNO 중대역 FDD 용량",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8AKRD901316"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "Radio 4438 44B2/B25 44B66 C (KRC 163 007)",
+"cert_id": "TA8AKRC163007",
+"date": "2026-06-19",
+"eq_class": "PCB - PCS Licensed Transmitter",
+"product": "4T4R 듀얼밴드 매크로 RRU",
+"band": "n25/B2 PCS (1930–1990MHz) + n66 AWS (2110–2200MHz)",
+"power": "최대 평균 전도전력 약 42W",
+"use_est": "PCS+AWS 4T4R 듀얼밴드 라디오 → 미국 MNO FDD 매크로 교체·신설",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8AKRC163007"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "AIR 6494 B77W (KRD 901 303/2)",
+"cert_id": "TA8AKRD901303",
+"date": "2026-06-17",
+"eq_class": "TNB - Licensed Non-Broadcast Station Transmitter",
+"product": "5G Massive MIMO 64T64R AIR(광대역 n77)",
+"band": "n77 3.45GHz (3450–3550MHz) + C-band 상단 (3840–3980MHz)",
+"power": "64포트 합산 최대 518.8W",
+"use_est": "3.45GHz+C-band 동시 지원 광대역 Massive MIMO → AT&T(3.45GHz+C-band 보유) 중대역 단일 라디오 통합 추정",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8AKRD901303"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "Radio 2271 B26D (KRC 161 0049)",
+"cert_id": "TA8AKRC1610049",
+"date": "2026-06-17",
+"eq_class": "TNB - Licensed Non-Broadcast Station Transmitter",
+"product": "2T2R 저대역 FDD RRU(LTE/NR/NB-IoT)",
+"band": "B26 800MHz ESMR (DL 859–880MHz / UL 814–835MHz)",
+"power": "80W/포트 ×2 (총 160W)",
+"use_est": "800MHz ESMR 대역 → T-Mobile(구 Sprint) 저대역 레이어 또는 사설망",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8AKRC1610049"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "Radio 4891 48B2/B25 48B66 M01 (KRC 163 003)",
+"cert_id": "TA8AKRC163003",
+"date": "2026-05-27",
+"eq_class": "PCB - PCS Licensed Transmitter",
+"product": "8T8R 듀얼밴드 고출력 매크로 RRU(GSM/LTE/NR/NB-IoT)",
+"band": "n25/B2 PCS (1930–1995MHz) + n66 AWS (2110–2200MHz)",
+"power": "100W/포트, 총 720W",
+"use_est": "PCS+AWS 8T8R 초고출력 라디오 → 미국 MNO 농촌·광역 커버리지 FDD 매크로",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8AKRC163003"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "Radio Dot 4465/4455 B77D B25 B66 (KRY 901 523/2, /1)",
+"cert_id": "TA8AKRY901626",
+"date": "2026-03-19",
+"eq_class": "PCB - PCS Licensed Transmitter",
+"product": "실내 소형셀(Radio Dot) 라디오",
+"band": "n25/B2 PCS (1930–1995MHz) + n66 AWS (2110–2200MHz) (+n77 변형)",
+"power": "0.2W",
+"use_est": "PCS/AWS 인빌딩 Dot → 미국 MNO 실내 커버리지",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8AKRY901626"
+},
+{
+"vendor": "Ericsson",
+"grantee": "TA8",
+"model": "Radio 4490 44B2/B25 44B66A C (KRC 163 002)",
+"cert_id": "TA8AKRC163002",
+"date": "2026-02-13",
+"eq_class": "PCB - PCS Licensed Transmitter",
+"product": "4T4R 듀얼밴드 매크로 RRU(GSM/WCDMA/LTE/NR/NB-IoT)",
+"band": "n25/B2 PCS (1930–1990MHz) + B66A AWS (2110–2180MHz)",
+"power": "최대 60W(정격 전도)",
+"use_est": "PCS+AWS 4T4R 60W 라디오 → 미국 MNO FDD 매크로",
+"type": "estimate",
+"url": "https://fccid.co/fcc/TA8AKRC163002"
+},
+{
+"vendor": "Nokia",
+"grantee": "VBN",
+"model": "AVHA (AirScale Base Transceiver Station Radio Unit)",
+"cert_id": "VBNAVHA-01",
+"date": "2024-12-01",
+"eq_class": "TNB - Licensed Non-Broadcast Station Transmitter",
+"product": "5G Massive MIMO 64T64R AirScale 라디오",
+"band": "n41 (2496–2690MHz)",
+"power": "400W(전도, 64포트 MIMO 기준)",
+"use_est": "2.5GHz 64T64R Massive MIMO → T-Mobile n41 중대역 용량 레이어",
+"type": "estimate",
+"url": "https://fccid.co/fcc/VBNAVHA-01"
+},
+{
+"vendor": "Nokia",
+"grantee": "2ASK5",
+"model": "Nokia AIOSC Outdoor 5G n79",
+"cert_id": "2ASK5AIOOD5GSC03",
+"date": "2026-03-13",
+"eq_class": "TNB - Licensed Non-Broadcast Station Transmitter",
+"product": "올인원(AIO) 실외 5G 소형셀",
+"band": "n79 4.9GHz 공공안전 (4945–4985MHz)",
+"power": "최대 4.75W(전도)",
+"use_est": "4.9GHz 공공안전 대역 실외 소형셀 → FirstNet/공공기관·유틸리티 사설 5G",
+"type": "estimate",
+"url": "https://fccid.co/fcc/2ASK5AIOOD5GSC03"
+},
+{
+"vendor": "Nokia",
+"grantee": "2AD8U",
+"model": "Nokia AIOSC Indoor 5G CBAND",
+"cert_id": "2AD8UAIOID5GSC05",
+"date": "2026-04-23",
+"eq_class": "TNB - Licensed Non-Broadcast Station Transmitter",
+"product": "올인원(AIO) 실내 5G 소형셀(+2.4GHz Wi-Fi)",
+"band": "n77 C-band (3720–3960MHz)",
+"power": "최대 EIRP 14.6W",
+"use_est": "C-band 실내 올인원 소형셀 → Verizon·AT&T 인빌딩 및 기업 사설 5G",
+"type": "estimate",
+"url": "https://fccid.co/fcc/2AD8UAIOID5GSC05"
+},
+{
+"vendor": "Airspan",
+"grantee": "O2J",
+"model": "CBATG (4G/5G GBSS Call Box)",
+"cert_id": "O2J-CBATG",
+"date": "2026-09-03",
+"eq_class": "TNB - Licensed Non-Broadcast Station Transmitter",
+"product": "이동형 4G/5G 소형셀 기지국(ATG 망 설치 시험용)",
+"band": "849–851MHz (ATG 항공-지상)",
+"power": "0.195W ERP",
+"use_est": "항공-지상(ATG) 네트워크 설치 시험용 이동형 소형셀 → Gogo/상용 ATG 사업자 지원 장비(상용 RAN 공급과는 구분)",
+"type": "estimate",
+"url": "https://fccid.co/fcc/O2J-CBATG"
+}
+],
+"summary": [
+{
+"vendor": "Samsung",
+"count_24m": 1,
+"highlights": "접근 가능한 색인에서 기간 내 신규(Original Equipment) 기지국 인증 미확인. 저대역 RRU RF4435D-71A(n71+B13)의 2024-12 변경승인 1건만 확인. 원본 FCC DB 직접조회 시 추가 건 존재 가능성 높음(2025-05 FCC 듀얼밴드 라디오 웨이버 승인 이후 신규 라디오 인증 가능)."
+},
+{
+"vendor": "Ericsson",
+"count_24m": 13,
+"highlights": "2026년 2~9월 집중 인증: C-band Massive MIMO AIR 6492/6494(3.45GHz+C-band 광대역), PCS+AWS 듀얼밴드 FDD 라디오(AIR 3286, Radio 4438/4490/4891 고출력), n71 고출력 Radio 4472HP, 인빌딩 Radio Dot 4455/4465/4469(C-band·3.45GHz·n41·PCS·AWS)."
+},
+{
+"vendor": "Nokia",
+"count_24m": 3,
+"highlights": "n41 64T64R AirScale 라디오(AVHA, T-Mobile 향 추정) 2024-12; 2026년 올인원 소형셀 AIOSC 실내 C-band 및 실외 4.9GHz 공공안전(n79)."
+},
+{
+"vendor": "Huawei",
+"count_24m": 0,
+"highlights": "2022-11 FCC Covered List 규칙 이후 신규 장비인증 불가(기존 인증 취소 검토 포함) — 기간 내 해당 없음."
+},
+{
+"vendor": "ZTE",
+"count_24m": 0,
+"highlights": "Huawei와 동일하게 Covered List 대상 — 신규 인증 불가, 기간 내 해당 없음."
+},
+{
+"vendor": "Mavenir",
+"count_24m": 0,
+"highlights": "접근 가능한 색인(TNB/PCB 등급 목록)에서 기간 내 인증 미확인."
+},
+{
+"vendor": "Fujitsu/1Finity",
+"count_24m": 0,
+"highlights": "Fujitsu Network Communications(CFD) 5G RU(TB2 등) 인증은 2023~24년에 집중, 기간 내 신규 건 접근 가능 색인에서 미확인(fcc.report 회사 페이지 접근 실패)."
+},
+{
+"vendor": "NEC",
+"count_24m": 0,
+"highlights": "접근 가능한 색인에서 기간 내 인증 미확인."
+},
+{
+"vendor": "Airspan",
+"count_24m": 1,
+"highlights": "ATG 설치 시험용 이동형 4G/5G 소형셀(O2J-CBATG) 2026-09 1건 — 상용 매크로/소형셀 신규 인증은 미확인."
+},
+{
+"vendor": "JMA Wireless",
+"count_24m": 0,
+"highlights": "접근 가능한 색인에서 기간 내 인증 미확인."
+},
+{
+"vendor": "Rakuten Symphony",
+"count_24m": 0,
+"highlights": "접근 가능한 색인에서 기간 내 인증 미확인."
+},
+{
+"vendor": "Parallel Wireless",
+"count_24m": 0,
+"highlights": "접근 가능한 색인에서 기간 내 인증 미확인."
+},
+{
+"vendor": "CommScope",
+"count_24m": 0,
+"highlights": "접근 가능한 색인에서 기간 내 소형셀 인증 미확인."
+},
+{
+"vendor": "Baicells",
+"count_24m": 0,
+"highlights": "grantee 2AG32의 LTE/5G 기지국 인증 다수 존재하나 기간 내 건은 접근 가능 색인에서 날짜 확인 불가."
+},
+{
+"vendor": "Comba",
+"count_24m": 0,
+"highlights": "접근 가능한 색인에서 기간 내 인증 미확인."
+}
+],
+"note": "① FCC OET EAS 원본 검색(apps.fcc.gov)과 주요 미러 fccid.io·device.report·fccidlookup.com은 본 세션 네트워크 정책/봇 차단으로 접근 불가. fccid.co는 접근 가능했으나 색인이 부분적임(예: Samsung A3L 3,637건 색인에도 2024-11 이후 기지국 건 0건, Nokia VBN 42건만 색인, Ericsson 2024-08~2026-02 공백) → 누락 가능성 매우 높음, 특히 Samsung·Nokia(VBN) 2025년 인증. fcc.report는 간헐적으로만 응답. ② 2025-05 FCC가 Samsung·Ericsson의 듀얼밴드(인접대역 통합) 라디오 규정 웨이버를 승인(Communications Daily 2025-05-05)하여 이후 PCS+AWS 등 듀얼밴드 라디오 신규 인증이 이어지는 추세 — Ericsson 2026년 건들이 이를 반영. ③ Huawei·ZTE는 2022-11-25 FCC Covered List 장비인증 금지 규칙으로 신규 기지국 인증 불가. ④ fccid.co 목록은 '원인증(Original Equipment)' 위주로, 기존 FCC ID에 대한 Class II 변경(permissive change)은 대부분 미표시 — Samsung RF4435D-71A 2024-12-18 건은 fcc.report 응용 이력에서 확인. ⑤ Airspan Networks Inc.(미국 법인) 별도 grantee 코드 및 Nokia OY(2AD8U) 전체 목록은 접근 불가하여 미검증. ⑥ 참고(대상 외 벤더): Dell 'DRU77440' 5G NR RRU 4T4R 40W(E2K-DRU77440, 2024-12-01, TNB), BTI Wireless RRU(2026-02/04), Blinq 5G 소형셀(2026-02) 등 신규 O-RAN RU 인증 관찰. ⑦ 원본 확인 권장: FCC EAS에서 grantee code A3L/TA8/VBN/2AD8U + Equipment Class TNB/PCB + Grant Date 2024-11-01~ 조건 검색."
+},
+"KOR": {
+"regulator": "국립전파연구원(RRA) 방송통신기자재 적합성평가(KC) — 적합인증",
+"db_url": "https://www.rra.go.kr/ko/license/A_c_search.do",
+"asof": "2026-11-03",
+"method": "계획: RRA 적합성평가 현황 검색(기자재 명칭 '기지국용 무선설비', '이동통신용 무선설비(기지국)', '이동통신용 무선설비(기지국/중계기)' 등 + 신청인 삼성전자·에릭슨엘지·노키아솔루션앤네트웍스코리아·화웨이·ZTE 등, 인증일 2024-11-01~2026-11-03) 조회 후 모델·인증번호(R-C-xxx-… 또는 R-R-xxx-…)·인증일 수집. 실행 결과: 본 실행환경에서 rra.go.kr·emsit.rra.go.kr 호스트는 네트워크 정책상 접속 차단(CONNECT 403/allowlist 거부)되어 DB 질의 불가. 공공데이터포털(data.go.kr)의 RRA 오픈API는 '자기적합확인 DB정보'(15142276)만 제공하며 기지국은 적합인증 대상이라 해당 API에 포함되지 않음. 대안으로 공개 뉴스·보도자료에서 KC 인증 모델명을 특정할 수 있는 2차 근거를 탐색했으나, 2024-11~2026-11 기간에 모델명·인증번호를 명시한 공개 자료를 찾지 못함(아래 note 참조). 추측 금지 원칙에 따라 items는 비움.",
+"items": [],
+"summary": [
+{
+"vendor": "Samsung",
+"count_24m": null,
+"highlights": "DB 미조회. 공개자료상 국내 3사 5G 메인 벤더(SKT·KT·LGU+ 3.5GHz Massive MIMO/RRH, 28GHz)이나 기간 내 KC 인증 모델명 공개 근거 없음."
+},
+{
+"vendor": "Ericsson",
+"count_24m": null,
+"highlights": "DB 미조회. 에릭슨엘지(Ericsson-LG) 명의 인증 추정. 2023-06 AIR 6476(3.5/3.7GHz 멀티밴드) 국내 소개 기사 있으나 기간 밖·인증 미확인."
+},
+{
+"vendor": "Nokia",
+"count_24m": null,
+"highlights": "DB 미조회. 노키아솔루션앤네트웍스코리아 명의 인증 추정. 기간 내 모델 공개 근거 없음."
+},
+{
+"vendor": "Huawei",
+"count_24m": null,
+"highlights": "DB 미조회. LGU+ 서울·수도권 북부 5G 3.5GHz 공급사. 기간 내 모델 공개 근거 없음."
+},
+{
+"vendor": "ZTE",
+"count_24m": null,
+"highlights": "DB 미조회. 국내 상용 기지국 공급 이력 없음(공개자료 기준)."
+},
+{
+"vendor": "기타(Mavenir, Fujitsu/1Finity, NEC, Airspan, JMA, Rakuten Symphony, Parallel Wireless, CommScope, Baicells, Comba)",
+"count_24m": null,
+"highlights": "DB 미조회. 국내 이음5G(특화망) 4.7GHz/28GHz 소형 기지국 인증 가능성(2022년 삼성·LG전자·노키아·우리넷 등 전파인증 사례) 있으나 기간 내 모델 공개 근거 없음."
+}
+],
+"note": "【DB 접근 제약】 본 실행환경에서 www.rra.go.kr 및 emsit.rra.go.kr 은 아웃바운드 프록시 정책으로 차단(CONNECT 403)되었고, 페이지 fetch 도구에서도 allowlist 거부되어 적합성평가 현황 검색을 수행하지 못했음. 따라서 items의 '0건'은 '인증 없음'이 아니라 '미조회'를 뜻함. 수동 조회 시 절차: rra.go.kr → 적합성평가 → 적합성평가 현황 검색 → 기자재 명칭에 '기지국' 포함 검색 + 신청인(삼성전자, 에릭슨엘지, 노키아솔루션앤네트웍스코리아, 화웨이테크놀러지코리아 등) 필터 + 인증일 2024-11-01~2026-11-03. 적합인증 번호 형식은 'R-C-{업체식별부호}-{모델}'(예: 삼성전자 SEC). 【2차 근거(기간 내, 모델 미특정)】 (1) 메트로신문 2026-08-17 '주파수 재할당 앞둔 통신3사, 5G SA 전환 잰걸음' — 2026-06/12 만료 3G/LTE 370MHz 재할당 조건으로 연내 기존 5G 무선국의 SA 코어 연결 및 실내 5G 무선국 1~2만국 추가 구축 시 재할당대가 감면 → 2026H2~2027 실내 소형셀/RRH 수요(장비 벤더 미명시). (2) ZDNet Korea 2026-10-18 '노키아는 팔고 에릭슨은 합치고…기업용 5G 사업 왜 바꾸나' — 벤더 조직 변화 기사, 모델 없음. (3) 이데일리 2023-06-15(기간 밖) — 에릭슨엘지가 국내 3사에 AIR 6476(3.5GHz+3.7~4.0GHz 듀얼밴드 Massive MIMO) 소개. 【누락 가능성】 기지국 KC 인증은 뉴스 보도가 거의 없어 DB 직접 조회 없이는 모델·건수 파악 불가. 사용자 환경(사내망/일반 브라우저)에서 위 URL 직접 조회를 권고."
+},
+"JPN": {
+"regulator": "総務省(총무성) 技術基準適合証明等(기술기준적합증명·工事設計認証(공사설계인증)) — TELEC/JATE 등 登録証明機関",
+"db_url": "https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=js01",
+"asof": "2026-11-03",
+"method": "계획: 技適(기적) Web-API(giteki/list)로 NAM=サムスン電子ジャパン/エリクソン・ジャパン/ノキアソリューションズ&ネットワークス/日本電気/1FINITY(富士通)/華為技術日本/ZTEジャパン/楽天モバイル·楽天シンフォニー + 특정무선설비 종별 '第2条第11号の…(携帯無線通信 基地局)' + DS=20241101·DE=20261103 로 工事設計認証 목록 수집. 실행 결과: www.tele.soumu.go.jp 는 curl 경로가 프록시 정책으로 차단(CONNECT 403)되고, 페이지 fetch 도구는 검색결과에 노출된 URL만 허용되어 임의 파라미터의 API/검색 URL은 allowlist 거부됨. 검색결과에 있던 결과 URL(pageID=jd01…)은 fetch되었으나 세션 기반 서블릿이어서 2010-05 기본 목록만 반환(파라미터 무시). 따라서 DB 직접 질의 불가 → 2차 근거(총무성 DB를 인용한 언론 보도, 벤더·통신사 보도자료)로 대체. 모든 항목 type='estimate'(DB 원문 미확인). 참고: blogofmobile.com(技適 DB 모니터링 매체)은 http↔https 리다이렉트 루프로 본문 fetch 불가, 제목만 확보.",
+"items": [
+{
+"vendor": "Samsung",
+"grantee": "삼성전자(제조자 명의, 총무성 DB 기준·더구루 보도)",
+"model": "SLS-BN01",
+"cert_id": "001-A21623, 001-A21624, 001-A21625, 001-A21626",
+"date": "2024-10",
+"product": "4G/5G 기지국(1.7GHz 대역, 4G용 2건·5G용 2건 工事設計認証)",
+"band": "1.7GHz (Band 3 / n3)",
+"power": "",
+"use_est": "소프트뱅크 주력 1.7GHz 대역 → SoftBank 4G/5G 매크로 공급 준비(2025-07 Ericsson, 2025-11 Nokia 모더나이제이션 계약과 경쟁). ※기간 경계(2024-10, 24개월 창 직전) 참고용. 2024-04에도 700MHz·3.4GHz·3.5GHz·3.9GHz 소프트뱅크 대역 5G 기지국 6건 TELEC 인증(번호 미공개).",
+"type": "estimate",
+"url": "https://www.theguru.co.kr/news/article.html?no=79996",
+"source": "더구루 2024-11-20(총무성 DB 인용)"
+},
+{
+"vendor": "Samsung",
+"grantee": "NTTドコモ(추정; 도코모 형식명 BS4001形 체계)",
+"model": "BS4001形 45L0AMMU(SS)",
+"cert_id": "",
+"date": "2025-06",
+"product": "5G Massive MIMO 안테나 일체형 무선장치(AAU)",
+"band": "4.5GHz (n79, 4.5–4.6GHz, 100MHz)",
+"power": "",
+"use_est": "NTT도코모 n79 Massive MIMO — Samsung 라디오 + NEC 제어장치(BS3201形 BDEEX(N)) 조합으로 TELEC 工事設計認証. 도코모 상용 투입 직전 단계.",
+"type": "estimate",
+"url": "https://theguru.co.kr/news/article.html?no=89031",
+"source": "더구루 2025-07-07(총무성 DB 인용)"
+},
+{
+"vendor": "NEC",
+"grantee": "NTTドコモ(추정)",
+"model": "BS3201形 BDEEX(N)",
+"cert_id": "",
+"date": "2025-06",
+"product": "기지국 제어장치(BBU/DU)",
+"band": "4.5GHz (n79) 구성",
+"power": "",
+"use_est": "NTT도코모 — NEC BBU + Samsung 45L0AMMU(SS) 라디오 조합 인증.",
+"type": "estimate",
+"url": "https://theguru.co.kr/news/article.html?no=89031",
+"source": "더구루 2025-07-07(총무성 DB 인용)"
+},
+{
+"vendor": "Samsung",
+"grantee": "삼성전자(제조자 명의)",
+"model": "CDU50 (+ AMMU 2종, CRRU 2종 구성)",
+"cert_id": "",
+"date": "2026-06",
+"product": "5G 베이스밴드(CDU50) 제어 기지국 구성 4건 — Massive MIMO AAU 2종 + 소형 RRU 2종",
+"band": "3.7GHz (n78), 4.5GHz (n79)",
+"power": "",
+"use_est": "NTT도코모(대역·식별부호 관행으로 추정) — 라디오 단품 공급에서 BBU 포함 엔드투엔드 공급으로 확대.",
+"type": "estimate",
+"url": "https://www.theguru.co.kr/news/article.html?no=103232",
+"source": "더구루 2026-06-18(총무성 DB 인용)"
+},
+{
+"vendor": "Samsung",
+"grantee": "",
+"model": "",
+"cert_id": "",
+"date": "2026-03-03",
+"product": "O-RAN 준수 5G 라디오 — 700MHz 저대역 RU, 1.7GHz 중대역 RU, 3.8GHz Massive MIMO",
+"band": "700MHz (n28), 1.7GHz (n3), 3.8GHz (n77)",
+"power": "",
+"use_est": "楽天モバイル(라쿠텐모바일) 전국 5G Open RAN 라디오 공급사 선정 — 2026년 내 상용 배치 예정. 모델명·技適 미공개(보도자료 기준).",
+"type": "estimate",
+"url": "https://www.samsung.com/global/business/networks/insights/press-release/0303-rakuten-mobile-selects-samsung-as-nationwide-5g-open-ran-radio-provider-in-japan/",
+"source": "Samsung Networks 보도자료 2026-03-03 / 共同通信PRワイヤー 2026-03-05"
+},
+{
+"vendor": "Ericsson",
+"grantee": "",
+"model": "AIR 3255",
+"cert_id": "",
+"date": "2025-12-18",
+"product": "Massive MIMO 안테나 일체형 라디오(13kg, Ericsson Silicon)",
+"band": "4.5GHz (n79)",
+"power": "",
+"use_est": "NTT도코모 5G 상용망 가동(2025-12) — 기존 3.7GHz Massive MIMO와 병행. 技適 번호 미확인.",
+"type": "estimate",
+"url": "https://www.ericsson.com/en/press-releases/2025/12/ericsson-4-5-ghz-massive-mimo-air-3255-radios-operational-in-docomos-5g-network",
+"source": "Ericsson 보도자료 2025-12-18"
+},
+{
+"vendor": "Ericsson",
+"grantee": "",
+"model": "AIR 3255, AIR 6476, RAN Compute(최신세대 베이스밴드)",
+"cert_id": "",
+"date": "2025-07-31",
+"product": "Massive MIMO 라디오·초광대역 라디오·베이스밴드",
+"band": "저·중·고대역(세부 미공개)",
+"power": "",
+"use_est": "SoftBank 4G/5G 장비 파트너십 확대(홋카이도·도호쿠·간토·호쿠리쿠·도카이·간사이 일부) — 5G SA 확대.",
+"type": "estimate",
+"url": "https://www.ericsson.com/en/press-releases/2025/7/ericsson-expands-4g-and-5g-network-equipment-partnership-with-softbank-corp",
+"source": "Ericsson 보도자료 2025-07-31"
+},
+{
+"vendor": "Ericsson",
+"grantee": "",
+"model": "RAN Compute(차세대, Ericsson Silicon)",
+"cert_id": "",
+"date": "2026-07-31",
+"product": "C-RAN용 베이스밴드 플랫폼",
+"band": "",
+"power": "",
+"use_est": "NTT도코모 4G/5G/5G-A·AI-RAN 베이스밴드 선정, 2026-07 배치 개시. 기지국 무선설비 인증 대상 아님(베이스밴드).",
+"type": "estimate",
+"url": "https://www.ericsson.com/en/press-releases/2026/7/ericsson-supplies-ran-compute-platform-for-ntt-docomo-in-japan",
+"source": "Ericsson 보도자료 2026-07-31"
+},
+{
+"vendor": "Ericsson",
+"grantee": "",
+"model": "AIR 1281",
+"cert_id": "",
+"date": "",
+"product": "mmWave 5G 안테나 일체형 라디오",
+"band": "28GHz (n257) 추정",
+"power": "",
+"use_est": "NTT도코모 밀리파 5G 기지국 도입 추정(blogofmobile 제목 '…ミリ波の5G基地局でエリクソンのAIR 1281を導入か', 記事ID 180440 → 2025년 중반 게재 추정). 본문·技適 번호 미확인.",
+"type": "estimate",
+"url": "http://blogofmobile.com/article/180440",
+"source": "blog of mobile(技適 DB 모니터링) — 제목만 확인"
+},
+{
+"vendor": "Nokia",
+"grantee": "",
+"model": "Habrok Massive MIMO, AirScale 베이스밴드(ReefShark)",
+"cert_id": "",
+"date": "2025-11-05",
+"product": "Massive MIMO 라디오·베이스밴드",
+"band": "미공개",
+"power": "",
+"use_est": "SoftBank 서일본 4G/5G 모더나이제이션·5G SA 확대 계약.",
+"type": "estimate",
+"url": "https://www.nokia.com/newsroom/nokia-extends-softbank-corp-partnership-with-network-modernization-deal-in-japan/",
+"source": "Nokia 보도자료 2025-11-05"
+},
+{
+"vendor": "Fujitsu/1Finity",
+"grantee": "",
+"model": "32A37 (기존 44R21 O-RU 보완)",
+"cert_id": "",
+"date": "2026-02-03",
+"product": "O-RAN 준수 Massive MIMO O-RU (Qualcomm Dragonwing QRU100)",
+"band": "3.7GHz (n77)",
+"power": "",
+"use_est": "楽天モバイル 상용 5G 채택, 2026년 중 배치 — 1FINITY 32A37 mMIMO + 44R21 광역 커버리지 O-RU.",
+"type": "estimate",
+"url": "https://businessnetwork.jp/article/32907/",
+"source": "BUSINESS NETWORK 2026-02-03"
+},
+{
+"vendor": "Fujitsu/1Finity",
+"grantee": "",
+"model": "44R21",
+"cert_id": "",
+"date": "",
+"product": "O-RAN O-RU(4T4R, 광역 커버리지)",
+"band": "1.7GHz/3.7GHz 중 하나로 추정(라쿠텐 대역)",
+"power": "",
+"use_est": "楽天モバイル 기존 상용 O-RU.",
+"type": "estimate",
+"url": "https://businessnetwork.jp/article/32907/",
+"source": "BUSINESS NETWORK 2026-02-03"
+},
+{
+"vendor": "기타(벤더 미상)",
+"grantee": "",
+"model": "",
+"cert_id": "",
+"date": "",
+"product": "로컬5G 및 소프트뱅크 4.9GHz 대역 지원 5G 기지국 技適 통과",
+"band": "4.9GHz (n79 상단, SoftBank 4.9–5.0GHz / 로컬5G 4.8–4.9GHz)",
+"power": "",
+"use_est": "blogofmobile 제목 'ローカル5Gとソフトバンクの4.9GHz帯に対応した5G基地局が技適通過'(記事ID 181028, 2025년 하반기 게재 추정). 벤더·모델 미확인.",
+"type": "estimate",
+"url": "http://blogofmobile.com/article/181028",
+"source": "blog of mobile — 제목만 확인"
+},
+{
+"vendor": "기타(벤더 미상)",
+"grantee": "KDDI",
+"model": "Dual Band Massive MIMO Unit (DB-MMU)",
+"cert_id": "",
+"date": "2025-04-11",
+"product": "듀얼밴드(3.7GHz+4.0GHz) Massive MIMO 유닛",
+"band": "3.7GHz + 4.0GHz (n77, 100MHz×2)",
+"power": "",
+"use_est": "KDDI 오사카·간사이 만박 EXPO 아리나 2025-03 상용 도입(일본 최초 Sub6 2주파 단일 무선장치). 벤더 미명시(KDDI 5G 라디오 벤더는 Samsung·Ericsson·Nokia).",
+"type": "estimate",
+"url": "https://newsroom.kddi.com/news/detail/kddi_nr-545_3826.html",
+"source": "KDDI 뉴스룸 2025-04-11"
+}
+],
+"summary": [
+{
+"vendor": "Samsung",
+"count_24m": 4,
+"highlights": "소프트뱅크 1.7GHz 4G/5G 기지국 SLS-BN01(TELEC 001-A21623~26, 2024-10) → 도코모 n79 AAU 45L0AMMU(SS)(2025-06) → 도코모 CDU50 BBU+AMMU/CRRU 4건(2026-06) → 라쿠텐 전국 O-RAN 라디오(700M/1.7G/3.8G MMIMO) 공급사 선정(2026-03). 일본 4사 모두 고객화."
+},
+{
+"vendor": "Ericsson",
+"count_24m": 4,
+"highlights": "도코모 n79 Massive MIMO AIR 3255 상용 가동(2025-12), 소프트뱅크 AIR 3255/AIR 6476/RAN Compute 파트너십 확대(2025-07), 도코모 차세대 RAN Compute(2026-07), 도코모 mmWave AIR 1281 技適 보도(2025 추정)."
+},
+{
+"vendor": "Nokia",
+"count_24m": 1,
+"highlights": "소프트뱅크 서일본 Habrok Massive MIMO·AirScale 모더나이제이션(2025-11). 2024년 초 blogofmobile상 소프트뱅크 900MHz 5G 및 도코모 3.7/4.5GHz 技適 보도(기간 밖)."
+},
+{
+"vendor": "NEC",
+"count_24m": 1,
+"highlights": "도코모 BS3201形 BDEEX(N) 제어장치 — Samsung n79 AAU와 조합 工事設計認証(2025-06)."
+},
+{
+"vendor": "Fujitsu/1Finity",
+"count_24m": 2,
+"highlights": "라쿠텐모바일 3.7GHz O-RAN Massive MIMO O-RU 32A37 채택(2026-02, 2026년 중 상용), 기존 44R21 O-RU. 별도 44R14-N77a는 FCC(미국) 인증(blogofmobile)."
+},
+{
+"vendor": "Rakuten Symphony",
+"count_24m": 0,
+"highlights": "라쿠텐 자체 브랜드 라디오 技適 근거 미확인(라쿠텐모바일 신규 RU는 Samsung·1FINITY 조달로 전환)."
+},
+{
+"vendor": "Huawei",
+"count_24m": 0,
+"highlights": "기간 내 일본 기지국 인증·공급 공개 근거 없음(소프트뱅크 4G 레거시만)."
+},
+{
+"vendor": "ZTE",
+"count_24m": 0,
+"highlights": "기간 내 일본 기지국 인증·공급 공개 근거 없음."
+}
+],
+"note": "【DB 접근 제약】 총무성 技適 검색(giteki/SearchServlet) 및 공식 Web-API(giteki/list, 사양: https://www.tele.soumu.go.jp/resource/j/giteki/webapi/gk_req_info.pdf)는 본 환경에서 프록시 정책(CONNECT 403) 및 fetch allowlist로 질의 불가. 따라서 cert_id·date는 DB 원문이 아니라 2차 자료(더구루가 총무성 DB를 인용한 번호·월, 벤더 보도자료 일자)이며 모두 type='estimate'. count_24m은 '공개 근거가 확인된 제품·계약 건수'이지 인증 건수가 아님. 【일본 제도 참고】 상용 기지국(携帯無線通信 基地局, 施行規則 第2条第11号 계열)은 工事設計認証(공사설계인증) 또는 免許+登録点検(등록점검)으로 운용되는 경우가 많아, 통신사(NTTドコモ 등) 명의로 인증되거나(도코모 형식명 BSxxxx形) DB에 벤더명이 드러나지 않을 수 있음. 더구루 보도는 삼성 2024-04(6건)·2024-10(4건)·2025-06·2026-06 TELEC 인증을 총무성 DB에서 확인했다고 명시. 【수동 조회 권고】 Web-API 예: https://www.tele.soumu.go.jp/giteki/list?OF=2&DC=5&NAM=サムスン電子&DS=20241101&DE=20261103 (NAM 부분일치; エリクソン・ジャパン, ノキアソリューションズ, 日本電気, 1FINITY, 華為技術日本, 楽天モバイル 로 반복) 및 TN=AIR 3255 / 45L0AMMU / CDU50 모델 검색. 【누락 가능성】 blogofmobile(技適 DB 정기 모니터링)의 2024-11~2026-11 기사 다수(Ericsson AIR 1281, 4.9GHz 기지국 등)를 본문 미확인으로 번호·일자 비움. Huawei/ZTE/Mavenir/Airspan/JMA/Parallel/CommScope/Baicells/Comba 일본 기지국 인증은 공개 근거 미발견."
+},
+"CAN": {
+"regulator": "ISED (Innovation, Science and Economic Development Canada) — Radio Equipment List (REL)",
+"db_url": "https://sms-sgs.ic.gc.ca/equipmentSearch/searchRadioEquipments?&lang=en",
+"asof": "2026-11-03",
+"method": "ISED REL 검색 페이지(sms-sgs.ic.gc.ca)는 Java 웹플로우(execution=e1s1) 기반의 입력 폼 전용 검색이며, 회사명(Samsung Electronics, Ericsson, Nokia, Mavenir, Airspan, Fujitsu/1Finity, NEC) 및 기지국 관련 장비 카테고리로 조회를 시도했으나 본 실행 환경에서 sms-sgs.ic.gc.ca·ic.gc.ca·services.arcgis.com(ISED Spectrum Licences Site Data) 호스트에 대한 HTTPS 접속이 정책상 차단(proxy 403)되어 조회 결과를 가져올 수 없었다. ISED 공식 안내 페이지(https://ised-isde.canada.ca/site/certification-engineering-bureau/en/node/19)에서 REL은 폼 검색 도구만 제공되고 오픈데이터(일괄 다운로드) 버전은 안내되지 않음을 확인했다. 대안으로 공개 검색엔진에서 ISED 인증번호(예: Samsung 회사번호 649E-xxxx) 또는 벤더 보도자료 중 캐나다 인증 모델명을 명시한 자료를 찾았으나, 2024-11~2026-11 구간에서 기지국(RAN) 모델의 ISED 인증을 명시한 공식 자료는 확인되지 않았다.",
+"items": [],
+"summary": [
+{
+"vendor": "Samsung",
+"count_24m": 0,
+"highlights": "REL 미조회(차단). 참고: 2024-02 TELUS–Samsung 캐나다 최초 5G vRAN/Open RAN 구축 발표(조사 기간 이전, 인증 기록 아님)."
+},
+{
+"vendor": "Ericsson",
+"count_24m": 0,
+"highlights": "REL 미조회(차단). 공개 자료에서 캐나다 인증 모델 명시 없음."
+},
+{
+"vendor": "Nokia",
+"count_24m": 0,
+"highlights": "REL 미조회(차단). 공개 자료에서 캐나다 인증 모델 명시 없음."
+},
+{
+"vendor": "Mavenir",
+"count_24m": 0,
+"highlights": "REL 미조회(차단)."
+},
+{
+"vendor": "Airspan",
+"count_24m": 0,
+"highlights": "REL 미조회(차단)."
+},
+{
+"vendor": "Fujitsu/1Finity",
+"count_24m": 0,
+"highlights": "REL 미조회(차단)."
+},
+{
+"vendor": "NEC",
+"count_24m": 0,
+"highlights": "REL 미조회(차단)."
+}
+],
+"note": "① DB 접근 제약: ISED REL(sms-sgs.ic.gc.ca)은 폼 전용 검색이며, 본 환경에서는 해당 호스트 접속 자체가 차단되어 벤더별 인증 건수·모델·인증일·인증번호를 추출하지 못했다. 따라서 items는 비어 있으며 count_24m=0은 '인증 없음'이 아니라 '미확인'을 의미한다. ② 정식 조회 방법(사용자 환경에서 수행 권장): REL 검색 폼에서 Company Name에 'Samsung Electronics' / 'Ericsson' / 'Nokia Solutions and Networks' / 'Mavenir' / 'Airspan' / 'Fujitsu' / 'NEC' 입력 후 Certification Date 범위를 2024-11-01~2026-11-03으로 지정, 결과에서 RSS-130/RSS-139/RSS-192/RSS-195 등 기지국 적용 규격(600/700MHz, AWS, 3450-3650MHz, 3650-3900/3900-3980MHz 등) 항목만 추출. ISED 회사번호(Company Number) 기준 검색도 가능(예: Samsung Electronics = 649E). ③ 보조 자료: ISED 'Spectrum Management System Authorization Data Extract'(open.canada.ca, TAFL) 및 'Spectrum Licences Site Data'(ArcGIS)는 면허 사이트 데이터로서 배치 장비 모델/인증번호 필드를 포함할 수 있으나 역시 접속 차단으로 미확인. ④ 추측 금지 원칙에 따라 FCC 인증 모델을 캐나다 인증으로 환산 추정하지 않았다."
+},
+"IND": {
+"regulator": "TEC MTCTE (Mandatory Testing and Certification of Telecommunication Equipment) / WPC ETA / DoT NSCS 'Trusted Source' 승인",
+"db_url": "https://www.mtcte.tec.gov.in/",
+"asof": "2026-11-03",
+"method": "TEC MTCTE 포털(mtcte.tec.gov.in)의 'Certified Products' 공개 목록에서 기지국(Base Station for Cellular Network / Base Station for Cellular Network for 5G, eNodeB·gNodeB) 항목을 Samsung, Ericsson, Nokia, Tejas 기준으로 조회하려 했으나, 본 실행 환경에서 mtcte.tec.gov.in 호스트 접속이 정책상 차단(proxy 403)되어 인증서 목록을 가져올 수 없었다. DoT eservices(eservices.dot.gov.in) 공지 및 인증 컨설팅사(Nemko, TÜV, Aleph India, certification-india, CAICT GMA) 공개 자료로 기지국 ERS(Essential Requirements)의 의무화 일정만 확인했다. NSCS/NCSC 'Trusted Source' 승인은 Trusted Telecom Portal(비공개)에서 관리되어 모델 단위 공개 목록이 없고, 벤더 단위 승인은 2021~2022년 언론 보도로만 확인된다(조사 기간 2024-11~2026-11 이전).",
+"items": [],
+"summary": [
+{
+"vendor": "Samsung",
+"count_24m": 0,
+"highlights": "MTCTE 인증서 목록 미조회(차단). NCSC Trusted Source 승인은 2022-03 보도(벤더 단위, 모델 비공개)."
+},
+{
+"vendor": "Ericsson",
+"count_24m": 0,
+"highlights": "MTCTE 미조회(차단). Trusted Source 승인 2021~2022 보도(벤더 단위)."
+},
+{
+"vendor": "Nokia",
+"count_24m": 0,
+"highlights": "MTCTE 미조회(차단). Trusted Source 승인 2021~2022 보도(벤더 단위)."
+},
+{
+"vendor": "Tejas Networks",
+"count_24m": 0,
+"highlights": "MTCTE 미조회(차단). Trusted Source 승인 2021~2022 보도. BSNL 4G/5G RAN 10만 사이트 공급(2023 수주, 2024~2025 공급) — 인증 기록 아님."
+},
+{
+"vendor": "Mavenir",
+"count_24m": 0,
+"highlights": "MTCTE 미조회(차단). Trusted Source 승인 2022 보도(벤더 단위)."
+}
+],
+"note": "① DB 접근 제약: MTCTE 포털(인증서 공개 목록)과 WPC ETA 조회(saralsanchar.gov.in)는 본 환경에서 접속 차단되어 모델·인증번호·인증일을 추출하지 못했다. items는 비어 있으며 count_24m=0은 '미확인'을 의미한다. ② 확인된 제도 일정(공식 공지 2차 자료 기준): 'Base Station for Cellular Network'(4G 이하, MTCTE Phase III/IV) 의무 인증 2024-01-01 발효; 'Base Station for Cellular Network for 5G'(Phase V) 의무 인증일은 TEC 2024-07-01 공지로 2024-10-01로 연장 발효(출처: GMA/CAICT 2024-07-17, https://gma.caict.ac.cn/en/update/119/579; Nemko 2023-07-27). 또한 ILAC 가맹 해외 시험소 성적서 수용 기한은 4G·5G 기지국 모두 2024-09-30까지 연장. 따라서 2024-10 이후 인도에 공급되는 모든 4G/5G 기지국은 MTCTE 인증서가 있어야 하며, 포털 조회 시 2024-10~2026-11 구간에 Samsung(India) / Ericsson India / Nokia Solutions and Networks India / Tejas 명의 인증서가 다수 존재할 것으로 예상되나 확인 불가. ③ 2025-02-25 DoT 고시(2025-08-24 발효)로 추가 의무화된 품목은 CPE·보안장비·NGSO 단말/게이트웨이 등이며 기지국은 포함되지 않음(출처: Aleph India). ④ Trusted Source(NSCS/NCSC): 2021-2022년 Ericsson, Nokia, Cisco, Mavenir, Tejas, HFCL, Samsung이 승인된 것으로 보도(tele.net.in 2022-03-21 등). 승인은 Trusted Telecom Portal에서 제품 단위로 이뤄지지만 공개 목록이 없어 모델별 확인 불가. 조사 기간 내 신규 승인 공개 공지는 확인되지 않음. ⑤ 정식 조회 방법(사용자 환경 권장): mtcte.tec.gov.in → Certified Products 검색에서 'Product' = Base Station for Cellular Network / Base Station for Cellular Network for 5G, 'Applicant/Manufacturer'에 벤더명 입력 후 Certificate Issue Date 2024-11-01 이후 필터."
+},
+"BRA": {
+"regulator": "Anatel — SCH (Sistema de Certificação e Homologação) / Certificado de Homologação",
+"db_url": "https://sistemas.anatel.gov.br/mosaico/sch/",
+"asof": "2026-11-03",
+"method": "Anatel 'Produtos Homologados' 공개 검색(sistemas.anatel.gov.br/mosaico/sch) 및 오픈데이터(dados.gov.br 'Produtos de Telecomunicações Homologados pela Anatel', www.anatel.gov.br/dadosabertos/PDA/Certificacao/ 디렉터리)에서 제품유형 'Estação Rádio Base' / 'Transceptor de Radiação Restrita'를 Ericsson, Nokia, Huawei, ZTE, Samsung 기준으로 추출하려 했으나, 본 실행 환경에서 sistemas.anatel.gov.br, www.anatel.gov.br, dados.gov.br, gov.br 호스트 접속이 정책상 차단(proxy 403)되어 데이터를 가져올 수 없었다. Anatel 오픈데이터 안내 페이지(https://www.gov.br/anatel/pt-br/dados/dados-abertos)에서 'Certificação e Homologação de Produtos de Telecomunicações' 데이터셋 존재와 PDA/Certificacao 하위 메타데이터 파일(Glossario e Metadados - Produtos por declaracao de conformidade.odt, Celulares em 5G__ORCN1.odt 등)의 존재만 확인했다. 공개 검색엔진에서 벤더가 공개한 기지국 Certificado de Homologação(번호 형식 NNNNN-YY-NNNNN) 문서를 탐색했으나 조사 기간 내 Ericsson·Nokia·Huawei·ZTE·Samsung 기지국 모델 인증서 문서는 발견되지 않았다.",
+"items": [],
+"summary": [
+{
+"vendor": "Ericsson",
+"count_24m": 0,
+"highlights": "SCH 미조회(차단). 공개 인증서 문서 미발견."
+},
+{
+"vendor": "Nokia",
+"count_24m": 0,
+"highlights": "SCH 미조회(차단). 공개 인증서 문서 미발견."
+},
+{
+"vendor": "Huawei",
+"count_24m": 0,
+"highlights": "SCH 미조회(차단). 공개 인증서 문서 미발견."
+},
+{
+"vendor": "ZTE",
+"count_24m": 0,
+"highlights": "SCH 미조회(차단). 공개 인증서 문서 미발견."
+},
+{
+"vendor": "Samsung",
+"count_24m": 0,
+"highlights": "SCH 미조회(차단). 공개 인증서 문서 미발견."
+}
+],
+"note": "① DB 접근 제약: Anatel SCH 검색과 오픈데이터 CSV 모두 본 환경에서 접속 차단. items는 비어 있으며 count_24m=0은 '미확인'을 의미한다. ② 정식 조회 방법(사용자 환경 권장): (a) https://sistemas.anatel.gov.br/mosaico/sch/ → Consulta de Produtos Homologados에서 'Tipo do Produto' = Estação Rádio Base(ERB) 선택, 'Fabricante/Solicitante'에 Ericsson Telecomunicações / Nokia Solutions and Networks do Brasil / Huawei do Brasil / ZTE do Brasil / Samsung Eletrônica da Amazônia 입력, 'Data da Homologação' 2024-11-01 이후 필터; (b) 오픈데이터: www.anatel.gov.br/dadosabertos/PDA/Certificacao/ 하위 '프로듀토스 세르티피카도스(Produtos Certificados)' CSV 일괄 다운로드 후 Categoria/Tipo 열에서 'Estação Rádio Base' 필터. 각 인증서 원본은 'Número de Homologação'(NNNNN-YY-NNNNN) 기준으로 SCH에서 PDF 조회 가능. ③ 참고 규제 동향(2차 자료): Anatel은 2025-02 이동통신 장비 인증 기술요건을 3GPP 최신 규격에 맞춰 개정(NB-NTN, RedCap, LTE Cat 1bis 추가; 2025-08-13부터 의무 적용 — 출처: DPL News 2025-02-19). 해당 개정은 단말 중심이며 기지국(ERB) 요건 변경 여부는 미확인. ④ 추측 금지 원칙에 따라 브라질 사업자(Claro/TIM/Vivo) 벤더 선정 보도를 인증 기록으로 환산하지 않았다."
+},
+"CHN": {
+"regulator": "MIIT 工业和信息化部(공업화신식화부, 공신부) — 电信设备进网许可(전신설비 진망허가, 네트워크 접속 허가) 및 无线电发射设备型号核准(무선전 발사설비 형호핵준, SRRC 모델 승인)",
+"db_url": "https://jwxk.miit.gov.cn/",
+"asof": "2026-11-03",
+"method": "工信部 进网许可(진망허가) 공개 조회(https://jwxk.miit.gov.cn/)와 SRRC 型号核准(형호핵준) 조회(工业和信息化部 一体化政务服务平台 https://ythzxfw.miit.gov.cn/, 国家无线电监测中心 https://www.srrc.org.cn/)에서 기지국(基站, 기참) 항목을 华为(화웨이, Huawei), 中兴(중흥, ZTE), 大唐/中信科移动(대당/중신과이동, Datang/CICT Mobile), 爱立信(애립신, Ericsson), 上海诺基亚贝尔(상해 노키아 베르, Nokia Shanghai Bell), 三星(삼성, Samsung) 기준으로 조회하려 했으나, 본 실행 환경에서 jwxk.miit.gov.cn, ythzxfw.miit.gov.cn, www.miit.gov.cn, www.srrc.org.cn, www.tenaa.com.cn 호스트 접속이 모두 정책상 차단(proxy 403)되어 조회 결과를 가져올 수 없었다. 공신부가 매월 공표하는 '电信设备进网许可证发放情况'(전신설비 진망허가증 발급 현황) 공고(모델명 포함)도 검색엔진 경유로 2024-11~2026-11 구간 원문에 접근하지 못했다. 공개 2차 자료로 제도 범위(목록) 변경 사항만 확인했다.",
+"items": [],
+"summary": [
+{
+"vendor": "Huawei (华为, 화웨이)",
+"count_24m": 0,
+"highlights": "进网许可·SRRC 미조회(차단). 모델별 허가 기록 미확인."
+},
+{
+"vendor": "ZTE (中兴, 중흥)",
+"count_24m": 0,
+"highlights": "进网许可·SRRC 미조회(차단)."
+},
+{
+"vendor": "Datang/CICT Mobile (大唐/中信科移动, 대당/중신과이동)",
+"count_24m": 0,
+"highlights": "进网许可·SRRC 미조회(차단)."
+},
+{
+"vendor": "Ericsson (爱立信, 애립신)",
+"count_24m": 0,
+"highlights": "进网许可·SRRC 미조회(차단)."
+},
+{
+"vendor": "Nokia Shanghai Bell (上海诺基亚贝尔, 상해 노키아 베르)",
+"count_24m": 0,
+"highlights": "进网许可·SRRC 미조회(차단)."
+},
+{
+"vendor": "Samsung (三星, 삼성)",
+"count_24m": 0,
+"highlights": "进网许可·SRRC 미조회(차단). 중국 내 기지국 공급 공개 기록 없음(미확인)."
+}
+],
+"note": "① DB 접근 제약: 进网许可(진망허가) 조회 사이트와 SRRC 型号核准(형호핵준) 조회 사이트 모두 본 환경에서 접속 차단. items는 비어 있으며 count_24m=0은 '미확인'을 의미한다. ② 제도 범위(2차 자료로 확인): 《电信设备进网管理办法》(전신설비 진망관리방법, 2001 제정·2014 개정, 工信部令 第28号/공신부령 제28호; 2024-01 工信部令 第68号/제68호로 벌칙 조항 개정)는 电信终端设备(전신 단말설비)·无线电通信设备(무선전 통신설비)·涉及网间互联的设备(망간 상호연결 설비)를 허가 대상으로 규정. 2022-09-23 국무원 办公厅《关于深化电子电器行业管理制度改革的意见》(전자전기 업종 관리제도 개혁 심화 의견) 및 2023-01-17 工信部《关于电信设备进网许可制度若干改革举措的通告》(진망허가 제도 개혁 조치 통고, 2023-03-01 시행)로 고정전화·팩스·모뎀·ATM 교환기 등 11종이 허가 대상에서 제외되고 卫星互联网设备(위성인터넷 설비)·功能虚拟化设备(기능 가상화 설비) 2종이 신규 편입됨. 기지국(基站)은 제외 품목에 포함되지 않았으며, 공신부 월별 발급현황 공고(예: 2020-06-09 공고)에서 '5G基站'(5G 기지국)이 허가 발급 품목으로 언급된 것을 확인(출처: SESEC 2020-07-06). 즉 5G 기지국은 进网许可 대상이고, 동시에 무선 송신설비로서 SRRC 型号核准(CMIIT ID) 대상이다. ③ 정식 조회 방법(중국 내 또는 허용 환경 권장): jwxk.miit.gov.cn → 进网许可证查询에서 设备名称(설비명)에 '基站' 또는 '5G基站', 企业名称(기업명)에 华为技术有限公司 / 中兴通讯股份有限公司 / 中信科移动通信技术股份有限公司 / 爱立信(中国)通信有限公司 / 上海诺基亚贝尔股份有限公司 입력, 发证日期(발증일자) 2024-11-01 이후 필터; SRRC는 ythzxfw.miit.gov.cn 또는 srrc.org.cn의 型号核准查询에서 동일 기업명으로 조회(核准代码 CMIIT ID 형식 20YYCPxxxx 등). ④ 월별 공고: 공신부 홈페이지 '电信设备进网许可证发放情况'(전신설비 진망허가증 발급 현황) 공고를 2024-11~2026-10 월별로 열람하면 벤더·모델 단위 허가 건을 공식 문서로 확보 가능(본 환경 접근 불가). ⑤ 추측 금지 원칙에 따라 중국 이통사(中国移动/중국이동, 中国电信/중국전신, 中国联通/중국연통, 中国广电/중국광전) 입찰 낙찰 보도를 허가 기록으로 환산하지 않았다."
+}
+}
 }
