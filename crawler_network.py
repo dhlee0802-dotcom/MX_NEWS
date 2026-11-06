@@ -372,11 +372,12 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
 과거(past): 기사가 보도하는 핵심 사건이 이미 발생한 지 수개월~수년이 지난 과거 사건이면 1, 최근 발생했거나 진행 중인 사건이면 0. 회고·기념·연재·분석 기사, 그리고 스팸성 사이트가 과거의 유명 기사를 최신 날짜로 재발행한 경우(발행일은 최신이어도 내용은 옛 사건)는 반드시 1. 특히 과거의 대규모 통신장애(예: 2021년 NTT 도코모 200만 명 장애, 2022년 KDDI 장애, 2018년 KT 아현 화재)를 다룬 기사를 현재 발생한 장애로 오인하지 말 것 — 기사 속 연도, "당시", "그해", 이미 종결된 사건의 사과·복구 완료 서술 등이 단서. past=1 기사는 전량 자동 제외됨. 현재 장애 기사가 과거 사례를 비교·인용만 하는 경우는 0.
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 영어·일본어·중국어 등 어떤 언어의 기사라도 이슈명은 반드시 한국어 표기(에릭슨, 노키아, 화웨이, 버라이즌, 도이치텔레콤 등)로 쓸 것 — 같은 사건을 다룬 다국어 기사가 전부 동일 이슈명으로 묶여야 함. 특정 회사가 주체가 아닌 사건(공항·지역 통신장애, 정책 발표 등)은 "지역/기관 사건" 형식으로 통일(예: 같은 공항 통신장애를 다룬 한국어·영어·일본어 기사 전부 → "미국공항 통신장애" 하나로). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 특히 같은 행사·발표·컨퍼런스·국정감사·정책 브리핑에서 파생된 기사들은 세부 주제가 조금씩 달라도 전부 하나의 동일 이슈명으로 묶을 것(예: 국정감사에서 나온 통신 관련 기사 전부 → "과기정통부 국감"). 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
 키워드(kw): 문장이 아닌 순수 키워드만, 최대 12자. 조사·서술어·수식어 금지, 2~3어절 명사 나열 (예: "CEO 교체", "2Q 매출 -6%", "美 제재 확대", "D2C 계약", "R&D 거점 이전", "6G 시연"). 회사명 생략. 모든 기사에 반드시 기재.
+시장국가(ctry): 사건이 발생한 시장(고객 통신사 소재) 국가의 ISO3 코드(예: USA, KOR, JPN, IND, DEU, GBR). 글로벌·다국가·불명이면 빈 문자열 "".
 공급제품(prod): evt가 수주공급 또는 신제품일 때만, 공급·출시되는 제품 유형을 다음 중 하나로: "5G RAN", "4G RAN", "vRAN/Open RAN", "5G Core", "4G Core", "IMS/음성", "전송/광", "안테나/RU", "네트워크 SW/자동화", "프라이빗 5G", "위성", "기타". 해당 없으면 빈 문자열 "".
 번역제목(kt): 기사 제목의 자연스러운 한국어 번역. 이미 한국어 제목이면 그대로 기재. 원제목의 의미를 유지하고 과장 금지, 매체명·불필요한 수식어는 제거, 80자 이내. 모든 기사에 반드시 기재.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 메신저 보고에 바로 붙여 쓸 수 있는 개조식으로 작성: "- "로 시작하는 불릿 3~5개, 불릿 사이는 줄바꿈(\\n), 각 불릿은 명사형 종결(예: 계약 체결, 출시 발표, 대응 필요). 순서는 핵심 사실 → 수치·배경 → 경쟁 구도·사업적 의미. 기사에 인용된 수치·금액·비율·규모는 최대한 그대로 포함할 것. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 불릿 1개만 작성.
 
-모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"score":62,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kw":"버라이즌 5G 계약 체결","prod":"5G RAN","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"score":62,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kw":"버라이즌 5G 계약 체결","prod":"5G RAN","ctry":"USA","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
@@ -422,6 +423,8 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
             if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
             pr = re.sub(r"\s+", " ", str(j.get("prod",""))).strip()
             if pr: item["prod"] = pr[:20]
+            ct = str(j.get("ctry","")).strip().upper()
+            if re.fullmatch(r"[A-Z]{3}", ct): item["ctry"] = ct
             kw = re.sub(r"\s+", " ", str(j.get("kw",""))).strip()
             if kw: item["kw"] = kw[:24]
             kt = re.sub(r"\s+", " ", str(j.get("kt",""))).strip()
@@ -875,8 +878,17 @@ def update_vendor_deals(pool):
         try: deals = json.loads(open(DEALS_FILE, encoding="utf-8").read())
         except Exception: deals = []
     seen = {(d.get("url") or d.get("title","")) for d in deals}
+    def same_event(x, y):   # 같은 벤더의 같은 사건(이슈명 동일 또는 제목 유사)을 7일 내 1건만
+        if x.get("vendor") != y.get("vendor"): return False
+        try:
+            if abs((datetime.strptime(x["date"][:10], "%Y-%m-%d") - datetime.strptime(y["date"][:10], "%Y-%m-%d")).days) > 7: return False
+        except Exception: return False
+        if x.get("topic") and x.get("topic") == y.get("topic"): return True
+        if x.get("carrier") and x.get("carrier") == y.get("carrier") and x.get("product") == y.get("product") and x.get("product"): return True
+        tx, ty = _tokens(x.get("title","")), _tokens(y.get("title",""))
+        return bool(tx and ty) and len(tx & ty) / len(tx | ty) >= 0.45
     added = 0
-    for a in pool:
+    for a in sorted(pool, key=lambda z: z.get("score", 0), reverse=True):
         if a.get("evt") != "수주공급": continue
         v = VENDOR_CANON.get(a.get("subj",""))
         if not v or a.get("importance", 0) < 3: continue
@@ -884,10 +896,16 @@ def update_vendor_deals(pool):
         if key in seen: continue
         seen.add(key)
         tgt = a.get("tgt","")
-        deals.append({"date": a["date"], "vendor": v, "carrier": tgt, "country": CARRIER_COUNTRY.get(tgt, ""),
-                      "product": a.get("prod",""), "kw": a.get("kw",""), "title": a["title"][:120], "url": a.get("url",""),
-                      "source": a.get("source",""), "score": a.get("score", 0)})
-        added += 1
+        rec = {"date": a["date"], "vendor": v, "carrier": tgt, "country": a.get("ctry") or CARRIER_COUNTRY.get(tgt, ""),
+               "product": a.get("prod",""), "kw": a.get("kw",""), "topic": a.get("topic",""), "title": a["title"][:120], "url": a.get("url",""),
+               "source": a.get("source",""), "score": a.get("score", 0)}
+        dup = next((d for d in deals if same_event(rec, d)), None)
+        if dup is not None:
+            dup["rel"] = dup.get("rel", 1) + 1
+            if not dup.get("country") and rec["country"]: dup["country"] = rec["country"]
+            if not dup.get("product") and rec["product"]: dup["product"] = rec["product"]
+            continue
+        deals.append(rec); added += 1
     cutoff = (datetime.now(KST) - timedelta(days=DEALS_DAYS)).strftime("%Y-%m-%d")
     deals = [d for d in deals if d.get("date","") >= cutoff]
     deals.sort(key=lambda d: d.get("date",""), reverse=True)

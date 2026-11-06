@@ -48,12 +48,13 @@
   .mapbox .c.has:hover{filter:brightness(1.3)}
   .mapbox .c.sel{stroke:#fff;stroke-width:1.3}
   .mapbox.zoomed .c:not(.sel){opacity:.5}
-  .maptip{position:absolute;z-index:5;background:#223052;color:#fff;border:1px solid var(--line2);border-radius:10px;padding:9px 12px;font-size:12px;box-shadow:0 6px 20px rgba(0,0,0,.55);display:none;pointer-events:none;max-width:360px}
+  .maptip{position:absolute;z-index:5;background:#223052;color:#fff;border:1px solid var(--line2);border-radius:10px;padding:9px 12px;font-size:12px;box-shadow:0 6px 20px rgba(0,0,0,.55);display:none;pointer-events:none;max-width:400px;min-width:240px}
   .maptip .t{font-weight:800;font-size:13px;margin-bottom:4px}
-  .maptip .r{display:flex;gap:6px;align-items:center;margin:2px 0;flex-wrap:nowrap}
-  .maptip .r b{font-weight:700;min-width:84px;color:#cfe0ff;white-space:nowrap}
+  .maptip .r{display:flex;gap:4px;align-items:center;margin:3px 0;flex-wrap:wrap}
+  .maptip .r b{font-weight:700;flex:0 0 118px;color:#cfe0ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .vch{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:1px 7px;border-radius:5px;background:rgba(255,255,255,.08);color:#e7ecf7;white-space:nowrap;line-height:1.5}
   .vch i{width:7px;height:7px;border-radius:50%;background:var(--c);display:inline-block;flex:0 0 auto}
+  .vn{font-size:11px;color:var(--sub);margin:0 6px 0 -2px;line-height:1.5}
   .vch.sun{opacity:.5;text-decoration:line-through}
   .mapctl{position:absolute;left:12px;top:12px;display:flex;gap:6px;z-index:4;flex-wrap:wrap}
   .mapctl .chip{background:rgba(20,29,51,.9)}
@@ -93,8 +94,9 @@
   table.kv tr:first-child td{border-top:none}
   table.kv td:first-child{color:var(--sub);font-size:11.5px;white-space:nowrap;width:62px;padding-right:8px;padding-top:5px}
   table.kv .vs{display:flex;flex-wrap:wrap;gap:3px}
-  .sec{font-size:11.5px;font-weight:800;color:var(--sub);margin:10px 0 5px;display:flex;align-items:center;gap:8px}
-  .sec::after{content:"";flex:1;height:1px;background:var(--line)}
+  .sec{font-size:11.5px;font-weight:800;color:var(--sub);margin:10px 0 5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;white-space:nowrap}
+  .sec>span{font-weight:500;flex:1 1 auto;min-width:0;white-space:normal}
+  .sec::after{content:"";flex:1 0 24px;height:1px;background:var(--line)}
   .share{display:flex;height:14px;border-radius:5px;overflow:hidden;gap:2px;background:var(--bg2)}
   .share div{height:100%;background:var(--c)}
   .share-row{display:flex;gap:4px 10px;align-items:center;flex-wrap:wrap;font-size:11.5px;margin-top:3px}
@@ -176,7 +178,13 @@ const REGION={"KOR":"아시아","JPN":"아시아","CHN":"아시아","IND":"아�
 function vbase(v){return String(v||"").replace(/\s*\(.*\)$/,"").trim();}
 function vcol(v){const b=vbase(v).toLowerCase();for(const k in VCOL){if(b.startsWith(k.toLowerCase()))return VCOL[k];}return OTHER;}
 function esc(s){return String(s==null?"":s).replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));}
-function vchip(v){v=String(v||"");if(/^\(/.test(v)||/미확인$/.test(v))return `<span class="basis">${esc(v)}</span>`;const sun=/종료|sunset|철거/i.test(v);return `<span class="vch${sun?" sun":""}" style="--c:${vcol(v)}"><i></i>${esc(v)}</span>`;}
+function vnote(v){const m=String(v||"").match(/\((.*)\)\s*$/);return m?m[1]:"";}
+function vchip(v,full){
+  // 칩에는 벤더명만, 괄호 안 부연은 full 모드에서만 작은 글씨로 뒤에 표시(툴팁·요약 줄에서는 title로만)
+  v=String(v||""); if(/^\(/.test(v)||/미확인$/.test(v)) return `<span class="basis">${esc(v)}</span>`;
+  const sun=/종료|sunset|철거/i.test(v), b=vbase(v), n=vnote(v);
+  return `<span class="vch${sun?" sun":""}" style="--c:${vcol(v)}" title="${esc(v)}"><i></i>${esc(b)}</span>${full&&n?`<span class="vn">${esc(n)}</span>`:""}`;
+}
 const BYISO={}; VM.countries.forEach(c=>BYISO[c.iso3]=c);
 const FEATS=WORLD.lo.map(f=>({id:f.id,n:f.n,r:f.r})).concat(Object.keys(WORLD.hi).map(k=>({id:k,n:WORLD.hi[k].n,r:WORLD.hi[k].r})));
 const BYFEAT={}; FEATS.forEach(f=>BYFEAT[f.id]=f);
@@ -276,7 +284,7 @@ function showTip(e,iso){
   const c=BYISO[iso]; const tip=document.getElementById("maptip"); if(!c){tip.style.display="none";return;}
   tip.innerHTML=`<div class="t">${esc(c.name_ko)} <span style="font-weight:500;color:#9fb3dc;font-size:11px">사업자 ${c.carriers.length}곳 · 5G RAN 공급사 · 클릭하면 상세</span></div>`+
     c.carriers.map(k=>{const v=((k.ran||{})["5g"]||[]).filter(x=>!/종료/.test(x));const v4=((k.ran||{})["4g"]||[]).filter(x=>!/종료/.test(x));
-      return `<div class="r"><b>${esc(k.name)}</b>${(v.length?v:v4).map(vchip).join("")||'<span style="color:#9fb3dc">미확인</span>'}${!v.length&&v4.length?'<span style="color:#9fb3dc;font-size:10.5px">(4G)</span>':""}</div>`;}).join("");
+      return `<div class="r"><b>${esc(k.name)}</b>${(v.length?v:v4).map(v=>vchip(v)).join("")||'<span style="color:#9fb3dc">미확인</span>'}${!v.length&&v4.length?'<span style="color:#9fb3dc;font-size:10.5px">(4G)</span>':""}</div>`;}).join("");
   const box=document.getElementById("mapbox").getBoundingClientRect();
   let x=e.clientX-box.left+14, y=e.clientY-box.top+14;
   tip.style.display="block";
@@ -363,11 +371,11 @@ function carrierCard(k,i){
     <div class="car-hd" onclick="this.parentElement.classList.toggle('open')">
       <div><h3>${esc(k.name)}</h3>${k.name_local&&k.name_local!==k.name?`<span class="loc">${esc(k.name_local)}</span>`:""}${k.type&&k.type!=="MNO"?`<span class="loc">${esc(k.type)}</span>`:""}${k.subs_m?`<span class="loc">가입자 ${k.subs_m}M</span>`:""}</div>
       <span class="conf ${esc(k.confidence||"")}">${cf}</span>
-      <div class="line"><span class="k">5G RAN</span>${v5.length?v5.map(vchip).join(""):'<span class="k">미확인</span>'}${cores.includes("5gc")?`<span class="k" style="margin-left:8px">5GC</span>${k.core["5gc"].map(vchip).join("")}`:""}</div>
+      <div class="line"><span class="k">5G RAN</span>${v5.length?v5.map(v=>vchip(v)).join(""):'<span class="k">미확인</span>'}${cores.includes("5gc")?`<span class="k" style="margin-left:8px">5GC</span>${k.core["5gc"].map(v=>vchip(v)).join("")}`:""}</div>
     </div>
     <div class="car-body"><div class="grid2">
-      <div><div class="sec">RAN 공급사</div><table class="kv">${gens.length?gens.map(g=>`<tr><td>${GEN_LABEL[g]}</td><td><div class="vs">${k.ran[g].map(vchip).join("")}</div></td></tr>`).join(""):'<tr><td colspan="2" class="basis">공개 정보 없음</td></tr>'}</table></div>
-      <div>${cores.length?`<div class="sec">Core 공급사</div><table class="kv">${cores.map(g=>`<tr><td>${CORE_LABEL[g]}</td><td><div class="vs">${k.core[g].map(vchip).join("")}</div></td></tr>`).join("")}</table>`:""}</div>
+      <div><div class="sec">RAN 공급사</div><table class="kv">${gens.length?gens.map(g=>`<tr><td>${GEN_LABEL[g]}</td><td><div class="vs">${k.ran[g].map(v=>vchip(v,true)).join("")}</div></td></tr>`).join(""):'<tr><td colspan="2" class="basis">공개 정보 없음</td></tr>'}</table></div>
+      <div>${cores.length?`<div class="sec">Core 공급사</div><table class="kv">${cores.map(g=>`<tr><td>${CORE_LABEL[g]}</td><td><div class="vs">${k.core[g].map(v=>vchip(v,true)).join("")}</div></td></tr>`).join("")}</table>`:""}</div>
     </div>
     ${(k.regions||[]).length?`<div class="sec">벤더 권역</div><table class="kv">`+k.regions.map(r=>`<tr><td style="width:auto">${vchip(r.vendor)}</td><td>${esc(r.area)}${r.gens?` <span class="basis">(${r.gens.map(g=>GEN_LABEL[g]||g).join("·")})</span>`:""}${r.source?` <a class="sl" href="${esc(r.source)}" target="_blank" rel="noopener">↗</a>`:""}</td></tr>`).join("")+`</table>`:""}
     ${(k.share||[]).some(s=>s.pct!=null)?`<div class="sec">RAN 점유율 (사이트 기준)</div>`+shareBars(k.share):""}
