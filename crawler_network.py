@@ -372,12 +372,13 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
 과거(past): 기사가 보도하는 핵심 사건이 이미 발생한 지 수개월~수년이 지난 과거 사건이면 1, 최근 발생했거나 진행 중인 사건이면 0. 회고·기념·연재·분석 기사, 그리고 스팸성 사이트가 과거의 유명 기사를 최신 날짜로 재발행한 경우(발행일은 최신이어도 내용은 옛 사건)는 반드시 1. 특히 과거의 대규모 통신장애(예: 2021년 NTT 도코모 200만 명 장애, 2022년 KDDI 장애, 2018년 KT 아현 화재)를 다룬 기사를 현재 발생한 장애로 오인하지 말 것 — 기사 속 연도, "당시", "그해", 이미 종결된 사건의 사과·복구 완료 서술 등이 단서. past=1 기사는 전량 자동 제외됨. 현재 장애 기사가 과거 사례를 비교·인용만 하는 경우는 0.
 이슈(topic): 기사가 다루는 핵심 사건을 나타내는 짧은 한국어 이슈명. 반드시 "회사명 사건" 형식으로, 회사명을 첫 단어로 동일하게 표기할 것(예: "버라이즌 장애", "에릭슨 수주", "에릭슨 실적" — 회사명 표기는 전부 통일). 영어·일본어·중국어 등 어떤 언어의 기사라도 이슈명은 반드시 한국어 표기(에릭슨, 노키아, 화웨이, 버라이즌, 도이치텔레콤 등)로 쓸 것 — 같은 사건을 다룬 다국어 기사가 전부 동일 이슈명으로 묶여야 함. 특정 회사가 주체가 아닌 사건(공항·지역 통신장애, 정책 발표 등)은 "지역/기관 사건" 형식으로 통일(예: 같은 공항 통신장애를 다룬 한국어·영어·일본어 기사 전부 → "미국공항 통신장애" 하나로). 같은 사건을 다룬 기사는 제목 표현·매체·언어가 달라도 반드시 한 글자도 다르지 않은 동일 이슈명을 부여. 특히 같은 행사·발표·컨퍼런스·국정감사·정책 브리핑에서 파생된 기사들은 세부 주제가 조금씩 달라도 전부 하나의 동일 이슈명으로 묶을 것(예: 국정감사에서 나온 통신 관련 기사 전부 → "과기정통부 국감"). 이슈명이 같으면 중복으로 간주되어 1건만 표시됨.
 키워드(kw): 문장이 아닌 순수 키워드만, 최대 12자. 조사·서술어·수식어 금지, 2~3어절 명사 나열 (예: "CEO 교체", "2Q 매출 -6%", "美 제재 확대", "D2C 계약", "R&D 거점 이전", "6G 시연"). 회사명 생략. 모든 기사에 반드시 기재.
+수주판정(deal): 통신장비 벤더(에릭슨·노키아·화웨이·ZTE·삼성·마베니어·후지쯔·NEC·라쿠텐심포니 등)가 이동통신사업자(MNO)에 RAN·Core·전송 장비나 네트워크 SW를 공급하는 계약 체결, 공급사 선정, 기존 벤더 교체(swap, rip-and-replace), 공급 계약 연장·확대가 확정적으로 보도된 기사만 1. 다음은 전부 0: 시험·실증·시연·PoC, MOU·파트너십·협력·공동연구, 제품 출시·기술 발표, 시장 전망·점유율·애널리스트 분석, 특허·소송·주가, 행사·스폰서십, 철도·군·공공기관·기업 등 통신사가 아닌 고객 사례, 통신사 자체 발표 중 벤더가 특정되지 않은 것.
 시장국가(ctry): 사건이 발생한 시장(고객 통신사 소재) 국가의 ISO3 코드(예: USA, KOR, JPN, IND, DEU, GBR). 글로벌·다국가·불명이면 빈 문자열 "".
 공급제품(prod): evt가 수주공급 또는 신제품일 때만, 공급·출시되는 제품 유형을 다음 중 하나로: "5G RAN", "4G RAN", "vRAN/Open RAN", "5G Core", "4G Core", "IMS/음성", "전송/광", "안테나/RU", "네트워크 SW/자동화", "프라이빗 5G", "위성", "기타". 해당 없으면 빈 문자열 "".
 번역제목(kt): 기사 제목의 자연스러운 한국어 번역. 이미 한국어 제목이면 그대로 기재. 원제목의 의미를 유지하고 과장 금지, 매체명·불필요한 수식어는 제거, 80자 이내. 모든 기사에 반드시 기재.
 요약(sum): 반드시 100% 한국어로만 작성 — 영어 문장을 그대로 넣는 것은 오답이며, 외국어 기사는 한국어로 번역해 요약. 메신저 보고에 바로 붙여 쓸 수 있는 개조식으로 작성: "- "로 시작하는 불릿 3~5개, 불릿 사이는 줄바꿈(\\n), 각 불릿은 명사형 종결(예: 계약 체결, 출시 발표, 대응 필요). 순서는 핵심 사실 → 수치·배경 → 경쟁 구도·사업적 의미. 기사에 인용된 수치·금액·비율·규모는 최대한 그대로 포함할 것. 제공된 제목·요약 범위 내에서만 작성하고 추측 금지. 제공 정보가 제목뿐이면 불릿 1개만 작성.
 
-모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"score":62,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kw":"버라이즌 5G 계약 체결","prod":"5G RAN","ctry":"USA","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
+모든 기사에 대해 빠짐없이 JSON 배열만 출력: [{{"i":0,"sec":"carrier","cat":"contract","imp":3,"score":62,"subj":"에릭슨","evt":"수주공급","tgt":"버라이즌","past":0,"topic":"에릭슨 수주","kw":"버라이즌 5G 계약 체결","prod":"5G RAN","deal":1,"ctry":"USA","kt":"에릭슨, 버라이즌과 5G 장비 공급 계약 체결","sum":"..."}}]
 
 기사 목록:
 {chr(10).join(lines)}"""
@@ -423,6 +424,8 @@ none = 삼성전자 네트워크사업과 명백히 무관할 때만 → 제외.
             if j.get("topic"): item["topic"] = re.sub(r"\s+"," ",str(j["topic"])).strip().lower()
             pr = re.sub(r"\s+", " ", str(j.get("prod",""))).strip()
             if pr: item["prod"] = pr[:20]
+            try: item["deal"] = 1 if int(j.get("deal", 0)) == 1 else 0
+            except Exception: item["deal"] = 0
             ct = str(j.get("ctry","")).strip().upper()
             if re.fullmatch(r"[A-Z]{3}", ct): item["ctry"] = ct
             kw = re.sub(r"\s+", " ", str(j.get("kw",""))).strip()
@@ -872,6 +875,44 @@ CARRIER_COUNTRY = {"버라이즌":"USA","at&t":"USA","t모바일":"USA","에코�
                    "지오":"IND","에어텔":"IND","보다폰아이디어":"IND","bsnl":"IND","텔러스":"CAN","비디오트론":"CAN","사스크텔":"CAN","로저스":"CAN","벨":"CAN",
                    "보다폰":"GBR","도이치텔레콤":"DEU","오렌지":"FRA","텔레포니카":"ESP","차이나모바일":"CHN","차이나텔레콤":"CHN","차이나유니콤":"CHN",
                    "tim":"ITA","텔리아":"SWE","kpn":"NLD","비보":"BRA","클라로":"BRA","텔셀":"MEX"}
+def rejudge_legacy_deals(deals):
+    """deal 판정을 거치지 않은 기존 아카이브 항목(chk 없음)을 Gemini로 재판정해 수주·교체 확정 기사만 남김"""
+    legacy = [d for d in deals if not d.get("chk")]
+    if not legacy: return deals
+    key = os.environ.get("GEMINI_API_KEY")
+    if not key:
+        print("안내: GEMINI_API_KEY 없음 - 아카이브 재판정 생략"); return deals
+    model = "gemini-2.0-flash"
+    if os.path.exists("gemini_model_nw.txt"):
+        m = open("gemini_model_nw.txt", encoding="utf-8").read().strip()
+        if m: model = m
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
+    verdict = {}
+    for ci in range(0, len(legacy), 60):
+        batch = legacy[ci:ci+60]
+        lines = [f"{i} | {d['vendor']} | {d.get('carrier','')} | {d['title']} | {d.get('kw','')}" for i, d in enumerate(batch)]
+        prompt = ("아래 기사(번호|벤더|상대|제목|키워드)가 통신장비 벤더가 이동통신사업자(MNO)에 RAN·Core·전송 장비/네트워크 SW를 공급하는 "
+                  "계약 체결·공급사 선정·기존 벤더 교체(swap)·공급 계약 연장을 확정적으로 보도한 기사면 1, 아니면 0으로 판정. "
+                  "시험·실증·MOU·파트너십·공동연구·제품 출시·시장 전망·점유율·특허·소송·주가·행사·철도/군/기업 등 비통신사 고객은 0. "
+                  "JSON 배열만 출력: [{\"i\":0,\"deal\":1}]\n\n" + "\n".join(lines))
+        payload = {"contents":[{"parts":[{"text":prompt}]}],"generationConfig":{"response_mime_type":"application/json","temperature":0}}
+        try:
+            r = gemini_call(url, payload, timeout=120)
+            raw = r["candidates"][0]["content"]["parts"][0]["text"]
+            for j in json.loads(raw):
+                try: verdict[id(batch[int(j["i"])])] = 1 if int(j.get("deal", 0)) == 1 else 0
+                except Exception: pass
+        except Exception as ex:
+            print(f"경고: 아카이브 재판정 실패({model}) - {ex}"); return deals
+    out = []
+    for d in deals:
+        if d.get("chk"): out.append(d); continue
+        v = verdict.get(id(d))
+        if v is None: out.append(d); continue      # 판정 누락분은 다음 회차에 재시도
+        if v == 1: d["chk"] = 1; out.append(d)
+    print(f"아카이브 재판정: {len(legacy)}건 중 {len(legacy) - (len(deals) - len(out))}건 유지, {len(deals) - len(out)}건 제거")
+    return out
+
 def update_vendor_deals(pool):
     deals = []
     if os.path.exists(DEALS_FILE):
@@ -888,15 +929,16 @@ def update_vendor_deals(pool):
         tx, ty = _tokens(x.get("title","")), _tokens(y.get("title",""))
         return bool(tx and ty) and len(tx & ty) / len(tx | ty) >= 0.45
     added = 0
+    deals = rejudge_legacy_deals(deals)
     for a in sorted(pool, key=lambda z: z.get("score", 0), reverse=True):
-        if a.get("evt") != "수주공급": continue
+        if a.get("evt") != "수주공급" or a.get("deal") != 1 or not a.get("tgt"): continue   # Gemini가 확정 수주·교체로 판정한 기사만
         v = VENDOR_CANON.get(a.get("subj",""))
         if not v or a.get("importance", 0) < 3: continue
         key = a.get("url") or a.get("title","")
         if key in seen: continue
         seen.add(key)
         tgt = a.get("tgt","")
-        rec = {"date": a["date"], "vendor": v, "carrier": tgt, "country": a.get("ctry") or CARRIER_COUNTRY.get(tgt, ""),
+        rec = {"date": a["date"], "vendor": v, "carrier": tgt, "country": a.get("ctry") or CARRIER_COUNTRY.get(tgt, ""), "chk": 1,
                "product": a.get("prod",""), "kw": a.get("kw",""), "topic": a.get("topic",""), "title": a["title"][:120], "url": a.get("url",""),
                "source": a.get("source",""), "score": a.get("score", 0)}
         dup = next((d for d in deals if same_event(rec, d)), None)

@@ -297,7 +297,7 @@ function hideTip(){document.getElementById("maptip").style.display="none";}
 /* ── 회전·드래그·줌 ── */
 const svgEl=document.getElementById("map");
 let pd=null, moved=0;
-svgEl.addEventListener("pointerdown",e=>{pd={x:e.clientX,y:e.clientY,lon:cLon,lat:cLat,vb:vb.slice()};moved=0;svgEl.setPointerCapture(e.pointerId);});
+svgEl.addEventListener("pointerdown",e=>{const t=e.target.closest?e.target.closest(".c.has"):null;pd={x:e.clientX,y:e.clientY,lon:cLon,lat:cLat,vb:vb.slice(),hit:t?t.dataset.iso:null};moved=0;svgEl.setPointerCapture(e.pointerId);});
 svgEl.addEventListener("pointermove",e=>{
   if(!pd)return; const dx=e.clientX-pd.x, dy=e.clientY-pd.y; moved=Math.max(moved,Math.abs(dx)+Math.abs(dy));
   if(moved<4)return; dragging=true; document.getElementById("mapbox").classList.add("drag"); hideTip(); stopAnim();
@@ -305,8 +305,8 @@ svgEl.addEventListener("pointermove",e=>{
   if(proj==="globe"){ const deg=k*(360/(2*Math.PI*R))*1.15; cLon=pd.lon-dx*deg; cLat=Math.max(-80,Math.min(80,pd.lat+dy*deg)); /* 지구를 잡아 끄는 방향으로 회전 */ renderMap(); }
   else{ vb=[pd.vb[0]-dx*k,pd.vb[1]-dy*k,pd.vb[2],pd.vb[3]]; setVB(vb); }
 });
-function endDrag(e){ if(!pd)return; const wasDrag=dragging; pd=null; dragging=false; document.getElementById("mapbox").classList.remove("drag");
-  if(!wasDrag){ const t=e.target.closest?e.target.closest(".c.has"):null; if(t)selectCountry(t.dataset.iso); else if(selIso)selectCountry(null); }
+function endDrag(e){ if(!pd)return; const wasDrag=dragging, hit=pd.hit; pd=null; dragging=false; document.getElementById("mapbox").classList.remove("drag");
+  if(!wasDrag){ if(hit)selectCountry(hit); else if(selIso)selectCountry(null); }   // 포인터 캡처 중에는 e.target이 svg라 pointerdown 시점의 국가를 사용
 }
 svgEl.addEventListener("pointerup",endDrag); svgEl.addEventListener("pointercancel",endDrag);
 svgEl.addEventListener("wheel",e=>{e.preventDefault();zoomBy(e.deltaY<0?1.2:1/1.2);},{passive:false});
