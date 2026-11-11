@@ -170,7 +170,7 @@
   .acts{display:grid;gap:6px}
   .act{display:grid;grid-template-columns:22px 1fr;gap:10px;padding:10px 12px;border-radius:10px;background:var(--raised);font-size:13px;line-height:1.5;animation:in .45s var(--ease) both}
   .act i{width:22px;height:22px;border-radius:6px;background:var(--blue-soft);color:#a9c1ff;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800}
-  .det-sum{font-size:13px;color:var(--sub);white-space:pre-wrap;line-height:1.6}
+  .det-sum{font-size:13.5px;color:var(--ink);white-space:pre-wrap;line-height:1.7;padding:12px 14px;background:var(--raised);border-radius:12px}
   .noimp{padding:14px;border-radius:12px;background:var(--raised);color:var(--sub);font-size:12.5px;line-height:1.6;border:1px dashed var(--line2)}
   .conf{font-size:11px;color:var(--dim)}
 
@@ -379,6 +379,7 @@ function openDetail(k){
     <div><div class="det-title">${esc(a.title)}</div>
     <div class="det-meta"><span class="chip">${CAT_LABEL[a.category]||esc(a.category)}</span>${a._sid||a.sid?`<span class="chip">${SEC_NAME[a._sid||a.sid]||""}</span>`:""}${im&&im.horizon?`<span class="chip">영향 시점 · ${esc(im.horizon)}</span>`:""}<span>${esc(a.source)} · ${esc(a.date)}</span></div></div></div>
     <div class="det-body" style="--c:var(--s${b})">`;
+  h+=`<div class="sec-h">기사 요약</div><div class="det-sum">${esc(a.summary||"요약 없음")}</div>`;
   if(im){
     if(im.why) h+=`<div class="sec-h">왜 중요한가</div><div class="why">${esc(im.why)}</div>`;
     if(im.areas&&im.areas.length){
@@ -392,7 +393,6 @@ function openDetail(k){
   }else{
     h+=`<div class="sec-h">사업 영향 분석</div><div class="noimp">${s>=75?"이 기사의 영향 분석은 다음 수집 주기(30분 이내)에 생성됩니다.":"영향 분석은 75점 이상(중요·긴급) 기사에 자동 생성됩니다."}</div>`;
   }
-  h+=`<div class="sec-h">기사 요약</div><div class="det-sum">${esc(a.summary||"요약 없음")}</div>`;
   if(a.otitle&&a.otitle!==a.title) h+=`<div class="conf" style="margin-top:8px">원제: ${esc(a.otitle)}</div>`;
   h+=`</div><div class="modal-ft">
     ${(a.url||"").includes("news.google.com")?`<a class="mbtn" href="https://www.google.com/search?q=${encodeURIComponent('"'+(a.otitle||a.title||"").slice(0,80)+'"')}" target="_blank" rel="noopener">원문 검색</a>`:""}
