@@ -1,5 +1,5 @@
 {
-"generated": "2026-11-03",
+"generated": "2026-11-12",
 "countries": [
 {
 "iso3": "KOR",
@@ -3621,585 +3621,6 @@
 ]
 },
 {
-"iso3": "ARG",
-"name_ko": "아르헨티나",
-"carriers": [
-{
-"name": "Claro Argentina",
-"name_local": "Claro (AMX Argentina)",
-"type": "MNO",
-"subs_m": null,
-"subs_asof": "",
-"ran": {
-"2g": [
-"Nokia"
-],
-"3g": [
-"Nokia"
-],
-"4g": [
-"Nokia"
-],
-"5g": [
-"Nokia"
-]
-},
-"core": {
-"epc": [],
-"5gc": [],
-"ims": []
-},
-"regions": [
-{
-"vendor": "Nokia",
-"area": "전국(5G 1단계: 주요 대도시)",
-"gens": [
-"2g",
-"3g",
-"4g",
-"5g"
-],
-"source": "https://www.nokia.com/newsroom/nokia-selected-by-claro-argentina-for-5g-network-deployment/"
-}
-],
-"share": [
-{
-"vendor": "Nokia",
-"pct": 100,
-"sites": null,
-"basis": "RAN 전체(2G~5G) 단일 벤더, 언론 보도",
-"asof": "2024-08",
-"type": "estimate",
-"source": "https://www.telesemana.com/blog/2024/08/27/claro-argentina-comenzara-a-desplegar-su-red-5g-de-la-mano-de-nokia-su-socio-eterno/"
-}
-],
-"issues": [
-{
-"year": 2023,
-"text": "3.5GHz 100MHz(3300-3400) 3.5억달러 낙찰(2023.10)",
-"source": "https://dplnews.com/?p=211546"
-},
-{
-"year": 2024,
-"text": "Nokia 단독 5G RAN(AirScale·IPAA+) 1단계 계약, 중남미 첫 IPAA+ 전면 도입",
-"source": "https://www.nokia.com/newsroom/nokia-selected-by-claro-argentina-for-5g-network-deployment/"
-},
-{
-"year": 2019,
-"text": "광전송·마이크로웨이브 일부에 Huawei 사용(RAN 아님)",
-"source": "https://dplnews.com/?p=13877"
-}
-],
-"confidence": "high",
-"sources": [
-{
-"label": "Nokia 보도자료 2024-08-27",
-"url": "https://www.nokia.com/newsroom/nokia-selected-by-claro-argentina-for-5g-network-deployment/"
-},
-{
-"label": "TeleSemana 2024-08-27",
-"url": "https://www.telesemana.com/blog/2024/08/27/claro-argentina-comenzara-a-desplegar-su-red-5g-de-la-mano-de-nokia-su-socio-eterno/"
-},
-{
-"label": "DPL News 5G 경매 결과 2023-10-24",
-"url": "https://dplnews.com/?p=211546"
-}
-]
-},
-{
-"name": "Movistar Argentina",
-"name_local": "Telefónica Móviles Argentina(2025.2 Telecom Argentina 인수, 2026.6 조건부 승인)",
-"type": "MNO",
-"subs_m": null,
-"subs_asof": "",
-"ran": {
-"2g": [
-"Ericsson",
-"Huawei"
-],
-"3g": [
-"Ericsson",
-"Huawei"
-],
-"4g": [
-"Ericsson",
-"Huawei"
-],
-"5g": []
-},
-"core": {
-"epc": [],
-"5gc": [],
-"ims": []
-},
-"regions": [],
-"share": [
-{
-"vendor": "Ericsson",
-"pct": 80,
-"sites": null,
-"basis": "RAN 사업 비중(2018 ERS 현대화 계약 후), Light Reading",
-"asof": "2018-06",
-"type": "estimate",
-"source": "https://www.lightreading.com/5g/ericsson-beefs-up-with-telef-nica-argentina-as-huawei-goes-hungry"
-},
-{
-"vendor": "Huawei",
-"pct": 20,
-"sites": null,
-"basis": "RAN 잔여 비중(종전 50:50에서 축소, 추정)",
-"asof": "2018-06",
-"type": "estimate",
-"source": "https://www.lightreading.com/5g/ericsson-beefs-up-with-telef-nica-argentina-as-huawei-goes-hungry"
-}
-],
-"issues": [
-{
-"year": 2018,
-"text": "Ericsson Radio System 3년 RAN 현대화·OSS 이관, Huawei 비중 축소",
-"source": "https://www.telecomtv.com/content/5g/movistar-argentina-selects-ericsson-radio-system-to-transform-mobile-network-31319/"
-},
-{
-"year": 2019,
-"text": "모바일 코어·지방간 전송망 Huawei 100%(현지 보도, 2019)",
-"source": "https://dplnews.com/?p=13877"
-},
-{
-"year": 2023,
-"text": "3.5GHz 50MHz(3550-3600) 1.75억달러 낙찰",
-"source": "https://dplnews.com/?p=211546"
-},
-{
-"year": 2026,
-"text": "Telecom Argentina 인수 ANC 조건부 승인(가입자 600만·주파수 반납)",
-"source": "https://www.lanacion.com.ar/economia/el-gobierno-aprobaria-esta-semana-la-compra-de-telefonica-por-parte-de-telecom-con-la-condicion-de-nid17062026/"
-}
-],
-"confidence": "medium",
-"sources": [
-{
-"label": "Light Reading 2018-06-14",
-"url": "https://www.lightreading.com/5g/ericsson-beefs-up-with-telef-nica-argentina-as-huawei-goes-hungry"
-},
-{
-"label": "TelecomTV(Ericsson 보도자료) 2018-06-07",
-"url": "https://www.telecomtv.com/content/5g/movistar-argentina-selects-ericsson-radio-system-to-transform-mobile-network-31319/"
-},
-{
-"label": "DPL News(El Tribuno) 2019-06-03",
-"url": "https://dplnews.com/?p=13877"
-},
-{
-"label": "Concurrences ANC 결의 2026-06-17",
-"url": "https://www.concurrences.com/en/bulletin/news-issues/preview/the-argentine-competition-authority-conditionally-approves-the-acquisition-of"
-}
-]
-},
-{
-"name": "Personal (Telecom Argentina)",
-"name_local": "Telecom Argentina S.A.",
-"type": "MNO",
-"subs_m": null,
-"subs_asof": "",
-"ran": {
-"2g": [
-"Huawei",
-"Nokia"
-],
-"3g": [
-"Huawei",
-"Nokia"
-],
-"4g": [
-"Huawei",
-"Nokia"
-],
-"5g": [
-"Huawei",
-"Nokia"
-]
-},
-"core": {
-"epc": [],
-"5gc": [
-"Nokia"
-],
-"ims": []
-},
-"regions": [
-{
-"vendor": "Huawei",
-"area": "AMBA(부에노스아이레스 수도권) 100%, 5G 초기 부에노스아이레스 사이트",
-"gens": [
-"4g",
-"5g"
-],
-"source": "https://dplnews.com/?p=88522"
-},
-{
-"vendor": "Nokia",
-"area": "로사리오 등 5G 초기 사이트",
-"gens": [
-"5g"
-],
-"source": "https://dplnews.com/?p=88522"
-}
-],
-"share": [
-{
-"vendor": "Huawei",
-"pct": 70,
-"sites": null,
-"basis": "전국망 공급 비중(현지 보도)",
-"asof": "2019-06",
-"type": "estimate",
-"source": "https://dplnews.com/?p=13877"
-}
-],
-"issues": [
-{
-"year": 2021,
-"text": "아르헨티나 최초 5G(DSS) 개통, Huawei(BA)·Nokia(로사리오) 장비",
-"source": "https://dplnews.com/telecom-enciende-la-primera-red-5g-de-argentina/"
-},
-{
-"year": 2022,
-"text": "5G SA 시연(Huawei·Nokia), 프라이빗 코어 Nokia·Cisco·Huawei 테스트",
-"source": "https://dplnews.com/?p=172765"
-},
-{
-"year": 2023,
-"text": "3.5GHz 100MHz 3.5억달러 낙찰, 12월 3.5GHz 5G SA 첫 개통",
-"source": "https://www.rcrwireless.com/20231204/5g/telecom-claims-first-5g-sa-deployment-argentina"
-},
-{
-"year": 2026,
-"text": "5G 코어 멀티벤더 전략으로 Nokia 5GC 도입(AMBA·코르도바 등), 5G 750사이트",
-"source": "https://dplnews.com/?p=303810"
-},
-{
-"year": 2026,
-"text": "Nokia와 네트워크 자동화 협력(3월), Telefónica AR 인수 조건부 승인(6월)",
-"source": "https://dplnews.com/telecom-argentina-modernizar-automatizar-redes-nokia/"
-}
-],
-"confidence": "medium",
-"sources": [
-{
-"label": "DPL News 첫 5G 개통 2021-02-08",
-"url": "https://dplnews.com/telecom-enciende-la-primera-red-5g-de-argentina/"
-},
-{
-"label": "DPL News Enacom 5G 시험 2021-03-11",
-"url": "https://dplnews.com/?p=88522"
-},
-{
-"label": "DPL News Nokia 5GC 2026-01-29",
-"url": "https://dplnews.com/?p=303810"
-},
-{
-"label": "DPL News Nokia 자동화 2026-03-06",
-"url": "https://dplnews.com/telecom-argentina-modernizar-automatizar-redes-nokia/"
-},
-{
-"label": "RCR Wireless 5G SA 2023-12-04",
-"url": "https://www.rcrwireless.com/20231204/5g/telecom-claims-first-5g-sa-deployment-argentina"
-}
-]
-}
-],
-"country_note": "Huawei 규제 없음(Enacom '기술 중립' 원칙). 2023.10 3.5GHz 경매(Claro·Personal 100MHz, Movistar 50MHz, 총 8.75억달러). Telecom Argentina가 Telefónica AR(Movistar)을 12.45억달러에 인수(2025.2), 2026.6 ANC가 가입자 600만·주파수 130MHz 반납 조건으로 승인 → 2사 체제 전환. Claro=Nokia 단일, Personal=Huawei 중심+Nokia, Movistar=Ericsson 중심.",
-"sources": [
-{
-"label": "DPL News 5G 경매 결과 2023-10-24",
-"url": "https://dplnews.com/?p=211546"
-},
-{
-"label": "DPL News Enacom 기술중립",
-"url": "https://dplnews.com/neutralidad-tecnologica-enacom-argentina/"
-},
-{
-"label": "La Nación 인수 승인 조건 2026-06-17",
-"url": "https://www.lanacion.com.ar/economia/el-gobierno-aprobaria-esta-semana-la-compra-de-telefonica-por-parte-de-telecom-con-la-condicion-de-nid17062026/"
-}
-]
-},
-{
-"iso3": "CHL",
-"name_ko": "칠레",
-"carriers": [
-{
-"name": "Entel Chile",
-"name_local": "Entel PCS",
-"type": "MNO",
-"subs_m": null,
-"subs_asof": "",
-"ran": {
-"2g": [
-"Ericsson (종료 2024~)"
-],
-"3g": [
-"Ericsson"
-],
-"4g": [
-"Ericsson"
-],
-"5g": [
-"Ericsson"
-]
-},
-"core": {
-"epc": [],
-"5gc": [],
-"ims": []
-},
-"regions": [
-{
-"vendor": "Ericsson",
-"area": "전국(5G RAN 3.5GHz·26GHz)",
-"gens": [
-"4g",
-"5g"
-],
-"source": "https://www.ericsson.com/en/press-releases/latin-america/2021/entel-chile-selects-ericsson-as--supplier-for-5g-ran-nationwide"
-}
-],
-"share": [],
-"issues": [
-{
-"year": 2021,
-"text": "Ericsson 전국 5G RAN 3년 계약(25년 이상 RAN 파트너)",
-"source": "https://www.ericsson.com/en/press-releases/latin-america/2021/entel-chile-selects-ericsson-as--supplier-for-5g-ran-nationwide"
-},
-{
-"year": 2023,
-"text": "5G 2단계 완료(신규 1,371기지국, 311코뮌), Ericsson 프라이빗 5G 협력",
-"source": "https://www.rcrwireless.com/20230912/5g/entel-completes-final-phase-5g-rollout-chile"
-},
-{
-"year": 2024,
-"text": "2G 단계적 종료 개시(2024 중반~, 약 100개 지역 유지)",
-"source": "https://dplnews.com/?p=199990"
-},
-{
-"year": 2025,
-"text": "칠레 5G 가입자 점유율 40.7%(Subtel 2025.6), Ericsson 5G SA",
-"source": "https://dplnews.com/?p=293258"
-}
-],
-"confidence": "high",
-"sources": [
-{
-"label": "Ericsson 보도자료 2021-06-30",
-"url": "https://www.ericsson.com/en/press-releases/latin-america/2021/entel-chile-selects-ericsson-as--supplier-for-5g-ran-nationwide"
-},
-{
-"label": "RCR Wireless 2023-09-12",
-"url": "https://www.rcrwireless.com/20230912/5g/entel-completes-final-phase-5g-rollout-chile"
-},
-{
-"label": "TeleSemana Ericsson CEO 2025-09-11",
-"url": "https://www.telesemana.com/blog/2025/09/11/ericsson-vuelve-a-la-argentina-despues-de-20-anos-y-redefine-su-juego-5g-en-america-latina/"
-}
-]
-},
-{
-"name": "Movistar Chile",
-"name_local": "Telefónica Móviles Chile(2026.2 Millicom·NJJ 인수)",
-"type": "MNO",
-"subs_m": null,
-"subs_asof": "",
-"ran": {
-"2g": [],
-"3g": [],
-"4g": [
-"Huawei",
-"Nokia"
-],
-"5g": [
-"Nokia"
-]
-},
-"core": {
-"epc": [],
-"5gc": [],
-"ims": []
-},
-"regions": [],
-"share": [],
-"issues": [
-{
-"year": 2013,
-"text": "2.6GHz LTE Nokia(NSN), 2015 700MHz LTE Huawei 구축",
-"source": "https://www.lightreading.com/5g/nokia-wins-5g-contract-from-movistar-chile"
-},
-{
-"year": 2021,
-"text": "5G 상용 Nokia AirScale 선정(멀티벤더 중 하나), 4G/4G+ 업그레이드 포함",
-"source": "https://www.nokia.com/newsroom/nokia-selected-by-movistar-chile-as-one-of-the-providers-for-commercial-5g-network/"
-},
-{
-"year": 2026,
-"text": "Telefónica, Millicom(49%)·NJJ(51%)에 2억달러+부채로 매각(2월)",
-"source": "https://www.telesemana.com/blog/2026/02/10/millicom-y-el-fondo-njj-compran-movistar-chile-por-us-200-millones/"
-}
-],
-"confidence": "medium",
-"sources": [
-{
-"label": "Nokia 보도자료 2021-05-10",
-"url": "https://www.nokia.com/newsroom/nokia-selected-by-movistar-chile-as-one-of-the-providers-for-commercial-5g-network/"
-},
-{
-"label": "Light Reading 2021-05-11",
-"url": "https://www.lightreading.com/5g/nokia-wins-5g-contract-from-movistar-chile"
-},
-{
-"label": "TeleSemana 매각 2026-02-10",
-"url": "https://www.telesemana.com/blog/2026/02/10/millicom-y-el-fondo-njj-compran-movistar-chile-por-us-200-millones/"
-}
-]
-},
-{
-"name": "Claro Chile (ClaroVTR)",
-"name_local": "ClaroVTR(América Móvil·Liberty LatAm JV)",
-"type": "MNO",
-"subs_m": null,
-"subs_asof": "",
-"ran": {
-"2g": [
-"Nokia"
-],
-"3g": [
-"Nokia"
-],
-"4g": [
-"Nokia"
-],
-"5g": []
-},
-"core": {
-"epc": [
-"Nokia"
-],
-"5gc": [],
-"ims": []
-},
-"regions": [],
-"share": [],
-"issues": [
-{
-"year": 2013,
-"text": "칠레 최초 LTE, NSN 단독(Single RAN+EPC)",
-"source": "https://www.lightreading.com/network-technology/nsn-powers-chile-s-first-lte-network"
-},
-{
-"year": 2024,
-"text": "2차 3.5GHz 경매 50MHz 8,920만달러 낙찰(6월), 5G 진입",
-"source": "https://www.rcrwireless.com/20240619/spectrum/chile-raises-90-million-in-its-second-5g-spectrum-auction"
-},
-{
-"year": 2025,
-"text": "모바일망 전면 현대화(신규 안테나 1,200) 90% 진행, 8월 완료 예정(벤더 미공개)",
-"source": "https://dplnews.com/?p=274840"
-}
-],
-"confidence": "low",
-"sources": [
-{
-"label": "Light Reading NSN 2013-06-27",
-"url": "https://www.lightreading.com/network-technology/nsn-powers-chile-s-first-lte-network"
-},
-{
-"label": "DPL News 현대화 2025-05-16",
-"url": "https://dplnews.com/?p=274840"
-},
-{
-"label": "RCR Wireless 2차 경매 2024-06-19",
-"url": "https://www.rcrwireless.com/20240619/spectrum/chile-raises-90-million-in-its-second-5g-spectrum-auction"
-}
-]
-},
-{
-"name": "WOM Chile",
-"name_local": "WOM S.A.(Novator→2025 채권단 구조조정)",
-"type": "MNO",
-"subs_m": null,
-"subs_asof": "",
-"ran": {
-"2g": [],
-"3g": [],
-"4g": [],
-"5g": []
-},
-"core": {
-"epc": [],
-"5gc": [],
-"ims": []
-},
-"regions": [],
-"share": [],
-"issues": [
-{
-"year": 2021,
-"text": "5G 벤더 선정 위해 Huawei·Nokia·Ericsson 시험(Huawei 주공급 추정 보도, 미확인)",
-"source": "https://dplnews.com/?p=100201"
-},
-{
-"year": 2022,
-"text": "5G 상용 개시(3월), 타워 3,800기 PTI 매각(9.3억달러)",
-"source": "https://www.telesemana.com/blog/2022/03/25/wom-chile-comenzo-a-ofrecer-sus-servicios-5g-desde-la-periferia/"
-},
-{
-"year": 2024,
-"text": "5G 구축 지연·채무로 美 Chapter 11 신청(4월)",
-"source": "https://bnamericas.com/en/news/chiles-wom-files-for-chapter-11-secures-us200mn-financing"
-},
-{
-"year": 2025,
-"text": "Subtel과 5G 의무 완수 합의(2026.12까지), 약 5,300만달러 납부",
-"source": "https://www.telesemana.com/blog/2025/09/03/wom-chile-acuerda-con-subtel-el-despliegue-total-de-la-red-5g-y-pagara-mas-de-us-53-millones-al-estado/"
-},
-{
-"year": 2025,
-"text": "5G 가입자 점유율 24.4%(Subtel 2025.6), 의무지역 366곳 구축 완료 보고",
-"source": "https://www.datacenterdynamics.com/en/news/wom-chile-completes-the-first-phase-of-its-5g-rollout/"
-}
-],
-"confidence": "low",
-"sources": [
-{
-"label": "DPL News 5G 벤더 시험 2021-05-26",
-"url": "https://dplnews.com/?p=100201"
-},
-{
-"label": "DPL News Huawei 칠레 2021-03-15",
-"url": "https://dplnews.com/huawei-esta-a-un-paso-del-5g-en-chile/"
-},
-{
-"label": "TeleSemana Subtel 합의 2025-09-03",
-"url": "https://www.telesemana.com/blog/2025/09/03/wom-chile-acuerda-con-subtel-el-despliegue-total-de-la-red-5g-y-pagara-mas-de-us-53-millones-al-estado/"
-}
-]
-}
-],
-"country_note": "Huawei 배제 규제 없음(Subtel '기술 중립'). 2021.2 중남미 첫 3.5GHz 5G 경매(Entel·Movistar·WOM), 2024.6 2차 경매로 Claro 진입. Entel=Ericsson 단일, Movistar=Nokia 5G(멀티벤더), Claro=Nokia 레거시, WOM 벤더 미공개. 2G 종료 진행(Movistar 2023, Entel 2024~). Telefónica Chile는 2026.2 Millicom·NJJ에 매각.",
-"sources": [
-{
-"label": "DPL News Huawei·Subtel 기술중립 2021-03-15",
-"url": "https://dplnews.com/huawei-esta-a-un-paso-del-5g-en-chile/"
-},
-{
-"label": "DPL News Subtel 5G 통계 2025-10-21",
-"url": "https://dplnews.com/?p=293258"
-},
-{
-"label": "DPL News Entel 2G 종료 2023-07-12",
-"url": "https://dplnews.com/?p=199990"
-}
-]
-},
-{
 "iso3": "COL",
 "name_ko": "콜롬비아",
 "carriers": [
@@ -4506,6 +3927,251 @@
 ]
 },
 {
+"iso3": "VEN",
+"name_ko": "베네수엘라",
+"carriers": [
+{
+"name": "Movilnet",
+"name_local": "Movilnet (CANTV, 국영)",
+"type": "MNO",
+"subs_m": 4.85,
+"subs_asof": "2023-12",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [
+{
+"vendor": "Huawei",
+"pct": null,
+"sites": null,
+"basis": "현지 애널리스트: CANTV·Movilnet 기술 대부분 Huawei",
+"asof": "2026-08",
+"type": "estimate",
+"source": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/29/us-targets-chinas-telecoms-grip-in-venezuela-with-new-sanctions-carve-out"
+}
+],
+"issues": [
+{
+"year": 2019,
+"text": "CANTV·Movilnet-Huawei US$1.44억 계약(LTE 기지국 900개, 4G/5G), 국가개발기금 재원",
+"source": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/29/us-targets-chinas-telecoms-grip-in-venezuela-with-new-sanctions-carve-out"
+},
+{
+"year": 2024,
+"text": "수도권(카라카스·라과이라·미란다) 5G 파일럿 발표, 벤더 미공개",
+"source": "https://finanzasdigital.com/aseguran-que-plan-piloto-5g-de-movilnet-avanza-en-la-region-capital/"
+},
+{
+"year": 2025,
+"text": "9월 경매서 3.5GHz 100MHz(2블록, 각 US$8,692만) 낙찰, CANTV는 2.6GHz 40MHz",
+"source": "https://mobiletime.la/noticias/11/09/2025/cantv-y-movilnet-4g-5g/"
+},
+{
+"year": 2026,
+"text": "美 OFAC GL61/62로 CANTV·Movilnet 거래 허용하되 중국 기업 배제 — Huawei 유지보수 리스크",
+"source": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/29/us-targets-chinas-telecoms-grip-in-venezuela-with-new-sanctions-carve-out"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "The Star/SCMP 2026-08-29 (OFAC 면허, Huawei 의존도)",
+"url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/29/us-targets-chinas-telecoms-grip-in-venezuela-with-new-sanctions-carve-out"
+},
+{
+"label": "Mobile Time 2025-09-11 (CANTV·Movilnet 주파수 낙찰)",
+"url": "https://mobiletime.la/noticias/11/09/2025/cantv-y-movilnet-4g-5g/"
+},
+{
+"label": "Finanzas Digital 2025-03 (4GMAX 현대화)",
+"url": "https://finanzasdigital.com/modernizacion-red-4gmax-movilnet-region-capital/"
+},
+{
+"label": "TeleSemana 시장 패널(Conatel 2023 가입자)",
+"url": "https://www.telesemana.com/panorama-de-mercado/venezuela/"
+}
+]
+},
+{
+"name": "Movistar Venezuela",
+"name_local": "Telefónica Venezolana",
+"type": "MNO",
+"subs_m": 8.63,
+"subs_asof": "2023-12",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "1월 경매서 2.5GHz LTE 주파수 낙찰(약 US$3,700만), 2년간 US$5억 4G/5G 투자 발표",
+"source": "https://dplnews.com/digitel-gana-espectro-en-5g-y-movistar-refuerza-4g-en-una-historica-subasta-en-venezuela/"
+},
+{
+"year": 2025,
+"text": "6,000개 노드 현대화·VoLTE 확대·2.6GHz 5G 점진 도입 계획, 벤더 미공개",
+"source": "https://dplnews.com/?p=289177"
+},
+{
+"year": 2026,
+"text": "Telefónica, 베네수엘라 자회사 매각 재추진(América Móvil 후보 거론), 미확정",
+"source": "https://expansion.mx/empresas/2026/01/19/telefonica-venezuela-reactiva-su-venta-mas-potencial-mexico"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "DPL News 2025-01-30 (주파수 경매)",
+"url": "https://dplnews.com/digitel-gana-espectro-en-5g-y-movistar-refuerza-4g-en-una-historica-subasta-en-venezuela/"
+},
+{
+"label": "DPL News 2025-09-17 (망 현대화·VoLTE·5G)",
+"url": "https://dplnews.com/?p=289177"
+},
+{
+"label": "DPL News 2024-07-05 (LTE 500개 기지국 현대화)",
+"url": "https://dplnews.com/?p=240763"
+},
+{
+"label": "Expansión 2026-01-19 (매각 재추진)",
+"url": "https://expansion.mx/empresas/2026/01/19/telefonica-venezuela-reactiva-su-venta-mas-potencial-mexico"
+},
+{
+"label": "TeleSemana 2025-12-22 (Telefónica 중남미 철수)",
+"url": "https://www.telesemana.com/blog/2025/12/22/2025-el-ano-en-que-telefonica-acelero-su-retirada-de-america-latina-por-que-se-va-que-paises-vendio-y-que-puede-pasar-en-2026/"
+}
+]
+},
+{
+"name": "Digitel",
+"name_local": "Corporación Digitel",
+"type": "MNO",
+"subs_m": 7.45,
+"subs_asof": "2023-12",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei",
+"Ericsson"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "술리아(118)·카라카스(60)·팔콘(22) LTE 기지국 200개(2019, 일부 Huawei 대체)",
+"gens": [
+"4g"
+],
+"source": "https://dplnews.com/venezuela-digitel-elige-a-ericsson-para-el-despliegue-de-200-estaciones-base-4g-con-una-inversion-de-25-mdd/"
+}
+],
+"share": [
+{
+"vendor": "Huawei",
+"pct": 50,
+"sites": null,
+"basis": "현지 애널리스트 추정(기술 기준 약 절반)",
+"asof": "2026-08",
+"type": "estimate",
+"source": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/29/us-targets-chinas-telecoms-grip-in-venezuela-with-new-sanctions-carve-out"
+},
+{
+"vendor": "Ericsson",
+"pct": 50,
+"sites": null,
+"basis": "현지 애널리스트 추정(기술 기준 약 절반)",
+"asof": "2026-08",
+"type": "estimate",
+"source": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/29/us-targets-chinas-telecoms-grip-in-venezuela-with-new-sanctions-carve-out"
+}
+],
+"issues": [
+{
+"year": 2019,
+"text": "Ericsson LTE 기지국 200개 US$2,500만 투자, 일부 Huawei 기지국 대체",
+"source": "https://dplnews.com/venezuela-digitel-elige-a-ericsson-para-el-despliegue-de-200-estaciones-base-4g-con-una-inversion-de-25-mdd/"
+},
+{
+"year": 2025,
+"text": "1월 경매 3.5GHz 50MHz 낙찰(US$8,692만), 6월 베네수엘라 첫 5G(FWA) 상용화, 벤더 미공개",
+"source": "https://www.telesemana.com/blog/2026/03/31/digitel-suma-mas-ciudades-con-5g-fwa-en-venezuela-y-avanza-con-el-foco-puesto-en-hogares-y-empresas/"
+},
+{
+"year": 2026,
+"text": "5G FWA 6개 이상 도시로 확대(카라카스·볼리바르·라라 등), 가입자 850만·점유율 약 32% 주장",
+"source": "https://www.telesemana.com/blog/2026/03/31/digitel-suma-mas-ciudades-con-5g-fwa-en-venezuela-y-avanza-con-el-foco-puesto-en-hogares-y-empresas/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "DPL News 2019-08 (Digitel-Ericsson LTE)",
+"url": "https://dplnews.com/venezuela-digitel-elige-a-ericsson-para-el-despliegue-de-200-estaciones-base-4g-con-una-inversion-de-25-mdd/"
+},
+{
+"label": "DPL News 2025-01-30 (5G 주파수 경매)",
+"url": "https://dplnews.com/digitel-gana-espectro-en-5g-y-movistar-refuerza-4g-en-una-historica-subasta-en-venezuela/"
+},
+{
+"label": "TeleSemana 2026-03-31 (5G FWA 확대)",
+"url": "https://www.telesemana.com/blog/2026/03/31/digitel-suma-mas-ciudades-con-5g-fwa-en-venezuela-y-avanza-con-el-foco-puesto-en-hogares-y-empresas/"
+},
+{
+"label": "The Star/SCMP 2026-08-29 (벤더 비중 추정)",
+"url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/29/us-targets-chinas-telecoms-grip-in-venezuela-with-new-sanctions-carve-out"
+}
+]
+}
+],
+"country_note": "제재 하에 서방 벤더 이탈로 Huawei·ZTE가 공중망 주 공급사(국영 CANTV·Movilnet 대부분 Huawei, Digitel Huawei·Ericsson 혼용). 2025년 Conatel 경매로 Digitel(3.5GHz)·Movistar(2.5GHz)·Movilnet/CANTV(3.5/2.6GHz) 주파수 확보. 2026.1 美 개입 후 8월 OFAC 일반면허 61·62호로 통신 인프라 거래 허용하되 중국·러시아 등 기업 배제 — 기존 Huawei/ZTE 망 유지보수·교체 리스크 부상.",
+"sources": [
+{
+"label": "The Star/SCMP 2026-08-29 (OFAC GL61/62, 중국 배제)",
+"url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/29/us-targets-chinas-telecoms-grip-in-venezuela-with-new-sanctions-carve-out"
+},
+{
+"label": "DPL News/Conatel 2026-08-25 (OFAC 면허 공지)",
+"url": "https://dplnews.com/?p=327958"
+},
+{
+"label": "Fierce Network 2026-01-22 (Huawei/ZTE 공중망, Ericsson 가능성)",
+"url": "https://www.fierce-network.com/broadband/venezuelan-infrastructure-how-could-private-networking-develop"
+},
+{
+"label": "TeleSemana 베네수엘라 시장 패널(Conatel 가입자)",
+"url": "https://www.telesemana.com/panorama-de-mercado/venezuela/"
+}
+]
+},
+{
 "iso3": "PER",
 "name_ko": "페루",
 "carriers": [
@@ -4722,6 +4388,884 @@
 {
 "label": "TeleSemana Integratel 2025-06-11",
 "url": "https://www.telesemana.com/blog/2025/06/11/integratel-peru-es-la-nueva-identidad-de-telefonica-del-peru-y-duena-de-us-102-millones-para-5g/"
+}
+]
+},
+{
+"iso3": "CHL",
+"name_ko": "칠레",
+"carriers": [
+{
+"name": "Entel Chile",
+"name_local": "Entel PCS",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Ericsson (종료 2024~)"
+],
+"3g": [
+"Ericsson"
+],
+"4g": [
+"Ericsson"
+],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "전국(5G RAN 3.5GHz·26GHz)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.ericsson.com/en/press-releases/latin-america/2021/entel-chile-selects-ericsson-as--supplier-for-5g-ran-nationwide"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "Ericsson 전국 5G RAN 3년 계약(25년 이상 RAN 파트너)",
+"source": "https://www.ericsson.com/en/press-releases/latin-america/2021/entel-chile-selects-ericsson-as--supplier-for-5g-ran-nationwide"
+},
+{
+"year": 2023,
+"text": "5G 2단계 완료(신규 1,371기지국, 311코뮌), Ericsson 프라이빗 5G 협력",
+"source": "https://www.rcrwireless.com/20230912/5g/entel-completes-final-phase-5g-rollout-chile"
+},
+{
+"year": 2024,
+"text": "2G 단계적 종료 개시(2024 중반~, 약 100개 지역 유지)",
+"source": "https://dplnews.com/?p=199990"
+},
+{
+"year": 2025,
+"text": "칠레 5G 가입자 점유율 40.7%(Subtel 2025.6), Ericsson 5G SA",
+"source": "https://dplnews.com/?p=293258"
+}
+],
+"confidence": "high",
+"sources": [
+{
+"label": "Ericsson 보도자료 2021-06-30",
+"url": "https://www.ericsson.com/en/press-releases/latin-america/2021/entel-chile-selects-ericsson-as--supplier-for-5g-ran-nationwide"
+},
+{
+"label": "RCR Wireless 2023-09-12",
+"url": "https://www.rcrwireless.com/20230912/5g/entel-completes-final-phase-5g-rollout-chile"
+},
+{
+"label": "TeleSemana Ericsson CEO 2025-09-11",
+"url": "https://www.telesemana.com/blog/2025/09/11/ericsson-vuelve-a-la-argentina-despues-de-20-anos-y-redefine-su-juego-5g-en-america-latina/"
+}
+]
+},
+{
+"name": "Movistar Chile",
+"name_local": "Telefónica Móviles Chile(2026.2 Millicom·NJJ 인수)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei",
+"Nokia"
+],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2013,
+"text": "2.6GHz LTE Nokia(NSN), 2015 700MHz LTE Huawei 구축",
+"source": "https://www.lightreading.com/5g/nokia-wins-5g-contract-from-movistar-chile"
+},
+{
+"year": 2021,
+"text": "5G 상용 Nokia AirScale 선정(멀티벤더 중 하나), 4G/4G+ 업그레이드 포함",
+"source": "https://www.nokia.com/newsroom/nokia-selected-by-movistar-chile-as-one-of-the-providers-for-commercial-5g-network/"
+},
+{
+"year": 2026,
+"text": "Telefónica, Millicom(49%)·NJJ(51%)에 2억달러+부채로 매각(2월)",
+"source": "https://www.telesemana.com/blog/2026/02/10/millicom-y-el-fondo-njj-compran-movistar-chile-por-us-200-millones/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Nokia 보도자료 2021-05-10",
+"url": "https://www.nokia.com/newsroom/nokia-selected-by-movistar-chile-as-one-of-the-providers-for-commercial-5g-network/"
+},
+{
+"label": "Light Reading 2021-05-11",
+"url": "https://www.lightreading.com/5g/nokia-wins-5g-contract-from-movistar-chile"
+},
+{
+"label": "TeleSemana 매각 2026-02-10",
+"url": "https://www.telesemana.com/blog/2026/02/10/millicom-y-el-fondo-njj-compran-movistar-chile-por-us-200-millones/"
+}
+]
+},
+{
+"name": "Claro Chile (ClaroVTR)",
+"name_local": "ClaroVTR(América Móvil·Liberty LatAm JV)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Nokia"
+],
+"3g": [
+"Nokia"
+],
+"4g": [
+"Nokia"
+],
+"5g": []
+},
+"core": {
+"epc": [
+"Nokia"
+],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2013,
+"text": "칠레 최초 LTE, NSN 단독(Single RAN+EPC)",
+"source": "https://www.lightreading.com/network-technology/nsn-powers-chile-s-first-lte-network"
+},
+{
+"year": 2024,
+"text": "2차 3.5GHz 경매 50MHz 8,920만달러 낙찰(6월), 5G 진입",
+"source": "https://www.rcrwireless.com/20240619/spectrum/chile-raises-90-million-in-its-second-5g-spectrum-auction"
+},
+{
+"year": 2025,
+"text": "모바일망 전면 현대화(신규 안테나 1,200) 90% 진행, 8월 완료 예정(벤더 미공개)",
+"source": "https://dplnews.com/?p=274840"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Light Reading NSN 2013-06-27",
+"url": "https://www.lightreading.com/network-technology/nsn-powers-chile-s-first-lte-network"
+},
+{
+"label": "DPL News 현대화 2025-05-16",
+"url": "https://dplnews.com/?p=274840"
+},
+{
+"label": "RCR Wireless 2차 경매 2024-06-19",
+"url": "https://www.rcrwireless.com/20240619/spectrum/chile-raises-90-million-in-its-second-5g-spectrum-auction"
+}
+]
+},
+{
+"name": "WOM Chile",
+"name_local": "WOM S.A.(Novator→2025 채권단 구조조정)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "5G 벤더 선정 위해 Huawei·Nokia·Ericsson 시험(Huawei 주공급 추정 보도, 미확인)",
+"source": "https://dplnews.com/?p=100201"
+},
+{
+"year": 2022,
+"text": "5G 상용 개시(3월), 타워 3,800기 PTI 매각(9.3억달러)",
+"source": "https://www.telesemana.com/blog/2022/03/25/wom-chile-comenzo-a-ofrecer-sus-servicios-5g-desde-la-periferia/"
+},
+{
+"year": 2024,
+"text": "5G 구축 지연·채무로 美 Chapter 11 신청(4월)",
+"source": "https://bnamericas.com/en/news/chiles-wom-files-for-chapter-11-secures-us200mn-financing"
+},
+{
+"year": 2025,
+"text": "Subtel과 5G 의무 완수 합의(2026.12까지), 약 5,300만달러 납부",
+"source": "https://www.telesemana.com/blog/2025/09/03/wom-chile-acuerda-con-subtel-el-despliegue-total-de-la-red-5g-y-pagara-mas-de-us-53-millones-al-estado/"
+},
+{
+"year": 2025,
+"text": "5G 가입자 점유율 24.4%(Subtel 2025.6), 의무지역 366곳 구축 완료 보고",
+"source": "https://www.datacenterdynamics.com/en/news/wom-chile-completes-the-first-phase-of-its-5g-rollout/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "DPL News 5G 벤더 시험 2021-05-26",
+"url": "https://dplnews.com/?p=100201"
+},
+{
+"label": "DPL News Huawei 칠레 2021-03-15",
+"url": "https://dplnews.com/huawei-esta-a-un-paso-del-5g-en-chile/"
+},
+{
+"label": "TeleSemana Subtel 합의 2025-09-03",
+"url": "https://www.telesemana.com/blog/2025/09/03/wom-chile-acuerda-con-subtel-el-despliegue-total-de-la-red-5g-y-pagara-mas-de-us-53-millones-al-estado/"
+}
+]
+}
+],
+"country_note": "Huawei 배제 규제 없음(Subtel '기술 중립'). 2021.2 중남미 첫 3.5GHz 5G 경매(Entel·Movistar·WOM), 2024.6 2차 경매로 Claro 진입. Entel=Ericsson 단일, Movistar=Nokia 5G(멀티벤더), Claro=Nokia 레거시, WOM 벤더 미공개. 2G 종료 진행(Movistar 2023, Entel 2024~). Telefónica Chile는 2026.2 Millicom·NJJ에 매각.",
+"sources": [
+{
+"label": "DPL News Huawei·Subtel 기술중립 2021-03-15",
+"url": "https://dplnews.com/huawei-esta-a-un-paso-del-5g-en-chile/"
+},
+{
+"label": "DPL News Subtel 5G 통계 2025-10-21",
+"url": "https://dplnews.com/?p=293258"
+},
+{
+"label": "DPL News Entel 2G 종료 2023-07-12",
+"url": "https://dplnews.com/?p=199990"
+}
+]
+},
+{
+"iso3": "ARG",
+"name_ko": "아르헨티나",
+"carriers": [
+{
+"name": "Claro Argentina",
+"name_local": "Claro (AMX Argentina)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Nokia"
+],
+"3g": [
+"Nokia"
+],
+"4g": [
+"Nokia"
+],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Nokia",
+"area": "전국(5G 1단계: 주요 대도시)",
+"gens": [
+"2g",
+"3g",
+"4g",
+"5g"
+],
+"source": "https://www.nokia.com/newsroom/nokia-selected-by-claro-argentina-for-5g-network-deployment/"
+}
+],
+"share": [
+{
+"vendor": "Nokia",
+"pct": 100,
+"sites": null,
+"basis": "RAN 전체(2G~5G) 단일 벤더, 언론 보도",
+"asof": "2024-08",
+"type": "estimate",
+"source": "https://www.telesemana.com/blog/2024/08/27/claro-argentina-comenzara-a-desplegar-su-red-5g-de-la-mano-de-nokia-su-socio-eterno/"
+}
+],
+"issues": [
+{
+"year": 2023,
+"text": "3.5GHz 100MHz(3300-3400) 3.5억달러 낙찰(2023.10)",
+"source": "https://dplnews.com/?p=211546"
+},
+{
+"year": 2024,
+"text": "Nokia 단독 5G RAN(AirScale·IPAA+) 1단계 계약, 중남미 첫 IPAA+ 전면 도입",
+"source": "https://www.nokia.com/newsroom/nokia-selected-by-claro-argentina-for-5g-network-deployment/"
+},
+{
+"year": 2019,
+"text": "광전송·마이크로웨이브 일부에 Huawei 사용(RAN 아님)",
+"source": "https://dplnews.com/?p=13877"
+}
+],
+"confidence": "high",
+"sources": [
+{
+"label": "Nokia 보도자료 2024-08-27",
+"url": "https://www.nokia.com/newsroom/nokia-selected-by-claro-argentina-for-5g-network-deployment/"
+},
+{
+"label": "TeleSemana 2024-08-27",
+"url": "https://www.telesemana.com/blog/2024/08/27/claro-argentina-comenzara-a-desplegar-su-red-5g-de-la-mano-de-nokia-su-socio-eterno/"
+},
+{
+"label": "DPL News 5G 경매 결과 2023-10-24",
+"url": "https://dplnews.com/?p=211546"
+}
+]
+},
+{
+"name": "Movistar Argentina",
+"name_local": "Telefónica Móviles Argentina(2025.2 Telecom Argentina 인수, 2026.6 조건부 승인)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Ericsson",
+"Huawei"
+],
+"3g": [
+"Ericsson",
+"Huawei"
+],
+"4g": [
+"Ericsson",
+"Huawei"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [
+{
+"vendor": "Ericsson",
+"pct": 80,
+"sites": null,
+"basis": "RAN 사업 비중(2018 ERS 현대화 계약 후), Light Reading",
+"asof": "2018-06",
+"type": "estimate",
+"source": "https://www.lightreading.com/5g/ericsson-beefs-up-with-telef-nica-argentina-as-huawei-goes-hungry"
+},
+{
+"vendor": "Huawei",
+"pct": 20,
+"sites": null,
+"basis": "RAN 잔여 비중(종전 50:50에서 축소, 추정)",
+"asof": "2018-06",
+"type": "estimate",
+"source": "https://www.lightreading.com/5g/ericsson-beefs-up-with-telef-nica-argentina-as-huawei-goes-hungry"
+}
+],
+"issues": [
+{
+"year": 2018,
+"text": "Ericsson Radio System 3년 RAN 현대화·OSS 이관, Huawei 비중 축소",
+"source": "https://www.telecomtv.com/content/5g/movistar-argentina-selects-ericsson-radio-system-to-transform-mobile-network-31319/"
+},
+{
+"year": 2019,
+"text": "모바일 코어·지방간 전송망 Huawei 100%(현지 보도, 2019)",
+"source": "https://dplnews.com/?p=13877"
+},
+{
+"year": 2023,
+"text": "3.5GHz 50MHz(3550-3600) 1.75억달러 낙찰",
+"source": "https://dplnews.com/?p=211546"
+},
+{
+"year": 2026,
+"text": "Telecom Argentina 인수 ANC 조건부 승인(가입자 600만·주파수 반납)",
+"source": "https://www.lanacion.com.ar/economia/el-gobierno-aprobaria-esta-semana-la-compra-de-telefonica-por-parte-de-telecom-con-la-condicion-de-nid17062026/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Light Reading 2018-06-14",
+"url": "https://www.lightreading.com/5g/ericsson-beefs-up-with-telef-nica-argentina-as-huawei-goes-hungry"
+},
+{
+"label": "TelecomTV(Ericsson 보도자료) 2018-06-07",
+"url": "https://www.telecomtv.com/content/5g/movistar-argentina-selects-ericsson-radio-system-to-transform-mobile-network-31319/"
+},
+{
+"label": "DPL News(El Tribuno) 2019-06-03",
+"url": "https://dplnews.com/?p=13877"
+},
+{
+"label": "Concurrences ANC 결의 2026-06-17",
+"url": "https://www.concurrences.com/en/bulletin/news-issues/preview/the-argentine-competition-authority-conditionally-approves-the-acquisition-of"
+}
+]
+},
+{
+"name": "Personal (Telecom Argentina)",
+"name_local": "Telecom Argentina S.A.",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Huawei",
+"Nokia"
+],
+"3g": [
+"Huawei",
+"Nokia"
+],
+"4g": [
+"Huawei",
+"Nokia"
+],
+"5g": [
+"Huawei",
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Huawei",
+"area": "AMBA(부에노스아이레스 수도권) 100%, 5G 초기 부에노스아이레스 사이트",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://dplnews.com/?p=88522"
+},
+{
+"vendor": "Nokia",
+"area": "로사리오 등 5G 초기 사이트",
+"gens": [
+"5g"
+],
+"source": "https://dplnews.com/?p=88522"
+}
+],
+"share": [
+{
+"vendor": "Huawei",
+"pct": 70,
+"sites": null,
+"basis": "전국망 공급 비중(현지 보도)",
+"asof": "2019-06",
+"type": "estimate",
+"source": "https://dplnews.com/?p=13877"
+}
+],
+"issues": [
+{
+"year": 2021,
+"text": "아르헨티나 최초 5G(DSS) 개통, Huawei(BA)·Nokia(로사리오) 장비",
+"source": "https://dplnews.com/telecom-enciende-la-primera-red-5g-de-argentina/"
+},
+{
+"year": 2022,
+"text": "5G SA 시연(Huawei·Nokia), 프라이빗 코어 Nokia·Cisco·Huawei 테스트",
+"source": "https://dplnews.com/?p=172765"
+},
+{
+"year": 2023,
+"text": "3.5GHz 100MHz 3.5억달러 낙찰, 12월 3.5GHz 5G SA 첫 개통",
+"source": "https://www.rcrwireless.com/20231204/5g/telecom-claims-first-5g-sa-deployment-argentina"
+},
+{
+"year": 2026,
+"text": "5G 코어 멀티벤더 전략으로 Nokia 5GC 도입(AMBA·코르도바 등), 5G 750사이트",
+"source": "https://dplnews.com/?p=303810"
+},
+{
+"year": 2026,
+"text": "Nokia와 네트워크 자동화 협력(3월), Telefónica AR 인수 조건부 승인(6월)",
+"source": "https://dplnews.com/telecom-argentina-modernizar-automatizar-redes-nokia/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "DPL News 첫 5G 개통 2021-02-08",
+"url": "https://dplnews.com/telecom-enciende-la-primera-red-5g-de-argentina/"
+},
+{
+"label": "DPL News Enacom 5G 시험 2021-03-11",
+"url": "https://dplnews.com/?p=88522"
+},
+{
+"label": "DPL News Nokia 5GC 2026-01-29",
+"url": "https://dplnews.com/?p=303810"
+},
+{
+"label": "DPL News Nokia 자동화 2026-03-06",
+"url": "https://dplnews.com/telecom-argentina-modernizar-automatizar-redes-nokia/"
+},
+{
+"label": "RCR Wireless 5G SA 2023-12-04",
+"url": "https://www.rcrwireless.com/20231204/5g/telecom-claims-first-5g-sa-deployment-argentina"
+}
+]
+}
+],
+"country_note": "Huawei 규제 없음(Enacom '기술 중립' 원칙). 2023.10 3.5GHz 경매(Claro·Personal 100MHz, Movistar 50MHz, 총 8.75억달러). Telecom Argentina가 Telefónica AR(Movistar)을 12.45억달러에 인수(2025.2), 2026.6 ANC가 가입자 600만·주파수 130MHz 반납 조건으로 승인 → 2사 체제 전환. Claro=Nokia 단일, Personal=Huawei 중심+Nokia, Movistar=Ericsson 중심.",
+"sources": [
+{
+"label": "DPL News 5G 경매 결과 2023-10-24",
+"url": "https://dplnews.com/?p=211546"
+},
+{
+"label": "DPL News Enacom 기술중립",
+"url": "https://dplnews.com/neutralidad-tecnologica-enacom-argentina/"
+},
+{
+"label": "La Nación 인수 승인 조건 2026-06-17",
+"url": "https://www.lanacion.com.ar/economia/el-gobierno-aprobaria-esta-semana-la-compra-de-telefonica-por-parte-de-telecom-con-la-condicion-de-nid17062026/"
+}
+]
+},
+{
+"iso3": "PRY",
+"name_ko": "파라과이",
+"carriers": [
+{
+"name": "Tigo Paraguay",
+"name_local": "Telecel S.A.E. (Millicom)",
+"type": "MNO",
+"subs_m": 4.2,
+"subs_asof": "2024-12",
+"ran": {
+"2g": [
+"Ericsson"
+],
+"3g": [
+"Ericsson"
+],
+"4g": [
+"Ericsson",
+"Huawei"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Huawei",
+"area": "농촌 지역 LTE(DPL News 칼럼 언급, 범위 미공개)",
+"gens": [
+"4g"
+],
+"source": "https://dplnews.com/?p=280448"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2018,
+"text": "Ericsson과 다년 RAN 현대화 계약(파라과이·온두라스 약 1,000사이트, 2G/3G/4G, 5G-ready)",
+"source": "https://www.ericsson.com/en/press-releases/2018/12/tigo-selects-ericsson-to-upgrade-its-network-in-paraguay-and-honduras"
+},
+{
+"year": 2025,
+"text": "중국산 장비 배제 조건 반발로 1차 5G 입찰(3.5GHz) 불참",
+"source": "https://www.telesemana.com/blog/2025/08/26/claro-y-nubicom-se-hicieron-de-espectro-5g-en-paraguay-y-se-preve-que-el-lanzamiento-de-servicios-sea-en-marzo-de-2026/"
+},
+{
+"year": 2026,
+"text": "2차 5G 입찰 참여(중국산 배제 조건 수용), 2.3GHz 100MHz 낙찰(US$160만), 180일 내 상용화·US$4,000만 투자 의무",
+"source": "https://www.telesemana.com/blog/2026/08/06/segunda-subasta-5g-en-paraguay-tigo-se-queda-con-2-3-ghz-y-personal-con-3-7-ghz/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson 보도자료 2018-12 (Tigo 파라과이·온두라스 RAN 현대화)",
+"url": "https://www.ericsson.com/en/press-releases/2018/12/tigo-selects-ericsson-to-upgrade-its-network-in-paraguay-and-honduras"
+},
+{
+"label": "DPL News 2025-07 (Tigo 농촌 LTE Huawei 언급, 칼럼)",
+"url": "https://dplnews.com/?p=280448"
+},
+{
+"label": "TeleSemana 2026-08-06 (2차 5G 경매 결과)",
+"url": "https://www.telesemana.com/blog/2026/08/06/segunda-subasta-5g-en-paraguay-tigo-se-queda-con-2-3-ghz-y-personal-con-3-7-ghz/"
+},
+{
+"label": "Mobile Time 2026-07-22 (Conatel 2차 입찰 선정·의무)",
+"url": "https://mobiletime.la/noticias/22/07/2026/tigo-y-personal-5g-en-paraguay-2/"
+},
+{
+"label": "DPL News 2025-10 (Conatel 2024 가입자: Telecel 420만)",
+"url": "https://dplnews.com/?p=291004"
+}
+]
+},
+{
+"name": "Personal Paraguay",
+"name_local": "Núcleo S.A. (Telecom Argentina)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"Ericsson"
+],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2008,
+"text": "Ericsson 단독 공급 전국 3G(WCDMA/HSPA) RAN+IP 코어(MSS) 계약",
+"source": "https://www.lightreading.com/mobile-core/ericsson-wins-in-paraguay"
+},
+{
+"year": 2025,
+"text": "1차 5G 입찰 불참 — '기술중립성 침해' 주장(중국산 장비 배제 조건)",
+"source": "https://www.telesemana.com/blog/2025/08/26/claro-y-nubicom-se-hicieron-de-espectro-5g-en-paraguay-y-se-preve-que-el-lanzamiento-de-servicios-sea-en-marzo-de-2026/"
+},
+{
+"year": 2026,
+"text": "2차 5G 입찰 3.7GHz 100MHz 낙찰(US$100만), 2027년 초까지 상용화 의무, 벤더 미공개",
+"source": "https://www.telesemana.com/blog/2026/08/06/segunda-subasta-5g-en-paraguay-tigo-se-queda-con-2-3-ghz-y-personal-con-3-7-ghz/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Light Reading 2008-03 (Personal 3G Ericsson)",
+"url": "https://www.lightreading.com/mobile-core/ericsson-wins-in-paraguay"
+},
+{
+"label": "TeleSemana 2026-07-10 (2차 입찰 참여, 중국산 배제 수용)",
+"url": "https://www.telesemana.com/blog/2026/07/10/paraguay-avanza-con-la-segunda-subasta-5g-y-tigo-y-personal-aceptan-las-reglas-contra-equipos-de-origen-chino/"
+},
+{
+"label": "TeleSemana 2026-08-06 (2차 5G 경매 결과)",
+"url": "https://www.telesemana.com/blog/2026/08/06/segunda-subasta-5g-en-paraguay-tigo-se-queda-con-2-3-ghz-y-personal-con-3-7-ghz/"
+}
+]
+},
+{
+"name": "Claro Paraguay",
+"name_local": "AMX Paraguay (América Móvil)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Nokia",
+"area": "5G 1단계: 그란 아순시온·시우다드델에스테·엔카르나시온·코로넬오비에도·페드로후안카바예로",
+"gens": [
+"5g"
+],
+"source": "https://mobiletime.la/noticias/18/12/2025/nokia-y-claro-red-5g-de-paraguay/"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "1차 5G 입찰 3.5GHz(3500-3700MHz) 200MHz 낙찰(약 US$202만)",
+"source": "https://www.telesemana.com/blog/2025/08/26/claro-y-nubicom-se-hicieron-de-espectro-5g-en-paraguay-y-se-preve-que-el-lanzamiento-de-servicios-sea-en-marzo-de-2026/"
+},
+{
+"year": 2025,
+"text": "12월 파라과이 최초 5G 상용 개통(US$3,500만 투자), Nokia AirScale RAN(Massive MIMO) 단독 공급",
+"source": "https://mobiletime.la/noticias/18/12/2025/nokia-y-claro-red-5g-de-paraguay/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Mobile Time 2025-12-18 (Nokia-Claro 5G RAN)",
+"url": "https://mobiletime.la/noticias/18/12/2025/nokia-y-claro-red-5g-de-paraguay/"
+},
+{
+"label": "TeleSemana 2025-12-18 (Claro 5G 개통, US$3,500만)",
+"url": "https://www.telesemana.com/blog/2025/12/18/claro-enciende-la-primera-red-5g-de-paraguay-con-una-inversion-de-us-35-millones/"
+},
+{
+"label": "RCR Wireless 2025-08-26 (1차 5G 경매 결과)",
+"url": "https://rcrwireless.com/20250826/spectrum/paraguay-awards-5g"
+}
+]
+},
+{
+"name": "Vox",
+"name_local": "Hola Paraguay S.A. (Copaco, 국영)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2022,
+"text": "Copaco, Vox 주파수를 美 Rivada Networks에 제공해 망 구축하는 20년 계약 추진(법적 논란, 체결 미확인)",
+"source": "https://dplnews.com/?p=175086"
+},
+{
+"year": 2026,
+"text": "이동통신 점유율 약 4.6%, 사실상 휴면 상태 평가. Nubicom의 Vox 인프라 활용설",
+"source": "https://www.telesemana.com/blog/2026/02/25/contraloria-confirma-irregularidades-en-la-licitacion-5g-de-paraguay-y-expone-el-rol-de-conatel-nubicom-y-copaco/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "DPL News 2022-12 (Vox-Rivada 계약)",
+"url": "https://dplnews.com/?p=175086"
+},
+{
+"label": "TeleSemana 2026-02-25 (감사원 보고, Vox 점유율)",
+"url": "https://www.telesemana.com/blog/2026/02/25/contraloria-confirma-irregularidades-en-la-licitacion-5g-de-paraguay-y-expone-el-rol-de-conatel-nubicom-y-copaco/"
+}
+]
+},
+{
+"name": "Nubicom Paraguay",
+"name_local": "Nubicom (아르헨티나계 신규 사업자)",
+"type": "신규 5G 사업자",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "1차 5G 입찰 3.3-3.5GHz 200MHz 낙찰(US$200만), 10월 면허 취득. US$2억 투자 계획 발표",
+"source": "https://www.telesemana.com/blog/2025/10/14/nubicom-obtuvo-finalmente-su-licencia-para-desplegar-y-brindar-servicios-5g-en-paraguay/"
+},
+{
+"year": 2026,
+"text": "감사원(CGR), 자격 미달(10만 가입자 요건 등)에도 Conatel이 낙찰 — 규정 위반 판정. 상용화 지연",
+"source": "https://www.telesemana.com/blog/2026/02/25/contraloria-confirma-irregularidades-en-la-licitacion-5g-de-paraguay-y-expone-el-rol-de-conatel-nubicom-y-copaco/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "TeleSemana 2025-10-14 (Nubicom 면허)",
+"url": "https://www.telesemana.com/blog/2025/10/14/nubicom-obtuvo-finalmente-su-licencia-para-desplegar-y-brindar-servicios-5g-en-paraguay/"
+},
+{
+"label": "DCD 2026-06 (Nubicom US$2억 투자 계획)",
+"url": "https://www.datacenterdynamics.com/en/news/nubicom-announces-largest-5g-deployment-in-paraguay-with-200-million-dollar-investment/"
+}
+]
+}
+],
+"country_note": "Conatel 5G 입찰(2025·2026)은 '정식 외교·통상관계국 장비' 조건으로 Huawei/ZTE 사실상 배제(파라과이는 대만 수교국). 1차(2025.8, 3.5GHz)는 Claro·Nubicom만 참여, Tigo·Personal 불참. 2차(2026.8)에서 Tigo 2.3GHz·Personal 3.7GHz 낙찰, 2027년 초 상용화 의무. Claro가 2025.12 Nokia로 첫 5G 개통. 4G는 Huawei 비중 큰 것으로 알려지나 공식 수치 없음.",
+"sources": [
+{
+"label": "DPL News 2025-07 (Huawei/ZTE 배제 조건 분석)",
+"url": "https://dplnews.com/?p=280448"
+},
+{
+"label": "TeleSemana 2025-08-26 (1차 5G 경매)",
+"url": "https://www.telesemana.com/blog/2025/08/26/claro-y-nubicom-se-hicieron-de-espectro-5g-en-paraguay-y-se-preve-que-el-lanzamiento-de-servicios-sea-en-marzo-de-2026/"
+},
+{
+"label": "TeleSemana 2026-08-06 (2차 5G 경매)",
+"url": "https://www.telesemana.com/blog/2026/08/06/segunda-subasta-5g-en-paraguay-tigo-se-queda-con-2-3-ghz-y-personal-con-3-7-ghz/"
+},
+{
+"label": "Conatel 이동통신 통계 2019-2024",
+"url": "https://www.conatel.gov.py/wp-content/uploads/2025/12/InformedeTelefoniaeInternetMovil2019-2024.pdf"
 }
 ]
 },
@@ -8802,6 +9346,364 @@
 {
 "label": "Ericsson PR - Cosmote 5G",
 "url": "https://www.ericsson.com/en/press-releases/2020/3/cosmote-greece-selects-ericsson-5g"
+}
+]
+},
+{
+"iso3": "ROU",
+"name_ko": "루마니아",
+"carriers": [
+{
+"name": "Orange Romania",
+"name_local": "Orange România",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [
+{
+"vendor": "Huawei",
+"pct": null,
+"sites": null,
+"basis": "Strand Consult: 4G RAN 전량 중국 벤더 의존(Orange는 '복수 공급사, Huawei 포함'이라 밝힘)",
+"asof": "2024-03",
+"type": "estimate",
+"source": "https://WWW.LIGHTREADING.COM/5g/vodafone-orange-face-5g-rip-and-replace-as-romania-bans-huawei"
+}
+],
+"issues": [
+{
+"year": 2019,
+"text": "Ericsson 매니지드서비스 연장(고정망+2G/3G/4G 운영, 향후 5G 포함)",
+"source": "https://www.economica.net/orange-a-prelungit-contractul-cu-ericsson-pentru-administrarea-retelelor-din-cinci-tari-europene-inclusiv-romania_177467.html"
+},
+{
+"year": 2024,
+"text": "법 163/2021에 따라 미인증 벤더(Huawei) 장비 기한 내 교체 방침 표명(코어 2026·RAN 2028 추정)",
+"source": "https://WWW.LIGHTREADING.COM/5g/vodafone-orange-face-5g-rip-and-replace-as-romania-bans-huawei"
+},
+{
+"year": 2024,
+"text": "Vodafone과 농촌 공유 Open RAN 파일럿 확대 — Samsung vRAN(2G/4G/5G)+Dell+Wind River",
+"source": "https://www.rcrwireless.com/20240523/featured/orange-vodafone-expand-shared-oran-pilot-romania"
+},
+{
+"year": 2025,
+"text": "루마니아 최초 5G SA 도입(다뉴브델타), 12월 Ericsson 장비로 26GHz mmWave SA 시험(10Gbps)",
+"source": "https://gadget.ro/ce-a-insemnat-2025-pentru-orange-romania-din-punct-de-vedere-al-inovatiilor-si-al-dezvoltarii-tehnologice/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Light Reading 2024-03-04 (Huawei 금지, Orange/Vodafone 4G 의존)",
+"url": "https://WWW.LIGHTREADING.COM/5g/vodafone-orange-face-5g-rip-and-replace-as-romania-bans-huawei"
+},
+{
+"label": "Economica 2019-12 (Orange-Ericsson 매니지드서비스)",
+"url": "https://www.economica.net/orange-a-prelungit-contractul-cu-ericsson-pentru-administrarea-retelelor-din-cinci-tari-europene-inclusiv-romania_177467.html"
+},
+{
+"label": "RCR Wireless 2024-05-23 (공유 Open RAN 파일럿)",
+"url": "https://www.rcrwireless.com/20240523/featured/orange-vodafone-expand-shared-oran-pilot-romania"
+},
+{
+"label": "Gadget.ro 2026-01-29 (Orange 2025 네트워크 결산)",
+"url": "https://gadget.ro/ce-a-insemnat-2025-pentru-orange-romania-din-punct-de-vedere-al-inovatiilor-si-al-dezvoltarii-tehnologice/"
+},
+{
+"label": "Romania Insider 2026-07 (2026년 €2.37억 투자)",
+"url": "https://www.romania-insider.com/orange-romania-planned-investments-jun-2026"
+}
+]
+},
+{
+"name": "Vodafone Romania",
+"name_local": "Vodafone România",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Samsung"
+],
+"3g": [],
+"4g": [
+"Huawei",
+"Ericsson",
+"Samsung"
+],
+"5g": [
+"Ericsson",
+"Samsung"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "도시 사이트 약 80%(5G RAN, 기존망 현대화)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://WWW.LIGHTREADING.COM/5g/vodafone-orange-face-5g-rip-and-replace-as-romania-bans-huawei"
+},
+{
+"vendor": "Samsung",
+"area": "도시 사이트 약 20%, 20개 도시 Open RAN(2G/4G/5G vRAN)",
+"gens": [
+"2g",
+"4g",
+"5g"
+],
+"source": "https://www.rcrwireless.com/20240220/open_ran/vodafone-kicks-off-oran-deployments-romania"
+}
+],
+"share": [
+{
+"vendor": "Ericsson",
+"pct": 80,
+"sites": null,
+"basis": "도시 사이트 기준 계획 비중(Light Reading)",
+"asof": "2024-03",
+"type": "estimate",
+"source": "https://WWW.LIGHTREADING.COM/5g/vodafone-orange-face-5g-rip-and-replace-as-romania-bans-huawei"
+},
+{
+"vendor": "Samsung",
+"pct": 20,
+"sites": null,
+"basis": "도시 사이트 기준 계획 비중(Light Reading)",
+"asof": "2024-03",
+"type": "estimate",
+"source": "https://WWW.LIGHTREADING.COM/5g/vodafone-orange-face-5g-rip-and-replace-as-romania-bans-huawei"
+}
+],
+"issues": [
+{
+"year": 2024,
+"text": "Ericsson과 6년 5G RAN 전략 파트너십(Massive MIMO, RAN Compute, SA 지향) — Huawei 교체 수순",
+"source": "https://www.ericsson.com/en/press-releases/3/2024/strategic-partnership-between-vodafone-romania-and-ericsson-for-5g-deployment"
+},
+{
+"year": 2024,
+"text": "Samsung Open RAN 상용 구축 개시(20개 도시, 2G/4G/5G, Dell 서버·Wind River)",
+"source": "https://www.rcrwireless.com/20240220/open_ran/vodafone-kicks-off-oran-deployments-romania"
+},
+{
+"year": 2024,
+"text": "Orange와 공유하는 농촌 사이트는 별도 입찰 예정(Strand/Light Reading)",
+"source": "https://WWW.LIGHTREADING.COM/5g/vodafone-orange-face-5g-rip-and-replace-as-romania-bans-huawei"
+},
+{
+"year": 2025,
+"text": "Telekom Romania Mobile 인수 완료(10.1, 후불·법인 고객·망 대부분), 2026 초 법적 합병",
+"source": "https://www.businessforum.ro/industry/20251002/vodafone-and-digi-complete-telekom-romania-mobile-acquisition-2377"
+},
+{
+"year": 2025,
+"text": "Vodafone 그룹, Samsung을 유럽 다국 Open RAN 핵심 파트너로 선정(10월)",
+"source": "https://www.zf.ro/business-hi-tech/gigantul-samsung-selectat-grupul-vodafone-furniza-solutii-22916976"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson 보도자료 2024-02-12",
+"url": "https://www.ericsson.com/en/press-releases/3/2024/strategic-partnership-between-vodafone-romania-and-ericsson-for-5g-deployment"
+},
+{
+"label": "RCR Wireless 2024-02-20 (Samsung Open RAN)",
+"url": "https://www.rcrwireless.com/20240220/open_ran/vodafone-kicks-off-oran-deployments-romania"
+},
+{
+"label": "Light Reading 2024-03-04 (Ericsson 80%/Samsung 20%)",
+"url": "https://WWW.LIGHTREADING.COM/5g/vodafone-orange-face-5g-rip-and-replace-as-romania-bans-huawei"
+},
+{
+"label": "Business Forum 2025-10-02 (TKRM 인수 완료)",
+"url": "https://www.businessforum.ro/industry/20251002/vodafone-and-digi-complete-telekom-romania-mobile-acquisition-2377"
+},
+{
+"label": "ZF 2025-10-01 (Vodafone-Samsung 유럽 Open RAN)",
+"url": "https://www.zf.ro/business-hi-tech/gigantul-samsung-selectat-grupul-vodafone-furniza-solutii-22916976"
+}
+]
+},
+{
+"name": "Digi Romania",
+"name_local": "Digi (RCS & RDS)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"Ericsson"
+],
+"4g": [
+"Ericsson"
+],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "부쿠레슈티 등 주요 도시(2017 3G/4G 현대화, 2019 5G NSA 개시)",
+"gens": [
+"3g",
+"4g",
+"5g"
+],
+"source": "https://www.ericsson.com/en/press-releases/2019/6/digi--rcs--rds-and-ericsson-go-live-with-5g-mobile-service-in-romania"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2017,
+"text": "Ericsson Radio System으로 3G/4G 접속망 현대화·5G/NB-IoT 준비 계약(부쿠레슈티 우선)",
+"source": "https://www.ericsson.com/en/news/2017/11/ericsson-to-gear-up-rcs--rds-digi-network-for-5g-and-iot"
+},
+{
+"year": 2017,
+"text": "Huawei와 4.5G 랩 테스트(1.5Gbps) 병행 — 상용 Huawei 4G 비중은 미공개",
+"source": "https://www.mobilissimo.ro/stiri-telefoane/digi-mobil-obtine-viteze-record-in-4-5g-alaturi-de-partenerul-huawei-dar-continua-spre-zona-5g-cu-ericsson"
+},
+{
+"year": 2019,
+"text": "루마니아 최초 5G 상용(NSA, Ericsson 5G NR, 부쿠레슈티→클루지)",
+"source": "https://www.ericsson.com/en/press-releases/2019/6/digi--rcs--rds-and-ericsson-go-live-with-5g-mobile-service-in-romania"
+},
+{
+"year": 2025,
+"text": "Telekom Romania Mobile 선불 사업·일부 주파수·타워 인수 완료(10.1)",
+"source": "https://www.digi-communications.ro/en/see-file/DIGI_Press-release_-Closing-TKRM-Transaction.pdf"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson 2017-11 (Digi 3G/4G 현대화)",
+"url": "https://www.ericsson.com/en/news/2017/11/ericsson-to-gear-up-rcs--rds-digi-network-for-5g-and-iot"
+},
+{
+"label": "Ericsson 보도자료 2019-06-27 (Digi 5G)",
+"url": "https://www.ericsson.com/en/press-releases/2019/6/digi--rcs--rds-and-ericsson-go-live-with-5g-mobile-service-in-romania"
+},
+{
+"label": "Digi 보도자료 2025-10-01 (TKRM 거래 종결)",
+"url": "https://www.digi-communications.ro/en/see-file/DIGI_Press-release_-Closing-TKRM-Transaction.pdf"
+},
+{
+"label": "Mobilissimo 2025-12 (ANCOM H1 2025 점유율)",
+"url": "https://www.mobilissimo.ro/stiri-diverse/cum-arata-piata-telecom-din-romania-la-final-de-2025-digi-si-orange-se-bat-pe-primele-pozitii"
+}
+]
+},
+{
+"name": "Telekom Romania Mobile",
+"name_local": "Telekom Romania Mobile Communications (舊 OTE, 2025.10 Vodafone·Digi에 분할 매각)",
+"type": "MNO(Vodafone에 흡수)",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2023,
+"text": "11개 도시 5G 서비스 제공(Samsung 단말 파트너), 네트워크 벤더 미공개",
+"source": "https://telecomtalk.info/telekom-romania-mobile-brings-5g-technology-11cities/718847/"
+},
+{
+"year": 2025,
+"text": "OTE, TKRM 매각 종결(€3,000만): Vodafone이 법인·후불·망 대부분, Digi가 선불·주파수·타워 인수",
+"source": "https://www.businessforum.ro/industry/20251002/vodafone-and-digi-complete-telekom-romania-mobile-acquisition-2377"
+},
+{
+"year": 2026,
+"text": "Vodafone Romania와 법적 합병 예정(2026 초), 브랜드 독립성 종료 수순",
+"source": "https://www.businessforum.ro/industry/20251002/vodafone-and-digi-complete-telekom-romania-mobile-acquisition-2377"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Business Forum 2025-10-02 (TKRM 분할 인수 완료)",
+"url": "https://www.businessforum.ro/industry/20251002/vodafone-and-digi-complete-telekom-romania-mobile-acquisition-2377"
+},
+{
+"label": "Digi 보도자료 2025-10-01",
+"url": "https://www.digi-communications.ro/en/see-file/DIGI_Press-release_-Closing-TKRM-Transaction.pdf"
+},
+{
+"label": "TelecomTalk 2023-06 (TKRM 5G 11개 도시)",
+"url": "https://telecomtalk.info/telekom-romania-mobile-brings-5g-technology-11cities/718847/"
+}
+]
+}
+],
+"country_note": "법 163/2021: 5G 장비는 CSAT 사전 인증 벤더만 허용. Huawei 거부(2024.2 관보), Nokia 2022 거부 후 재인증, Ericsson·Samsung·NEC·Mavenir 등 30여 사 인증. 미인증 장비 교체 기한 코어 5년·RAN 7년(≈2026/2028). Huawei 헌재 제소(2026.4). 2025.10 Telekom Romania Mobile이 Vodafone·Digi로 분할돼 3사 체제. ANCOM H1 2025: Orange 33.6%, Digi 29.9%, Vodafone 24.5%.",
+"sources": [
+{
+"label": "Light Reading 2024-03-04 (Huawei 금지·교체 기한)",
+"url": "https://WWW.LIGHTREADING.COM/5g/vodafone-orange-face-5g-rip-and-replace-as-romania-bans-huawei"
+},
+{
+"label": "Puterea 2023-02 (CSAT 인증 30개사 목록)",
+"url": "https://www.puterea.ro/?p=217868"
+},
+{
+"label": "TelecomLead 2022-04 (Nokia 인증 거부·소송)",
+"url": "https://telecomlead.com/telecom-equipment/nokia-starts-legal-challenge-to-5g-exclusion-in-romania-104210"
+},
+{
+"label": "Economedia 2026-05-04 (Huawei 헌재 제소·EU 권고)",
+"url": "https://economedia.ro/?p=345643"
+},
+{
+"label": "Economedia 2025-10-14 (Huawei 인증 거부 관보 2024.2)",
+"url": "https://economedia.ro/vodafone-va-inlocui-echipamentele-huawei-din-retelele-sale-din-europa-cu-echipamente-samsung-romania-a-respins-anul-trecut-participarea-gigantului-chinez-huawei-la-reteaua-5g-din-tara.html"
+},
+{
+"label": "Mobilissimo 2025-12-20 (ANCOM H1 2025 점유율)",
+"url": "https://www.mobilissimo.ro/stiri-diverse/cum-arata-piata-telecom-din-romania-la-final-de-2025-digi-si-orange-se-bat-pe-primele-pozitii"
 }
 ]
 },
