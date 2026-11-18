@@ -77,6 +77,8 @@ CFG = {
                 kpi={"capex": "CAPEX for the 3-month quarter, in 억 원",
                      "arpu": "MNO 서비스 ARPU (IoT 제외, 원/월)", "churn": "MNO 해지율 (%)"}),
 }
+# Yahoo 재무 시계열(공시 집계): (티커, 단위 나눗수, 이익 지표 — None이면 매출만 대조하고 이익은 공식 자료 추출값 사용)
+YAHOO = {"에릭슨": ("ERIC", 1e6, None), "노키아": ("NOK", 1e6, None), "zte": ("0763.HK", 1e6, "NetIncomeCommonStockholders"), "kddi": ("9433.T", 1e6, "OperatingIncome"), "skt": ("017670.KS", 1e9, "OperatingIncome"), "kt": ("030200.KS", 1e9, "OperatingIncome"), "lg유플러스": ("032640.KS", 1e9, "OperatingIncome")}
 KPI_KEYS = {"capex": "capex_quarterly", "arpu": "arpu_quarterly", "churn": "churn_quarterly", "subs": "subs_quarterly"}
 
 # ── 라벨 해석·다음 기간 라벨 생성 (회사마다 표기가 달라 기존 표기를 그대로 이어감) ──
@@ -261,7 +263,9 @@ def apply_result(f, per, res, src_url, today):
                 f["annual"].append({"label": new_lb, "revenue": _round(sum(r["revenue"] for r in last_n), ref),
                                     "op": _round(sum(r["op"] for r in last_n), ref), "src": src_url, "auto": today})
                 del f["annual"][:-KEEP_ANNUAL]
-    # 통신 KPI
+    return apply_kpi(f, per, res)
+
+def apply_kpi(f, per, res):
     kpi = f.get("kpi") or {}
     applied = []
     for k, lst_key in KPI_KEYS.items():
@@ -311,6 +315,47 @@ def validate(f, per, res, cfg, chunks, sec):
         if lastrev and abs(rev - lastrev) / abs(lastrev) > 0.5: return None, "직전 분기 대비 매출 변동 과대(단위 오류 의심)"
     return {"revenue": rev, "op": op, **{k: res.get(k) for k in KPI_KEYS}}, ""
 
+def yahoo_quarter(sym, div, op_type, end_y, end_m):
+    """Yahoo fundamentals-timeseries에서 해당 분기와 전년 동기 매출·이익 조회 (원 단위 → 저장 단위)"""
+    types = ["quarterlyTotalRevenue"] + ([f"quarterly{op_type}"] if op_type else [])
+    p1 = int(datetime(end_y - 2, 1, 1).timestamp()); p2 = int(time.time())
+    url = (f"https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/{sym}"
+           f"?symbol={sym}&type={','.join(types)}&period1={p1}&period2={p2}")
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
+        with urllib.request.urlopen(req, timeout=25) as r:
+            data = json.loads(r.read().decode("utf-8"))
+    except Exception:
+        return None
+    series = {}
+    for res in (data.get("timeseries") or {}).get("result") or []:
+        t = (res.get("meta") or {}).get("type", [""])[0]
+        for row in res.get(t) or []:
+            if row and row.get("periodType") == "3M" and row.get("reportedValue"):
+                series.setdefault(t, {})[row["asOfDate"]] = row["reportedValue"]["raw"] / float(div)
+    end = f"{end_y}-{end_m:02d}-{_last_day(end_y, end_m):02d}"
+    yend = f"{end_y - 1}-{end_m:02d}-{_last_day(end_y - 1, end_m):02d}"
+    rev = series.get("quarterlyTotalRevenue", {})
+    if end not in rev: return None
+    out = {"revenue": rev[end], "yoy_revenue": rev.get(yend)}
+    if op_type:
+        ops = series.get(f"quarterly{op_type}", {})
+        out["op"] = ops.get(end); out["yoy_op"] = ops.get(yend)
+    out["url"] = f"https://finance.yahoo.com/quote/{sym}/financials/"
+    return out
+
+def check_against_stored(f, per, yoy_rev, yoy_op):
+    """전년 동기 값이 저장값과 맞는지(정의·단위 일치 확인). 반환: (매출 일치, 이익 일치 또는 None)"""
+    q = f.get("quarterly") or []
+    i = find_label(q, per["end_y"] - 1, per["end_m"])
+    if i is None: return None, None
+    sr, so = q[i].get("revenue"), q[i].get("op")
+    rev_ok = (yoy_rev is not None and sr) and abs(yoy_rev - sr) / abs(sr) <= 0.03
+    op_ok = None
+    if yoy_op is not None and so is not None and sr:
+        op_ok = abs(yoy_op - so) <= max(abs(so) * 0.05, abs(sr) * 0.005)
+    return bool(rev_ok), op_ok
+
 def run(log=print):
     key = os.environ.get("GEMINI_API_KEY")
     if not key or not os.path.exists(FIN_FILE): return 0
@@ -339,10 +384,22 @@ def run(log=print):
     ts = time.time()
     models = [x for x in models if cool.get(x, 0) <= ts] + [x for x in models if cool.get(x, 0) > ts]
     models = models[:6]
-    calls, changed = 0, False
+    calls, changed, g_blocked = 0, False, False
     for comp, cfg in CFG.items():
         f = fin["companies"].get(comp)
         if not f or f.get("private") or not f.get("quarterly"): continue
+        kr = (state.get(comp) or {}).get("kpi_retry")
+        if kr and cfg.get("kpi") and not g_blocked and calls < MAX_CALLS_PER_RUN:
+            calls += 1
+            try:
+                text, chunks, gm = _gemini(build_prompt(comp, cfg, kr), key, models)
+                res = _parse_json(text) or {}
+                if res.get("found") and _domain_ok(cfg, res.get("source_url"), chunks):
+                    got = apply_kpi(f, kr, res)
+                    log(f"[실적] {comp} {kr['label']} KPI 보완: {got}")
+                    state[comp].pop("kpi_retry", None); changed = changed or bool(got)
+            except Exception as ex:
+                g_blocked = True; log(f"[실적] Gemini 조회 불가 - {str(ex)[:300]}")
         per = next_period(f)
         if not per: continue
         end = datetime(per["end_y"], per["end_m"], _last_day(per["end_y"], per["end_m"]), tzinfo=KST)
@@ -360,38 +417,71 @@ def run(log=print):
             except Exception: pass
         interval = RECHECK_FAST_H if now < end + timedelta(days=FAST_UNTIL_DAYS) else RECHECK_SLOW_H
         if st.get("state") == "error": interval = 1
-        if age_h < interval or calls >= MAX_CALLS_PER_RUN:
+        if age_h < interval:
             status["state"] = st.get("state", "checking"); f["auto_status"] = status; continue
-        calls += 1
         st["checked"] = now.strftime("%Y-%m-%d %H:%M")
-        try:
-            text, chunks, used = _gemini(build_prompt(comp, cfg, per), key, models)
-            res = _parse_json(text) or {}
-        except Exception as ex:
-            st.update(state="error", msg=f"조회 실패: {ex}"[:160]); state[comp] = st
-            status.update(state="error", checked=st["checked"], msg=st["msg"]); f["auto_status"] = status
-            log(f"[실적] {comp} {per['label']} 조회 실패 - {ex}")
-            calls = MAX_CALLS_PER_RUN   # 모든 모델 실패 시 이번 회차 나머지 조회 중단(다음 회차 1시간 뒤 재시도)
-            continue
-        if not res.get("found"):
-            st.update(state="not_yet", msg="아직 발표 자료 미확인"); state[comp] = st
-            status.update(state="not_yet", checked=st["checked"], msg=st["msg"]); f["auto_status"] = status
-            log(f"[실적] {comp} {per['label']} 미발표"); continue
-        sec = sec_quarter(cfg["cik"], per["end_y"], per["end_m"]) if cfg.get("cik") and not per["half"] else None
-        vals, why = validate(f, per, res, cfg, chunks, sec)
-        src = (sec or {}).get("url") or res.get("source_url") or ""
-        if not vals:
-            st.update(state="pending", msg=why, extracted={k: res.get(k) for k in ("revenue", "op", "yoy_revenue", "yoy_op")}, src=src)
-            state[comp] = st
-            status.update(state="pending", checked=st["checked"], msg=why, src=src); f["auto_status"] = status
-            log(f"[실적] {comp} {per['label']} 검증 대기 - {why}"); continue
+        vals, src, why, used, kp = None, "", "", "", {}
+        # ① 미국 SEC 제출사: XBRL 공시값(공식) 그대로 사용
+        if cfg.get("cik") and not per["half"]:
+            sec = sec_quarter(cfg["cik"], per["end_y"], per["end_m"])
+            if sec: vals, src, used = {"revenue": sec["revenue"], "op": sec["op"]}, sec["url"], "SEC XBRL"
+        # ② Yahoo 공시 집계: 전년 동기 매출(·이익)이 저장값과 맞을 때만 채택(지표 정의·단위 일치 확인)
+        yop = None
+        if not vals and comp in YAHOO and not per["half"]:
+            sym, div, op_type = YAHOO[comp]
+            y = yahoo_quarter(sym, div, op_type, per["end_y"], per["end_m"])
+            if y:
+                rev_ok, op_ok = check_against_stored(f, per, y.get("yoy_revenue"), y.get("yoy_op"))
+                if rev_ok and op_type and op_ok and y.get("op") is not None:
+                    vals, src, used = {"revenue": y["revenue"], "op": y["op"]}, y["url"], "Yahoo Finance(공시 집계)"
+                elif rev_ok:
+                    yop = y   # 매출은 확인됨 — 이익(회사 고유 지표)은 공식 자료 추출로 보완
+                    why = "이익 지표가 회사 고유 정의라 공식 자료 확인 필요"
+                else:
+                    why = "공시 집계 값이 저장된 전년 동기와 불일치"
+        # ③ Gemini + Google 검색(공식 자료): 매출·이익 미확보분과 통신 KPI
+        need_g = (vals is None) or bool(cfg.get("kpi"))
+        if need_g and not g_blocked and calls < MAX_CALLS_PER_RUN:
+            calls += 1
+            try:
+                text, chunks, gm = _gemini(build_prompt(comp, cfg, per), key, models)
+                res = _parse_json(text) or {}
+                if res.get("found"):
+                    kp = {k: res.get(k) for k in KPI_KEYS}
+                    if vals is None:
+                        gv, gwhy = validate(f, per, res, cfg, chunks, None)
+                        if gv and yop and abs(gv["revenue"] - yop["revenue"]) / abs(yop["revenue"]) > 0.02:
+                            gv, gwhy = None, "공식 자료 추출 매출이 공시 집계와 불일치"
+                        if gv: vals, src, used = {"revenue": gv["revenue"], "op": gv["op"]}, res.get("source_url") or "", gm
+                        else: why = gwhy
+                elif vals is None and not yop:
+                    why = "아직 발표 자료 미확인"
+            except Exception as ex:
+                g_blocked = True       # 할당량·권한 문제면 이번 회차의 나머지 Gemini 조회 생략
+                gerr = str(ex)[:300]
+                log(f"[실적] Gemini 조회 불가 - {gerr}")
+                if vals is None: why = why or "공식 자료 조회 불가(Gemini 검색 할당량)"
+        if vals is None and need_g and (g_blocked or calls >= MAX_CALLS_PER_RUN) and not why:
+            # 공식 자료 조회를 이번 회차에 못 한 경우: 1시간 뒤 재시도
+            st.update(state="error", msg="공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)"); state[comp] = st
+            status.update(state="checking", checked=st["checked"], msg=st["msg"]); f["auto_status"] = status
+            log(f"[실적] {comp} {per['label']} 조회 대기"); continue
+        if vals is None:
+            stt = "not_yet" if why == "아직 발표 자료 미확인" or (not why and not yop) else "pending"
+            if not why: why = "아직 발표 자료 미확인"
+            st.update(state=("error" if (stt == "pending" and g_blocked) else stt), msg=why); state[comp] = st
+            status.update(state=stt, checked=st["checked"], msg=why, src=(yop or {}).get("url", "")); f["auto_status"] = status
+            log(f"[실적] {comp} {per['label']} {stt} - {why}"); continue
+        vals.update({k: v for k, v in kp.items() if v is not None})
         kpis = apply_result(f, per, vals, src, today)
         changed = True
-        st = {"period": per["label"], "state": "applied", "checked": now.strftime("%Y-%m-%d %H:%M"), "src": src,
-              "msg": f"{per['label']} 자동 반영" + (f" (KPI: {', '.join(kpis)})" if kpis else ""), "model": used}
-        state[comp] = {"period": next_period(f)["label"] if next_period(f) else "", "last_applied": st}
-        f["auto_status"] = {"period": per["label"], "state": "applied", "checked": st["checked"], "msg": st["msg"], "src": src}
-        log(f"[실적] {comp} {per['label']} 반영: 매출 {vals['revenue']:,.1f} / 이익 {vals['op']:,.1f} {cfg['unit']}"
+        kpi_retry = per if (cfg.get("kpi") and not kpis and not any(v is not None for v in kp.values())) else None
+        msg = f"{per['label']} 자동 반영 · {used}" + (f" · KPI {', '.join(kpis)}" if kpis else (" · KPI 미반영" if cfg.get("kpi") else ""))
+        state[comp] = {"period": next_period(f)["label"] if next_period(f) else "",
+                       "last_applied": {"period": per["label"], "checked": st["checked"], "src": src, "msg": msg}}
+        if kpi_retry: state[comp]["kpi_retry"] = kpi_retry
+        f["auto_status"] = {"period": per["label"], "state": "applied", "checked": st["checked"], "msg": msg, "src": src}
+        log(f"[실적] {comp} {per['label']} 반영({used}): 매출 {vals['revenue']:,.1f} / 이익 {vals['op']:,.1f} {cfg['unit']}"
             + (f" / KPI {kpis}" if kpis else ""))
     fin["auto_checked"] = now.strftime("%Y-%m-%d %H:%M")
     open(FIN_FILE, "w", encoding="utf-8").write(json.dumps(fin, ensure_ascii=False, indent=0))
