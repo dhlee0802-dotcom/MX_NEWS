@@ -232,10 +232,11 @@
 "seg_note": "단위: SEK 백만. FY2024·FY2025 및 분기 수치는 보고서 Note 2의 정확한 백만 단위 수치. FY2023은 2024년 중 조직개편(Enterprise Wireless Solutions의 Networks 편입 등)을 반영해 재작성된 비교치로, Q4 2024 보고서에 10억",
 "auto_status": {
 "period": "2026 Q3",
-"state": "error",
+"state": "pending",
 "due_from": "2026-10-14",
-"checked": "2026-11-18 11:18",
-"msg": "조회 실패: gemini-3.1-flash-lite: HTTP 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to "
+"checked": "2026-11-18 12:02",
+"msg": "이익 지표가 회사 고유 정의라 공식 자료 확인 필요",
+"src": "https://finance.yahoo.com/quote/ERIC/financials/"
 }
 },
 "노키아": {
@@ -459,10 +460,11 @@
 "seg_note": "단위: EUR 백만. [연간] 구(舊) 4개 사업그룹 체계 기준. FY2025·FY2024는 Q4 2025 보고서 기준(FY2024는 Managed Services의 CNS→Mobile Networks 이관을 소급 반영한 recast치; 당초 공시치는 MN 7,725/CNS 3,022)",
 "auto_status": {
 "period": "2026 Q3",
-"state": "error",
+"state": "pending",
 "due_from": "2026-10-14",
-"checked": "",
-"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
+"checked": "2026-11-18 12:02",
+"msg": "이익 지표가 회사 고유 정의라 공식 자료 확인 필요",
+"src": "https://finance.yahoo.com/quote/NOK/financials/"
 }
 },
 "화웨이": {
@@ -823,10 +825,11 @@
 "seg_note": "단위: 백만 CNY(공시가 십억 단위 소수 2자리라 백만 단위는 ±10 수준 반올림 오차 가능). ZTE 부문별 공시는 반기 기준이라 반기로 기재. 2024 H2와 2025 H2는 공시된 연간−상반기 차감 산출값(파생치), 2025 H1(캐리어 35,060/정부기업 19,250/컨슈머 ",
 "auto_status": {
 "period": "2026 Q3",
-"state": "error",
+"state": "pending",
 "due_from": "2026-10-14",
-"checked": "",
-"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
+"checked": "2026-11-18 12:02",
+"msg": "공시 집계 값이 저장된 전년 동기와 불일치",
+"src": ""
 }
 },
 "ast": {
@@ -878,10 +881,10 @@
 "note": "실적 공시는 영업손실 라인을 별도 표기하지 않아 영업이익 = 총매출 - 총영업비용으로 산출. Q3 FY2025와 Q1 FY2026은 연간/반기/분기 공시치 차감으로 도출(공시 수치 기반 정확 계산). Q2 FY2026 영업비용 급증($329.1M)은 위성 제조 램프업 등 비용 확대 반영 — GAAP 순손실 $230.9M. FY2023 매출 0, FY2022는 $13.8M이었음.",
 "auto_status": {
 "period": "Q3 FY2026",
-"state": "error",
+"state": "checking",
 "due_from": "2026-10-14",
-"checked": "",
-"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
+"checked": "2026-11-18 12:02",
+"msg": "공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)"
 }
 },
 "스타링크": {
@@ -1621,10 +1624,10 @@
 },
 "auto_status": {
 "period": "3Q26 (2026.7-9)",
-"state": "error",
+"state": "checking",
 "due_from": "2026-10-14",
-"checked": "",
-"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
+"checked": "2026-11-18 12:02",
+"msg": "공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)"
 }
 },
 "kddi": {
@@ -2008,10 +2011,11 @@
 },
 "auto_status": {
 "period": "FY26 2Q (2026.7-9)",
-"state": "error",
+"state": "pending",
 "due_from": "2026-10-14",
-"checked": "",
-"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
+"checked": "2026-11-18 12:02",
+"msg": "공시 집계 값이 저장된 전년 동기와 불일치",
+"src": ""
 }
 },
 "도코모": {
@@ -2449,8 +2453,8 @@
 "period": "FY26 2Q (2026.7-9)",
 "state": "checking",
 "due_from": "2026-10-14",
-"checked": "",
-"msg": ""
+"checked": "2026-11-18 12:02",
+"msg": "공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)"
 }
 },
 "지오": {
@@ -2693,8 +2697,8 @@
 "period": "FY27 2Q (2026.7-9)",
 "state": "checking",
 "due_from": "2026-10-14",
-"checked": "",
-"msg": ""
+"checked": "2026-11-18 12:02",
+"msg": "공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)"
 }
 },
 "skt": {
@@ -2738,6 +2742,13 @@
 "label": "2026 Q2",
 "revenue": 4359.1,
 "op": 566.0
+},
+{
+"label": "2026 Q3",
+"revenue": 4497.3,
+"op": 552.3,
+"src": "https://finance.yahoo.com/quote/017670.KS/financials/",
+"auto": "2026-11-18"
 }
 ],
 "segments": {
@@ -3125,10 +3136,10 @@
 },
 "auto_status": {
 "period": "2026 Q3",
-"state": "checking",
-"due_from": "2026-10-14",
-"checked": "",
-"msg": ""
+"state": "applied",
+"checked": "2026-11-18 12:02",
+"msg": "2026 Q3 자동 반영 · Yahoo Finance(공시 집계) · KPI 미반영",
+"src": "https://finance.yahoo.com/quote/017670.KS/financials/"
 }
 },
 "kt": {
@@ -3669,8 +3680,8 @@
 "period": "2026 Q3",
 "state": "checking",
 "due_from": "2026-10-14",
-"checked": "",
-"msg": ""
+"checked": "2026-11-18 12:02",
+"msg": "공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)"
 }
 },
 "lg유플러스": {
@@ -4115,11 +4126,11 @@
 "period": "2026 Q3",
 "state": "checking",
 "due_from": "2026-10-14",
-"checked": "",
-"msg": ""
+"checked": "2026-11-18 12:02",
+"msg": "공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)"
 }
 }
 },
 "kpi_updated": "2026-10-30",
-"auto_checked": "2026-11-18 11:18"
+"auto_checked": "2026-11-18 12:02"
 }
