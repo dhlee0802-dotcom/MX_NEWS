@@ -1,37 +1,31 @@
 {
  "에릭슨": {
   "period": "2026 Q3",
-  "checked": "2026-11-18 10:48",
   "state": "error",
   "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
  },
  "노키아": {
   "period": "2026 Q3",
-  "checked": "2026-11-18 10:48",
   "state": "error",
   "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
  },
  "zte": {
   "period": "2026 Q3",
-  "checked": "2026-11-18 10:48",
   "state": "error",
   "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
  },
  "ast": {
   "period": "Q3 FY2026",
-  "checked": "2026-11-18 10:48",
   "state": "error",
   "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
  },
  "버라이즌": {
   "period": "3Q26 (2026.7-9)",
-  "checked": "2026-11-18 10:48",
   "state": "error",
   "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
  },
  "kddi": {
   "period": "FY26 2Q (2026.7-9)",
-  "checked": "2026-11-18 10:48",
   "state": "error",
   "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
  }

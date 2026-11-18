@@ -138,22 +138,26 @@ def find_label(lst, end_y, end_m):
 def _gemini(prompt, key, models):
     payload = {"contents": [{"parts": [{"text": prompt}]}], "tools": [{"google_search": {}}],
                "generationConfig": {"temperature": 0}}
-    last = None
+    errs = []
     for model in models:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
         req = urllib.request.Request(url, method="POST", data=json.dumps(payload).encode("utf-8"))
         req.add_header("Content-Type", "application/json; charset=utf-8")
         try:
-            with urllib.request.urlopen(req, timeout=180) as r:
+            with urllib.request.urlopen(req, timeout=90) as r:
                 res = json.loads(r.read().decode("utf-8"))
             cand = res["candidates"][0]
             text = "".join(p.get("text", "") for p in cand["content"]["parts"])
             chunks = [(c.get("web") or {}) for c in (cand.get("groundingMetadata") or {}).get("groundingChunks", [])]
             return text, chunks, model
+        except urllib.error.HTTPError as ex:
+            try: body = ex.read().decode("utf-8", "ignore")
+            except Exception: body = ""
+            msg = re.search(r'"message":\s*"([^"]{0,120})', body)
+            errs.append(f"{model}: HTTP {ex.code} {msg.group(1) if msg else ''}".strip())
         except Exception as ex:
-            last = f"{model}: {str(ex)[:80]}"
-            continue
-    raise RuntimeError(last or "Gemini 호출 실패")
+            errs.append(f"{model}: {str(ex)[:80]}")
+    raise RuntimeError(" | ".join(errs)[:600] or "Gemini 호출 실패")
 
 def _parse_json(text):
     m = re.search(r"\{[\s\S]*\}", text or "")
@@ -320,8 +324,21 @@ def run(log=print):
     if os.path.exists("gemini_model_nw.txt"):
         m = open("gemini_model_nw.txt", encoding="utf-8").read().strip()
         if m: models.append(m)
-    models += ["gemini-flash-latest", "gemini-2.5-flash", "gemini-flash-lite-latest", "gemini-2.5-flash-lite"]
+    avail = []
+    if os.path.exists("gemini_diag.txt"):
+        first = open("gemini_diag.txt", encoding="utf-8").read().split("\n")[0]
+        if first.startswith("avail:"): avail = [x.strip() for x in first[6:].split(",") if x.strip()]
+    full = sorted([x for x in avail if "lite" not in x], reverse=True)    # 신형 상위 모델 우선
+    lite = sorted([x for x in avail if "lite" in x], reverse=True)
+    models += full + lite + ["gemini-flash-latest", "gemini-flash-lite-latest"]
     models = list(dict.fromkeys(models))
+    cool = {}
+    if os.path.exists("gemini_cooldown_nw.json"):
+        try: cool = json.loads(open("gemini_cooldown_nw.json", encoding="utf-8").read())
+        except Exception: cool = {}
+    ts = time.time()
+    models = [x for x in models if cool.get(x, 0) <= ts] + [x for x in models if cool.get(x, 0) > ts]
+    models = models[:6]
     calls, changed = 0, False
     for comp, cfg in CFG.items():
         f = fin["companies"].get(comp)
@@ -342,6 +359,7 @@ def run(log=print):
             try: age_h = (now - datetime.strptime(st["checked"], "%Y-%m-%d %H:%M").replace(tzinfo=KST)).total_seconds() / 3600
             except Exception: pass
         interval = RECHECK_FAST_H if now < end + timedelta(days=FAST_UNTIL_DAYS) else RECHECK_SLOW_H
+        if st.get("state") == "error": interval = 1
         if age_h < interval or calls >= MAX_CALLS_PER_RUN:
             status["state"] = st.get("state", "checking"); f["auto_status"] = status; continue
         calls += 1
@@ -352,7 +370,9 @@ def run(log=print):
         except Exception as ex:
             st.update(state="error", msg=f"조회 실패: {ex}"[:160]); state[comp] = st
             status.update(state="error", checked=st["checked"], msg=st["msg"]); f["auto_status"] = status
-            log(f"[실적] {comp} {per['label']} 조회 실패 - {ex}"); continue
+            log(f"[실적] {comp} {per['label']} 조회 실패 - {ex}")
+            calls = MAX_CALLS_PER_RUN   # 모든 모델 실패 시 이번 회차 나머지 조회 중단(다음 회차 1시간 뒤 재시도)
+            continue
         if not res.get("found"):
             st.update(state="not_yet", msg="아직 발표 자료 미확인"); state[comp] = st
             status.update(state="not_yet", checked=st["checked"], msg=st["msg"]); f["auto_status"] = status
