@@ -2,8 +2,7 @@
  "에릭슨": {
   "period": "2026 Q3",
   "state": "error",
-  "msg": "조회 실패: gemini-3.1-flash-lite: HTTP 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to ",
-  "checked": "2026-11-18 11:18"
+  "msg": "조회 실패: gemini-3.1-flash-lite: HTTP 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to "
  },
  "노키아": {
   "period": "2026 Q3",
