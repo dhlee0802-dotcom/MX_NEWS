@@ -57,6 +57,7 @@ jobs:
           git add stock_prices.json || true
           git add company_financials.json || true
           git add earnings_state.json || true
+          git add earnings_diag.txt || true
           git commit -m "network dashboard update" || { echo "no changes"; exit 0; }
           for i in 1 2 3; do
             git pull --rebase -X theirs

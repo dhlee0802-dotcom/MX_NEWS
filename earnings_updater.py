@@ -79,6 +79,7 @@ CFG = {
 }
 # Yahoo 재무 시계열(공시 집계): (티커, 단위 나눗수, 이익 지표 — None이면 매출만 대조하고 이익은 공식 자료 추출값 사용)
 YAHOO = {"에릭슨": ("ERIC", 1e6, None), "노키아": ("NOK", 1e6, None), "zte": ("0763.HK", 1e6, "NetIncomeCommonStockholders"), "kddi": ("9433.T", 1e6, "OperatingIncome"), "skt": ("017670.KS", 1e9, "OperatingIncome"), "kt": ("030200.KS", 1e9, "OperatingIncome"), "lg유플러스": ("032640.KS", 1e9, "OperatingIncome")}
+DIAG = []
 KPI_KEYS = {"capex": "capex_quarterly", "arpu": "arpu_quarterly", "churn": "churn_quarterly", "subs": "subs_quarterly"}
 
 # ── 라벨 해석·다음 기간 라벨 생성 (회사마다 표기가 달라 기존 표기를 그대로 이어감) ──
@@ -204,7 +205,7 @@ Return ONLY one JSON object, no prose:
 
 # ── SEC XBRL (미국 제출사: 매출·영업이익 공식값) ──
 def sec_quarter(cik, end_y, end_m):
-    ua = "MX-NEWS-dashboard research bot (github.com/dhlee0802-dotcom/MX_NEWS)"
+    ua = "MXNewsDashboard noreply@users.noreply.github.com"
     out = {}
     for field, tags in (("revenue", ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax"]),
                         ("op", ["OperatingIncomeLoss"])):
@@ -214,7 +215,8 @@ def sec_quarter(cik, end_y, end_m):
                                              headers={"User-Agent": ua, "Accept": "application/json"})
                 with urllib.request.urlopen(req, timeout=30) as r:
                     data = json.loads(r.read().decode("utf-8"))
-            except Exception:
+            except Exception as ex:
+                DIAG.append(f"SEC {cik} {tag}: {str(ex)[:80]}")
                 continue
             end = f"{end_y}-{end_m:02d}-{_last_day(end_y, end_m):02d}"
             for u in data.get("units", {}).get("USD", []):
@@ -225,6 +227,7 @@ def sec_quarter(cik, end_y, end_m):
                     out["accn"] = u.get("accn", "")
                     break
             if field in out: break
+    DIAG.append(f"SEC {cik} {end_y}-{end_m:02d}: 결과 {sorted(k for k in out if k in ('revenue','op'))}")
     if "revenue" in out and "op" in out:
         accn = out.get("accn", "").replace("-", "")
         out["url"] = f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accn}/" if accn else "https://www.sec.gov/"
@@ -325,7 +328,8 @@ def yahoo_quarter(sym, div, op_type, end_y, end_m):
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
         with urllib.request.urlopen(req, timeout=25) as r:
             data = json.loads(r.read().decode("utf-8"))
-    except Exception:
+    except Exception as ex:
+        DIAG.append(f"Yahoo {sym}: {str(ex)[:80]}")
         return None
     series = {}
     for res in (data.get("timeseries") or {}).get("result") or []:
@@ -336,6 +340,7 @@ def yahoo_quarter(sym, div, op_type, end_y, end_m):
     end = f"{end_y}-{end_m:02d}-{_last_day(end_y, end_m):02d}"
     yend = f"{end_y - 1}-{end_m:02d}-{_last_day(end_y - 1, end_m):02d}"
     rev = series.get("quarterlyTotalRevenue", {})
+    DIAG.append(f"Yahoo {sym}: 분기 {sorted(rev)[-5:]}")
     if end not in rev: return None
     out = {"revenue": rev[end], "yoy_revenue": rev.get(yend)}
     if op_type:
@@ -432,6 +437,7 @@ def run(log=print):
             y = yahoo_quarter(sym, div, op_type, per["end_y"], per["end_m"])
             if y:
                 rev_ok, op_ok = check_against_stored(f, per, y.get("yoy_revenue"), y.get("yoy_op"))
+                DIAG.append(f"Yahoo {comp}: rev {y.get('revenue')} op {y.get('op')} yoy_rev {y.get('yoy_revenue')} yoy_op {y.get('yoy_op')} → 매출일치 {rev_ok} 이익일치 {op_ok}")
                 if rev_ok and op_type and op_ok and y.get("op") is not None:
                     vals, src, used = {"revenue": y["revenue"], "op": y["op"]}, y["url"], "Yahoo Finance(공시 집계)"
                 elif rev_ok:
@@ -458,7 +464,7 @@ def run(log=print):
                     why = "아직 발표 자료 미확인"
             except Exception as ex:
                 g_blocked = True       # 할당량·권한 문제면 이번 회차의 나머지 Gemini 조회 생략
-                gerr = str(ex)[:300]
+                gerr = str(ex)[:300]; DIAG.append(f"Gemini: {str(ex)[:600]}")
                 log(f"[실적] Gemini 조회 불가 - {gerr}")
                 if vals is None: why = why or "공식 자료 조회 불가(Gemini 검색 할당량)"
         if vals is None and need_g and (g_blocked or calls >= MAX_CALLS_PER_RUN) and not why:
@@ -486,6 +492,7 @@ def run(log=print):
     fin["auto_checked"] = now.strftime("%Y-%m-%d %H:%M")
     open(FIN_FILE, "w", encoding="utf-8").write(json.dumps(fin, ensure_ascii=False, indent=0))
     open(STATE_FILE, "w", encoding="utf-8").write(json.dumps(state, ensure_ascii=False, indent=1))
+    if DIAG: open("earnings_diag.txt", "w", encoding="utf-8").write(now.strftime("%Y-%m-%d %H:%M") + "\n" + "\n".join(DIAG))
     log(f"[실적] 자동 갱신 점검 완료: 조회 {calls}건{' · 반영 있음' if changed else ''}")
     return calls
 
