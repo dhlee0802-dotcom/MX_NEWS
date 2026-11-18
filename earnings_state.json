@@ -39,7 +39,8 @@
    "end_y": 2026,
    "end_m": 9,
    "half": false
-  }
+  },
+  "kpi_g": "2026-11-18"
  },
  "kddi": {
   "period": "FY26 2Q (2026.7-9)",
@@ -88,9 +89,10 @@
  },
  "_search": {
   "month": "2026-11",
-  "used": 0,
+  "used": 1,
   "day": "2026-11-18",
-  "day_used": 0,
-  "ran": false
+  "day_used": 1,
+  "ran": true,
+  "blocked_until": "2026-11-19 17:20"
  }
 }
