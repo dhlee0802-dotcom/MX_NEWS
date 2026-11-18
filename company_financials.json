@@ -234,8 +234,8 @@
 "period": "2026 Q3",
 "state": "error",
 "due_from": "2026-10-14",
-"checked": "2026-11-18 10:48",
-"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
+"checked": "2026-11-18 11:18",
+"msg": "조회 실패: gemini-3.1-flash-lite: HTTP 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to "
 }
 },
 "노키아": {
@@ -461,7 +461,7 @@
 "period": "2026 Q3",
 "state": "error",
 "due_from": "2026-10-14",
-"checked": "2026-11-18 10:48",
+"checked": "",
 "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
 }
 },
@@ -825,7 +825,7 @@
 "period": "2026 Q3",
 "state": "error",
 "due_from": "2026-10-14",
-"checked": "2026-11-18 10:48",
+"checked": "",
 "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
 }
 },
@@ -880,7 +880,7 @@
 "period": "Q3 FY2026",
 "state": "error",
 "due_from": "2026-10-14",
-"checked": "2026-11-18 10:48",
+"checked": "",
 "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
 }
 },
@@ -1623,7 +1623,7 @@
 "period": "3Q26 (2026.7-9)",
 "state": "error",
 "due_from": "2026-10-14",
-"checked": "2026-11-18 10:48",
+"checked": "",
 "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
 }
 },
@@ -2010,7 +2010,7 @@
 "period": "FY26 2Q (2026.7-9)",
 "state": "error",
 "due_from": "2026-10-14",
-"checked": "2026-11-18 10:48",
+"checked": "",
 "msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
 }
 },
@@ -4121,5 +4121,5 @@
 }
 },
 "kpi_updated": "2026-10-30",
-"auto_checked": "2026-11-18 10:48"
+"auto_checked": "2026-11-18 11:18"
 }
