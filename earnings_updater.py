@@ -78,7 +78,7 @@ CFG = {
                      "arpu": "MNO 서비스 ARPU (IoT 제외, 원/월)", "churn": "MNO 해지율 (%)"}),
 }
 # Yahoo 재무 시계열(공시 집계): (티커, 단위 나눗수, 이익 지표 — None이면 매출만 대조하고 이익은 공식 자료 추출값 사용)
-YAHOO = {"에릭슨": ("ERIC", 1e6, None), "노키아": ("NOK", 1e6, None), "zte": ("0763.HK", 1e6, "NetIncomeCommonStockholders"), "kddi": ("9433.T", 1e6, "OperatingIncome"), "skt": ("017670.KS", 1e9, "OperatingIncome"), "kt": ("030200.KS", 1e9, "OperatingIncome"), "lg유플러스": ("032640.KS", 1e9, "OperatingIncome")}
+YAHOO = {"버라이즌": ("VZ", 1e6, "OperatingIncome"), "ast": ("ASTS", 1e6, "OperatingIncome"), "스타링크": ("SPCX", 1e6, "OperatingIncome"), "에릭슨": ("ERIC", 1e6, None), "노키아": ("NOK", 1e6, None), "zte": ("0763.HK", 1e6, "NetIncomeCommonStockholders"), "kddi": ("9433.T", 1e6, "OperatingIncome"), "skt": ("017670.KS", 1e9, "OperatingIncome"), "kt": ("030200.KS", 1e9, "OperatingIncome"), "lg유플러스": ("032640.KS", 1e9, "OperatingIncome")}
 DIAG = []
 KPI_KEYS = {"capex": "capex_quarterly", "arpu": "arpu_quarterly", "churn": "churn_quarterly", "subs": "subs_quarterly"}
 
