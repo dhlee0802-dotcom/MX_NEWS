@@ -1195,6 +1195,12 @@ def main():
     print("완료 -> docs/briefing.html 생성")
     # ── 기업 히스토리 페이지 생성 ──
     cmeta = {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"), "groups": HIST_GROUPS}
+    # 실적 발표 시즌 자동 갱신: 대기 기간 종료 +14일부터 공식 자료 조회·검증 후 company_financials.json 반영
+    try:
+        import earnings_updater
+        earnings_updater.run()
+    except Exception as ex:
+        print(f"경고: 실적 자동 갱신 실패 - {ex}")
     cfin = {}
     if os.path.exists("company_financials.json"):
         try: cfin = json.loads(open("company_financials.json", encoding="utf-8").read())
