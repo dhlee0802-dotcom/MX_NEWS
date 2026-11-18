@@ -229,7 +229,14 @@
 ]
 }
 ],
-"seg_note": "단위: SEK 백만. FY2024·FY2025 및 분기 수치는 보고서 Note 2의 정확한 백만 단위 수치. FY2023은 2024년 중 조직개편(Enterprise Wireless Solutions의 Networks 편입 등)을 반영해 재작성된 비교치로, Q4 2024 보고서에 10억"
+"seg_note": "단위: SEK 백만. FY2024·FY2025 및 분기 수치는 보고서 Note 2의 정확한 백만 단위 수치. FY2023은 2024년 중 조직개편(Enterprise Wireless Solutions의 Networks 편입 등)을 반영해 재작성된 비교치로, Q4 2024 보고서에 10억",
+"auto_status": {
+"period": "2026 Q3",
+"state": "error",
+"due_from": "2026-10-14",
+"checked": "2026-11-18 10:48",
+"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
+}
 },
 "노키아": {
 "company": "노키아",
@@ -449,7 +456,14 @@
 ]
 }
 ],
-"seg_note": "단위: EUR 백만. [연간] 구(舊) 4개 사업그룹 체계 기준. FY2025·FY2024는 Q4 2025 보고서 기준(FY2024는 Managed Services의 CNS→Mobile Networks 이관을 소급 반영한 recast치; 당초 공시치는 MN 7,725/CNS 3,022)"
+"seg_note": "단위: EUR 백만. [연간] 구(舊) 4개 사업그룹 체계 기준. FY2025·FY2024는 Q4 2025 보고서 기준(FY2024는 Managed Services의 CNS→Mobile Networks 이관을 소급 반영한 recast치; 당초 공시치는 MN 7,725/CNS 3,022)",
+"auto_status": {
+"period": "2026 Q3",
+"state": "error",
+"due_from": "2026-10-14",
+"checked": "2026-11-18 10:48",
+"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
+}
 },
 "화웨이": {
 "company": "화웨이",
@@ -611,7 +625,14 @@
 ]
 }
 ],
-"seg_note": "단위: 백만 CNY. 연간 총매출 FY2023 704,174 / FY2024 862,072 / FY2025 880,941. FY2023 수치는 2024 연차보고서의 재분류(restated) 비교치 기준(2023년 보고서 원수치와 일부 상이: 당시 클라우드 55,290 등). 클라우드는 "
+"seg_note": "단위: 백만 CNY. 연간 총매출 FY2023 704,174 / FY2024 862,072 / FY2025 880,941. FY2023 수치는 2024 연차보고서의 재분류(restated) 비교치 기준(2023년 보고서 원수치와 일부 상이: 당시 클라우드 55,290 등). 클라우드는 ",
+"auto_status": {
+"period": "2026 H2",
+"state": "waiting",
+"due_from": "2027-02-14",
+"checked": "",
+"msg": ""
+}
 },
 "zte": {
 "company": "zte",
@@ -799,7 +820,14 @@
 ]
 }
 ],
-"seg_note": "단위: 백만 CNY(공시가 십억 단위 소수 2자리라 백만 단위는 ±10 수준 반올림 오차 가능). ZTE 부문별 공시는 반기 기준이라 반기로 기재. 2024 H2와 2025 H2는 공시된 연간−상반기 차감 산출값(파생치), 2025 H1(캐리어 35,060/정부기업 19,250/컨슈머 "
+"seg_note": "단위: 백만 CNY(공시가 십억 단위 소수 2자리라 백만 단위는 ±10 수준 반올림 오차 가능). ZTE 부문별 공시는 반기 기준이라 반기로 기재. 2024 H2와 2025 H2는 공시된 연간−상반기 차감 산출값(파생치), 2025 H1(캐리어 35,060/정부기업 19,250/컨슈머 ",
+"auto_status": {
+"period": "2026 Q3",
+"state": "error",
+"due_from": "2026-10-14",
+"checked": "2026-11-18 10:48",
+"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
+}
 },
 "ast": {
 "company": "ast",
@@ -847,7 +875,14 @@
 "segments": null,
 "source": "AST SpaceMobile Q4/FY2025 실적 보도자료(2026-03-02) 및 Q2 2026 8-K(Ex-99.1, SEC)",
 "url": "https://www.sec.gov/Archives/edgar/data/0001780312/000119312526342540/asts-ex99_1.htm",
-"note": "실적 공시는 영업손실 라인을 별도 표기하지 않아 영업이익 = 총매출 - 총영업비용으로 산출. Q3 FY2025와 Q1 FY2026은 연간/반기/분기 공시치 차감으로 도출(공시 수치 기반 정확 계산). Q2 FY2026 영업비용 급증($329.1M)은 위성 제조 램프업 등 비용 확대 반영 — GAAP 순손실 $230.9M. FY2023 매출 0, FY2022는 $13.8M이었음."
+"note": "실적 공시는 영업손실 라인을 별도 표기하지 않아 영업이익 = 총매출 - 총영업비용으로 산출. Q3 FY2025와 Q1 FY2026은 연간/반기/분기 공시치 차감으로 도출(공시 수치 기반 정확 계산). Q2 FY2026 영업비용 급증($329.1M)은 위성 제조 램프업 등 비용 확대 반영 — GAAP 순손실 $230.9M. FY2023 매출 0, FY2022는 $13.8M이었음.",
+"auto_status": {
+"period": "Q3 FY2026",
+"state": "error",
+"due_from": "2026-10-14",
+"checked": "2026-11-18 10:48",
+"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
+}
 },
 "스타링크": {
 "company": "스타링크",
@@ -1148,6 +1183,13 @@
 }
 ],
 "note": "CAPEX 1Q25·4Q25·1Q26은 누계 차감 산출. 가입자는 공시 시점(S-1·실적 발표)에 공개된 분기 기말 값만 게재. ARPU·해지율은 미공시."
+},
+"auto_status": {
+"period": "4Q26 (2026.10-12)",
+"state": "waiting",
+"due_from": "2027-01-14",
+"checked": "",
+"msg": ""
 }
 },
 "아마존": {
@@ -1576,6 +1618,13 @@
 "url": "https://www.verizon.com/about/investors"
 }
 ]
+},
+"auto_status": {
+"period": "3Q26 (2026.7-9)",
+"state": "error",
+"due_from": "2026-10-14",
+"checked": "2026-11-18 10:48",
+"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
 }
 },
 "kddi": {
@@ -1956,6 +2005,13 @@
 "url": "https://www.kddi.com/english/corporate/ir/ir-library/presentation/"
 }
 ]
+},
+"auto_status": {
+"period": "FY26 2Q (2026.7-9)",
+"state": "error",
+"due_from": "2026-10-14",
+"checked": "2026-11-18 10:48",
+"msg": "조회 실패: gemini-2.5-flash-lite: HTTP Error 404: Not Found"
 }
 },
 "도코모": {
@@ -2388,6 +2444,13 @@
 "url": "https://www.docomo.ne.jp/corporate/ir/library/presentation/archive/fy2025.html"
 }
 ]
+},
+"auto_status": {
+"period": "FY26 2Q (2026.7-9)",
+"state": "checking",
+"due_from": "2026-10-14",
+"checked": "",
+"msg": ""
 }
 },
 "지오": {
@@ -2625,6 +2688,13 @@
 "url": "https://www.ril.com/investors/financial-reporting"
 }
 ]
+},
+"auto_status": {
+"period": "FY27 2Q (2026.7-9)",
+"state": "checking",
+"due_from": "2026-10-14",
+"checked": "",
+"msg": ""
 }
 },
 "skt": {
@@ -3052,6 +3122,13 @@
 "url": "https://news.sktelecom.com/tag/%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C"
 }
 ]
+},
+"auto_status": {
+"period": "2026 Q3",
+"state": "checking",
+"due_from": "2026-10-14",
+"checked": "",
+"msg": ""
 }
 },
 "kt": {
@@ -3587,6 +3664,13 @@
 "url": "https://m.corp.kt.com/eng/attach/record/2021/KT%20ER%20PT%204Q21%20ENG_FFin.pdf"
 }
 ]
+},
+"auto_status": {
+"period": "2026 Q3",
+"state": "checking",
+"due_from": "2026-10-14",
+"checked": "",
+"msg": ""
 }
 },
 "lg유플러스": {
@@ -4026,8 +4110,16 @@
 "url": "https://alphasquare.co.kr/home/stock-issue?code=032640&type=ir"
 }
 ]
+},
+"auto_status": {
+"period": "2026 Q3",
+"state": "checking",
+"due_from": "2026-10-14",
+"checked": "",
+"msg": ""
 }
 }
 },
-"kpi_updated": "2026-10-30"
+"kpi_updated": "2026-10-30",
+"auto_checked": "2026-11-18 10:48"
 }
