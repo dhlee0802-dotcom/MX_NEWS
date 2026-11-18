@@ -884,11 +884,11 @@
 "url": "https://www.sec.gov/Archives/edgar/data/0001780312/000119312526342540/asts-ex99_1.htm",
 "note": "실적 공시는 영업손실 라인을 별도 표기하지 않아 영업이익 = 총매출 - 총영업비용으로 산출. Q3 FY2025와 Q1 FY2026은 연간/반기/분기 공시치 차감으로 도출(공시 수치 기반 정확 계산). Q2 FY2026 영업비용 급증($329.1M)은 위성 제조 램프업 등 비용 확대 반영 — GAAP 순손실 $230.9M. FY2023 매출 0, FY2022는 $13.8M이었음.",
 "auto_status": {
-"period": "Q3 FY2026",
-"state": "applied",
-"checked": "2026-11-18 13:19",
-"msg": "Q3 FY2026 자동 반영 · Yahoo Finance(공시 집계)",
-"src": "https://finance.yahoo.com/quote/ASTS/financials/"
+"period": "Q4 FY2026",
+"state": "waiting",
+"due_from": "2027-01-14",
+"checked": "",
+"msg": ""
 }
 },
 "스타링크": {
@@ -1634,11 +1634,11 @@
 ]
 },
 "auto_status": {
-"period": "3Q26 (2026.7-9)",
-"state": "applied",
-"checked": "2026-11-18 13:19",
-"msg": "3Q26 (2026.7-9) 자동 반영 · Yahoo Finance(공시 집계) · KPI 미반영",
-"src": "https://finance.yahoo.com/quote/VZ/financials/"
+"period": "4Q26 (2026.10-12)",
+"state": "waiting",
+"due_from": "2027-01-14",
+"checked": "",
+"msg": ""
 }
 },
 "kddi": {
@@ -4142,5 +4142,5 @@
 }
 },
 "kpi_updated": "2026-10-30",
-"auto_checked": "2026-11-18 13:19"
+"auto_checked": "2026-11-18 13:48"
 }
