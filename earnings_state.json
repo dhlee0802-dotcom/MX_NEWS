@@ -18,14 +18,28 @@
   "checked": "2026-11-18 12:52"
  },
  "ast": {
-  "period": "Q3 FY2026",
-  "state": "error",
-  "msg": "공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)"
+  "period": "Q4 FY2026",
+  "last_applied": {
+   "period": "Q3 FY2026",
+   "checked": "2026-11-18 13:19",
+   "src": "https://finance.yahoo.com/quote/ASTS/financials/",
+   "msg": "Q3 FY2026 자동 반영 · Yahoo Finance(공시 집계)"
+  }
  },
  "버라이즌": {
-  "period": "3Q26 (2026.7-9)",
-  "state": "error",
-  "msg": "공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)"
+  "period": "4Q26 (2026.10-12)",
+  "last_applied": {
+   "period": "3Q26 (2026.7-9)",
+   "checked": "2026-11-18 13:19",
+   "src": "https://finance.yahoo.com/quote/VZ/financials/",
+   "msg": "3Q26 (2026.7-9) 자동 반영 · Yahoo Finance(공시 집계) · KPI 미반영"
+  },
+  "kpi_retry": {
+   "label": "3Q26 (2026.7-9)",
+   "end_y": 2026,
+   "end_m": 9,
+   "half": false
+  }
  },
  "kddi": {
   "period": "FY26 2Q (2026.7-9)",
