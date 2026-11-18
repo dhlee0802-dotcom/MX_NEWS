@@ -85,5 +85,12 @@
   "state": "error",
   "msg": "공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)",
   "checked": "2026-11-18 12:52"
+ },
+ "_search": {
+  "month": "2026-11",
+  "used": 0,
+  "day": "2026-11-18",
+  "day_used": 0,
+  "ran": false
  }
 }
