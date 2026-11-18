@@ -18,6 +18,12 @@ from datetime import datetime, timedelta, timezone
 KST = timezone(timedelta(hours=9))
 FIN_FILE, STATE_FILE = "company_financials.json", "earnings_state.json"
 MAX_CALLS_PER_RUN = 6
+# Gemini 검색 연동(그라운딩) 사용 정책 — 월 할당량을 넘지 않도록 보수적으로 제한
+SEARCH_MONTHLY_BUDGET = 120     # 월 검색 호출 상한(시도 기준으로 집계)
+SEARCH_DAILY_MAX = 5            # 하루 상한
+SEARCH_HOURS_KST = (17, 23)     # 검색은 Gemini 일일 할당량 리셋(태평양 자정) 직후 시간대의 하루 1회차에서만
+SEARCH_GAP_DAYS_FAST, SEARCH_GAP_DAYS_SLOW = 3, 7   # 같은 회사·같은 분기 재검색 간격
+SEARCH_BLOCK_HOURS = 24         # 할당량 초과(429) 응답 시 검색 중단 시간
 START_AFTER_DAYS, FAST_UNTIL_DAYS = 14, 75
 RECHECK_FAST_H, RECHECK_SLOW_H = 12, 72
 KEEP_QUARTERS, KEEP_ANNUAL = 8, 3
@@ -205,7 +211,10 @@ Return ONLY one JSON object, no prose:
 
 # ── SEC XBRL (미국 제출사: 매출·영업이익 공식값) ──
 def sec_quarter(cik, end_y, end_m):
-    ua = "MXNewsDashboard noreply@users.noreply.github.com"
+    contact = os.environ.get("SEC_CONTACT", "").strip()   # SEC는 실제 연락처가 있는 User-Agent를 요구 (GitHub Secret으로 설정)
+    if not contact:
+        DIAG.append("SEC: SEC_CONTACT 미설정 - 건너뜀"); return None
+    ua = f"MX News Dashboard {contact}"
     out = {}
     for field, tags in (("revenue", ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax"]),
                         ("op", ["OperatingIncomeLoss"])):
@@ -388,14 +397,32 @@ def run(log=print):
         except Exception: cool = {}
     ts = time.time()
     models = [x for x in models if cool.get(x, 0) <= ts] + [x for x in models if cool.get(x, 0) > ts]
-    models = models[:6]
+    models = models[:3]
     calls, changed, g_blocked = 0, False, False
+    # 검색 예산
+    sb = state.setdefault("_search", {})
+    if sb.get("month") != now.strftime("%Y-%m"): sb.update(month=now.strftime("%Y-%m"), used=0)
+    if sb.get("day") != today: sb.update(day=today, day_used=0, ran=False)
+    nowstr = now.strftime("%Y-%m-%d %H:%M")
+    in_window = SEARCH_HOURS_KST[0] <= now.hour <= SEARCH_HOURS_KST[1]
+    if sb.get("blocked_until", "") > nowstr or not in_window or sb.get("ran"): g_blocked = True
+    def can_search():
+        return (not g_blocked) and sb["used"] < SEARCH_MONTHLY_BUDGET and sb["day_used"] < SEARCH_DAILY_MAX
+    def spend():
+        nonlocal calls
+        calls += 1; sb["used"] += 1; sb["day_used"] += 1
+    def on_quota(ex):
+        nonlocal g_blocked
+        g_blocked = True
+        if "429" in str(ex):
+            sb["blocked_until"] = (now + timedelta(hours=SEARCH_BLOCK_HOURS)).strftime("%Y-%m-%d %H:%M")
     for comp, cfg in CFG.items():
         f = fin["companies"].get(comp)
         if not f or f.get("private") or not f.get("quarterly"): continue
         kr = (state.get(comp) or {}).get("kpi_retry")
-        if kr and cfg.get("kpi") and not g_blocked and calls < MAX_CALLS_PER_RUN:
-            calls += 1
+        kr_gap_ok = (state.get(comp) or {}).get("kpi_g", "") <= (now - timedelta(days=SEARCH_GAP_DAYS_FAST)).strftime("%Y-%m-%d")
+        if kr and cfg.get("kpi") and kr_gap_ok and can_search():
+            spend(); state[comp]["kpi_g"] = today
             try:
                 text, chunks, gm = _gemini(build_prompt(comp, cfg, kr), key, models)
                 res = _parse_json(text) or {}
@@ -404,7 +431,7 @@ def run(log=print):
                     log(f"[실적] {comp} {kr['label']} KPI 보완: {got}")
                     state[comp].pop("kpi_retry", None); changed = changed or bool(got)
             except Exception as ex:
-                g_blocked = True; log(f"[실적] Gemini 조회 불가 - {str(ex)[:300]}")
+                on_quota(ex); log(f"[실적] Gemini 조회 불가 - {str(ex)[:300]}")
         per = next_period(f)
         if not per: continue
         end = datetime(per["end_y"], per["end_m"], _last_day(per["end_y"], per["end_m"]), tzinfo=KST)
@@ -421,8 +448,10 @@ def run(log=print):
             try: age_h = (now - datetime.strptime(st["checked"], "%Y-%m-%d %H:%M").replace(tzinfo=KST)).total_seconds() / 3600
             except Exception: pass
         interval = RECHECK_FAST_H if now < end + timedelta(days=FAST_UNTIL_DAYS) else RECHECK_SLOW_H
-        if st.get("state") == "error": interval = 1
-        if age_h < interval:
+        gap0 = SEARCH_GAP_DAYS_FAST if now < end + timedelta(days=FAST_UNTIL_DAYS) else SEARCH_GAP_DAYS_SLOW
+        search_turn = (not g_blocked) and st.get("state") in ("waiting_search", "pending", "not_yet") \
+            and st.get("g_checked", "") <= (now - timedelta(days=gap0)).strftime("%Y-%m-%d")
+        if age_h < interval and not search_turn:      # 검색 시간대에 검색이 필요한 회사는 간격과 무관하게 진행
             status["state"] = st.get("state", "checking"); f["auto_status"] = status; continue
         st["checked"] = now.strftime("%Y-%m-%d %H:%M")
         vals, src, why, used, kp = None, "", "", "", {}
@@ -447,8 +476,11 @@ def run(log=print):
                     why = "공시 집계 값이 저장된 전년 동기와 불일치"
         # ③ Gemini + Google 검색(공식 자료): 매출·이익 미확보분과 통신 KPI
         need_g = (vals is None) or bool(cfg.get("kpi"))
-        if need_g and not g_blocked and calls < MAX_CALLS_PER_RUN:
-            calls += 1
+        gap = SEARCH_GAP_DAYS_FAST if now < end + timedelta(days=FAST_UNTIL_DAYS) else SEARCH_GAP_DAYS_SLOW
+        g_gap_ok = st.get("g_checked", "") <= (now - timedelta(days=gap)).strftime("%Y-%m-%d")
+        searched = False
+        if need_g and g_gap_ok and can_search():
+            spend(); st["g_checked"] = today; searched = True
             try:
                 text, chunks, gm = _gemini(build_prompt(comp, cfg, per), key, models)
                 res = _parse_json(text) or {}
@@ -463,19 +495,19 @@ def run(log=print):
                 elif vals is None and not yop:
                     why = "아직 발표 자료 미확인"
             except Exception as ex:
-                g_blocked = True       # 할당량·권한 문제면 이번 회차의 나머지 Gemini 조회 생략
+                on_quota(ex)           # 할당량·권한 문제면 이번 회차의 나머지 검색 생략(429면 24시간 중단)
                 gerr = str(ex)[:300]; DIAG.append(f"Gemini: {str(ex)[:600]}")
                 log(f"[실적] Gemini 조회 불가 - {gerr}")
                 if vals is None: why = why or "공식 자료 조회 불가(Gemini 검색 할당량)"
-        if vals is None and need_g and (g_blocked or calls >= MAX_CALLS_PER_RUN) and not why:
-            # 공식 자료 조회를 이번 회차에 못 한 경우: 1시간 뒤 재시도
-            st.update(state="error", msg="공식 자료 조회 대기(Gemini 검색 할당량·호출 상한)"); state[comp] = st
+        if vals is None and need_g and not searched and not why:
+            # 검색 정책상 이번 회차에 공식 자료 검색을 하지 않은 경우: 다음 검색 시간대에 재시도
+            st.update(state="waiting_search", msg=f"공식 자료 검색 대기(검색은 하루 1회 {SEARCH_HOURS_KST[0]}시 이후·월 {SEARCH_MONTHLY_BUDGET}건 한도)"); state[comp] = st
             status.update(state="checking", checked=st["checked"], msg=st["msg"]); f["auto_status"] = status
             log(f"[실적] {comp} {per['label']} 조회 대기"); continue
         if vals is None:
             stt = "not_yet" if why == "아직 발표 자료 미확인" or (not why and not yop) else "pending"
             if not why: why = "아직 발표 자료 미확인"
-            st.update(state=("error" if (stt == "pending" and g_blocked) else stt), msg=why); state[comp] = st
+            st.update(state=stt, msg=why); state[comp] = st
             status.update(state=stt, checked=st["checked"], msg=why, src=(yop or {}).get("url", "")); f["auto_status"] = status
             log(f"[실적] {comp} {per['label']} {stt} - {why}"); continue
         vals.update({k: v for k, v in kp.items() if v is not None})
@@ -489,11 +521,13 @@ def run(log=print):
         f["auto_status"] = {"period": per["label"], "state": "applied", "checked": st["checked"], "msg": msg, "src": src}
         log(f"[실적] {comp} {per['label']} 반영({used}): 매출 {vals['revenue']:,.1f} / 이익 {vals['op']:,.1f} {cfg['unit']}"
             + (f" / KPI {kpis}" if kpis else ""))
+    if calls: sb["ran"] = True
     fin["auto_checked"] = now.strftime("%Y-%m-%d %H:%M")
+    fin["auto_search"] = {"month": sb["month"], "used": sb["used"], "budget": SEARCH_MONTHLY_BUDGET}
     open(FIN_FILE, "w", encoding="utf-8").write(json.dumps(fin, ensure_ascii=False, indent=0))
     open(STATE_FILE, "w", encoding="utf-8").write(json.dumps(state, ensure_ascii=False, indent=1))
     if DIAG: open("earnings_diag.txt", "w", encoding="utf-8").write(now.strftime("%Y-%m-%d %H:%M") + "\n" + "\n".join(DIAG))
-    log(f"[실적] 자동 갱신 점검 완료: 조회 {calls}건{' · 반영 있음' if changed else ''}")
+    log(f"[실적] 자동 갱신 점검 완료: 검색 {calls}건(이번 달 {sb['used']}/{SEARCH_MONTHLY_BUDGET}){' · 반영 있음' if changed else ''}")
     return calls
 
 if __name__ == "__main__":

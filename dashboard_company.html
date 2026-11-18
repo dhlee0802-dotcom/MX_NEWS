@@ -372,10 +372,12 @@ function autoNote(f){
   const M={waiting:["⏳","다음 실적 대기",`${esc(a.period)} 실적은 ${esc(a.due_from||"")}부터 자동 확인`],
            not_yet:["🔎","발표 확인 중",`${esc(a.period)} 발표 자료 아직 미확인 · 최근 확인 ${esc(a.checked||"")}`],
            checking:["🔎","발표 확인 중",`${esc(a.period)} · 최근 확인 ${esc(a.checked||"")}`],
+           waiting_search:["🔎","공식 자료 검색 대기",`${esc(a.period)} · ${esc(a.msg||"")}`],
            pending:["⚠️","자동 검증 대기",`${esc(a.period)} 발표 확인됐으나 검증 실패(${esc(a.msg||"")}) — 수동 확인 필요`],
            error:["⚠️","조회 오류",`${esc(a.period)} · ${esc(a.msg||"")}`],
            applied:["✅","자동 반영",`${esc(a.period)} 실적 자동 반영 (${esc((a.checked||"").slice(0,10))})`]}[a.state]||["","",""];
-  return `<div class="fin-note" style="margin-top:4px">${M[0]} <b style="color:var(--ink)">${M[1]}</b> · ${M[2]}${a.src?` · <a href="${esc(a.src)}" target="_blank" rel="noopener" style="color:var(--sub)">출처</a>`:""}</div>`;
+  const sb=FIN.auto_search; const quota=sb?` · 이번 달 검색 ${sb.used}/${sb.budget}건`:"";
+  return `<div class="fin-note" style="margin-top:4px">${M[0]} <b style="color:var(--ink)">${M[1]}</b> · ${M[2]}${a.src?` · <a href="${esc(a.src)}" target="_blank" rel="noopener" style="color:var(--sub)">출처</a>`:""}${quota}</div>`;
 }
 function setFin(k){finView=k;render();}
 
