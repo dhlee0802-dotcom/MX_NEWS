@@ -1,4 +1,10 @@
-2026-11-19 17:32
-Yahoo ERIC: 분기 ['2025-09-30', '2025-12-31', '2026-03-31', '2026-06-30', '2026-09-30']
-Yahoo 에릭슨: rev 59478.0 op None yoy_rev 56239.0 yoy_op None → 매출일치 True 이익일치 None
-Gemini: gemini-flash-lite-latest: HTTP 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to | gemini-3.5-flash-lite: HTTP 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to | gemini-3.1-flash-lite: HTTP 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to
+2026-11-20 01:03
+Yahoo NOK: 분기 ['2025-09-30', '2025-12-31', '2026-03-31', '2026-06-30', '2026-09-30']
+Yahoo 노키아: rev 5154.0 op None yoy_rev 4700.0 yoy_op None → 매출일치 True 이익일치 None
+Yahoo 0763.HK: 분기 ['2025-06-30', '2025-12-31', '2026-03-31', '2026-06-30', '2026-09-30']
+Yahoo zte: rev 38813.107 op 1307.417 yoy_rev None yoy_op None → 매출일치 False 이익일치 None
+Yahoo 9433.T: 분기 ['2025-03-31', '2025-06-30', '2025-09-30', '2026-06-30', '2026-09-30']
+Yahoo kddi: rev 1565495.0 op 233391.0 yoy_rev 1479677.0 yoy_op 270169.0 → 매출일치 False 이익일치 False
+Yahoo 030200.KS: 분기 ['2025-06-30', '2025-09-30', '2025-12-31', '2026-03-31', '2026-06-30']
+Yahoo 032640.KS: 분기 ['2025-09-30', '2025-12-31', '2026-03-31', '2026-06-30', '2026-09-30']
+Yahoo lg유플러스: rev 3981.299 op 3981.299 yoy_rev 4010.838 yoy_op 138.864 → 매출일치 True 이익일치 False
