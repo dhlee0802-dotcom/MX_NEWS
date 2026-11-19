@@ -234,8 +234,9 @@
 "period": "2026 Q3",
 "state": "pending",
 "due_from": "2026-10-14",
-"checked": "2026-11-19 13:00",
-"msg": "이익 지표가 회사 고유 정의라 공식 자료 확인 필요"
+"checked": "2026-11-19 17:32",
+"msg": "이익 지표가 회사 고유 정의라 공식 자료 확인 필요",
+"src": "https://finance.yahoo.com/quote/ERIC/financials/"
 }
 },
 "노키아": {
@@ -4142,10 +4143,10 @@
 }
 },
 "kpi_updated": "2026-10-30",
-"auto_checked": "2026-11-19 16:57",
+"auto_checked": "2026-11-19 17:32",
 "auto_search": {
 "month": "2026-11",
-"used": 1,
+"used": 2,
 "budget": 120
 }
 }
