@@ -1,5 +1,5 @@
 {
-"generated": "2026-11-12",
+"generated": "2026-11-19",
 "countries": [
 {
 "iso3": "KOR",
@@ -2038,6 +2038,1613 @@
 ]
 },
 {
+"iso3": "VNM",
+"name_ko": "베트남",
+"carriers": [
+{
+"name": "Viettel",
+"name_local": "Tập đoàn Công nghiệp - Viễn thông Quân đội (Viettel Group)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Ericsson",
+"Nokia"
+],
+"5g": [
+"Ericsson",
+"Nokia",
+"기타(Viettel High Tech)"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"기타(Viettel High Tech)"
+],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "전국 5G RAN의 과반 — 하노이 및 북부·중부 지역(4G 현대화 동일 권역)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.rcrwireless.com/20241002/5g/ericsson-secures-deal-5g-ran-deployment-vietnam"
+},
+{
+"vendor": "Nokia",
+"area": "22개 성(省) — 5G AirScale(Massive MIMO·RRH) + 4G 현대화",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.rcrwireless.com/20240925/5g/nokia-secures-5g-deal-viettel-vietnam"
+},
+{
+"vendor": "기타(Viettel High Tech)",
+"area": "자체 O-RAN 5G(Qualcomm 플랫폼) — 하노이·하남 초기 구축, 2025년 1분기까지 300+ 사이트 계획",
+"gens": [
+"5g"
+],
+"source": "https://www.rcrwireless.com/20241114/featured/viettel-qualcomm-5g-o-ran"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "Samsung과 다낭에서 5G 상용 시범(Samsung 기지국·64T64R Massive MIMO) — 양사 첫 협력",
+"source": "https://news.samsung.com/global/samsung-and-viettel-to-launch-5g-commercial-trial-in-da-nang-vietnam"
+},
+{
+"year": 2024,
+"text": "Ericsson(과반 권역)·Nokia(22개 성) 5G RAN 및 4G 현대화 계약, 2.6GHz 리파밍",
+"source": "https://www.rcrwireless.com/20241002/5g/ericsson-secures-deal-5g-ran-deployment-vietnam"
+},
+{
+"year": 2024,
+"text": "Qualcomm 기반 자체 O-RAN 5G 상용 개시(2024-10), 6,500+ 5G 기지국 63개 지역",
+"source": "https://www.rcrwireless.com/20241114/featured/viettel-qualcomm-5g-o-ran"
+},
+{
+"year": 2025,
+"text": "Huawei와 5G 기술이전 협약(6월, 베트남 국방부 발표)",
+"source": "https://www.thestar.com.my/aseanplus/aseanplus-news/2025/11/29/huawei-zte-seal-5g-deals-in-vietnam-after-us-tariffs-as-ties-with-china-warm"
+},
+{
+"year": 2025,
+"text": "신규 5G 사이트 2만 개 초과 달성; gNodeB·5GC·과금 자체(Viettel High Tech) 장비",
+"source": "https://www.developingtelecoms.com/telecom-business/operator-news/19469-viettel-passes-target-of-20-000-new-5g-sites-by-end-2025.html"
+},
+{
+"year": 2025,
+"text": "Viettel·VNPT, ZTE·Huawei와 5G 공급계약 체결(사업자별 배분 미공개, Reuters)",
+"source": "https://www.communicationstoday.co.in/?p=398271"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "RCR Wireless 2024-10-02 (Ericsson–Viettel 5G RAN)",
+"url": "https://www.rcrwireless.com/20241002/5g/ericsson-secures-deal-5g-ran-deployment-vietnam"
+},
+{
+"label": "RCR Wireless 2024-09-25 (Nokia–Viettel 22개 성)",
+"url": "https://www.rcrwireless.com/20240925/5g/nokia-secures-5g-deal-viettel-vietnam"
+},
+{
+"label": "RCR Wireless 2024-11-14 (Viettel–Qualcomm O-RAN)",
+"url": "https://www.rcrwireless.com/20241114/featured/viettel-qualcomm-5g-o-ran"
+},
+{
+"label": "Developing Telecoms 2025 (Viettel 5G 2만 사이트·자체 장비)",
+"url": "https://www.developingtelecoms.com/telecom-business/operator-news/19469-viettel-passes-target-of-20-000-new-5g-sites-by-end-2025.html"
+},
+{
+"label": "Samsung Newsroom 2021-12 (Viettel 5G 상용 시범)",
+"url": "https://news.samsung.com/global/samsung-and-viettel-to-launch-5g-commercial-trial-in-da-nang-vietnam"
+},
+{
+"label": "Jakarta Post/Reuters 2019-08 (Viettel 4G Ericsson·Nokia)",
+"url": "https://www.thejakartapost.com/seasia/2019/08/26/vietnam-prefers-its-mobile-networks-to-be-free-of-huawei.html"
+},
+{
+"label": "The Star/Reuters 2025-11-29 (Huawei·ZTE 베트남 5G 수주)",
+"url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2025/11/29/huawei-zte-seal-5g-deals-in-vietnam-after-us-tariffs-as-ties-with-china-warm"
+}
+]
+},
+{
+"name": "VNPT (VinaPhone)",
+"name_local": "Tập đoàn Bưu chính Viễn thông Việt Nam",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Ericsson",
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "VNPT 가입자 밀집 대도시·관광·산업 중심지(성 단위 미공개)",
+"gens": [
+"5g"
+],
+"source": "https://www.ericsson.com/en/press-releases/2/2024/10/ericsson-and-vnpt-collaborate-on-5g-implementation-in-vietnam"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2024,
+"text": "Ericsson 5G 무선장비 공급 계약(대도시 중심, 2024-10)",
+"source": "https://www.ericsson.com/en/press-releases/2/2024/10/ericsson-and-vnpt-collaborate-on-5g-implementation-in-vietnam"
+},
+{
+"year": 2024,
+"text": "Nokia 5G AirScale·MantaRay 공급, 베트남 현지 생산(2024-10-21)",
+"source": "https://telecoms.com/5g-6g/nokia-teams-up-with-vnpt-for-5g-push-in-vietnam"
+},
+{
+"year": 2025,
+"text": "Viettel·VNPT, ZTE·Huawei와 5G 공급계약 체결(사업자별 배분 미공개, Reuters)",
+"source": "https://www.communicationstoday.co.in/?p=398271"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Ericsson 보도자료 2024-10 (VNPT 5G)",
+"url": "https://www.ericsson.com/en/press-releases/2/2024/10/ericsson-and-vnpt-collaborate-on-5g-implementation-in-vietnam"
+},
+{
+"label": "Telecoms.com 2024-10 (Nokia–VNPT 5G)",
+"url": "https://telecoms.com/5g-6g/nokia-teams-up-with-vnpt-for-5g-push-in-vietnam"
+},
+{
+"label": "Communications Today/Reuters 2026-03-06",
+"url": "https://www.communicationstoday.co.in/?p=398271"
+}
+]
+},
+{
+"name": "MobiFone",
+"name_local": "Tổng công ty Viễn thông MobiFone",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2019,
+"text": "Reuters: MobiFone은 Samsung 장비 사용(세대 미특정)",
+"source": "https://www.thejakartapost.com/seasia/2019/08/26/vietnam-prefers-its-mobile-networks-to-be-free-of-huawei.html"
+},
+{
+"year": 2023,
+"text": "Nokia와 5G·클라우드 협력 협약(MWC 2023, 공급계약 아님)",
+"source": "https://www.itnews.asia/news/vietnams-mobifone-signs-deal-with-nokia-for-5g-gear-and-tech-knowhow-591565"
+},
+{
+"year": 2024,
+"text": "Ericsson과 5G 이노베이션 허브 MoU(공급계약 아님)",
+"source": "https://theinvestor.vn/swedens-ericsson-advances-5g-collaboration-with-vietnam-telcos-viettel-mobifone-d12549.html"
+},
+{
+"year": 2025,
+"text": "5G 상용 개시(3월), 3,800–3,900MHz 대역, 대도시부터",
+"source": "https://vietnamnews.vn/economy/1694611/mobifone-officially-launches-5g-services.html"
+},
+{
+"year": 2026,
+"text": "중국 업체 대상 5G 기지국 입찰 추진(대도시 제외), 호찌민 Huawei 5G 기지국 목격",
+"source": "https://www.communicationstoday.co.in/?p=398271"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Communications Today/Reuters 2026-03-06 (MobiFone 중국 업체 5G 입찰)",
+"url": "https://www.communicationstoday.co.in/?p=398271"
+},
+{
+"label": "Viet Nam News 2025-03-26 (MobiFone 5G 개시)",
+"url": "https://vietnamnews.vn/economy/1694611/mobifone-officially-launches-5g-services.html"
+},
+{
+"label": "iTnews Asia 2023-03 (MobiFone–Nokia)",
+"url": "https://www.itnews.asia/news/vietnams-mobifone-signs-deal-with-nokia-for-5g-gear-and-tech-knowhow-591565"
+},
+{
+"label": "The Investor 2024-10 (Ericsson–MobiFone MoU)",
+"url": "https://theinvestor.vn/swedens-ericsson-advances-5g-collaboration-with-vietnam-telcos-viettel-mobifone-d12549.html"
+},
+{
+"label": "Jakarta Post/Reuters 2019-08 (MobiFone Samsung 장비)",
+"url": "https://www.thejakartapost.com/seasia/2019/08/26/vietnam-prefers-its-mobile-networks-to-be-free-of-huawei.html"
+}
+]
+}
+],
+"country_note": "2020년 미국 'Clean Network' 참여로 Huawei·ZTE 5G 배제를 약속, 초기 5G는 Ericsson·Nokia·Viettel 자체 장비 중심. 2025년 미 관세 이후 Huawei 컨소시엄(US$2,300만)·ZTE 안테나(US$2,000만+) 수주 등 중국 벤더 재진입, 2026년 MobiFone도 중국 업체 입찰 추진. 미국은 2026-02 비신뢰 벤더 의존 경고. 5GC·백본은 Ericsson·Nokia 유지 보도.",
+"sources": [
+{
+"label": "The Star/Reuters 2025-11-29",
+"url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2025/11/29/huawei-zte-seal-5g-deals-in-vietnam-after-us-tariffs-as-ties-with-china-warm"
+},
+{
+"label": "The Star/Reuters 2026-03-06",
+"url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/03/06/vietnam-eyes-new-5g-deals-with-chinese-tech-firms-sources-say-despite-us-warnings"
+}
+]
+},
+{
+"iso3": "THA",
+"name_ko": "태국",
+"carriers": [
+{
+"name": "AIS",
+"name_local": "Advanced Info Service (Advanced Wireless Network)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Huawei",
+"ZTE"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Huawei",
+"area": "방콕 700MHz·2600MHz 상용망(RedCap 검증); CODC 전국 60,000셀 적용",
+"gens": [
+"5g"
+],
+"source": "https://www.rcrwireless.com/?p=394738"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2019,
+"text": "Huawei·Nokia·ZTE와 5G 유스케이스 MoU",
+"source": "https://totaltele.com/nokia-huawei-and-zte-sign-5g-deals-with-thailands-ais/"
+},
+{
+"year": 2020,
+"text": "5G 코어 입찰에 Huawei·Ericsson·Nokia·ZTE·Samsung 5개사 참여(낙찰사 미확인)",
+"source": "https://www.freemalaysiatoday.com/category/business/2020/07/14/thai-telco-says-huawei-among-5-firms-tendering-to-build-5g-networks"
+},
+{
+"year": 2022,
+"text": "ZTE를 5G 업그레이드 종합 전략 파트너로 지정, A-Z 이노베이션 센터",
+"source": "https://www.zte.com.cn/global/about/news/20220610e1.html"
+},
+{
+"year": 2023,
+"text": "NT에 RAN 13,500개 기지국 임대(700MHz), NT 700MHz 절반 이전",
+"source": "https://www.rcrwireless.com/20230913/5g/thai-telco-ais-lease-ran-equipment-national-telecom-5g"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "RCR Wireless (AIS RedCap — Huawei·ZTE)",
+"url": "https://www.rcrwireless.com/?p=394738"
+},
+{
+"label": "Huawei Transform (AIS CODC 60,000셀)",
+"url": "https://www.huawei.com/en/media-center/transform/20/08-AIS-Thailand"
+},
+{
+"label": "ZTE 보도자료 2022-06-10 (AIS 전략 파트너)",
+"url": "https://www.zte.com.cn/global/about/news/20220610e1.html"
+},
+{
+"label": "FMT/Reuters 2020-07-14 (AIS 5G 코어 입찰)",
+"url": "https://www.freemalaysiatoday.com/category/business/2020/07/14/thai-telco-says-huawei-among-5-firms-tendering-to-build-5g-networks"
+},
+{
+"label": "RCR Wireless 2023-09-13 (AIS–NT RAN 임대)",
+"url": "https://www.rcrwireless.com/20230913/5g/thai-telco-ais-lease-ran-equipment-national-telecom-5g"
+}
+]
+},
+{
+"name": "True Corporation",
+"name_local": "True Move H + dtac (2023 합병)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Ericsson",
+"Nokia"
+],
+"5g": [
+"Ericsson",
+"ZTE",
+"Nokia"
+]
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "(구 True) 북부·중서부·상부 남부, 700MHz/2.6GHz/26GHz",
+"gens": [
+"5g"
+],
+"source": "https://www.rcrwireless.com/20200427/5g/ericsson-to-provide-5g-ran-thailands-true-corporation"
+},
+{
+"vendor": "Ericsson",
+"area": "(구 dtac) 방콕 수도권·중부 평야·동부경제회랑, 700MHz",
+"gens": [
+"5g"
+],
+"source": "https://www.ericsson.com/en/news/2021/1/dtac-thailand-5g"
+},
+{
+"vendor": "Nokia",
+"area": "(구 dtac) 북부·북동부, 700–900MHz·26GHz 5G 및 2300/2100/1800MHz 4G 업그레이드",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.rcrwireless.com/20201229/5g/dtac-selects-nokia-5g-deployment-parts-thailand"
+},
+{
+"vendor": "Ericsson",
+"area": "(구 dtac) 방콕 2100MHz LTE",
+"gens": [
+"4g"
+],
+"source": "https://www.ericsson.com/en/press-releases/2014/4/thai-operator-dtac-launches-lte-with-ericsson"
+},
+{
+"vendor": "ZTE",
+"area": "(구 True) 매크로·실내 5G, 700MHz/2.6GHz/26GHz(권역 미공개)",
+"gens": [
+"5g"
+],
+"source": "https://www.mobileworldlive.com/zte/zte-handles-true-move-tri-band-ran/"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2014,
+"text": "(구 dtac) Ericsson LTE 및 EPC·UDM·회선코어 단독 공급",
+"source": "https://www.ericsson.com/en/press-releases/2014/4/thai-operator-dtac-launches-lte-with-ericsson"
+},
+{
+"year": 2018,
+"text": "(구 dtac) Nokia, TOT 2300MHz 4G TDD 상용망 구축",
+"source": "https://www.telecomtv.com/content/4g-lte/nokia-and-dtac-deploy-first-4g-tdd-network-for-mass-commercial-use-in-thailand-31642/amp/"
+},
+{
+"year": 2020,
+"text": "(구 True) 5G RAN Ericsson·ZTE 이원화 선정",
+"source": "https://rcrwireless.com/20200729/5g/true-move-selects-zte-ran-portfolio-5g-launch"
+},
+{
+"year": 2024,
+"text": "합병망 현대화 7,100사이트 완료(목표 대비 42%, 2Q24)",
+"source": "https://www.true.th/blog/en/cto-3/"
+},
+{
+"year": 2025,
+"text": "True–dtac 망 통합 100% 완료(10월), 중복 타워 축소·기지국 수 유지",
+"source": "https://www.developingtelecoms.com/telecom-business/operator-news/19181-true-corp-completes-integration-with-dtac-network.html"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "RCR Wireless 2020-04-27 (Ericsson–True 5G RAN)",
+"url": "https://www.rcrwireless.com/20200427/5g/ericsson-to-provide-5g-ran-thailands-true-corporation"
+},
+{
+"label": "RCR Wireless 2020-07-29 (ZTE–True 5G RAN)",
+"url": "https://rcrwireless.com/20200729/5g/true-move-selects-zte-ran-portfolio-5g-launch"
+},
+{
+"label": "Ericsson 2021-01 (dtac 5G)",
+"url": "https://www.ericsson.com/en/news/2021/1/dtac-thailand-5g"
+},
+{
+"label": "RCR Wireless 2020-12-29 (Nokia–dtac 5G 북부·북동부)",
+"url": "https://www.rcrwireless.com/20201229/5g/dtac-selects-nokia-5g-deployment-parts-thailand"
+},
+{
+"label": "Ericsson 보도자료 2014-04 (dtac LTE·EPC)",
+"url": "https://www.ericsson.com/en/press-releases/2014/4/thai-operator-dtac-launches-lte-with-ericsson"
+},
+{
+"label": "True 블로그 2024-08 (망 현대화 42%)",
+"url": "https://www.true.th/blog/en/cto-3/"
+},
+{
+"label": "Developing Telecoms 2025-10-13 (통합 완료)",
+"url": "https://www.developingtelecoms.com/telecom-business/operator-news/19181-true-corp-completes-integration-with-dtac-network.html"
+}
+]
+},
+{
+"name": "NT (National Telecom)",
+"name_local": "บริษัท โทรคมนาคมแห่งชาติ (TOT+CAT 2021 통합)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2018,
+"text": "TOT 2300MHz 대역 dtac 파트너십 — Nokia 4G TDD 장비로 구축",
+"source": "https://www.telecomtv.com/content/4g-lte/nokia-and-dtac-deploy-first-4g-tdd-network-for-mass-commercial-use-in-thailand-31642/amp/"
+},
+{
+"year": 2023,
+"text": "AIS로부터 700MHz RAN 13,500개 기지국 임대, 2036년까지 AIS 로밍",
+"source": "https://www.rcrwireless.com/20230913/5g/thai-telco-ais-lease-ran-equipment-national-telecom-5g"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "RCR Wireless 2023-09-13 (AIS–NT RAN 임대)",
+"url": "https://www.rcrwireless.com/20230913/5g/thai-telco-ais-lease-ran-equipment-national-telecom-5g"
+},
+{
+"label": "TelecomTV 2018 (Nokia–dtac 4G TDD)",
+"url": "https://www.telecomtv.com/content/4g-lte/nokia-and-dtac-deploy-first-4g-tdd-network-for-mass-commercial-use-in-thailand-31642/amp/"
+}
+]
+}
+],
+"country_note": "Huawei 규제 없음 — AIS는 Huawei·ZTE 중심, True는 Ericsson·ZTE(구 True)와 Ericsson·Nokia(구 dtac) 혼재. 2023-02 True–dtac 합병 후 2025-10 망 통합 완료. 국영 NT는 자체 5G 대신 AIS 장비 임대·로밍 모델. Samsung RAN 공급 사례는 확인되지 않음(2020 AIS 5G 코어 입찰 참여만 확인).",
+"sources": [
+{
+"label": "FMT/Reuters 2020-07-14",
+"url": "https://www.freemalaysiatoday.com/category/business/2020/07/14/thai-telco-says-huawei-among-5-firms-tendering-to-build-5g-networks"
+},
+{
+"label": "Developing Telecoms 2025-10-13",
+"url": "https://www.developingtelecoms.com/telecom-business/operator-news/19181-true-corp-completes-integration-with-dtac-network.html"
+}
+]
+},
+{
+"iso3": "IDN",
+"name_ko": "인도네시아",
+"carriers": [
+{
+"name": "Telkomsel",
+"name_local": "PT Telekomunikasi Selular",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Ericsson",
+"ZTE"
+],
+"5g": [
+"Ericsson",
+"Huawei",
+"ZTE"
+]
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "아체·북부/중부/서부 수마트라·동부 칼리만탄(누산타라 포함)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.ericsson.com/en/press-releases/2/2023/8/telkomsel-and-ericsson-strengthen-partnership-to-expand-4g5g-networks-in-indonesia"
+},
+{
+"vendor": "Huawei",
+"area": "자카르타 수도권 5G 확장(공항·PIK·폰독인다~모나스)",
+"gens": [
+"5g"
+],
+"source": "https://www.telecomtv.com/content/5g/telkomsel-expands-5g-network-across-greater-jakarta-area-51928"
+},
+{
+"vendor": "ZTE",
+"area": "마카사르·켄다리 4G(술라웨시)",
+"gens": [
+"4g"
+],
+"source": "https://www.rcrwireless.com/20241124/featured/telkomsel-4g-ai-zte"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2019,
+"text": "Ericsson 코어(5G 대비) 도입",
+"source": "https://www.ericsson.com/en/press-releases/2019/6/telkomsel-indonesia-to-deploy-ericsson-core-in-preparation-for-5g"
+},
+{
+"year": 2023,
+"text": "Ericsson 4G/5G 파트너십 갱신(수마트라·동칼리만탄)",
+"source": "https://www.ericsson.com/en/press-releases/2/2023/8/telkomsel-and-ericsson-strengthen-partnership-to-expand-4g5g-networks-in-indonesia"
+},
+{
+"year": 2024,
+"text": "Huawei 지원 자카르타 수도권 5G 확장(12월)",
+"source": "https://www.telecomtv.com/content/5g/telkomsel-expands-5g-network-across-greater-jakarta-area-51928"
+},
+{
+"year": 2026,
+"text": "ZTE와 AI-native RAN PoC(BBU V9200)·엣지 UPF 확장 MoU(MWC26)",
+"source": "https://www.theregister.com/2026/03/27/zte-telkomsel-boost-indonesia-connectivity-at-mwc-2026"
+},
+{
+"year": 2026,
+"text": "주파수 경매: 700MHz 2x10MHz·2.6GHz 80MHz 확보(7월, 잠정)",
+"source": "https://katadata.co.id/digital/teknologi/6a50e6956d061/telkomsel-indosat-dan-xlsmart-dapat-frekuensi-baru-siap-genjot-5g"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson 보도자료 2023-08-08 (Telkomsel 4G/5G)",
+"url": "https://www.ericsson.com/en/press-releases/2/2023/8/telkomsel-and-ericsson-strengthen-partnership-to-expand-4g5g-networks-in-indonesia"
+},
+{
+"label": "Ericsson 보도자료 2019-06 (Telkomsel 코어)",
+"url": "https://www.ericsson.com/en/press-releases/2019/6/telkomsel-indonesia-to-deploy-ericsson-core-in-preparation-for-5g"
+},
+{
+"label": "TelecomTV 2024-12 (Huawei 자카르타 5G)",
+"url": "https://www.telecomtv.com/content/5g/telkomsel-expands-5g-network-across-greater-jakarta-area-51928"
+},
+{
+"label": "RCR Wireless 2024-11-24 (ZTE 4G 마카사르·켄다리)",
+"url": "https://www.rcrwireless.com/20241124/featured/telkomsel-4g-ai-zte"
+},
+{
+"label": "The Register 2026-03-27 (ZTE–Telkomsel)",
+"url": "https://www.theregister.com/2026/03/27/zte-telkomsel-boost-indonesia-connectivity-at-mwc-2026"
+},
+{
+"label": "Katadata 2026-07 (700MHz·2.6GHz 경매)",
+"url": "https://katadata.co.id/digital/teknologi/6a50e6956d061/telkomsel-indosat-dan-xlsmart-dapat-frekuensi-baru-siap-genjot-5g"
+}
+]
+},
+{
+"name": "Indosat Ooredoo Hutchison",
+"name_local": "PT Indosat Tbk (IOH)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Nokia",
+"Huawei"
+],
+"5g": [
+"Nokia",
+"Ericsson"
+]
+},
+"core": {
+"epc": [
+"Huawei"
+],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Nokia",
+"area": "수마트라·칼리만탄·중부 자바·수라바야(약 140만㎢), 주력 4G/5G 벤더",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.rcrwireless.com/20220308/5g/indosat-ooredoo-hutchinson-selects-nordic-vendors-5g-expansion"
+},
+{
+"vendor": "Ericsson",
+"area": "자카르타·보고르·탕그랑·브카시(자보데타벡) 5G",
+"gens": [
+"5g"
+],
+"source": "https://www.rcrwireless.com/20220308/5g/indosat-ooredoo-hutchinson-selects-nordic-vendors-5g-expansion"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2022,
+"text": "Nokia 주력 벤더 3년 계약 + Ericsson 자보데타벡 5G 확장",
+"source": "https://www.rcrwireless.com/20220308/5g/indosat-ooredoo-hutchinson-selects-nordic-vendors-5g-expansion"
+},
+{
+"year": 2023,
+"text": "Huawei MOCN으로 Indosat–Tri 합병망 46,000+ 사이트 통합",
+"source": "https://telecoms.com/telecoms-infrastructure/indosat-ooredoo-hutchison-huawei-mocn-network-consolidation"
+},
+{
+"year": 2024,
+"text": "Huawei, PS 코어 26개소 통합(1억+ 가입자, 14개월)",
+"source": "https://www.huawei.com/en/news/2024/8/world-corenetwork"
+},
+{
+"year": 2026,
+"text": "Nokia, 전국 저·중대역 5G RAN 핵심 공급사 + Nvidia AI-RAN(상용 2027~)",
+"source": "https://www.rcrwireless.com/20260612/ai-infrastructure/nokia-indosat-ai-ran"
+},
+{
+"year": 2026,
+"text": "주파수 경매: 700MHz 2x10MHz·2.6GHz 60MHz 확보(7월, 잠정)",
+"source": "https://katadata.co.id/digital/teknologi/6a50e6956d061/telkomsel-indosat-dan-xlsmart-dapat-frekuensi-baru-siap-genjot-5g"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "RCR Wireless 2022-03-08 (Nokia·Ericsson 권역)",
+"url": "https://www.rcrwireless.com/20220308/5g/indosat-ooredoo-hutchinson-selects-nordic-vendors-5g-expansion"
+},
+{
+"label": "Telecoms.com 2023-11 (Huawei MOCN 통합)",
+"url": "https://telecoms.com/telecoms-infrastructure/indosat-ooredoo-hutchison-huawei-mocn-network-consolidation"
+},
+{
+"label": "Huawei 보도자료 2024-08-30 (PS 코어 통합)",
+"url": "https://www.huawei.com/en/news/2024/8/world-corenetwork"
+},
+{
+"label": "RCR Wireless 2026-06-12 (Nokia–Indosat AI-RAN)",
+"url": "https://www.rcrwireless.com/20260612/ai-infrastructure/nokia-indosat-ai-ran"
+}
+]
+},
+{
+"name": "XLSmart",
+"name_local": "PT XLSMART Telecom Sejahtera Tbk (XL Axiata+Smartfren, 2025)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei",
+"ZTE"
+],
+"5g": [
+"ZTE"
+]
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [
+{
+"vendor": "ZTE",
+"area": "5G 33개 도시 중 24곳(수라바야·스마랑·메단·마카사르·발릭파판 등 5개 권역), 4G 2만+ 통합·5G 7천+ 신규",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://developingtelecoms.com/telecom-technology/wireless-networks/19850-zte-and-indonesias-xlsmart-expand-5g-coverage-nationwide.html"
+},
+{
+"vendor": "Ericsson",
+"area": "듀얼모드 5G 코어 — 동부 자바 신규 사이트 우선 적용",
+"gens": [
+"5g"
+],
+"source": "https://ericsson.com/en/press-releases/2/2024/5/ericsson-dual-mode-5g-core-revolutionizes-xl-axiatas-connectivity-expansion-in-indonesia"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "(구 XL) Ericsson 5G-ready 클라우드 패킷코어·NFVI 도입",
+"source": "https://www.ericsson.com/en/press-releases/2020/7/xl-axiata-to-deploy-ericsson-5g-ready-cloud-core-technology"
+},
+{
+"year": 2024,
+"text": "(구 XL) Ericsson 듀얼모드 5G 코어 도입(5월)",
+"source": "https://ericsson.com/en/press-releases/2/2024/5/ericsson-dual-mode-5g-core-revolutionizes-xl-axiatas-connectivity-expansion-in-indonesia"
+},
+{
+"year": 2025,
+"text": "합병 시 XL=Huawei·Smartfren=ZTE 위주, 장비 합리화 검토 발표",
+"source": "https://teknologi.bisnis.com/read/20250119/101/1832838/xl-axiata-dan-smartfren-kaji-ulang-kerja-sama-dengan-huawei-zte"
+},
+{
+"year": 2025,
+"text": "Huawei·ZTE와 전국망(BTS 20만+) 운영관리 협약(5월)",
+"source": "https://teknologi.bisnis.com/read/20250521/101/1878623/xlsmart-huawei-zte-teken-kerja-sama-pengelolaan-operasional-jaringan"
+},
+{
+"year": 2025,
+"text": "망 통합 약 70% 완료(2025년 말), 2026년 완료 목표",
+"source": "https://inet.detik.com/telecommunication/d-8496519/integrasi-jaringan-xlsmart-capai-70-sinyal-5g-makin-dikebut"
+},
+{
+"year": 2026,
+"text": "ZTE 5G 7천+ 사이트 신규·4G 2만+ 통합, Ultra 5G+ 출시(3월)",
+"source": "https://developingtelecoms.com/telecom-technology/wireless-networks/19850-zte-and-indonesias-xlsmart-expand-5g-coverage-nationwide.html"
+},
+{
+"year": 2026,
+"text": "주파수 경매: 700MHz 2x15MHz(최대)·2.6GHz 50MHz 확보(7월, 잠정)",
+"source": "https://katadata.co.id/digital/teknologi/6a50e6956d061/telkomsel-indosat-dan-xlsmart-dapat-frekuensi-baru-siap-genjot-5g"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Developing Telecoms 2026-03-02 (ZTE–XLSmart 5G)",
+"url": "https://developingtelecoms.com/telecom-technology/wireless-networks/19850-zte-and-indonesias-xlsmart-expand-5g-coverage-nationwide.html"
+},
+{
+"label": "Bisnis.com 2025-01-19 (XL Huawei·Smartfren ZTE)",
+"url": "https://teknologi.bisnis.com/read/20250119/101/1832838/xl-axiata-dan-smartfren-kaji-ulang-kerja-sama-dengan-huawei-zte"
+},
+{
+"label": "Bisnis.com 2025-05-21 (Huawei·ZTE 운영관리)",
+"url": "https://teknologi.bisnis.com/read/20250521/101/1878623/xlsmart-huawei-zte-teken-kerja-sama-pengelolaan-operasional-jaringan"
+},
+{
+"label": "detikInet 2026-05 (통합 70%)",
+"url": "https://inet.detik.com/telecommunication/d-8496519/integrasi-jaringan-xlsmart-capai-70-sinyal-5g-makin-dikebut"
+},
+{
+"label": "Ericsson 보도자료 2024-05-29 (듀얼모드 5GC)",
+"url": "https://ericsson.com/en/press-releases/2/2024/5/ericsson-dual-mode-5g-core-revolutionizes-xl-axiatas-connectivity-expansion-in-indonesia"
+},
+{
+"label": "Ericsson 보도자료 2020-07 (클라우드 패킷코어)",
+"url": "https://www.ericsson.com/en/press-releases/2020/7/xl-axiata-to-deploy-ericsson-5g-ready-cloud-core-technology"
+}
+]
+}
+],
+"country_note": "Huawei 규제 없음, 중국 벤더 비중 큼. 3사 체제(Telkomsel·Indosat·XLSmart) — 2022 Indosat–Tri, 2025 XL–Smartfren 합병으로 RAN 통합 진행(XLSmart는 ZTE 주도 5G). 2026-07 700MHz·2.6GHz 경매로 5G 커버리지 투자 확대 예상. Samsung RAN/vRAN 공급 사례는 확인되지 않음.",
+"sources": [
+{
+"label": "Katadata 2026-07 (700MHz·2.6GHz 경매 결과)",
+"url": "https://katadata.co.id/digital/teknologi/6a50e6956d061/telkomsel-indosat-dan-xlsmart-dapat-frekuensi-baru-siap-genjot-5g"
+}
+]
+},
+{
+"iso3": "PHL",
+"name_ko": "필리핀",
+"carriers": [
+{
+"name": "Smart Communications (PLDT)",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"Ericsson"
+],
+"4g": [
+"Huawei",
+"Ericsson"
+],
+"5g": [
+"Huawei",
+"Ericsson",
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": [
+"Nokia"
+]
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2018,
+"text": "Ericsson과 5G 시범망 구축 계약",
+"source": "https://www.rcrwireless.com/20180813/5g/ericsson-secures-5g-network-philipppines"
+},
+{
+"year": 2019,
+"text": "5G 공급사로 Huawei 선정, Ericsson은 소규모 병행(MVP 발언)",
+"source": "https://business.inquirer.net/286308/pldt-taps-huawei-for-5g-rollout-in-2020"
+},
+{
+"year": 2019,
+"text": "Nokia와 5G 개발 협력(학교 등 5G 구축)",
+"source": "https://news.abs-cbn.com/business/03/12/19/pldt-taps-nokia-for-5g-development"
+},
+{
+"year": 2021,
+"text": "Nokia가 NFVI·IMS 코어 운영 플랫폼 표준화(남부루손·비사야·민다나오)",
+"source": "https://www.nokia.com/newsroom/nokia-to-help-transform-pldt-and-smarts-nationwide-network-and-standardize-virtualization-environment/"
+},
+{
+"year": 2022,
+"text": "Samsung과 5G SA 협력—Galaxy 단말 VoNR 시험, 망장비 공급 근거는 없음",
+"source": "https://www.rcrwireless.com/20220113/featured/smart-communications-selects-samsung-5g-sa-deployment"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Inquirer 2019-12 PLDT taps Huawei",
+"url": "https://business.inquirer.net/286308/pldt-taps-huawei-for-5g-rollout-in-2020"
+},
+{
+"label": "Light Reading Ericsson bags Smart HSPA deal",
+"url": "https://www.lightreading.com/business-management/ericsson-bags-smart-hspa-deal"
+},
+{
+"label": "Nokia PR 2021-05",
+"url": "https://www.nokia.com/newsroom/nokia-to-help-transform-pldt-and-smarts-nationwide-network-and-standardize-virtualization-environment/"
+},
+{
+"label": "RCR 2022-01 Smart-Samsung 5G SA",
+"url": "https://www.rcrwireless.com/20220113/featured/smart-communications-selects-samsung-5g-sa-deployment"
+}
+]
+},
+{
+"name": "Globe Telecom",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei",
+"Nokia",
+"Ericsson"
+],
+"5g": [
+"Huawei",
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Nokia",
+"area": "민다나오·비사야(남부) 4G 업그레이드/5G 확장 1,000+ 사이트",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.rcrwireless.com/20230905/5g/globe-selects-nokia-4g-5g-network-expansion-philippines"
+}
+],
+"share": [
+{
+"vendor": "Huawei",
+"pct": 80,
+"sites": null,
+"basis": "전체 망장비(Globe 법무총괄 상원 증언)",
+"asof": "2020-09",
+"type": "official",
+"source": "https://www.philstar.com/headlines/2020/09/24/2044697/globe-moving-away-huawei"
+}
+],
+"issues": [
+{
+"year": 2019,
+"text": "Huawei 장비로 5G(FWA) 상용화",
+"source": "https://news.yahoo.com/philippines-globe-telecoms-launches-5g-151823894.html"
+},
+{
+"year": 2020,
+"text": "Huawei 비중 80%→비중국 벤더 기반 망 전략 협상 착수 발표",
+"source": "https://www.philstar.com/headlines/2020/09/24/2044697/globe-moving-away-huawei"
+},
+{
+"year": 2021,
+"text": "Nokia 3년 계약: 민다나오·비사야 4G 업그레이드 및 5G 1,000+ 사이트",
+"source": "https://www.rcrwireless.com/20230905/5g/globe-selects-nokia-4g-5g-network-expansion-philippines"
+},
+{
+"year": 2023,
+"text": "Nokia IPAA+ 안테나(4G 패시브+5G 액티브) 도입",
+"source": "https://www.rcrwireless.com/20230905/5g/globe-selects-nokia-4g-5g-network-expansion-philippines"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Philstar 2020-09 Globe moving away from Huawei",
+"url": "https://www.philstar.com/headlines/2020/09/24/2044697/globe-moving-away-huawei"
+},
+{
+"label": "RCR 2023-09 Globe selects Nokia",
+"url": "https://www.rcrwireless.com/20230905/5g/globe-selects-nokia-4g-5g-network-expansion-philippines"
+}
+]
+},
+{
+"name": "DITO Telecommunity",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"ZTE"
+],
+"5g": [
+"ZTE"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "ZTE",
+"area": "남부 루손·비사야 (2개 권역 턴키, 1,000+ 사이트)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://zte.com.cn/global/about/magazine/zte-technologies/2022/1-en/VIP-Voice/1.html"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2019,
+"text": "China Telecom 40% 지분 참여 제3사업자—안보 우려 제기",
+"source": "https://www.abs-cbn.com/spotlight/09/17/19/will-dito-telecommunity-expose-philippines-to-unhampered-espionage"
+},
+{
+"year": 2020,
+"text": "ZTE를 주력 공급사로 4G/5G 구축 협력",
+"source": "https://www.mobileworldlive.com/zte-updates-2019-20/dito-joins-hands-with-zte-to-create-new-speed-in-the-philippines-telecommunications-industry/"
+},
+{
+"year": 2024,
+"text": "코어 데이터센터 이전·5G SA 고도화(코어 벤더 미공개)",
+"source": "https://w.media/dito-telecommunity-successfully-migrates-core-data-centers-enhances-5g-sa-network/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "ZTE Technologies 2022 DITO interview",
+"url": "https://zte.com.cn/global/about/magazine/zte-technologies/2022/1-en/VIP-Voice/1.html"
+},
+{
+"label": "MWL DITO-ZTE",
+"url": "https://www.mobileworldlive.com/zte-updates-2019-20/dito-joins-hands-with-zte-to-create-new-speed-in-the-philippines-telecommunications-industry/"
+}
+]
+}
+],
+"country_note": "필리핀은 화웨이 규제 없음. Globe는 2020년 장비의 약 80%가 Huawei라고 밝히고 비중국 벤더 다변화(Nokia 남부 확대)를 추진. Smart는 Huawei·Ericsson 병행에 Nokia가 5G·클라우드/IMS 담당. DITO는 China Telecom 지분 40%, ZTE 주력(Huawei 공급은 공개 근거 미확인). Samsung은 Smart와 5G SA 단말(VoNR) 협력만 확인되며 망장비 수주 근거는 없음.",
+"sources": [
+{
+"label": "Philstar 2020-09",
+"url": "https://www.philstar.com/headlines/2020/09/24/2044697/globe-moving-away-huawei"
+},
+{
+"label": "Inquirer 2019-12",
+"url": "https://business.inquirer.net/286308/pldt-taps-huawei-for-5g-rollout-in-2020"
+}
+]
+},
+{
+"iso3": "MYS",
+"name_ko": "말레이시아",
+"carriers": [
+{
+"name": "Digital Nasional Berhad (DNB)",
+"name_local": "",
+"type": "wholesale",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [],
+"share": [
+{
+"vendor": "Ericsson",
+"pct": 100,
+"sites": 7489,
+"basis": "DNB 5G 송신사이트(단일벤더 E2E)",
+"asof": "2025-07",
+"type": "official",
+"source": "https://techwireasia.com/2026/07/u-mobile-ultra5g-network-dnb-exit/"
+}
+],
+"issues": [
+{
+"year": 2021,
+"text": "Ericsson 10년 E2E 계약(RAN·코어·전송·OSS/BSS), Huawei 탈락",
+"source": "https://www.ericsson.com/en/press-releases/2021/9/ericsson-to-support-malaysias-digital-transformation-through-nationwide-5g-deployment"
+},
+{
+"year": 2025,
+"text": "Ericsson과 5G-Advanced(RedCap 등) 개시",
+"source": "https://rcrwireless.com/20250205/5g/ericsson-adds-5g-a-dnb"
+},
+{
+"year": 2026,
+"text": "U Mobile 6/30 이탈, TM도 U Mobile MOCN 전환 추진—잔여 CelcomDigi·Maxis·YTL",
+"source": "https://www.lightreading.com/5g/dnb-expands-5g-capacity-as-u-mobile-officially-pulls-out"
+}
+],
+"confidence": "high",
+"sources": [
+{
+"label": "Ericsson PR 2021-09",
+"url": "https://www.ericsson.com/en/press-releases/2021/9/ericsson-to-support-malaysias-digital-transformation-through-nationwide-5g-deployment"
+},
+{
+"label": "Light Reading 2026-07",
+"url": "https://www.lightreading.com/5g/dnb-expands-5g-capacity-as-u-mobile-officially-pulls-out"
+},
+{
+"label": "The Star 2026-02 TM-U Mobile",
+"url": "https://www.thestar.com.my/tech/tech-news/2026/02/25/tm-and-u-mobile-enter-into-5g-wholesale-arrangement"
+}
+]
+},
+{
+"name": "U Mobile",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"ZTE (종료 2021)"
+],
+"4g": [
+"ZTE",
+"Huawei"
+],
+"5g": [
+"Huawei",
+"ZTE"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Huawei",
+"area": "말레이반도(Peninsular)",
+"gens": [
+"5g"
+],
+"source": "https://techwireasia.com/2026/07/u-mobile-ultra5g-network-dnb-exit/"
+},
+{
+"vendor": "ZTE",
+"area": "동말레이시아(사바·사라왁)",
+"gens": [
+"5g"
+],
+"source": "https://techwireasia.com/2026/07/u-mobile-ultra5g-network-dnb-exit/"
+}
+],
+"share": [
+{
+"vendor": "Huawei+ZTE",
+"pct": null,
+"sites": 6737,
+"basis": "제2 5G망(ULTRA5G) 전체 사이트",
+"asof": "2026-04",
+"type": "official",
+"source": "https://soyacincau.com/2026/07/01/u-mobile-complete-5g-network-migration-exit-dnb-wholesale/"
+}
+],
+"issues": [
+{
+"year": 2014,
+"text": "ZTE·Huawei와 3G/LTE 망 확장 계약",
+"source": "https://telecomlead.com/?p=56030"
+},
+{
+"year": 2025,
+"text": "제2 5G망 파트너로 Huawei·ZTE 선정(4월), 7월 구축 개시",
+"source": "https://www.rcrwireless.com/20250417/5g/u-mobile-awards-deals"
+},
+{
+"year": 2026,
+"text": "TM과 5G MOCN 도매 계약(2월)",
+"source": "https://www.thestar.com.my/tech/tech-news/2026/02/25/tm-and-u-mobile-enter-into-5g-wholesale-arrangement"
+},
+{
+"year": 2026,
+"text": "DNB 도매 이탈 완료(6/30), 자체망 CoPA 85%+",
+"source": "https://soyacincau.com/2026/07/01/u-mobile-complete-5g-network-migration-exit-dnb-wholesale/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "RCR 2025-04 U Mobile awards deals",
+"url": "https://www.rcrwireless.com/20250417/5g/u-mobile-awards-deals"
+},
+{
+"label": "The Star 2025-04",
+"url": "https://www.thestar.com.my/business/business-news/2025/04/16/u-mobile-in-5g-pact-with-huawei-and-zte"
+},
+{
+"label": "Techwire Asia 2026-07",
+"url": "https://techwireasia.com/2026/07/u-mobile-ultra5g-network-dnb-exit/"
+}
+]
+},
+{
+"name": "CelcomDigi",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"(종료 2021~2022)"
+],
+"4g": [
+"Huawei",
+"ZTE"
+],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2023,
+"text": "Huawei·ZTE와 전국 RAN 통합·현대화(약 2.5만 사이트, 32T32R) 계약",
+"source": "https://corporate.celcomdigi.com/news/celcomdigi-partners-huawei-and-zte-for-nationwide-network-integration-and-modernisation"
+},
+{
+"year": 2025,
+"text": "Huawei·ZTE(AI망)·Ericsson(5G SA 산업) MoU—비구속",
+"source": "https://www.developingtelecoms.com/telecom-technology/wireless-networks/18130-celcomdigi-signs-5g-and-ai-deals-with-huawei-zte-and-ericsson.html"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "CelcomDigi PR 2023-07",
+"url": "https://corporate.celcomdigi.com/news/celcomdigi-partners-huawei-and-zte-for-nationwide-network-integration-and-modernisation"
+},
+{
+"label": "Developing Telecoms 2025-03",
+"url": "https://www.developingtelecoms.com/telecom-technology/wireless-networks/18130-celcomdigi-signs-5g-and-ai-deals-with-huawei-zte-and-ericsson.html"
+}
+]
+},
+{
+"name": "Maxis",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"(종료 2021)"
+],
+"4g": [
+"Huawei"
+],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2019,
+"text": "Huawei와 4G/LTE·5G 무선장비 공급 계약(DNB 단일망 전환으로 5G 무력화)",
+"source": "https://www.telecompaper.com/news/huawei-to-supply-4glte-5g-radio-equipment-to-malaysias-maxis--1310820"
+},
+{
+"year": 2024,
+"text": "Nokia가 5G 코어 생태계 일부(클라우드 네이티브) 구축",
+"source": "https://www.rcrwireless.com/20240314/5g/maxis-nokia-expand-collaboration-next-gen-connectivity"
+},
+{
+"year": 2024,
+"text": "Huawei와 5G-Advanced 공동혁신 협력",
+"source": "https://rcrwireless.com/20240814/5g/maxis-huawei-partner-5g-advanced-joint-innovation"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Telecompaper 2019-10",
+"url": "https://www.telecompaper.com/news/huawei-to-supply-4glte-5g-radio-equipment-to-malaysias-maxis--1310820"
+},
+{
+"label": "RCR 2024-03 Maxis-Nokia",
+"url": "https://www.rcrwireless.com/20240314/5g/maxis-nokia-expand-collaboration-next-gen-connectivity"
+}
+]
+}
+],
+"country_note": "2021년 국영 DNB가 Ericsson 단일 E2E 5G 도매망 구축(전 사업자 공용). 2023년 이중망 정책 전환, 2025년 U Mobile이 Huawei(반도)·ZTE(동말) 제2 5G망 구축, 2026.6 DNB 이탈 완료, TM도 U Mobile로 이동 추진. CelcomDigi·Maxis·YTL은 DNB 잔류. 4G는 Huawei·ZTE 중심. 3G는 2021년말 일괄 종료. Samsung 망장비 수주 근거 없음.",
+"sources": [
+{
+"label": "RCR 2025-02",
+"url": "https://rcrwireless.com/20250205/5g/ericsson-adds-5g-a-dnb"
+},
+{
+"label": "Soyacincau 3G 종료",
+"url": "https://soyacincau.com/2020/08/30/malaysia-switch-off-3g-2021-what-you-need-to-know/"
+}
+]
+},
+{
+"iso3": "SGP",
+"name_ko": "싱가포르",
+"carriers": [
+{
+"name": "Singtel",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"(종료 2024)"
+],
+"4g": [],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "5G 공급사로 Ericsson 선정(Huawei 배제)",
+"source": "https://soyacincau.com/2020/06/25/singapore-5g-singtel-starhub-m1-pick-nokia-ericsson-tpg-huawei"
+},
+{
+"year": 2021,
+"text": "Ericsson RAN+듀얼모드 5GC로 5G SA 구축; Samsung은 단말(S21) 파트너",
+"source": "https://www.rcrwireless.com/20210922/business/ericsson-provides-equipment-solutions-boost-singtel-5g-sa-network"
+},
+{
+"year": 2026,
+"text": "Ericsson과 5년 전략 파트너십(5G-A·SA·AI-RAN), 10/20 발표",
+"source": "https://www.ericsson.com/en/press-releases/2/2026/singtel-and-ericsson-deepen-partnership-to-scale-5g-innovation-and-build-ai-native-networks-for-consumers-and-enterprises-in-singapore"
+}
+],
+"confidence": "high",
+"sources": [
+{
+"label": "Ericsson PR 2026-10",
+"url": "https://www.ericsson.com/en/press-releases/2/2026/singtel-and-ericsson-deepen-partnership-to-scale-5g-innovation-and-build-ai-native-networks-for-consumers-and-enterprises-in-singapore"
+},
+{
+"label": "RCR 2021-09",
+"url": "https://www.rcrwireless.com/20210922/business/ericsson-provides-equipment-solutions-boost-singtel-5g-sa-network"
+}
+]
+},
+{
+"name": "StarHub",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"(종료 2024)"
+],
+"4g": [
+"Huawei",
+"Nokia"
+],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "M1과 합작 5G망: RAN Nokia, 코어·mmWave Ericsson 초기 발표",
+"source": "https://www.rcrwireless.com/20200624/business/singapore-select-nokia-ericsson-5g"
+},
+{
+"year": 2021,
+"text": "Nokia 클라우드 네이티브 5G SA 코어 채택",
+"source": "https://www.nokia.com/newsroom/nokia-and-starhub-partner-to-expedite-standalone-5g-services-for-singapore-customers/"
+},
+{
+"year": 2023,
+"text": "합작사 Antina, Nokia와 10년 5G SA RAN 연장 계약",
+"source": "https://itwire.com/it-industry-news/deals/nokia-wins-new-10-year-5g-deal-with-antina-in-singapore-202302220806"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Nokia PR 2021-02",
+"url": "https://www.nokia.com/newsroom/nokia-and-starhub-partner-to-expedite-standalone-5g-services-for-singapore-customers/"
+},
+{
+"label": "RCR 2016 Huawei-StarHub LTE-A",
+"url": "https://rcrwireless.com/20160418/asia-pacific/huawei-starhub-unveils-new-4g-lte-solution-tag23"
+},
+{
+"label": "TelecomLead StarHub Nokia LTE",
+"url": "https://telecomlead.com/telecom-equipment/starhub-deploys-nokia-networks-td-lte-fd-lte-and-outdoor-small-cells-64523"
+}
+]
+},
+{
+"name": "M1",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"(종료 2024)"
+],
+"4g": [
+"Huawei"
+],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "Nokia 5G SA 코어(클라우드 네이티브 5GC·Cloud Packet Core) 채택",
+"source": "https://www.nokia.com/newsroom/nokia-and-m1-partner-with-5g-standalone-core-to-drive-singapores-5g-ecosystem/"
+},
+{
+"year": 2021,
+"text": "Antina에 Nokia 5G SA RAN 셰어링망 구축",
+"source": "https://www.nokia.com/newsroom/nokia-deploys-first-5g-standalone-ran-sharing-network-for-m1-starhub-joint-venture-in-singapore/"
+},
+{
+"year": 2024,
+"text": "3G 망 7/31 종료(국내 최초)",
+"source": "https://www.thestar.com.my/aseanplus/aseanplus-news/2024/07/24/goodbye-3g-m1-first-to-retire-3g-network-by-aug-1-singtel-and-starhub-to-follow"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Nokia PR 2021-01",
+"url": "https://www.nokia.com/newsroom/nokia-and-m1-partner-with-5g-standalone-core-to-drive-singapores-5g-ecosystem/"
+},
+{
+"label": "TelecomLead M1 4G Huawei",
+"url": "https://telecomlead.com/4g-lte/m1-targets-retail-and-enterprise-users-for-4g-services-powered-by-huawei-17274?amp=1"
+}
+]
+},
+{
+"name": "SIMBA Telecom (구 TPG Singapore)",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Huawei"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "5G 전국면허 탈락, Huawei가 국지(스팟) 5G 공급 역할",
+"source": "https://soyacincau.com/2020/06/25/singapore-5g-singtel-starhub-m1-pick-nokia-ericsson-tpg-huawei"
+},
+{
+"year": 2020,
+"text": "Rakuten Mobile과 Open RAN 시험 협력",
+"source": "https://www.rcrwireless.com/20200221/business/rakuten-mobile-tpg-telecom-carry-out-openran-trial-singapore"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Soyacincau 2020-06",
+"url": "https://soyacincau.com/2020/06/25/singapore-5g-singtel-starhub-m1-pick-nokia-ericsson-tpg-huawei"
+}
+]
+}
+],
+"country_note": "IMDA 5G 심사에서 Singtel은 Ericsson, StarHub·M1 합작 Antina는 Nokia(RAN) 선정—Huawei 사실상 배제(4G에서는 StarHub·M1에 Huawei 존재). Singtel은 2026.10 Ericsson 5년 연장. 3G는 2024년 7~8월 전 사업자 종료. SIMBA 4G 벤더 공개 자료 미확인. Samsung은 Singtel 5G SA 단말 협력만 확인.",
+"sources": [
+{
+"label": "RCR 2020-06",
+"url": "https://www.rcrwireless.com/20200624/business/singapore-select-nokia-ericsson-5g"
+},
+{
+"label": "DCD 3G 종료",
+"url": "https://www.datacenterdynamics.com/en/news/singaporean-mnos-poised-to-fully-retire-3g-services-by-end-of-july-2024/"
+}
+]
+},
+{
 "iso3": "USA",
 "name_ko": "미국",
 "carriers": [
@@ -3262,6 +4869,994 @@
 ]
 },
 {
+"iso3": "GTM",
+"name_ko": "과테말라",
+"carriers": [
+{
+"name": "Tigo Guatemala",
+"name_local": "Comcel (Tigo)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2022,
+"text": "중미 최초 5G 상용화(2022.7.8, Cayalá 시작). 장비 공급사 미공개",
+"source": "https://dplnews.com/?p=158135"
+},
+{
+"year": 2023,
+"text": "2.5GHz 8블록 중 7블록(약 4,900만달러), 700MHz 20MHz 확보",
+"source": "https://www.telesemana.com/blog/2026/08/27/a-3-anos-de-concretada-la-licitacion-de-la-banda-de-700-mhz-guatemala-discute-sus-resultados/"
+},
+{
+"year": 2026,
+"text": "의회가 2023년 700MHz 낙찰 '위법(lesiva)' 선언 요구, CGC·SIT 조사 착수",
+"source": "https://www.telesemana.com/blog/2026/08/27/a-3-anos-de-concretada-la-licitacion-de-la-banda-de-700-mhz-guatemala-discute-sus-resultados/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "DPL News 2022-07-08 Tigo 5G 개시",
+"url": "https://dplnews.com/?p=158135"
+},
+{
+"label": "TeleSemana 2026-08-27 700MHz 경매 재검토",
+"url": "https://www.telesemana.com/blog/2026/08/27/a-3-anos-de-concretada-la-licitacion-de-la-banda-de-700-mhz-guatemala-discute-sus-resultados/"
+}
+]
+},
+{
+"name": "Claro Guatemala",
+"name_local": "Telgua (Claro)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2022,
+"text": "5G 상용화(2022.7.19) 22개 주. 기존 4G 인프라 활용(4.5G 성격 논란)",
+"source": "https://www.telesemana.com/blog/2022/07/20/claro-lanzo-su-servicio-5g-en-guatemala-unos-dias-despues-de-tigo-pero-de-que-servicio-5g-se-trata/"
+},
+{
+"year": 2023,
+"text": "700MHz 40MHz(B·C블록) 확보 — 2026년 낙찰 재검토 대상",
+"source": "https://www.telesemana.com/blog/2026/08/27/a-3-anos-de-concretada-la-licitacion-de-la-banda-de-700-mhz-guatemala-discute-sus-resultados/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "DPL News 2022-07-20 Claro 5G 상용화",
+"url": "https://dplnews.com/?p=159532"
+},
+{
+"label": "TeleSemana 2022-07-20 Claro 5G 기술 분석",
+"url": "https://www.telesemana.com/blog/2022/07/20/claro-lanzo-su-servicio-5g-en-guatemala-unos-dias-despues-de-tigo-pero-de-que-servicio-5g-se-trata/"
+}
+]
+}
+],
+"country_note": "Tigo·Claro 2강 체제(Movistar는 2019년 Claro에 흡수). 2022년 중미 최초 5G, GSMA 기준 5G 기지국 2,100여 개·인구 40% 커버(2026.8). 사업자별 RAN 벤더는 공개 자료 없음. 2025.2 Rubio 미 국무장관이 과테말라 방문 중 Huawei를 '중대한 안보 위협'으로 경고했으나 정부의 배제 조치는 없음. 2023년 700MHz 경매 재검토가 진행 중이라 규제 불확실성이 큼. Samsung 네트워크 장비 공급 사례는 확인되지 않음.",
+"sources": [
+{
+"label": "E&N 2026-08-27 과테말라 5G 현황(GSMA)",
+"url": "https://www.revistaeyn.com/empresasymanagement/el-dilema-digital-de-guatemala-mas-redes-5g-pero-millones-de-personas-aun-no-se-conectan-PP31850395"
+},
+{
+"label": "Centroamérica360 2025-02-06 Rubio Huawei 경고",
+"url": "https://centroamerica360.com/politica/rubio-advierte-en-centroamerica-sobre-peligro-de-empresas-chinas-de-telecomunicaciones"
+}
+]
+},
+{
+"iso3": "SLV",
+"name_ko": "엘살바도르",
+"carriers": [
+{
+"name": "Claro El Salvador",
+"name_local": "CTE (Claro)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2026,
+"text": "점유율 32%로 1위였으나 GIT의 Digicel 인수 시 2위로 하락 예상",
+"source": "https://www.telesemana.com/blog/2026/09/17/digicel-se-va-de-el-salvador-que-ahora-se-queda-con-tres-operadores-moviles/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "TeleSemana 2026-09-17 Digicel 철수·시장점유율",
+"url": "https://www.telesemana.com/blog/2026/09/17/digicel-se-va-de-el-salvador-que-ahora-se-queda-con-tres-operadores-moviles/"
+}
+]
+},
+{
+"name": "Tigo El Salvador",
+"name_local": "Telemóvil (Tigo)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "국내 최초 5G 개시(2025.10.28), 70개 사이트→연말 120개 목표. 벤더·주파수 미공개",
+"source": "https://diario.elmundo.sv/economia/tigo-enciende-la-red-5g-en-el-salvador"
+},
+{
+"year": 2026,
+"text": "5G 커버리지 인구 약 25%(150만 명), 4.5G 커버리지 98%",
+"source": "https://www.revistaeyn.com/empresasymanagement/tigo-alcanza-98-de-cobertura-45g-y-extiende-su-red-5g-al-25-de-el-salvador-GH32423072"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "El Mundo 2025-10-28 Tigo 5G 개시",
+"url": "https://diario.elmundo.sv/economia/tigo-enciende-la-red-5g-en-el-salvador"
+},
+{
+"label": "DPL News 2025-10-31 Tigo 5G",
+"url": "https://dplnews.com/?p=294455"
+},
+{
+"label": "E&N 2026-10-24 Tigo 5G 25% 커버",
+"url": "https://www.revistaeyn.com/empresasymanagement/tigo-alcanza-98-de-cobertura-45g-y-extiende-su-red-5g-al-25-de-el-salvador-GH32423072"
+}
+]
+},
+{
+"name": "Movistar El Salvador",
+"name_local": "General International Telecom (Movistar)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Ericsson"
+],
+"3g": [
+"Ericsson"
+],
+"4g": [
+"Ericsson",
+"Huawei"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2016,
+"text": "Ericsson, 국내 최초 LTE 구축(2G·3G·LTE 공급 지속, Telefónica 중미 계약)",
+"source": "https://www.ericsson.com/es/news/2016/11/ericsson-y-telefonica-seran-los-primeros-en-llevar-lte-a-el-salvador"
+},
+{
+"year": 2022,
+"text": "Telefónica가 GIT에 매각 완료(2022.1, 1.39억달러)",
+"source": "https://www.telesemana.com/blog/2026/09/17/digicel-se-va-de-el-salvador-que-ahora-se-queda-con-tres-operadores-moviles/"
+},
+{
+"year": 2023,
+"text": "Huawei와 '5G Ready' 4G 현대화(1단계 2023.6 완료, 2단계 2024.6 목표)",
+"source": "https://dplnews.com/?p=213309"
+},
+{
+"year": 2026,
+"text": "Digicel SV 인수 합의(2026.9), SIGET·SC 승인 대기 — 승인 시 점유율 약 40%로 1위",
+"source": "https://www.telesemana.com/blog/2026/09/17/digicel-se-va-de-el-salvador-que-ahora-se-queda-con-tres-operadores-moviles/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson 2016-11-17 Telefónica El Salvador LTE",
+"url": "https://www.ericsson.com/es/news/2016/11/ericsson-y-telefonica-seran-los-primeros-en-llevar-lte-a-el-salvador"
+},
+{
+"label": "DPL News 2023-11-08 Movistar·Huawei 5G Ready",
+"url": "https://dplnews.com/?p=213309"
+},
+{
+"label": "TeleSemana 2026-09-17 Digicel 매각",
+"url": "https://www.telesemana.com/blog/2026/09/17/digicel-se-va-de-el-salvador-que-ahora-se-queda-con-tres-operadores-moviles/"
+}
+]
+},
+{
+"name": "Digicel El Salvador",
+"name_local": "Digicel",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "1,900MHz 기반 신규 LTE-A망 구축(2020.5 착공, 2021 전국 확대). 벤더 미공개",
+"source": "https://dplnews.com/?p=92638"
+},
+{
+"year": 2026,
+"text": "GIT(Movistar)에 매각 합의, 점유율 13%. 승인 시 시장 4→3사",
+"source": "https://www.telesemana.com/blog/2026/09/17/digicel-se-va-de-el-salvador-que-ahora-se-queda-con-tres-operadores-moviles/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "DPL News 2021-04-13 Digicel LTE 4.5G",
+"url": "https://dplnews.com/?p=92638"
+},
+{
+"label": "TeleSemana 2026-09-17 Digicel 철수",
+"url": "https://www.telesemana.com/blog/2026/09/17/digicel-se-va-de-el-salvador-que-ahora-se-queda-con-tres-operadores-moviles/"
+}
+]
+}
+],
+"country_note": "4사 체제(점유율 Claro 32%·Tigo 27%·Movistar 27%·Digicel 13%)였으나 2026.9 GIT(Movistar)의 Digicel 인수 합의로 3사 재편 예정(2027년 상반기 승인 판단). 5G는 Tigo만 2025.10 개시했고 3.5GHz 할당은 아직 진행 중. Movistar는 Ericsson 기반에 Huawei 현대화를 병행. 미국 주도 Pax Silica(AI 공급망 동맹)에 2026.6 가입했으나 통신 벤더 배제 조항은 없음. Samsung 네트워크 사례는 미확인.",
+"sources": [
+{
+"label": "TeleSemana 2026-09-17 El Salvador 시장 재편",
+"url": "https://www.telesemana.com/blog/2026/09/17/digicel-se-va-de-el-salvador-que-ahora-se-queda-con-tres-operadores-moviles/"
+},
+{
+"label": "El Mundo 2026-06-26 Pax Silica 가입",
+"url": "https://diario.elmundo.sv/politica/el-salvador-firma-ingreso-a-pax-silica-para-el-desarrollo-de-la-inteligencia-artificial"
+},
+{
+"label": "DPL News 2023-11-08 3.5GHz 재배치 계획",
+"url": "https://dplnews.com/?p=213309"
+}
+]
+},
+{
+"iso3": "HND",
+"name_ko": "온두라스",
+"carriers": [
+{
+"name": "Tigo Honduras",
+"name_local": "Celtel (Tigo)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Ericsson"
+],
+"3g": [
+"Ericsson"
+],
+"4g": [
+"Ericsson"
+],
+"5g": []
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2018,
+"text": "Ericsson 다년 계약: 2G/3G/4G 사이트 현대화(파라과이와 합산 약 1,000개 사이트)",
+"source": "https://www.ericsson.com/en/press-releases/2018/12/tigo-selects-ericsson-to-upgrade-its-network-in-paraguay-and-honduras"
+},
+{
+"year": 2021,
+"text": "1.35억달러 투자(3개국): Ericsson Radio System 확대, 4G 코어를 Ericsson 듀얼모드 5G 코어로 교체",
+"source": "https://dplnews.com/?p=106867"
+},
+{
+"year": 2026,
+"text": "AWS·700MHz 경매 8월 유찰(입찰 1곳) 후 10월 재공고, 12월 종료 목표",
+"source": "https://www.telesemana.com/blog/2026/10/21/honduras-vuelve-a-licitar-espectro-y-apunta-a-ampliar-la-cobertura-movil-y-avanzar-hacia-5g/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson 2018-12-07 Tigo Paraguay·Honduras 보도자료",
+"url": "https://www.ericsson.com/en/press-releases/2018/12/tigo-selects-ericsson-to-upgrade-its-network-in-paraguay-and-honduras"
+},
+{
+"label": "Millicom/GlobeNewswire 2021-07-08 Ericsson 현대화",
+"url": "https://www.globenewswire.com/de/news-release/2021/07/08/2259810/0/en/Millicom-to-invest-135-million-to-modernize-its-mobile-networks-in-partnership-with-Ericsson-in-Honduras-Paraguay-and-Bolivia.html"
+},
+{
+"label": "DPL News 2021-07-08 Millicom 2차 현대화",
+"url": "https://dplnews.com/?p=106867"
+}
+]
+},
+{
+"name": "Claro Honduras",
+"name_local": "Sercom (Claro)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2026,
+"text": "5G 미상용화. 신규 주파수(AWS·700MHz) 경매 재공고, 기존 사업자만 참여 가능",
+"source": "https://www.telesemana.com/blog/2026/10/21/honduras-vuelve-a-licitar-espectro-y-apunta-a-ampliar-la-cobertura-movil-y-avanzar-hacia-5g/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "TeleSemana 2026-10-21 온두라스 주파수 재경매",
+"url": "https://www.telesemana.com/blog/2026/10/21/honduras-vuelve-a-licitar-espectro-y-apunta-a-ampliar-la-cobertura-movil-y-avanzar-hacia-5g/"
+}
+]
+}
+],
+"country_note": "Tigo·Claro가 시장의 거의 100%를 차지(국영 Hondutel은 미미). 5G는 아직 계획 단계이고, 13년 만의 신규 주파수(AWS·700MHz) 경매가 2026.8 유찰된 뒤 재공고되어 12월 종료를 목표로 함. 2019년 Huawei는 자사가 국내 사업자 장비의 약 70%를 공급한다고 주장했으며(Tigo·Claro·Hondutel), Tigo는 Ericsson 중심으로 현대화 중. Huawei 규제 조치나 Samsung 사례는 확인되지 않음.",
+"sources": [
+{
+"label": "La Prensa 2019-07-16 Huawei 온두라스 70% 주장",
+"url": "https://www.laprensa.hn/economia/huawei-tecnologia-5g-lista-funcionar-honduras-IXLP1302318"
+},
+{
+"label": "TeleSemana 2026-10-21 주파수 재경매",
+"url": "https://www.telesemana.com/blog/2026/10/21/honduras-vuelve-a-licitar-espectro-y-apunta-a-ampliar-la-cobertura-movil-y-avanzar-hacia-5g/"
+}
+]
+},
+{
+"iso3": "CRI",
+"name_ko": "코스타리카",
+"carriers": [
+{
+"name": "Kölbi (ICE)",
+"name_local": "Instituto Costarricense de Electricidad (국영)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"Huawei"
+],
+"4g": [
+"Huawei"
+],
+"5g": [
+"Ericsson",
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2016,
+"text": "Huawei와 4G LTE 강화 계약(3G 제어장비도 Huawei)",
+"source": "https://www.elfinancierocr.com/tecnologia/sistemas-para-telefonia-movil-y-datos-son-las/PQM3GSUOING7ZCMZWDV6EURF2M/story/"
+},
+{
+"year": 2023,
+"text": "그룹사 Racsa, Nokia에 5G FWA 3천만 달러 발주(3.5GHz, 200개 기지국)",
+"source": "https://semanariouniversidad.com/pais/grupo-ice-coloca-orden-de-compra-por-30-millones-a-multinacional-nokia-para-despliegue-de-5g/"
+},
+{
+"year": 2026,
+"text": "5G망 Ericsson 주계약(약 2.2억 달러, Open RAN SA), Coasin-Nokia 기지국 장비·연결",
+"source": "https://www.telesemana.com/blog/2026/04/30/el-grupo-ice-de-costa-rica-le-adjudico-a-ericsson-su-red-5g-para-que-tenga-una-arquitectura-open-ran-stand-alone/"
+},
+{
+"year": 2026,
+"text": "감사원, Ericsson 낙찰 확정하되 백홀 항목은 무효화(2026.7)",
+"source": "https://delfino.cr/2026/07/contraloria-deja-en-firme-adjudicacion-de-red-5g-a-ericsson-pero-anula-partidas-de-backhaul"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson 보도자료 - ICE 5G 선정(2026)",
+"url": "https://www.ericsson.com/es/press-releases/latin-america/2026/ice-selecciona-a-ericsson-para-desplegar-la-red-5g-de-costa-rica"
+},
+{
+"label": "TeleSemana - ICE 5G Open RAN SA",
+"url": "https://www.telesemana.com/blog/2026/04/30/el-grupo-ice-de-costa-rica-le-adjudico-a-ericsson-su-red-5g-para-que-tenga-una-arquitectura-open-ran-stand-alone/"
+},
+{
+"label": "El Financiero - ICE 계약 현황(2017)",
+"url": "https://www.elfinancierocr.com/tecnologia/sistemas-para-telefonia-movil-y-datos-son-las/PQM3GSUOING7ZCMZWDV6EURF2M/story/"
+},
+{
+"label": "Delfino - 감사원 결정(2026.7)",
+"url": "https://delfino.cr/2026/07/contraloria-deja-en-firme-adjudicacion-de-red-5g-a-ericsson-pero-anula-partidas-de-backhaul"
+},
+{
+"label": "CR Hoy - 부다페스트 협약 미비준국 기업 참여 가능(2024.1)",
+"url": "https://crhoy.com/tecnologia/empresas-en-paises-que-no-ratificaron-convenio-de-budapest-pueden-participar-en-licitacion-5g/"
+}
+]
+},
+{
+"name": "Claro CR",
+"name_local": "Claro Costa Rica (América Móvil)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Huawei",
+"Cisco",
+"Oracle"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "2025.9.17 5G NSA 개시(기지국 350여개) — 액세스 Ericsson, 코어 Huawei·Cisco·Oracle 혼합",
+"source": "https://semanariouniversidad.com/pais/claro-golpea-la-mesa-con-lanzamiento-inmediato-de-5g-y-deja-a-kolbi-en-la-cola-de-la-carrera/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Semanario Universidad - Claro 5G 개시(2025.9)",
+"url": "https://semanariouniversidad.com/pais/claro-golpea-la-mesa-con-lanzamiento-inmediato-de-5g-y-deja-a-kolbi-en-la-cola-de-la-carrera/"
+}
+]
+},
+{
+"name": "Liberty CR",
+"name_local": "Liberty Latin America (구 Telefónica Costa Rica)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "Ericsson 6년 계약, 1,400여 사이트 전국 5G SA(RAN·듀얼모드 5GC) — 중미 최초 SA",
+"source": "https://rcrwireless.com/20250716/5g/ericsson-liberty-5g-sa"
+},
+{
+"year": 2026,
+"text": "Ericsson과 주요 지역·관광지로 5G 단계적 확대",
+"source": "https://www.ericsson.com/en/press-releases/latin-america/2026/liberty-and-ericsson-enhance-5g-coverage-to-key-regions-and-tourist-communities-in-costa-rica"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "RCR Wireless - Ericsson·Liberty 5G SA(2025.7)",
+"url": "https://rcrwireless.com/20250716/5g/ericsson-liberty-5g-sa"
+},
+{
+"label": "Ericsson 보도자료(2026)",
+"url": "https://www.ericsson.com/en/press-releases/latin-america/2026/liberty-and-ericsson-enhance-5g-coverage-to-key-regions-and-tourist-communities-in-costa-rica"
+},
+{
+"label": "Fierce Network - Ericsson·Nokia 코스타리카 SA",
+"url": "https://www.fierce-network.com/wireless/5g-sa-goes-south-border"
+},
+{
+"label": "Semanario Universidad - Liberty 협력사(Ericsson·Cisco·HP·Huawei)",
+"url": "https://semanariouniversidad.com/pais/decreto-5g-de-chaves-que-excluye-a-huawei-hunde-a-kolbi-ice-mientras-claro-y-liberty-avanzan-sin-restricciones/"
+}
+]
+}
+],
+"country_note": "2023.8.31 행정령 44196-MSP-MICITT로 부다페스트 사이버범죄협약 미동의국 기업을 5G 핵심망에서 배제(중남미 유일 중국 배제). 당초 한국 기업도 해당 우려가 있었으나 MICITT가 한국 대사관 질의에 한국 기업 참여 가능 회신(2024.1), ICE 시장조사에 Samsung이 잠재 입찰자로 언급. 2025.4 5G 주파수 할당, Liberty·Claro 2025년 상용화, ICE는 2026 Ericsson 낙찰. Samsung 수주 없음.",
+"sources": [
+{
+"label": "Semanario Universidad - 행정령 44196 및 Huawei 배제",
+"url": "https://semanariouniversidad.com/pais/decreto-5g-de-chaves-que-excluye-a-huawei-hunde-a-kolbi-ice-mientras-claro-y-liberty-avanzan-sin-restricciones/"
+},
+{
+"label": "Semanario Universidad - 중남미 유일 중국 배제",
+"url": "https://semanariouniversidad.com/pais/costa-rica-ha-sido-el-unico-pais-de-latinoamerica-en-excluir-a-empresas-chinas-de-sus-redes-5g/"
+},
+{
+"label": "CR Hoy - MICITT 한국 기업 참여 가능 회신",
+"url": "https://crhoy.com/tecnologia/empresas-en-paises-que-no-ratificaron-convenio-de-budapest-pueden-participar-en-licitacion-5g/"
+},
+{
+"label": "TeleSemana - 코스타리카 5G 계약 승인(2025.7)",
+"url": "https://www.telesemana.com/blog/2025/07/29/costa-rica-da-luz-verde-al-5g-contraloria-refrenda-contratos-y-comienza-el-despliegue-comercial/"
+}
+]
+},
+{
+"iso3": "PAN",
+"name_ko": "파나마",
+"carriers": [
+{
+"name": "Más Móvil (+Móvil)",
+"name_local": "Cable & Wireless Panamá (Liberty Latin America, 구 Claro PA 흡수)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [],
+"ims": [
+"Ericsson"
+]
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2016,
+"text": "Ericsson IMS·EPC로 전국 Core 업그레이드(VoWiFi·VoLTE)",
+"source": "https://www.ericsson.com/es/press-releases/2016/2/la-solucion-core-de-ericsson-habilitara-wi-fi-calling-y-volte-para-cable--wireless-en-panama"
+},
+{
+"year": 2022,
+"text": "C&W Panamá, América Móvil의 Claro Panamá 인수 완료",
+"source": "https://www.businesswire.com/news/home/20220630005937/en/Cable-Wireless-Panam-Completes-the-Acquisition-of-Amrica-Mvils-Panama-Operations"
+},
+{
+"year": 2024,
+"text": "LTE 주파수 DSS로 5G 시범·파나마시 366개 지점 구축(장비사 미공개)",
+"source": "https://www.datacenterdynamics.com/es/noticias/mas-movil-despliega-red-5g-en-mas-de-360-puntos-de-la-ciudad-de-panama/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Ericsson 보도자료 - C&W Panamá Core(2016.2)",
+"url": "https://www.ericsson.com/es/press-releases/2016/2/la-solucion-core-de-ericsson-habilitara-wi-fi-calling-y-volte-para-cable--wireless-en-panama"
+},
+{
+"label": "Business Wire - Claro Panamá 인수 완료(2022.6)",
+"url": "https://www.businesswire.com/news/home/20220630005937/en/Cable-Wireless-Panam-Completes-the-Acquisition-of-Amrica-Mvils-Panama-Operations"
+},
+{
+"label": "DCD - Más Móvil 5G 366개 지점(2024.10)",
+"url": "https://www.datacenterdynamics.com/es/noticias/mas-movil-despliega-red-5g-en-mas-de-360-puntos-de-la-ciudad-de-panama/"
+}
+]
+},
+{
+"name": "Tigo Panamá",
+"name_local": "Telefónica Móviles Panamá → Millicom (2019)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2023,
+"text": "1억 달러 이상 현대화 계획, LTE 사이트 커버리지 95%·5G 준비(장비사 미공개)",
+"source": "https://www.revistaeyn.com/empresasymanagement/tigo-proyecta-invertir-en-panama-mas-de-us-100-millones-en-plan-de-modernizacion-PG12414128"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Revista E&N - Tigo Panamá 현대화(2023.3)",
+"url": "https://www.revistaeyn.com/empresasymanagement/tigo-proyecta-invertir-en-panama-mas-de-us-100-millones-en-plan-de-modernizacion-PG12414128"
+}
+]
+}
+],
+"country_note": "현재 전국 MNO는 +Móvil(C&W Panamá, Liberty)과 Tigo Panamá 2개. Claro PA는 2022년 C&W에 흡수, Digicel 2024년 철수. 정부가 제3사업자 유치용 3.5GHz 5G 입찰(01-2026-Telco) 추진했으나 2026.8.11 사전심사 응찰자 0. 전용 5G 주파수 미할당으로 DSS 기반 5G만 존재. 화웨이 규제 없음. Samsung 수주 사례 미확인.",
+"sources": [
+{
+"label": "DPL News - 제3사업자 응찰자 없음(2026.8)",
+"url": "https://dplnews.com/panama-queda-sin-postores-tercer-operador-movil/"
+},
+{
+"label": "TeleSemana - 파나마 5G 입찰 공고(2026.6)",
+"url": "https://www.telesemana.com/blog/2026/06/05/panama-anuncio-su-licitacion-de-espectro-5g-y-oficializo-su-apuesta-por-abrir-el-juego-a-un-tercer-operador-movil/"
+}
+]
+},
+{
+"iso3": "DOM",
+"name_ko": "도미니카공화국",
+"carriers": [
+{
+"name": "Claro Dominicana",
+"name_local": "Compañía Dominicana de Teléfonos (Claro)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Huawei"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2019,
+"text": "5G 전환용 장비를 Huawei에서 구매(2019.5 보도)",
+"source": "https://eldia.com.do/telefonica-dominicana-trae-tecnologia-de-huawei-para-ofrecer-servicio-5g/"
+},
+{
+"year": 2021,
+"text": "3.5GHz 70MHz 확보 후 5G 상용화(2021.12.1, 산토도밍고 29개 사이트)",
+"source": "https://dplnews.com/5g-llega-a-republica-dominicana-gracias-a-claro/"
+},
+{
+"year": 2026,
+"text": "LPI-001-2026 경매에서 700MHz 20MHz 추가 확보(2026.8)",
+"source": "https://www.telesemana.com/blog/2026/08/19/viettel-y-claro-las-ganadoras-de-la-nueva-licitacion-de-espectro-de-republica-dominicana/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "El Día 2019-05-22 Claro·Huawei 5G 장비",
+"url": "https://eldia.com.do/telefonica-dominicana-trae-tecnologia-de-huawei-para-ofrecer-servicio-5g/"
+},
+{
+"label": "DPL News 2019-06-06 RD 5G 마케팅(Claro=Huawei)",
+"url": "https://dplnews.com/?p=14387"
+},
+{
+"label": "DPL News 2021-12-02 Claro 5G 상용화",
+"url": "https://dplnews.com/5g-llega-a-republica-dominicana-gracias-a-claro/"
+}
+]
+},
+{
+"name": "Altice Dominicana",
+"name_local": "Altice (구 Orange Dominicana)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"Huawei"
+],
+"4g": [
+"Huawei"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2015,
+"text": "Orange Dominicana 시절 3G·4G 및 광망 확장을 Huawei에 발주(안테나 1,000개)",
+"source": "https://www.telesemana.com/blog/2015/05/12/orange-dominicana-confio-a-huawei-la-expansion-de-sus-redes-moviles-y-de-fibra/"
+},
+{
+"year": 2022,
+"text": "5G 상용화(2022.2.22, 산토도밍고 구시가지·산티아고). 3.4~3.6GHz 총 100MHz, 벤더 미공개",
+"source": "https://dplnews.com/?p=138650"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "TeleSemana 2015-05-12 Orange Dominicana·Huawei",
+"url": "https://www.telesemana.com/blog/2015/05/12/orange-dominicana-confio-a-huawei-la-expansion-de-sus-redes-moviles-y-de-fibra/"
+},
+{
+"label": "DPL News 2022-02 Altice 5G 개시",
+"url": "https://dplnews.com/?p=138650"
+},
+{
+"label": "Revista Mercado 2022-02-18 Altice 5G 100MHz",
+"url": "https://revistamercado.do/empresas/altice-5g-republica-dominicana-certificados-de-licencia-indotel/"
+}
+]
+},
+{
+"name": "Viva",
+"name_local": "Trilogy Dominicana (Viva)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Ericsson"
+],
+"3g": [
+"Ericsson"
+],
+"4g": [
+"Ericsson"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "전국(단독 공급, 2G 교체·3G 신규·LTE 4x4 MIMO 확장)",
+"gens": [
+"2g",
+"3g",
+"4g"
+],
+"source": "https://www.ericsson.com/es/press-releases/latin-america/2017/4/viva-y-ericsson-los-primeros-en-ofrecer-4x4-mimo-lte-a-republica-dominicana-mediante-la-expansion-de-la-red"
+}
+],
+"share": [
+{
+"vendor": "Ericsson",
+"pct": 100,
+"sites": null,
+"basis": "2G/3G/4G RAN 단독 공급(Ericsson 보도자료)",
+"asof": "2017-04",
+"type": "estimate",
+"source": "https://www.ericsson.com/es/press-releases/latin-america/2017/4/viva-y-ericsson-los-primeros-en-ofrecer-4x4-mimo-lte-a-republica-dominicana-mediante-la-expansion-de-la-red"
+}
+],
+"issues": [
+{
+"year": 2017,
+"text": "Ericsson 5년 계약: 2G/3G/4G 전면 현대화 단독 공급, 국내 최초 4x4 MIMO",
+"source": "https://www.ericsson.com/es/press-releases/latin-america/2017/4/viva-y-ericsson-los-primeros-en-ofrecer-4x4-mimo-lte-a-republica-dominicana-mediante-la-expansion-de-la-red"
+},
+{
+"year": 2017,
+"text": "Ericsson Charging System·Multi Mediation(BSS) 도입",
+"source": "https://www.ericsson.com/es/press-releases/2017/8/viva-dominicana-implementa-ericsson-charging-system-y-4g-4x4-mimo"
+},
+{
+"year": 2019,
+"text": "Ericsson과 5G 시연. 2021년 3.5GHz 할당은 Claro·Altice만 받아 5G 미상용",
+"source": "https://dplnews.com/?p=14387"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson 2017-04-20 Viva 4x4 MIMO",
+"url": "https://www.ericsson.com/es/press-releases/latin-america/2017/4/viva-y-ericsson-los-primeros-en-ofrecer-4x4-mimo-lte-a-republica-dominicana-mediante-la-expansion-de-la-red"
+},
+{
+"label": "Ericsson 2017-08-23 Viva Charging",
+"url": "https://www.ericsson.com/es/press-releases/2017/8/viva-dominicana-implementa-ericsson-charging-system-y-4g-4x4-mimo"
+}
+]
+},
+{
+"name": "Viettel Dominicana",
+"name_local": "Viettel Dominicana",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2026,
+"text": "제4사업자로 진출, 5.6억달러 투자 계획(2026.6)",
+"source": "https://dplnews.com/?p=317826"
+},
+{
+"year": 2026,
+"text": "700MHz 40·2.3GHz 100·3.6GHz 100 = 총 240MHz 20년 낙찰(2026.8)",
+"source": "https://www.telesemana.com/blog/2026/08/19/viettel-y-claro-las-ganadoras-de-la-nueva-licitacion-de-espectro-de-republica-dominicana/"
+},
+{
+"year": 2026,
+"text": "Indotel 20년 면허 계약(2026.11.16), 2027.2~3월 개시 예상. 인프라 벤더 미정",
+"source": "https://revistamercado.do/empresas/viettel-firma-indotel-cuarta-telefonica-rd-cuando-opera/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "DPL News 2026-06-01 Viettel 제4사업자",
+"url": "https://dplnews.com/?p=317826"
+},
+{
+"label": "TeleSemana 2026-08-19 LPI-001-2026 결과",
+"url": "https://www.telesemana.com/blog/2026/08/19/viettel-y-claro-las-ganadoras-de-la-nueva-licitacion-de-espectro-de-republica-dominicana/"
+},
+{
+"label": "Revista Mercado 2026-11 Viettel 면허 계약",
+"url": "https://revistamercado.do/empresas/viettel-firma-indotel-cuarta-telefonica-rd-cuando-opera/"
+},
+{
+"label": "Revista Mercado 2026-08-28 Viettel·Qualcomm Open RAN",
+"url": "https://revistamercado.do/money-invest/daily-news/por-que-la-alianza-de-viettel-y-qualcomm-podria-impactar-las-telecomunicaciones-en-rd/"
+}
+]
+}
+],
+"country_note": "Claro·Altice가 5G 운영(2021.12/2022.2), Viva는 Ericsson 단독. 2020.11 미 'Clean Network' 압박 속 Huawei 5G 배제 보도가 있었으나 2021.2 경매 조건에서는 배제하지 않음. 2026.9 Indotel이 '신뢰할 수 있는 공급사' 조항(부다페스트협약 비준국 본사 요건)으로 중국·러시아·인도 장비를 사실상 배제하는 통신법 초안을 공개 협의에 부침. 베트남 Viettel이 제4사업자로 2027년 개시 예정이며 벤더는 미정. Samsung에는 잠재적 기회.",
+"sources": [
+{
+"label": "Our Today 2020-11-24 RD Huawei 5G 배제 보도",
+"url": "https://our.today/dom-rep-bans-huawei-from-building-out-its-5g-network/"
+},
+{
+"label": "RCR Wireless 2021-02-17 경매서 Huawei 미배제",
+"url": "https://www.rcrwireless.com/20210217/policy/huawei-catches-a-5g-break-in-the-dominican-republic"
+},
+{
+"label": "DPL News 2026-09-04 Indotel 통신법 초안(신뢰 공급사)",
+"url": "https://dplnews.com/indotel-ley-regula-centros-datos-excluye-proveedores/"
+}
+]
+},
+{
 "iso3": "BRA",
 "name_ko": "브라질",
 "carriers": [
@@ -4172,6 +6767,183 @@
 ]
 },
 {
+"iso3": "ECU",
+"name_ko": "에콰도르",
+"carriers": [
+{
+"name": "Claro EC",
+"name_local": "Conecel (América Móvil)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "2025.10.30 주파수 계약 갱신(Claro·Movistar 합계 8.8억 달러, 2038년까지), 12.3 5G 상용 개시",
+"source": "https://www.expreso.ec/actualidad/economia/claro-inaugura-el-servicio-5g-en-ecuador-como-operara-266572.html"
+},
+{
+"year": 2026,
+"text": "향후 3년간 6억 달러 투자 발표, 5G 가입자 100만 돌파(2026.7)",
+"source": "https://www.telesemana.com/blog/2026/03/13/claro-anuncio-que-invertira-us-600-millones-en-ecuador-en-los-proximos-3-anos/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Expreso - Claro 5G 개시(2025.12)",
+"url": "https://www.expreso.ec/actualidad/economia/claro-inaugura-el-servicio-5g-en-ecuador-como-operara-266572.html"
+},
+{
+"label": "TeleSemana - Claro 6억 달러 투자",
+"url": "https://www.telesemana.com/blog/2026/03/13/claro-anuncio-que-invertira-us-600-millones-en-ecuador-en-los-proximos-3-anos/"
+},
+{
+"label": "Vistazo - Claro 5G 100만 사용자",
+"url": "https://www.vistazo.com/negocios/empresas/2026-07-03-claro-conecta-millon-usuarios-nueva-red-5g-ecuador-NF11143295"
+}
+]
+},
+{
+"name": "Tigo Ecuador (Movistar 브랜드 유지)",
+"name_local": "Otecel (Millicom, 구 Telefónica Ecuador)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "Millicom, Telefónica Ecuador 3.8억 달러 인수 완료 — Movistar 브랜드로 영업 지속",
+"source": "https://mfn.se/all/a/millicom/millicom-tigo-acquires-telefonica-ecuador-for-usd-380-million-strengthening-its-south-american-footprint-fba2f556"
+},
+{
+"year": 2026,
+"text": "Millicom 4년간 4.5억 달러 투자 계획, 5G 상용화(CNT·Claro 이후 3번째)",
+"source": "https://www.telesemana.com/blog/2026/04/30/ecuador-acelera-el-5g-y-supera-metas-tras-renegociar-concesiones/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Millicom 보도자료 - Telefónica Ecuador 인수",
+"url": "https://mfn.se/all/a/millicom/millicom-tigo-acquires-telefonica-ecuador-for-usd-380-million-strengthening-its-south-american-footprint-fba2f556"
+},
+{
+"label": "DPL News - Millicom 에콰도르 인수 완료",
+"url": "https://dplnews.com/?p=294355"
+},
+{
+"label": "TeleSemana - 에콰도르 5G 가속(2026.4)",
+"url": "https://www.telesemana.com/blog/2026/04/30/ecuador-acelera-el-5g-y-supera-metas-tras-renegociar-concesiones/"
+}
+]
+},
+{
+"name": "CNT",
+"name_local": "Corporación Nacional de Telecomunicaciones EP",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"Huawei",
+"Nokia"
+],
+"4g": [
+"Huawei",
+"Nokia"
+],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Nokia",
+"area": "Guayas·Los Ríos·Manabí·Bolívar·Morona Santiago·Santa Elena 6개 주(3G/LTE 현대화 및 5G NSA)",
+"gens": [
+"3g",
+"4g",
+"5g"
+],
+"source": "https://www.rcrwireless.com/?p=189242"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "Nokia가 Huawei 대체해 6개 주 3G/LTE 현대화·5G NSA 수주(기존 4G는 Huawei)",
+"source": "https://www.expreso.ec/actualidad/economia/nokia-desplaza-huawei-desplegar-red-5g-ecuador-100008.html"
+},
+{
+"year": 2025,
+"text": "2025.10.8 국내 최초 5G 상용 개시(3.5GHz, 기지국 422개 계획)",
+"source": "https://www.primicias.ec/economia/cnt-lanzamiento-5g-red-celulares-ciudades-clientes-ecuador-106906/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "RCR Wireless - Nokia, CNT 5G 계약(2021.3)",
+"url": "https://www.rcrwireless.com/?p=189242"
+},
+{
+"label": "Expreso - Nokia desplaza a Huawei",
+"url": "https://www.expreso.ec/actualidad/economia/nokia-desplaza-huawei-desplegar-red-5g-ecuador-100008.html"
+},
+{
+"label": "Primicias - CNT 5G 개시",
+"url": "https://www.primicias.ec/economia/cnt-lanzamiento-5g-red-celulares-ciudades-clientes-ecuador-106906/"
+}
+]
+}
+],
+"country_note": "별도 5G 경매 대신 Claro·Movistar(Tigo) 주파수 계약 갱신(2025.10.30, 8.8억 달러·2038년까지)에 5G 포함. CNT(2025.10)→Claro(2025.12)→Tigo 순 상용화, 2025년 말 5G 기지국 233개. Millicom이 Telefónica Ecuador 인수 완료(2025). 화웨이 배제 규제 없음. Claro·Tigo 장비사는 공개자료로 미확인. Samsung 수주 사례 미확인.",
+"sources": [
+{
+"label": "TeleSemana - Ecuador acelera el 5G",
+"url": "https://www.telesemana.com/blog/2026/04/30/ecuador-acelera-el-5g-y-supera-metas-tras-renegociar-concesiones/"
+},
+{
+"label": "Expreso - Claro·Movistar 8.8억 달러",
+"url": "https://www.expreso.ec/actualidad/economia/claro-y-movistar-pagaran-880-millones-ecuador-por-concesion-de-frecuencias-263326.html"
+}
+]
+},
+{
 "iso3": "PER",
 "name_ko": "페루",
 "carriers": [
@@ -4388,6 +7160,155 @@
 {
 "label": "TeleSemana Integratel 2025-06-11",
 "url": "https://www.telesemana.com/blog/2025/06/11/integratel-peru-es-la-nueva-identidad-de-telefonica-del-peru-y-duena-de-us-102-millones-para-5g/"
+}
+]
+},
+{
+"iso3": "BOL",
+"name_ko": "볼리비아",
+"carriers": [
+{
+"name": "Entel BO",
+"name_local": "Empresa Nacional de Telecomunicaciones (국영)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2018,
+"text": "Huawei TubeStar 일체형 매크로 사이트 상용 구축",
+"source": "https://thefastmode.com/technology-solutions/12816-bolivias-entel-deploys-huaweis-all-in-one-small-footprint-urban-macro-site-solution-tubestar"
+},
+{
+"year": 2025,
+"text": "3.5GHz 100MHz로 5G 개시, 2025.11 기준 9개 주도에 기지국 101개",
+"source": "https://dplnews.com/?p=294627"
+},
+{
+"year": 2026,
+"text": "5G 및 노후 4G 장비 교체에 1억 달러 이상 투자(장비사 미공개)",
+"source": "https://eju.tv/?p=5044678"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "The Fast Mode - Entel·Huawei TubeStar(2018)",
+"url": "https://thefastmode.com/technology-solutions/12816-bolivias-entel-deploys-huaweis-all-in-one-small-footprint-urban-macro-site-solution-tubestar"
+},
+{
+"label": "DPL News - Entel 5G 101개 기지국",
+"url": "https://dplnews.com/?p=294627"
+},
+{
+"label": "TeleSemana - Entel 5G 시험(2025.7)",
+"url": "https://www.telesemana.com/blog/2025/07/11/entel-bolivia-inicia-las-pruebas-de-5g-en-distintos-puntos-estrategicos-del-pais/"
+}
+]
+},
+{
+"name": "Tigo BO",
+"name_local": "Telefónica Celular de Bolivia (Millicom)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Ericsson"
+],
+"5g": []
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "Millicom 1.35억 달러 현대화(온두라스·파라과이·볼리비아): Ericsson RAN, 4G Core 교체, 듀얼모드 5GC",
+"source": "https://www.globenewswire.com/de/news-release/2021/07/08/2259810/0/en/Millicom-to-invest-135-million-to-modernize-its-mobile-networks-in-partnership-with-Ericsson-in-Honduras-Paraguay-and-Bolivia.html"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Millicom 보도자료(2021.7.8)",
+"url": "https://www.globenewswire.com/de/news-release/2021/07/08/2259810/0/en/Millicom-to-invest-135-million-to-modernize-its-mobile-networks-in-partnership-with-Ericsson-in-Honduras-Paraguay-and-Bolivia.html"
+},
+{
+"label": "Ericsson - Ericsson and Millicom drive digital inclusion",
+"url": "https://www.ericsson.com/en/news/4/2021/ericsson-and-millicom---tigo-drive-digital-inclusion-in-latin-america"
+}
+]
+},
+{
+"name": "Viva",
+"name_local": "NuevaTel PCS de Bolivia",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2023,
+"text": "4G 확장 및 미개통 지역 커버리지 확대 계획 발표(장비사 미공개)",
+"source": "https://www.convergencialatina.com/Section-Analysis/347633-3-45-NuevaTel_aims_to_expand_Vivas_4G_network_and_deploy_connectivity_in_areas_with_little_or_no_coverage?Lang=EN"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Convergencia Latina - NuevaTel 4G 확장(2023.6)",
+"url": "https://www.convergencialatina.com/Section-Analysis/347633-3-45-NuevaTel_aims_to_expand_Vivas_4G_network_and_deploy_connectivity_in_areas_with_little_or_no_coverage?Lang=EN"
+}
+]
+}
+],
+"country_note": "규제기관 ATT가 Entel(국영)에 3.5GHz 100MHz 우선 배정, Entel이 2025년 하반기 5G 개시(2025.11 기지국 101개). Tigo는 2021년 Ericsson으로 RAN·Core 현대화. 화웨이 배제 규제 없음. Entel 5G 장비사는 공개자료 미확인(기존 Huawei 관계). Samsung 수주 사례 미확인.",
+"sources": [
+{
+"label": "DPL News - Entel 5G",
+"url": "https://dplnews.com/?p=294627"
+},
+{
+"label": "BNamericas - 볼리비아 5G 주파수 계획",
+"url": "https://bnamericas.com/en/news/bolivia-plans-to-allocate-5g-spectrum-in-2025"
 }
 ]
 },
@@ -4967,6 +7888,166 @@
 {
 "label": "La Nación 인수 승인 조건 2026-06-17",
 "url": "https://www.lanacion.com.ar/economia/el-gobierno-aprobaria-esta-semana-la-compra-de-telefonica-por-parte-de-telecom-con-la-condicion-de-nid17062026/"
+}
+]
+},
+{
+"iso3": "URY",
+"name_ko": "우루과이",
+"carriers": [
+{
+"name": "Antel",
+"name_local": "Administración Nacional de Telecomunicaciones (국영)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"Huawei"
+],
+"4g": [
+"Nokia"
+],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2011,
+"text": "Alcatel-Lucent(현 Nokia)와 남미 최초 상용 LTE 개시",
+"source": "https://prnewswire.com/news-releases/antel-and-alcatel-lucent-launch-4glte-services-in-uruguay-and-establish-the-first-commercial-4glte-wireless-network-in-a-latin-american-country-135501863.html"
+},
+{
+"year": 2019,
+"text": "Nokia와 중남미 최초 상용 5G(28GHz, 말도나도) — RAN·광전송 공급",
+"source": "https://nokia.com/about-us/news/releases/2019/04/10/antel-and-nokia-make-the-first-5g-call-on-a-commercial-network-in-latin-america"
+},
+{
+"year": 2026,
+"text": "5G 기지국 900개 달성, SA 전환 계획(일정 미정)",
+"source": "https://www.telesemana.com/blog/2026/09/16/antel-informa-900-radiobases-5g-y-un-alza-de-20-por-ciento-en-los-ingresos-del-antel-arena/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Nokia 보도자료(2019.4.10)",
+"url": "https://nokia.com/about-us/news/releases/2019/04/10/antel-and-nokia-make-the-first-5g-call-on-a-commercial-network-in-latin-america"
+},
+{
+"label": "Alcatel-Lucent 보도자료 - Antel LTE",
+"url": "https://prnewswire.com/news-releases/antel-and-alcatel-lucent-launch-4glte-services-in-uruguay-and-establish-the-first-commercial-4glte-wireless-network-in-a-latin-american-country-135501863.html"
+},
+{
+"label": "Converge Digest - Huawei, Antel UMTS 공급",
+"url": "https://convergedigest.com/huawei-to-supply-umts-for-uruguay-antel/"
+},
+{
+"label": "DPL News - Antel, Huawei·ZTE 계약 검토(2019)",
+"url": "https://dplnews.com/gobierno-uruguayo-evalua-si-mantiene-o-no-contratos-con-huawei/"
+},
+{
+"label": "TeleSemana - Antel 5G 900 기지국",
+"url": "https://www.telesemana.com/blog/2026/09/16/antel-informa-900-radiobases-5g-y-un-alza-de-20-por-ciento-en-los-ingresos-del-antel-arena/"
+}
+]
+},
+{
+"name": "Movistar UY (Tigo/Millicom)",
+"name_local": "Telefónica Móviles del Uruguay → Millicom",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2023,
+"text": "5G 경매서 3.5GHz 100MHz 확보",
+"source": "https://rcrwireless.com/20230510/featured/claro-movistar-secure-5g-spectrum-uruguay"
+},
+{
+"year": 2025,
+"text": "Millicom, Telefónica 우루과이 4.4억 달러 인수 완료(2025.10)",
+"source": "https://mfn.se/all/a/millicom/millicom-tigo-completes-acquisition-of-telefonica-in-uruguay-strengthening-its-regional-footprint-in-south-america-d3105158"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Millicom 보도자료 - 우루과이 인수 완료",
+"url": "https://mfn.se/all/a/millicom/millicom-tigo-completes-acquisition-of-telefonica-in-uruguay-strengthening-its-regional-footprint-in-south-america-d3105158"
+},
+{
+"label": "RCR Wireless - 우루과이 5G 경매(2023.5)",
+"url": "https://rcrwireless.com/20230510/featured/claro-movistar-secure-5g-spectrum-uruguay"
+}
+]
+},
+{
+"name": "Claro UY",
+"name_local": "AM Wireless Uruguay (América Móvil)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2023,
+"text": "3.5GHz 100MHz 2,810만 달러 낙찰, 5G용 Core 개조 완료(장비사 미공개)",
+"source": "https://dplnews.com/?p=198397"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "DPL News - Claro Uruguay 5G Core 개조",
+"url": "https://dplnews.com/?p=198397"
+}
+]
+}
+],
+"country_note": "Antel(국영)이 Nokia와 2019년 중남미 최초 상용 5G, 2023년 3.5GHz 100MHz 별도 배정받아 전국 확대(2026.9 기지국 900개). 2023.5 경매서 Claro·Movistar 각 100MHz. Antel은 과거 Huawei·ZTE와도 거래(3G 등). Millicom이 Telefónica 우루과이 인수 완료(2025.10). 화웨이 배제 규제 없음. Samsung 수주 사례 미확인.",
+"sources": [
+{
+"label": "RCR Wireless - Antel 5G 상용(2023.6)",
+"url": "https://www.rcrwireless.com/20230629/carriers/state-run-carrier-antel-launches-5g-services-in-uruguay"
+},
+{
+"label": "Nokia 보도자료(2019)",
+"url": "https://nokia.com/about-us/news/releases/2019/04/10/antel-and-nokia-make-the-first-5g-call-on-a-commercial-network-in-latin-america"
 }
 ]
 },
@@ -9708,6 +12789,1811 @@
 ]
 },
 {
+"iso3": "HUN",
+"name_ko": "헝가리",
+"carriers": [
+{
+"name": "Magyar Telekom",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Ericsson"
+],
+"3g": [
+"Ericsson"
+],
+"4g": [
+"Ericsson"
+],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [
+"Mavenir"
+],
+"5gc": [
+"Mavenir"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "Ericsson과 상용 5G(3.6GHz) 개시, 2G~4G 장기 파트너십 연장",
+"source": "https://www.rcrwireless.com/20200420/business/ericsson-magyar-telekom-5g-hungary"
+},
+{
+"year": 2022,
+"text": "Mavenir 클라우드 네이티브 Converged Packet Core(2G~5G NSA/SA) 선정",
+"source": "https://www.lightreading.com/service-provider-cloud/magyar-telekom-selects-mavenirs-converged-packet-core/d/d-id/781831"
+}
+],
+"confidence": "high",
+"sources": [
+{
+"label": "RCR Wireless (2020-04-20)",
+"url": "https://www.rcrwireless.com/20200420/business/ericsson-magyar-telekom-5g-hungary"
+},
+{
+"label": "Light Reading (2022-11-17)",
+"url": "https://www.lightreading.com/service-provider-cloud/magyar-telekom-selects-mavenirs-converged-packet-core/d/d-id/781831"
+},
+{
+"label": "Direkt36 (2020-07-03)",
+"url": "https://www.direkt36.hu/en/?p=6258"
+}
+]
+},
+{
+"name": "Yettel Hungary",
+"name_local": "Yettel Magyarország (舊 Telenor Hungary)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"ZTE"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "Telenor 시절 4G는 ZTE 공급, 5G 벤더 입찰 진행(PPF는 Huawei 선호 관측)",
+"source": "https://www.direkt36.hu/en/?p=6258"
+},
+{
+"year": 2023,
+"text": "2021년 착수한 안테나·코어 현대화로 5G SA 개시(벤더 미공개)",
+"source": "https://en.yettel.hu/press/press-release/yettel-launches-the-most-advanced-5g-network-for-its-customers"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Direkt36 (2020-07-03)",
+"url": "https://www.direkt36.hu/en/?p=6258"
+},
+{
+"label": "Yettel HU 보도자료 (2023-11-20)",
+"url": "https://en.yettel.hu/press/press-release/yettel-launches-the-most-advanced-5g-network-for-its-customers"
+}
+]
+},
+{
+"name": "One Hungary",
+"name_local": "One Magyarország (舊 Vodafone Hungary)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei"
+],
+"5g": [
+"Huawei"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [
+{
+"vendor": "Huawei",
+"pct": 100,
+"sites": null,
+"basis": "네트워크 전체(Strand Consult 분석 인용 보도)",
+"asof": "2020",
+"type": "estimate",
+"source": "https://www.direkt36.hu/en/?p=6258"
+}
+],
+"issues": [
+{
+"year": 2019,
+"text": "Huawei 장비로 부다페스트 한정 5G 개시",
+"source": "https://www.direkt36.hu/en/?p=6258"
+},
+{
+"year": 2020,
+"text": "英 Vodafone 본사, Huawei 코어 5년 내 교체 방침(헝가리 포함 보도)",
+"source": "https://www.direkt36.hu/en/?p=6258"
+},
+{
+"year": 2022,
+"text": "4iG·국가(Corvinus)가 Vodafone HU 인수 → 2025년 One 브랜드 전환",
+"source": "https://www.rcrwireless.com/20220822/featured/vodafone-to-sell-hungary-operations-to-4ig-state-for-1-8-billion"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Direkt36 (2020-07-03)",
+"url": "https://www.direkt36.hu/en/?p=6258"
+},
+{
+"label": "CMS 5G Guide Hungary",
+"url": "https://cms.law/en/int/expert-guides/cms-expert-guide-to-5g-regulation-and-law/hungary"
+}
+]
+}
+],
+"country_note": "국가 차원 고위험 벤더(HRS) 규제 프레임워크 없음(Cullen 2026-03, 헝가리·불가리아 등 4개국). 美 Clean Network 불참, 2023년 中과 5G·6G 협력 합의 등 정부는 Huawei 우호적. Magyar Telekom(DT)은 Ericsson 단일 RAN, One(舊 Vodafone)은 Huawei 중심. 조사 범위 내 Samsung 공급 사례 미확인.",
+"sources": [
+{
+"label": "Cullen International (2026-03-23)",
+"url": "https://www.cullen-international.com/news/2026/03/National-frameworks-for-high-risk-suppliers-in-Europe.html"
+},
+{
+"label": "CMS 5G Guide Hungary",
+"url": "https://cms.law/en/int/expert-guides/cms-expert-guide-to-5g-regulation-and-law/hungary"
+},
+{
+"label": "Direkt36 (2020-07-03)",
+"url": "https://www.direkt36.hu/en/?p=6258"
+}
+]
+},
+{
+"iso3": "SVK",
+"name_ko": "슬로바키아",
+"carriers": [
+{
+"name": "Orange Slovensko",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "Nokia AirScale로 5G RAN 준비 계약(NetAct 포함)",
+"source": "https://telecomlead.com/telecom-equipment/orange-slovensko-selects-nokia-to-prepare-radio-network-for-5g-93984"
+},
+{
+"year": 2026,
+"text": "기업 고객 대상 5G SA 제공 중(벤더 미공개)",
+"source": "https://www.pulse.bot/telecom/news/slovak-operators-prepare-to-make-5g-sa-available-to-all-customers-eventually-74c60fb8-b815-4a61-9600-9c162d87375e/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "TelecomLead (2020-02-10)",
+"url": "https://telecomlead.com/telecom-equipment/orange-slovensko-selects-nokia-to-prepare-radio-network-for-5g-93984"
+},
+{
+"label": "Slovak Spectator/SYM (2020-12-17)",
+"url": "https://www.symsite.sk/single-post/5g-technology-will-be-supplied-by-ericsson-slovak-telekom-and-o2-nokia-orange-and-zte-4ka"
+}
+]
+},
+{
+"name": "Slovak Telekom",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "Ericsson Radio System·스펙트럼 공유로 상용 5G 개시",
+"source": "https://www.ericsson.com/en/press-releases/3/2020/slovak-telekom-to-launch-commercial-5g-with-ericsson"
+},
+{
+"year": 2026,
+"text": "기업 고객 대상 5G SA 제공 중(벤더 미공개)",
+"source": "https://www.pulse.bot/telecom/news/slovak-operators-prepare-to-make-5g-sa-available-to-all-customers-eventually-74c60fb8-b815-4a61-9600-9c162d87375e/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson 보도자료 (2020-12-15)",
+"url": "https://www.ericsson.com/en/press-releases/3/2020/slovak-telekom-to-launch-commercial-5g-with-ericsson"
+}
+]
+},
+{
+"name": "O2 Slovakia",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Ericsson"
+],
+"3g": [
+"Ericsson"
+],
+"4g": [
+"Ericsson"
+],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "Ericsson 단독 5G RAN 선정 + 기존 2G~4G RAN 현대화(기존 벤더 미공개)",
+"source": "https://www.ericsson.com/en/news/3/2021/o2-slovakia-opts-for-ericsson-as-5g-partner"
+},
+{
+"year": 2026,
+"text": "2026년 중 5G SA 출시 계획",
+"source": "https://www.pulse.bot/telecom/news/slovak-operators-prepare-to-make-5g-sa-available-to-all-customers-eventually-74c60fb8-b815-4a61-9600-9c162d87375e/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson (2021-04-22)",
+"url": "https://www.ericsson.com/en/news/3/2021/o2-slovakia-opts-for-ericsson-as-5g-partner"
+}
+]
+},
+{
+"name": "4ka",
+"name_local": "4ka (SWAN Mobile)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"ZTE"
+],
+"5g": [
+"ZTE"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2019,
+"text": "4G 인프라 ZTE 기반, 5G도 ZTE와 협력 지속",
+"source": "https://touchit.sk/vyskusali-sme-5g-siet-na-slovensku-huawei-v-sieti-4ky/261812"
+},
+{
+"year": 2020,
+"text": "5G ZTE 선정, 中 장비 규제 시 벤더 변경 가능성 언급",
+"source": "https://www.symsite.sk/single-post/5g-technology-will-be-supplied-by-ericsson-slovak-telekom-and-o2-nokia-orange-and-zte-4ka"
+},
+{
+"year": 2026,
+"text": "5G SA 2027년 출시 계획",
+"source": "https://www.pulse.bot/telecom/news/slovak-operators-prepare-to-make-5g-sa-available-to-all-customers-eventually-74c60fb8-b815-4a61-9600-9c162d87375e/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Touchit (2019-11-02)",
+"url": "https://touchit.sk/vyskusali-sme-5g-siet-na-slovensku-huawei-v-sieti-4ky/261812"
+},
+{
+"label": "Lupa.cz",
+"url": "https://www.lupa.cz/aktuality/na-slovensku-otestovali-prvni-5g-videohovor-stavi-na-technologiich-zte/"
+},
+{
+"label": "SYM (2020-12-17)",
+"url": "https://www.symsite.sk/single-post/5g-technology-will-be-supplied-by-ericsson-slovak-telekom-and-o2-nokia-orange-and-zte-4ka"
+}
+]
+}
+],
+"country_note": "사이버보안법(Act 69/2018) 개정으로 NBÚ(국가안보청)가 정부 승인하에 특정 공급사 사용 제한·금지 가능(기존 장비 2~5년 유예). 다만 2024-08 기준 Huawei·ZTE 금지 결정 없음. Cullen(2026-03)은 NIS2 전 분야 적용 프레임워크로 분류. 4ka가 유일한 ZTE 의존 사업자. Samsung 공급 사례 미확인.",
+"sources": [
+{
+"label": "Lupa.cz (2024-08-13)",
+"url": "https://www.lupa.cz/clanky/regulace-podle-nis2-slovaci-k-zakazum-dodavatele-novelu-kyberzakona-nepotrebuji/"
+},
+{
+"label": "Cullen International (2026-03-23)",
+"url": "https://www.cullen-international.com/news/2026/03/National-frameworks-for-high-risk-suppliers-in-Europe.html"
+},
+{
+"label": "SYM (2020-12-17)",
+"url": "https://www.symsite.sk/single-post/5g-technology-will-be-supplied-by-ericsson-slovak-telekom-and-o2-nokia-orange-and-zte-4ka"
+}
+]
+},
+{
+"iso3": "CZE",
+"name_ko": "체코",
+"carriers": [
+{
+"name": "O2 Czech Republic",
+"name_local": "O2 CZ (망 보유: CETIN, PPF)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Ericsson"
+],
+"3g": [
+"Huawei(종료 2021)"
+],
+"4g": [
+"Ericsson"
+],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "전국 단독 — CETIN 2020 계약, 4,000+ 기지국 Huawei(및 모라비아 일부 Nokia) 장비 교체, 2024년 대부분 완료",
+"gens": [
+"2g",
+"4g",
+"5g"
+],
+"source": "https://www.lupa.cz/clanky/5g-vsude-do-tri-let-o2-a-cetin-rozjely-nejvetsi-modernizaci-mobilni-site-v-historii/"
+}
+],
+"share": [
+{
+"vendor": "Ericsson",
+"pct": 100,
+"sites": 4200,
+"basis": "CETIN 전국 Ericsson 단독 교체(4,000+ 기지국; 모라비아 4,200 로케이션 중 2,600 완료 2023.8), 2024 대부분 완료",
+"asof": "2024",
+"type": "estimate",
+"source": "https://insidetowers.com/?p=55607"
+}
+],
+"issues": [
+{
+"year": 2020,
+"text": "CETIN, Huawei 대신 Ericsson을 5G 단독 공급사로 선정(수십억 CZK)",
+"source": "https://ct24.ceskatelevize.cz/clanek/ekonomika/cetin-si-vybral-za-vyhradniho-dodavatele-5g-firmu-ericsson-43153"
+},
+{
+"year": 2021,
+"text": "4,000+ 기지국 Huawei→Ericsson 교체 착수(3년), 3G 11월 종료",
+"source": "https://www.lupa.cz/clanky/5g-vsude-do-tri-let-o2-a-cetin-rozjely-nejvetsi-modernizaci-mobilni-site-v-historii/"
+},
+{
+"year": 2023,
+"text": "모라비아 현대화: Huawei·Nokia 장비 Ericsson으로 교체(4,200 중 2,600 완료)",
+"source": "https://insidetowers.com/?p=55607"
+},
+{
+"year": 2024,
+"text": "Ericsson CETIN 현대화 마무리 단계, Huawei 제거로 Ericsson CZ 매출 10억 CZK 돌파",
+"source": "https://www.lupa.cz/aktuality/ericsson-dokoncuje-velkou-modernizaci-site-pro-cetin-a-letos-spusti-prvni-samostatne-5g-jadro"
+},
+{
+"year": 2025,
+"text": "체코 최초 5G SA 코어 상용 — Nokia CNF + Red Hat OpenShift, 구 코어 2026 폐쇄 예정",
+"source": "https://www.lupa.cz/clanky/mobilni-sit-o2-nabidne-rychlost-2-gb-s-a-velmi-nizke-odezvy-nokia-diky-dodavce-noveho-jadra-slavi-navrat/"
+}
+],
+"confidence": "high",
+"sources": [
+{
+"label": "ČT24 — CETIN Ericsson 단독 5G 공급사 선정",
+"url": "https://ct24.ceskatelevize.cz/clanek/ekonomika/cetin-si-vybral-za-vyhradniho-dodavatele-5g-firmu-ericsson-43153"
+},
+{
+"label": "Lupa.cz — O2/CETIN 최대 현대화 (2021.06)",
+"url": "https://www.lupa.cz/clanky/5g-vsude-do-tri-let-o2-a-cetin-rozjely-nejvetsi-modernizaci-mobilni-site-v-historii/"
+},
+{
+"label": "Inside Towers — Moravia Ericsson replacing Huawei/Nokia (2023.08)",
+"url": "https://insidetowers.com/?p=55607"
+},
+{
+"label": "Lupa.cz — O2 Nokia 5G SA 코어 (2025.07)",
+"url": "https://www.lupa.cz/clanky/mobilni-sit-o2-nabidne-rychlost-2-gb-s-a-velmi-nizke-odezvy-nokia-diky-dodavce-noveho-jadra-slavi-navrat/"
+},
+{
+"label": "Developing Telecoms — 체코 3G 종료 (2021.12)",
+"url": "https://www.developingtelecoms.com/telecom-technology/data-centres-networks/12445-czech-mate-for-3g-as-o2-and-t-mobile-complete-shutdown.html"
+}
+]
+},
+{
+"name": "T-Mobile Czech Republic",
+"name_local": "T-Mobile CZ (Deutsche Telekom; 일부 지역 CETIN과 RAN 공유)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"Huawei(종료 2021)"
+],
+"4g": [
+"Huawei",
+"Ericsson"
+],
+"5g": [
+"Huawei",
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Huawei",
+"area": "CETIN(O2)과 공유하지 않는 자체 구축 지역",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+},
+{
+"vendor": "Ericsson",
+"area": "CETIN과 RAN 공유 지역(CETIN망 Ericsson)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "3G 11월 종료 완료",
+"source": "https://www.developingtelecoms.com/telecom-technology/data-centres-networks/12445-czech-mate-for-3g-as-o2-and-t-mobile-complete-shutdown.html"
+},
+{
+"year": 2022,
+"text": "DT 독일 코어 Huawei→Mavenir 교체 발표, 체코 T-Mobile은 RAN Huawei 유지 입장",
+"source": "https://www.lupa.cz/aktuality/vlastnik-ceskeho-t-mobilu-v-jadru-site-nahradi-huawei-technologii-vyvijenou-i-v-brne/"
+},
+{
+"year": 2025,
+"text": "5G SA 코어 상용 준비(B2B 사설망은 운영 중), 공급사 미공개(Ericsson 또는 Mavenir 유력)",
+"source": "https://www.lupa.cz/aktuality/take-cesky-t-mobile-chysta-spusteni-noveho-moderniho-jadra-5g-site-doda-ho-ericsson/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Lupa.cz — 체코 벤더 지형(Nokia comeback) (2024.10)",
+"url": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+},
+{
+"label": "Lupa.cz — T-Mobile CZ 5G SA 코어 준비 (2025.07)",
+"url": "https://www.lupa.cz/aktuality/take-cesky-t-mobile-chysta-spusteni-noveho-moderniho-jadra-5g-site-doda-ho-ericsson/"
+},
+{
+"label": "Lupa.cz — DT Mavenir 코어, 체코 RAN Huawei 유지 (2022.09)",
+"url": "https://www.lupa.cz/aktuality/vlastnik-ceskeho-t-mobilu-v-jadru-site-nahradi-huawei-technologii-vyvijenou-i-v-brne/"
+}
+]
+},
+{
+"name": "Vodafone Czech Republic",
+"name_local": "Vodafone CZ",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [
+"Huawei(종료 2021)"
+],
+"4g": [
+"Huawei"
+],
+"5g": [
+"Huawei"
+]
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Huawei",
+"area": "전국 RAN(2007년부터 전략 파트너); 코어는 Huawei 미사용(Ericsson)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.lupa.cz/aktuality/neni-to-pravda-reaguje-cesky-vodafone-na-informace-ze-zcela-zavisi-na-huawei/"
+}
+],
+"share": [
+{
+"vendor": "Huawei",
+"pct": null,
+"sites": null,
+"basis": "Strand Consult: RAN 100% Huawei 주장 → Vodafone은 '복수 벤더 사용' 반박(비중 미공개)",
+"asof": "2020",
+"type": "estimate",
+"source": "https://www.lupa.cz/aktuality/neni-to-pravda-reaguje-cesky-vodafone-na-informace-ze-zcela-zavisi-na-huawei/"
+}
+],
+"issues": [
+{
+"year": 2020,
+"text": "Huawei 100% 의존 보도 반박; 코어 Huawei 배제 방침, 5G 시험은 Ericsson 코어+Huawei 라디오",
+"source": "https://www.lupa.cz/aktuality/neni-to-pravda-reaguje-cesky-vodafone-na-informace-ze-zcela-zavisi-na-huawei/"
+},
+{
+"year": 2021,
+"text": "체코 최초 3G 종료(3월)",
+"source": "https://www.developingtelecoms.com/telecom-technology/data-centres-networks/12445-czech-mate-for-3g-as-o2-and-t-mobile-complete-shutdown.html"
+},
+{
+"year": 2024,
+"text": "5G RAN Huawei 유지; 5G SA 코어 준비(Ericsson 유력), 중국 부품 배제 방침",
+"source": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Lupa.cz — Vodafone CZ Huawei 의존 반박 (2020.06)",
+"url": "https://www.lupa.cz/aktuality/neni-to-pravda-reaguje-cesky-vodafone-na-informace-ze-zcela-zavisi-na-huawei/"
+},
+{
+"label": "Lupa.cz — 체코 벤더 지형 (2024.10)",
+"url": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+},
+{
+"label": "Lupa.cz — 3대 사업자 SA 코어 전환 (2025.07)",
+"url": "https://www.lupa.cz/aktuality/take-cesky-t-mobile-chysta-spusteni-noveho-moderniho-jadra-5g-site-doda-ho-ericsson/"
+}
+]
+}
+],
+"country_note": "체코 NÚKIB(국가사이버정보보안청)는 2018.12 Huawei·ZTE 보안경고를 발령, 공공부문 중심 제한. 신(新)사이버보안법(264/2025 Coll., NIS2 이행)이 2025.11.1 발효 — 공급망 보안 메커니즘으로 지정 공급사·장비 제한 권한 부여(세부 정부령 미완). O2/CETIN은 2020~24 Huawei→Ericsson 전면 교체, SA 코어 Nokia. T-Mobile·Vodafone은 RAN Huawei 유지, 코어만 비중국화 추진. 3G 2021 전면 종료.",
+"sources": [
+{
+"label": "NÚKIB — 공급망 보안 강화 입장",
+"url": "https://nukib.gov.cz/en/infoservis-en/news/1886-increasing-the-supply-chain-security-of-the-state-s-strategic-infrastructure-is-in-the-interest-of-the-czech-republic"
+},
+{
+"label": "Bird & Bird — 체코 사이버보안법 264/2025 (2025.11 발효)",
+"url": "https://cm.twobirds.com/en/insights/2026/what-to-expect-in-2026-in-czech-cybersecurity-and-telecommunications-law"
+},
+{
+"label": "Lupa.cz — 체코 5G RAN 벤더 지형 (2024.10)",
+"url": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+}
+]
+},
+{
+"iso3": "POL",
+"name_ko": "폴란드",
+"carriers": [
+{
+"name": "Orange Polska",
+"name_local": "Orange Polska (RAN 공유: NetWorkS! JV with T-Mobile)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Nokia",
+"Huawei"
+],
+"3g": [
+"Nokia(종료 2025)",
+"Huawei(종료 2025)"
+],
+"4g": [
+"Nokia",
+"Huawei"
+],
+"5g": [
+"Nokia",
+"Huawei"
+]
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Nokia",
+"area": "폴란드 북부 — 망의 약 50%, 10년 연장 계약(2022, C-band 5G·3G 철거 포함)",
+"gens": [
+"2g",
+"3g",
+"4g",
+"5g"
+],
+"source": "https://www.developingtelecoms.com/telecom-business/operator-news/13573-nokia-bags-ten-year-contract-extension-with-orange-polska.html"
+},
+{
+"vendor": "Huawei",
+"area": "폴란드 남부(NetWorkS! 2012 선정 영역) — 기존 공급사, C-band 5G도 Huawei 장비로 개통",
+"gens": [
+"2g",
+"3g",
+"4g",
+"5g"
+],
+"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+}
+],
+"share": [
+{
+"vendor": "Nokia",
+"pct": 50,
+"sites": null,
+"basis": "Nokia 10년 계약이 '망의 약 50%(북부)' 커버",
+"asof": "2022",
+"type": "official",
+"source": "https://www.developingtelecoms.com/telecom-business/operator-news/13573-nokia-bags-ten-year-contract-extension-with-orange-polska.html"
+},
+{
+"vendor": "Huawei",
+"pct": 50,
+"sites": null,
+"basis": "잔여분(남부) Huawei 추정",
+"asof": "2024",
+"type": "estimate",
+"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+}
+],
+"issues": [
+{
+"year": 2012,
+"text": "NetWorkS!(Orange·T-Mobile RAN 공유 JV) Huawei·Nokia 선정, T-Mobile측 Ericsson 교체",
+"source": "https://www.lightreading.com/mobile-core/ericsson-ousted-from-shared-network"
+},
+{
+"year": 2022,
+"text": "Ericsson과 5년 5G SA 코어(클라우드, 4G/NSA/SA 통합) 계약(2월)",
+"source": "https://www.telepolis.pl/wiadomosci/orange-siec-rdzeniowa-5g-ericsson"
+},
+{
+"year": 2022,
+"text": "Nokia 10년 조기 연장 — 북부 50% 현대화·C-band 5G·3G 철거",
+"source": "https://www.developingtelecoms.com/telecom-business/operator-news/13573-nokia-bags-ten-year-contract-extension-with-orange-polska.html"
+},
+{
+"year": 2024,
+"text": "C-band 5G를 기존 Nokia·Huawei 장비로 개통(1월)",
+"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+},
+{
+"year": 2025,
+"text": "약 12,000 기지국 업그레이드 후 3G 종료 완료(11월)",
+"source": "https://www.benchmark.pl/aktualnosci/orange-koniec-3g-t-mobile-play-plus.html"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Developing Telecoms — Nokia 10년 연장 (2022.06)",
+"url": "https://www.developingtelecoms.com/telecom-business/operator-news/13573-nokia-bags-ten-year-contract-extension-with-orange-polska.html"
+},
+{
+"label": "Telepolis — Orange 5G 코어 Ericsson (2022.02)",
+"url": "https://www.telepolis.pl/wiadomosci/orange-siec-rdzeniowa-5g-ericsson"
+},
+{
+"label": "GSMOnline — C-band 5G Huawei 장비 (2024.01)",
+"url": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+},
+{
+"label": "Light Reading — NetWorkS! 벤더 선정 (2012)",
+"url": "https://www.lightreading.com/mobile-core/ericsson-ousted-from-shared-network"
+}
+]
+},
+{
+"name": "Play",
+"name_local": "P4 Sp. z o.o. (Iliad)",
+"type": "MNO",
+"subs_m": 15.0,
+"subs_asof": "2021",
+"ran": {
+"2g": [
+"Huawei",
+"Ericsson"
+],
+"3g": [
+"Huawei(종료 2025)",
+"Ericsson(종료 2025)"
+],
+"4g": [
+"Huawei",
+"Ericsson"
+],
+"5g": [
+"Huawei",
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "전국 일부 — 2018 전국 확장 계약, 2021 Iliad 인수 후 5G RAN 파트너십 연장(사이트 현대화, 4x4 MIMO)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.lightreading.com/5g/eurobites-ericsson-extends-5g-ran-partnership-with-play-in-poland/d/d-id/773222"
+},
+{
+"vendor": "Huawei",
+"area": "전국 다수 — Huawei 기지국 수가 Ericsson보다 훨씬 많음",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+}
+],
+"share": [
+{
+"vendor": "Huawei",
+"pct": null,
+"sites": null,
+"basis": "현지 전문지: 'Huawei 기지국이 Ericsson보다 훨씬 많음'(다수 공급사)",
+"asof": "2024",
+"type": "estimate",
+"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+}
+],
+"issues": [
+{
+"year": 2018,
+"text": "Ericsson, 전국 망 확장 가속 공급사로 선정",
+"source": "https://www.telecomtv.com/content/radio-access-network/play-selects-ericsson-to-accelerate-nationwide-mobile-network-expansion-in-poland-31840/"
+},
+{
+"year": 2021,
+"text": "Iliad 인수 후 Ericsson과 5G RAN 파트너십 연장(전국 사이트 현대화)",
+"source": "https://www.lightreading.com/5g/eurobites-ericsson-extends-5g-ran-partnership-with-play-in-poland/d/d-id/773222"
+},
+{
+"year": 2024,
+"text": "C-band 5G를 Huawei 장비 중심으로 개통, 공급사 다변화 지속 입장",
+"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+},
+{
+"year": 2025,
+"text": "4월부터 3G 단계적 종료, 2025년말 완료 목표",
+"source": "https://www.benchmark.pl/aktualnosci/orange-koniec-3g-t-mobile-play-plus.html"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Light Reading — Ericsson extends 5G RAN partnership with Play (2021.11)",
+"url": "https://www.lightreading.com/5g/eurobites-ericsson-extends-5g-ran-partnership-with-play-in-poland/d/d-id/773222"
+},
+{
+"label": "Ericsson PR(FR) — Play 5G RAN 협력 강화 (2021.10)",
+"url": "https://www.ericsson.com/fr/press-releases/3/2021/10/ericsson-et-play-renforcent-leur-partenariat-dans-le-domaine-des-reseaux-dacces-radio-5g"
+},
+{
+"label": "GSMOnline — Play Huawei 기지국 다수 (2024.01)",
+"url": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+}
+]
+},
+{
+"name": "T-Mobile Polska",
+"name_local": "T-Mobile Polska (RAN 공유: NetWorkS! JV with Orange)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Nokia",
+"Huawei"
+],
+"3g": [
+"Nokia(종료 2023)",
+"Huawei(종료 2023)"
+],
+"4g": [
+"Nokia",
+"Huawei"
+],
+"5g": [
+"Nokia",
+"Huawei"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Nokia",
+"area": "전국 약 50% — 2022년 10년 계약으로 Nokia 비중 50%로 확대(AirScale, Massive MIMO)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://itwire.com/5g/nokia-extends-partnership-with-t-mobile-polska-in-ten-year-deal"
+},
+{
+"vendor": "Huawei",
+"area": "나머지 약 50%(NetWorkS! 2012 선정 영역)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+}
+],
+"share": [
+{
+"vendor": "Nokia",
+"pct": 50,
+"sites": null,
+"basis": "Nokia 발표: 10년 계약으로 T-Mobile 망 내 비중 50%",
+"asof": "2022",
+"type": "official",
+"source": "https://itwire.com/5g/nokia-extends-partnership-with-t-mobile-polska-in-ten-year-deal"
+},
+{
+"vendor": "Huawei",
+"pct": 50,
+"sites": null,
+"basis": "현지 전문지: 망의 약 절반이 중국산, 나머지 Nokia",
+"asof": "2024",
+"type": "estimate",
+"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+}
+],
+"issues": [
+{
+"year": 2012,
+"text": "NetWorkS! 공동망 Huawei·Nokia 선정으로 기존 Ericsson 장비 교체",
+"source": "https://www.lightreading.com/mobile-core/ericsson-ousted-from-shared-network"
+},
+{
+"year": 2022,
+"text": "Nokia 10년 계약 — 전국 RAN 현대화·5G(DSS 저대역, 3.5GHz 도심)",
+"source": "https://itwire.com/5g/nokia-extends-partnership-with-t-mobile-polska-in-ten-year-deal"
+},
+{
+"year": 2023,
+"text": "3G 종료 완료(폴란드 최초)",
+"source": "https://www.benchmark.pl/aktualnosci/orange-koniec-3g-t-mobile-play-plus.html"
+},
+{
+"year": 2024,
+"text": "C-band 5G 사이트에 Huawei 장비 사용(비공식 확인)",
+"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "iTWire — Nokia extends partnership with T-Mobile Polska (2022.03)",
+"url": "https://itwire.com/5g/nokia-extends-partnership-with-t-mobile-polska-in-ten-year-deal"
+},
+{
+"label": "GSMOnline — T-Mobile 망 절반 중국산 (2024.01)",
+"url": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+},
+{
+"label": "Light Reading — NetWorkS! 2012",
+"url": "https://www.lightreading.com/mobile-core/ericsson-ousted-from-shared-network"
+}
+]
+},
+{
+"name": "Plus",
+"name_local": "Polkomtel (Grupa Polsat Plus; 인프라 일부 Cellnex Poland 보유)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Nokia",
+"Ericsson"
+],
+"3g": [
+"Nokia",
+"Ericsson"
+],
+"4g": [
+"Nokia",
+"Ericsson"
+],
+"5g": [
+"Ericsson",
+"Nokia"
+]
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "2020 첫 5G(2.6GHz TDD) 5개 도시(그단스크·우치·포즈난·슈체친·브로츠와프) + 5G 코어/EPC",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.ericsson.com/en/news/2020/1/polkomtel-plus-5g-in-poland-with-ericsson"
+},
+{
+"vendor": "Nokia",
+"area": "2020.12 Nokia와 5G 서비스 개통(기타 지역)",
+"gens": [
+"4g",
+"5g"
+],
+"source": "https://www.developingtelecoms.com/telecom-technology/wireless-networks/10474-nokia-and-polkomtel-switch-on-5g-services-in-poland.html.md"
+}
+],
+"share": [
+{
+"vendor": "Huawei",
+"pct": 0,
+"sites": null,
+"basis": "현지 전문지: Plus는 중국산 장비 미사용, Nokia·Ericsson만 사용",
+"asof": "2024",
+"type": "estimate",
+"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+}
+],
+"issues": [
+{
+"year": 2020,
+"text": "Ericsson 5G RAN+5G 코어(EPC 포함)로 폴란드 최초 상용 5G(2.6GHz TDD, 85+ 사이트)",
+"source": "https://www.ericsson.com/en/news/2020/1/polkomtel-plus-5g-in-poland-with-ericsson"
+},
+{
+"year": 2020,
+"text": "Nokia와도 5G 서비스 개통(12월)",
+"source": "https://www.developingtelecoms.com/telecom-technology/wireless-networks/10474-nokia-and-polkomtel-switch-on-5g-services-in-poland.html.md"
+},
+{
+"year": 2025,
+"text": "3G 단계적 종료 준비 착수 발표(11월, 일정 미정)",
+"source": "https://www.benchmark.pl/aktualnosci/orange-koniec-3g-t-mobile-play-plus.html"
+},
+{
+"year": 2026,
+"text": "Cellnex Poland(Plus 인프라), Ericsson을 5G RAN 현대화·확장 공급사 중 하나로 선정(9월)",
+"source": "https://www.ericsson.com/en/news/3/2026/ericsson-selected-for-5g-ran-modernization-and-expansion-by-cellnex-poland"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Ericsson — Polkomtel Plus 5G (2020.02)",
+"url": "https://www.ericsson.com/en/news/2020/1/polkomtel-plus-5g-in-poland-with-ericsson"
+},
+{
+"label": "Developing Telecoms — Nokia and Polkomtel switch on 5G (2020.12)",
+"url": "https://www.developingtelecoms.com/telecom-technology/wireless-networks/10474-nokia-and-polkomtel-switch-on-5g-services-in-poland.html.md"
+},
+{
+"label": "Ericsson — Cellnex Poland 5G RAN (2026.09)",
+"url": "https://www.ericsson.com/en/news/3/2026/ericsson-selected-for-5g-ran-modernization-and-expansion-by-cellnex-poland"
+},
+{
+"label": "GSMOnline — Plus 중국산 미사용 (2024.01)",
+"url": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+}
+]
+}
+],
+"country_note": "폴란드는 EU 내 Huawei RAN 잔존 최대 시장(Orange·T-Mobile 각 ~50%, Play 다수; Plus만 비중국). 국가사이버보안체계법(KSC) 개정안이 2026.1 하원 통과(407:10), 2.19 대통령 서명 후 헌법재판소 회부 — 디지털장관이 '고위험 공급사' 지정 시 신규 도입 금지, 기존 장비 최대 7년(대형 통신사 4년) 내 철거. Huawei 명시 없으나 '렉스 화웨이'로 통칭, 보상 없는 교체 비용 논란. 삼성 등 대체 벤더 기회 창.",
+"sources": [
+{
+"label": "Notes from Poland — KSC 개정 서명·헌재 회부 (2026.02)",
+"url": "https://notesfrompoland.com/2026/02/21/poland-tightens-cybersecurity-rules-targeting-non-nato-suppliers/"
+},
+{
+"label": "Osborne Clarke — KSC 개정 HRV 절차·철거 기한 (2026.02)",
+"url": "https://www.osborneclarke.com/insights/polands-amendment-national-cybersecurity-system-act-has-been-signed-president"
+},
+{
+"label": "GSMOnline — 폴란드 C-band 5G Huawei 장비 현황 (2024.01)",
+"url": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
+},
+{
+"label": "Benchmark.pl — 폴란드 3G 종료 현황 (2025.12)",
+"url": "https://www.benchmark.pl/aktualnosci/orange-koniec-3g-t-mobile-play-plus.html"
+}
+]
+},
+{
+"iso3": "SVN",
+"name_ko": "슬로베니아",
+"carriers": [
+{
+"name": "Telekom Slovenije",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "Ericsson과 슬로베니아 최초 상용 5G 개시",
+"source": "https://www.ericsson.com/en/press-releases/2020/8/telekom-slovenije-and-ericsson-roll-out-first-5g-commercial-network-in-slovenia"
+},
+{
+"year": 2026,
+"text": "Ericsson RAN·듀얼모드 5GC·클라우드 인프라로 5G SA 개시",
+"source": "https://www.ericsson.com/en/press-releases/3/2026/telekom-slovenije-launches-5g-standalone-network"
+}
+],
+"confidence": "high",
+"sources": [
+{
+"label": "Ericsson (2020-08)",
+"url": "https://www.ericsson.com/en/press-releases/2020/8/telekom-slovenije-and-ericsson-roll-out-first-5g-commercial-network-in-slovenia"
+},
+{
+"label": "Ericsson (2026-05-12)",
+"url": "https://www.ericsson.com/en/press-releases/3/2026/telekom-slovenije-launches-5g-standalone-network"
+}
+]
+},
+{
+"name": "A1 Slovenija",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "A1 그룹, 슬로베니아 5G RAN+SA 코어 Nokia 단일 벤더 선정",
+"source": "https://www.rcrwireless.com/20210823/5g/a1-telekom-group-awards-nokia-single-vendor-three-country-5g-deal"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "RCR Wireless (2021-08-23)",
+"url": "https://www.rcrwireless.com/20210823/5g/a1-telekom-group-awards-nokia-single-vendor-three-country-5g-deal"
+},
+{
+"label": "Telecoms.com (2021-08-23)",
+"url": "https://telecoms.com/5g-6g/nokia-and-ericsson-continue-to-gain-ground-in-europe"
+}
+]
+},
+{
+"name": "Telemach Slovenija",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [
+"Nokia"
+],
+"5gc": [],
+"ims": [
+"Nokia"
+]
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "United Group, Nokia 클라우드 코어(패킷·음성·SDM) 도입",
+"source": "https://www.rcrwireless.com/20210812/5g/united-group-taps-nokia-for-core-network-upgrades-in-southeast-europe"
+},
+{
+"year": 2023,
+"text": "AKOS 보안 일반법령안에 'RAN 교체는 재무·조직상 극히 부담' 의견 제출",
+"source": "https://www.akos-rs.si/fileadmin/user_upload/dokumenti/Javna_posvetovanja_in_razpisi/Posvetovanja_2023/Pripombe_Telemacha_Slovenija_k_predlogu_Splosnega_akta_o_dodatnih_varnostnih_zahtevah_in_omejitvah.pdf"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "RCR Wireless (2021-08-12)",
+"url": "https://www.rcrwireless.com/20210812/5g/united-group-taps-nokia-for-core-network-upgrades-in-southeast-europe"
+},
+{
+"label": "AKOS 의견서 (2023-05-10)",
+"url": "https://www.akos-rs.si/fileadmin/user_upload/dokumenti/Javna_posvetovanja_in_razpisi/Posvetovanja_2023/Pripombe_Telemacha_Slovenija_k_predlogu_Splosnega_akta_o_dodatnih_varnostnih_zahtevah_in_omejitvah.pdf"
+}
+]
+}
+],
+"country_note": "2020-09 정부 '5G 위험저감 조치 결의'(EU Toolbox 기반) 채택, 2023-06 EC의 Huawei·ZTE 고위험 판단에 따라 개정. AKOS(통신규제청)가 공급사 위험평가 의무 일반법령안 추진(2023). Huawei는 2023-12 1.7억 유로 보상 요구. 4번째 MNO T-2는 Nokia 단독 5G RAN(2021). Samsung 공급 사례 미확인.",
+"sources": [
+{
+"label": "Siol.net (2020-09-30)",
+"url": "https://siol.net/novice/digisvet/vlada-sprejela-pomembno-odlocitev-o-omrezjih-5g-535452"
+},
+{
+"label": "N1 Slovenija (2023-06-23)",
+"url": "https://n1info.si/magazin/digitalno/huawei-in-zte-predstavljata-bistveno-vecja-tveganja-kot-drugi-dobavitelji-5g/"
+},
+{
+"label": "N1 Slovenija (2023-12-05)",
+"url": "https://n1info.si/magazin/digitalno/huawei-od-slovenije-terja-povracilo-stroskov-v-visini-170-milijonov-evrov/"
+},
+{
+"label": "Nokia/T-2 (2021-10-18)",
+"url": "https://www.globenewswire.com/news-release/2021/10/18/2315373/0/en/Nokia-selected-by-T-2-Slovenia-in-five-year-5G-deal-as-sole-supplier.html"
+}
+]
+},
+{
+"iso3": "HRV",
+"name_ko": "크로아티아",
+"carriers": [
+{
+"name": "Hrvatski Telekom",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "Ericsson(Nikola Tesla) 5G RAN 단독 공급사 선정",
+"source": "https://www.ericsson.com/en/press-releases/2020/6/hrvatski-telekom-croatia-selects-ericsson-as-sole-5g-ran-supplier"
+},
+{
+"year": 2023,
+"text": "Ericsson 듀얼모드 5G 코어(4G/5G) 단독 공급, T-CaaS 클라우드",
+"source": "https://www.developingtelecoms.com/telecom-technology/telecom-cloud-virtualization/15939-ericsson-nikola-tesla-to-deploy-dual-mode-5g-core-in-croatia-and-montenegro.html"
+},
+{
+"year": 2024,
+"text": "Ericsson 5G RAN 계약 2027년 말까지 연장",
+"source": "https://www.t.ht.hr/en/Press/press-releases/7205/Hrvatski-Telekom-and-Ericsson-Nikola-Tesla-continue-to-cooperate-in-the-5G-radio-network-segment.html"
+}
+],
+"confidence": "high",
+"sources": [
+{
+"label": "Ericsson (2020-06)",
+"url": "https://www.ericsson.com/en/press-releases/2020/6/hrvatski-telekom-croatia-selects-ericsson-as-sole-5g-ran-supplier"
+},
+{
+"label": "HT 보도자료 (2024-01-23)",
+"url": "https://www.t.ht.hr/en/Press/press-releases/7205/Hrvatski-Telekom-and-Ericsson-Nikola-Tesla-continue-to-cooperate-in-the-5G-radio-network-segment.html"
+},
+{
+"label": "Developing Telecoms (2023-12-12)",
+"url": "https://www.developingtelecoms.com/telecom-technology/telecom-cloud-virtualization/15939-ericsson-nikola-tesla-to-deploy-dual-mode-5g-core-in-croatia-and-montenegro.html"
+}
+]
+},
+{
+"name": "A1 Hrvatska",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "A1 그룹, 크로아티아 5G 전체 네트워크 Ericsson 선정",
+"source": "https://telecoms.com/5g-6g/nokia-and-ericsson-continue-to-gain-ground-in-europe"
+},
+{
+"year": 2026,
+"text": "Ericsson Nikola Tesla 5년 독점 무선망 공급·유지보수 계약",
+"source": "https://ericssonnikolatesla.com/en/news/a1-hrvatska-and-ericsson-nikola-tesla-continue-to-cooperate-in-the-radio-network-segment/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Telecoms.com (2021-08-23)",
+"url": "https://telecoms.com/5g-6g/nokia-and-ericsson-continue-to-gain-ground-in-europe"
+},
+{
+"label": "SeeNews",
+"url": "https://seenews.com/news/a1-group-picks-ericsson-as-partner-in-core-5g-network-launch-in-croatia-752065"
+},
+{
+"label": "Ericsson Nikola Tesla (2026-05-27)",
+"url": "https://ericssonnikolatesla.com/en/news/a1-hrvatska-and-ericsson-nikola-tesla-continue-to-cooperate-in-the-radio-network-segment/"
+}
+]
+},
+{
+"name": "Telemach Hrvatska",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [
+"Nokia"
+],
+"5gc": [],
+"ims": [
+"Nokia"
+]
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "모회사 United Group, 인프라 Huawei 우세 → 교체 검토 발표",
+"source": "https://telecomlead.com/telecom-equipment/united-group-to-remove-huawei-equipment-from-mobile-network-99152"
+},
+{
+"year": 2021,
+"text": "Nokia 클라우드 코어(패킷·음성·3G코어·SDM) 도입",
+"source": "https://www.rcrwireless.com/20210812/5g/united-group-taps-nokia-for-core-network-upgrades-in-southeast-europe"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "RCR Wireless (2021-08-12)",
+"url": "https://www.rcrwireless.com/20210812/5g/united-group-taps-nokia-for-core-network-upgrades-in-southeast-europe"
+},
+{
+"label": "TelecomLead (2021-03-10)",
+"url": "https://telecomlead.com/telecom-equipment/united-group-to-remove-huawei-equipment-from-mobile-network-99152"
+}
+]
+}
+],
+"country_note": "국가 HRS 프레임워크는 '제안' 단계이며, HRS 장비 철거 의무 시 사업자에 국가 보상을 명시적으로 예정(Cullen 2026-03). HT(DT)·A1은 Ericsson Nikola Tesla(현지 Ericsson 법인) 중심. Telemach(United Group) RAN 벤더는 공개자료 미확인. Samsung 공급 사례 미확인.",
+"sources": [
+{
+"label": "Cullen International (2026-03-23)",
+"url": "https://www.cullen-international.com/news/2026/03/National-frameworks-for-high-risk-suppliers-in-Europe.html"
+}
+]
+},
+{
+"iso3": "SRB",
+"name_ko": "세르비아",
+"carriers": [
+{
+"name": "Telekom Srbija (mts)",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Ericsson",
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2017,
+"text": "Huawei와 전략적 광대역 협력 협정, 이전 세대는 Huawei 사용",
+"source": "https://www.slobodnaevropa.org/a/srbija-5g-mreza-sad-amerika-telekom-kina-huawei/33815930.html"
+},
+{
+"year": 2025,
+"text": "2025-12 5G 상용화, 5G는 Ericsson·Nokia 장비 기반",
+"source": "https://www.slobodnaevropa.org/a/srbija-5g-mreza-sad-amerika-telekom-kina-huawei/33815930.html"
+},
+{
+"year": 2026,
+"text": "美 EXIM 5천만 달러 대출(Juniper·Cisco 등 美 장비용)",
+"source": "https://developingtelecoms.com/telecom-business/operator-news/20227-telekom-srbija-secures-50m-exim-loan-for-serbia-5g-rollout.html"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "RFE/RL (2026-07-28)",
+"url": "https://www.slobodnaevropa.org/a/srbija-5g-mreza-sad-amerika-telekom-kina-huawei/33815930.html"
+},
+{
+"label": "Developing Telecoms (2026-05-11)",
+"url": "https://developingtelecoms.com/telecom-business/operator-news/20227-telekom-srbija-secures-50m-exim-loan-for-serbia-5g-rollout.html"
+},
+{
+"label": "bne IntelliNews (2025-12-03)",
+"url": "https://www.intellinews.com/serbia-launches-long-delayed-5g-network-414790/"
+}
+]
+},
+{
+"name": "Yettel Serbia",
+"name_local": "Yettel Srbija (舊 Telenor Serbia)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "2025-12-02 5G 상용 개시, Ericsson과 5G 구축",
+"source": "https://www.slobodnaevropa.org/a/srbija-5g-mreza-sad-amerika-telekom-kina-huawei/33815930.html"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "RFE/RL (2026-07-28)",
+"url": "https://www.slobodnaevropa.org/a/srbija-5g-mreza-sad-amerika-telekom-kina-huawei/33815930.html"
+},
+{
+"label": "Yettel RS (2025-12-02)",
+"url": "https://www.yettel.rs/en/about-yettel/news/news-and-press-releases/yettel-launches-5g/"
+}
+]
+},
+{
+"name": "A1 Srbija",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [
+"Nokia"
+],
+"3g": [],
+"4g": [
+"Nokia"
+],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "A1 그룹, 세르비아 5G RAN+SA 코어 Nokia 단일 벤더 선정",
+"source": "https://www.rcrwireless.com/20210823/5g/a1-telekom-group-awards-nokia-single-vendor-three-country-5g-deal"
+},
+{
+"year": 2026,
+"text": "RAN에 중국산 장비 사용 이력 없음(회사 입장)",
+"source": "https://www.slobodnaevropa.org/a/srbija-5g-mreza-sad-amerika-telekom-kina-huawei/33815930.html"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "RFE/RL (2026-07-28)",
+"url": "https://www.slobodnaevropa.org/a/srbija-5g-mreza-sad-amerika-telekom-kina-huawei/33815930.html"
+},
+{
+"label": "RCR Wireless (2021-08-23)",
+"url": "https://www.rcrwireless.com/20210823/5g/a1-telekom-group-awards-nokia-single-vendor-three-country-5g-deal"
+}
+]
+}
+],
+"country_note": "EU 비회원. 2025년 5G 경매(3사 약 3억 유로), 2025-12 상용화. 정부는 '사업자 자율 선택·위험기반 접근'이며 국가 5G 위험평가 준비 중, EC는 HRS 제한·배제 포함 Toolbox 완전 이행 요구. 국영 Telekom Srbija는 과거 Huawei 의존, 5G는 유럽 벤더. Samsung 공급 사례 미확인.",
+"sources": [
+{
+"label": "RFE/RL (2026-07-29)",
+"url": "https://www.slobodnaevropa.org/a/srbija-5g-mreza-eu-sajber-sigurnost-/33817545.html"
+},
+{
+"label": "bne IntelliNews (2025-12-03)",
+"url": "https://www.intellinews.com/serbia-launches-long-delayed-5g-network-414790/"
+}
+]
+},
+{
+"iso3": "BGR",
+"name_ko": "불가리아",
+"carriers": [
+{
+"name": "A1 Bulgaria",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2021,
+"text": "Nokia AirScale 5G RAN 주공급사, 75개 도시 NSA 개시",
+"source": "https://www.developingtelecoms.com/telecom-technology/wireless-networks/11310-a1-bulgaria-taps-nokia-for-5g-ran.html"
+},
+{
+"year": 2021,
+"text": "A1 그룹: 불가리아 RAN은 Nokia, 코어는 Ericsson 선정",
+"source": "https://telecoms.com/5g-6g/nokia-and-ericsson-continue-to-gain-ground-in-europe"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "Developing Telecoms (2021-06-10)",
+"url": "https://www.developingtelecoms.com/telecom-technology/wireless-networks/11310-a1-bulgaria-taps-nokia-for-5g-ran.html"
+},
+{
+"label": "Telecoms.com (2021-08-23)",
+"url": "https://telecoms.com/5g-6g/nokia-and-ericsson-continue-to-gain-ground-in-europe"
+},
+{
+"label": "RCR Wireless (2021-08-23)",
+"url": "https://www.rcrwireless.com/20210823/5g/a1-telekom-group-awards-nokia-single-vendor-three-country-5g-deal"
+}
+]
+},
+{
+"name": "Yettel Bulgaria",
+"name_local": "Yettel България (舊 Telenor/Globul)",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [
+"Huawei"
+],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2014,
+"text": "Globul, 네트워크 현대화 공급사로 Huawei 선정",
+"source": "https://www.capital.bg/biznes/kompanii/2014/03/10/2258728_globul_izbra_huawei_za_obnoviavaneto_na_mrejata_si/"
+},
+{
+"year": 2020,
+"text": "코어 네트워크 Huawei 사용(Capital 보도)",
+"source": "https://www.capital.bg/en/business/2020/10/15/4142675_5g_learning_to_walk_in_bulgaria/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Capital.bg (2014-03-10)",
+"url": "https://www.capital.bg/biznes/kompanii/2014/03/10/2258728_globul_izbra_huawei_za_obnoviavaneto_na_mrejata_si/"
+},
+{
+"label": "Capital.bg (2020-10-15)",
+"url": "https://www.capital.bg/en/business/2020/10/15/4142675_5g_learning_to_walk_in_bulgaria/"
+}
+]
+},
+{
+"name": "Vivacom",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei"
+],
+"5g": [
+"Huawei"
+]
+},
+"core": {
+"epc": [
+"Nokia",
+"Ericsson"
+],
+"5gc": [],
+"ims": [
+"Nokia"
+]
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2020,
+"text": "기지국 Huawei, 코어 Nokia·Ericsson, 전송 Cisco(Capital 보도)",
+"source": "https://www.capital.bg/en/business/2020/10/15/4142675_5g_learning_to_walk_in_bulgaria/"
+},
+{
+"year": 2021,
+"text": "United Group, Nokia 클라우드 코어(패킷·음성·SDM) 도입",
+"source": "https://www.rcrwireless.com/20210812/5g/united-group-taps-nokia-for-core-network-upgrades-in-southeast-europe"
+},
+{
+"year": 2021,
+"text": "모회사 United Group, Huawei 장비 일부/전체 교체 검토 발표",
+"source": "https://telecomlead.com/telecom-equipment/united-group-to-remove-huawei-equipment-from-mobile-network-99152"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "Capital.bg (2020-10-15)",
+"url": "https://www.capital.bg/en/business/2020/10/15/4142675_5g_learning_to_walk_in_bulgaria/"
+},
+{
+"label": "RCR Wireless (2021-08-12)",
+"url": "https://www.rcrwireless.com/20210812/5g/united-group-taps-nokia-for-core-network-upgrades-in-southeast-europe"
+},
+{
+"label": "TelecomLead (2021-03-10)",
+"url": "https://telecomlead.com/telecom-equipment/united-group-to-remove-huawei-equipment-from-mobile-network-99152"
+}
+]
+}
+],
+"country_note": "2020-10 美와 5G 보안 공동선언·Clean Network 가입(Huawei·ZTE 배제 취지)했으나 국가 HRS 규제 프레임워크는 미수립(Cullen 2026-03). Vivacom(United Group)·Yettel(PPF)은 Huawei 비중 높고, A1은 Nokia RAN·Ericsson 코어. Samsung 공급 사례 미확인.",
+"sources": [
+{
+"label": "TelecomLead (2020-10-24)",
+"url": "https://telecomlead.com/5g/bulgaria-and-us-sign-declaration-on-security-of-5g-networks-97335"
+},
+{
+"label": "Cullen International (2026-03-23)",
+"url": "https://www.cullen-international.com/news/2026/03/National-frameworks-for-high-risk-suppliers-in-Europe.html"
+}
+]
+},
+{
 "iso3": "SWE",
 "name_ko": "스웨덴",
 "carriers": [
@@ -11007,482 +15893,18 @@
 ]
 },
 {
-"iso3": "POL",
-"name_ko": "폴란드",
+"iso3": "EST",
+"name_ko": "에스토니아",
 "carriers": [
 {
-"name": "Orange Polska",
-"name_local": "Orange Polska (RAN 공유: NetWorkS! JV with T-Mobile)",
+"name": "Telia Eesti",
+"name_local": "",
 "type": "MNO",
 "subs_m": null,
 "subs_asof": "",
 "ran": {
-"2g": [
-"Nokia",
-"Huawei"
-],
-"3g": [
-"Nokia(종료 2025)",
-"Huawei(종료 2025)"
-],
-"4g": [
-"Nokia",
-"Huawei"
-],
-"5g": [
-"Nokia",
-"Huawei"
-]
-},
-"core": {
-"epc": [
-"Ericsson"
-],
-"5gc": [
-"Ericsson"
-],
-"ims": []
-},
-"regions": [
-{
-"vendor": "Nokia",
-"area": "폴란드 북부 — 망의 약 50%, 10년 연장 계약(2022, C-band 5G·3G 철거 포함)",
-"gens": [
-"2g",
-"3g",
-"4g",
-"5g"
-],
-"source": "https://www.developingtelecoms.com/telecom-business/operator-news/13573-nokia-bags-ten-year-contract-extension-with-orange-polska.html"
-},
-{
-"vendor": "Huawei",
-"area": "폴란드 남부(NetWorkS! 2012 선정 영역) — 기존 공급사, C-band 5G도 Huawei 장비로 개통",
-"gens": [
-"2g",
-"3g",
-"4g",
-"5g"
-],
-"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-}
-],
-"share": [
-{
-"vendor": "Nokia",
-"pct": 50,
-"sites": null,
-"basis": "Nokia 10년 계약이 '망의 약 50%(북부)' 커버",
-"asof": "2022",
-"type": "official",
-"source": "https://www.developingtelecoms.com/telecom-business/operator-news/13573-nokia-bags-ten-year-contract-extension-with-orange-polska.html"
-},
-{
-"vendor": "Huawei",
-"pct": 50,
-"sites": null,
-"basis": "잔여분(남부) Huawei 추정",
-"asof": "2024",
-"type": "estimate",
-"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-}
-],
-"issues": [
-{
-"year": 2012,
-"text": "NetWorkS!(Orange·T-Mobile RAN 공유 JV) Huawei·Nokia 선정, T-Mobile측 Ericsson 교체",
-"source": "https://www.lightreading.com/mobile-core/ericsson-ousted-from-shared-network"
-},
-{
-"year": 2022,
-"text": "Ericsson과 5년 5G SA 코어(클라우드, 4G/NSA/SA 통합) 계약(2월)",
-"source": "https://www.telepolis.pl/wiadomosci/orange-siec-rdzeniowa-5g-ericsson"
-},
-{
-"year": 2022,
-"text": "Nokia 10년 조기 연장 — 북부 50% 현대화·C-band 5G·3G 철거",
-"source": "https://www.developingtelecoms.com/telecom-business/operator-news/13573-nokia-bags-ten-year-contract-extension-with-orange-polska.html"
-},
-{
-"year": 2024,
-"text": "C-band 5G를 기존 Nokia·Huawei 장비로 개통(1월)",
-"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-},
-{
-"year": 2025,
-"text": "약 12,000 기지국 업그레이드 후 3G 종료 완료(11월)",
-"source": "https://www.benchmark.pl/aktualnosci/orange-koniec-3g-t-mobile-play-plus.html"
-}
-],
-"confidence": "medium",
-"sources": [
-{
-"label": "Developing Telecoms — Nokia 10년 연장 (2022.06)",
-"url": "https://www.developingtelecoms.com/telecom-business/operator-news/13573-nokia-bags-ten-year-contract-extension-with-orange-polska.html"
-},
-{
-"label": "Telepolis — Orange 5G 코어 Ericsson (2022.02)",
-"url": "https://www.telepolis.pl/wiadomosci/orange-siec-rdzeniowa-5g-ericsson"
-},
-{
-"label": "GSMOnline — C-band 5G Huawei 장비 (2024.01)",
-"url": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-},
-{
-"label": "Light Reading — NetWorkS! 벤더 선정 (2012)",
-"url": "https://www.lightreading.com/mobile-core/ericsson-ousted-from-shared-network"
-}
-]
-},
-{
-"name": "Play",
-"name_local": "P4 Sp. z o.o. (Iliad)",
-"type": "MNO",
-"subs_m": 15.0,
-"subs_asof": "2021",
-"ran": {
-"2g": [
-"Huawei",
-"Ericsson"
-],
-"3g": [
-"Huawei(종료 2025)",
-"Ericsson(종료 2025)"
-],
-"4g": [
-"Huawei",
-"Ericsson"
-],
-"5g": [
-"Huawei",
-"Ericsson"
-]
-},
-"core": {
-"epc": [],
-"5gc": [],
-"ims": []
-},
-"regions": [
-{
-"vendor": "Ericsson",
-"area": "전국 일부 — 2018 전국 확장 계약, 2021 Iliad 인수 후 5G RAN 파트너십 연장(사이트 현대화, 4x4 MIMO)",
-"gens": [
-"4g",
-"5g"
-],
-"source": "https://www.lightreading.com/5g/eurobites-ericsson-extends-5g-ran-partnership-with-play-in-poland/d/d-id/773222"
-},
-{
-"vendor": "Huawei",
-"area": "전국 다수 — Huawei 기지국 수가 Ericsson보다 훨씬 많음",
-"gens": [
-"4g",
-"5g"
-],
-"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-}
-],
-"share": [
-{
-"vendor": "Huawei",
-"pct": null,
-"sites": null,
-"basis": "현지 전문지: 'Huawei 기지국이 Ericsson보다 훨씬 많음'(다수 공급사)",
-"asof": "2024",
-"type": "estimate",
-"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-}
-],
-"issues": [
-{
-"year": 2018,
-"text": "Ericsson, 전국 망 확장 가속 공급사로 선정",
-"source": "https://www.telecomtv.com/content/radio-access-network/play-selects-ericsson-to-accelerate-nationwide-mobile-network-expansion-in-poland-31840/"
-},
-{
-"year": 2021,
-"text": "Iliad 인수 후 Ericsson과 5G RAN 파트너십 연장(전국 사이트 현대화)",
-"source": "https://www.lightreading.com/5g/eurobites-ericsson-extends-5g-ran-partnership-with-play-in-poland/d/d-id/773222"
-},
-{
-"year": 2024,
-"text": "C-band 5G를 Huawei 장비 중심으로 개통, 공급사 다변화 지속 입장",
-"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-},
-{
-"year": 2025,
-"text": "4월부터 3G 단계적 종료, 2025년말 완료 목표",
-"source": "https://www.benchmark.pl/aktualnosci/orange-koniec-3g-t-mobile-play-plus.html"
-}
-],
-"confidence": "medium",
-"sources": [
-{
-"label": "Light Reading — Ericsson extends 5G RAN partnership with Play (2021.11)",
-"url": "https://www.lightreading.com/5g/eurobites-ericsson-extends-5g-ran-partnership-with-play-in-poland/d/d-id/773222"
-},
-{
-"label": "Ericsson PR(FR) — Play 5G RAN 협력 강화 (2021.10)",
-"url": "https://www.ericsson.com/fr/press-releases/3/2021/10/ericsson-et-play-renforcent-leur-partenariat-dans-le-domaine-des-reseaux-dacces-radio-5g"
-},
-{
-"label": "GSMOnline — Play Huawei 기지국 다수 (2024.01)",
-"url": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-}
-]
-},
-{
-"name": "T-Mobile Polska",
-"name_local": "T-Mobile Polska (RAN 공유: NetWorkS! JV with Orange)",
-"type": "MNO",
-"subs_m": null,
-"subs_asof": "",
-"ran": {
-"2g": [
-"Nokia",
-"Huawei"
-],
-"3g": [
-"Nokia(종료 2023)",
-"Huawei(종료 2023)"
-],
-"4g": [
-"Nokia",
-"Huawei"
-],
-"5g": [
-"Nokia",
-"Huawei"
-]
-},
-"core": {
-"epc": [],
-"5gc": [],
-"ims": []
-},
-"regions": [
-{
-"vendor": "Nokia",
-"area": "전국 약 50% — 2022년 10년 계약으로 Nokia 비중 50%로 확대(AirScale, Massive MIMO)",
-"gens": [
-"4g",
-"5g"
-],
-"source": "https://itwire.com/5g/nokia-extends-partnership-with-t-mobile-polska-in-ten-year-deal"
-},
-{
-"vendor": "Huawei",
-"area": "나머지 약 50%(NetWorkS! 2012 선정 영역)",
-"gens": [
-"4g",
-"5g"
-],
-"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-}
-],
-"share": [
-{
-"vendor": "Nokia",
-"pct": 50,
-"sites": null,
-"basis": "Nokia 발표: 10년 계약으로 T-Mobile 망 내 비중 50%",
-"asof": "2022",
-"type": "official",
-"source": "https://itwire.com/5g/nokia-extends-partnership-with-t-mobile-polska-in-ten-year-deal"
-},
-{
-"vendor": "Huawei",
-"pct": 50,
-"sites": null,
-"basis": "현지 전문지: 망의 약 절반이 중국산, 나머지 Nokia",
-"asof": "2024",
-"type": "estimate",
-"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-}
-],
-"issues": [
-{
-"year": 2012,
-"text": "NetWorkS! 공동망 Huawei·Nokia 선정으로 기존 Ericsson 장비 교체",
-"source": "https://www.lightreading.com/mobile-core/ericsson-ousted-from-shared-network"
-},
-{
-"year": 2022,
-"text": "Nokia 10년 계약 — 전국 RAN 현대화·5G(DSS 저대역, 3.5GHz 도심)",
-"source": "https://itwire.com/5g/nokia-extends-partnership-with-t-mobile-polska-in-ten-year-deal"
-},
-{
-"year": 2023,
-"text": "3G 종료 완료(폴란드 최초)",
-"source": "https://www.benchmark.pl/aktualnosci/orange-koniec-3g-t-mobile-play-plus.html"
-},
-{
-"year": 2024,
-"text": "C-band 5G 사이트에 Huawei 장비 사용(비공식 확인)",
-"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-}
-],
-"confidence": "medium",
-"sources": [
-{
-"label": "iTWire — Nokia extends partnership with T-Mobile Polska (2022.03)",
-"url": "https://itwire.com/5g/nokia-extends-partnership-with-t-mobile-polska-in-ten-year-deal"
-},
-{
-"label": "GSMOnline — T-Mobile 망 절반 중국산 (2024.01)",
-"url": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-},
-{
-"label": "Light Reading — NetWorkS! 2012",
-"url": "https://www.lightreading.com/mobile-core/ericsson-ousted-from-shared-network"
-}
-]
-},
-{
-"name": "Plus",
-"name_local": "Polkomtel (Grupa Polsat Plus; 인프라 일부 Cellnex Poland 보유)",
-"type": "MNO",
-"subs_m": null,
-"subs_asof": "",
-"ran": {
-"2g": [
-"Nokia",
-"Ericsson"
-],
-"3g": [
-"Nokia",
-"Ericsson"
-],
-"4g": [
-"Nokia",
-"Ericsson"
-],
-"5g": [
-"Ericsson",
-"Nokia"
-]
-},
-"core": {
-"epc": [
-"Ericsson"
-],
-"5gc": [
-"Ericsson"
-],
-"ims": []
-},
-"regions": [
-{
-"vendor": "Ericsson",
-"area": "2020 첫 5G(2.6GHz TDD) 5개 도시(그단스크·우치·포즈난·슈체친·브로츠와프) + 5G 코어/EPC",
-"gens": [
-"4g",
-"5g"
-],
-"source": "https://www.ericsson.com/en/news/2020/1/polkomtel-plus-5g-in-poland-with-ericsson"
-},
-{
-"vendor": "Nokia",
-"area": "2020.12 Nokia와 5G 서비스 개통(기타 지역)",
-"gens": [
-"4g",
-"5g"
-],
-"source": "https://www.developingtelecoms.com/telecom-technology/wireless-networks/10474-nokia-and-polkomtel-switch-on-5g-services-in-poland.html.md"
-}
-],
-"share": [
-{
-"vendor": "Huawei",
-"pct": 0,
-"sites": null,
-"basis": "현지 전문지: Plus는 중국산 장비 미사용, Nokia·Ericsson만 사용",
-"asof": "2024",
-"type": "estimate",
-"source": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-}
-],
-"issues": [
-{
-"year": 2020,
-"text": "Ericsson 5G RAN+5G 코어(EPC 포함)로 폴란드 최초 상용 5G(2.6GHz TDD, 85+ 사이트)",
-"source": "https://www.ericsson.com/en/news/2020/1/polkomtel-plus-5g-in-poland-with-ericsson"
-},
-{
-"year": 2020,
-"text": "Nokia와도 5G 서비스 개통(12월)",
-"source": "https://www.developingtelecoms.com/telecom-technology/wireless-networks/10474-nokia-and-polkomtel-switch-on-5g-services-in-poland.html.md"
-},
-{
-"year": 2025,
-"text": "3G 단계적 종료 준비 착수 발표(11월, 일정 미정)",
-"source": "https://www.benchmark.pl/aktualnosci/orange-koniec-3g-t-mobile-play-plus.html"
-},
-{
-"year": 2026,
-"text": "Cellnex Poland(Plus 인프라), Ericsson을 5G RAN 현대화·확장 공급사 중 하나로 선정(9월)",
-"source": "https://www.ericsson.com/en/news/3/2026/ericsson-selected-for-5g-ran-modernization-and-expansion-by-cellnex-poland"
-}
-],
-"confidence": "medium",
-"sources": [
-{
-"label": "Ericsson — Polkomtel Plus 5G (2020.02)",
-"url": "https://www.ericsson.com/en/news/2020/1/polkomtel-plus-5g-in-poland-with-ericsson"
-},
-{
-"label": "Developing Telecoms — Nokia and Polkomtel switch on 5G (2020.12)",
-"url": "https://www.developingtelecoms.com/telecom-technology/wireless-networks/10474-nokia-and-polkomtel-switch-on-5g-services-in-poland.html.md"
-},
-{
-"label": "Ericsson — Cellnex Poland 5G RAN (2026.09)",
-"url": "https://www.ericsson.com/en/news/3/2026/ericsson-selected-for-5g-ran-modernization-and-expansion-by-cellnex-poland"
-},
-{
-"label": "GSMOnline — Plus 중국산 미사용 (2024.01)",
-"url": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-}
-]
-}
-],
-"country_note": "폴란드는 EU 내 Huawei RAN 잔존 최대 시장(Orange·T-Mobile 각 ~50%, Play 다수; Plus만 비중국). 국가사이버보안체계법(KSC) 개정안이 2026.1 하원 통과(407:10), 2.19 대통령 서명 후 헌법재판소 회부 — 디지털장관이 '고위험 공급사' 지정 시 신규 도입 금지, 기존 장비 최대 7년(대형 통신사 4년) 내 철거. Huawei 명시 없으나 '렉스 화웨이'로 통칭, 보상 없는 교체 비용 논란. 삼성 등 대체 벤더 기회 창.",
-"sources": [
-{
-"label": "Notes from Poland — KSC 개정 서명·헌재 회부 (2026.02)",
-"url": "https://notesfrompoland.com/2026/02/21/poland-tightens-cybersecurity-rules-targeting-non-nato-suppliers/"
-},
-{
-"label": "Osborne Clarke — KSC 개정 HRV 절차·철거 기한 (2026.02)",
-"url": "https://www.osborneclarke.com/insights/polands-amendment-national-cybersecurity-system-act-has-been-signed-president"
-},
-{
-"label": "GSMOnline — 폴란드 C-band 5G Huawei 장비 현황 (2024.01)",
-"url": "https://gsmonline.pl/artykuly/5g-w-polsce-bedzie-dzialac-na-sprzecie-huawei-trzech-operatorow-ma-gotowa-do-uruchomienia-siec"
-},
-{
-"label": "Benchmark.pl — 폴란드 3G 종료 현황 (2025.12)",
-"url": "https://www.benchmark.pl/aktualnosci/orange-koniec-3g-t-mobile-play-plus.html"
-}
-]
-},
-{
-"iso3": "CZE",
-"name_ko": "체코",
-"carriers": [
-{
-"name": "O2 Czech Republic",
-"name_local": "O2 CZ (망 보유: CETIN, PPF)",
-"type": "MNO",
-"subs_m": null,
-"subs_asof": "",
-"ran": {
-"2g": [
-"Ericsson"
-],
-"3g": [
-"Huawei(종료 2021)"
-],
+"2g": [],
+"3g": [],
 "4g": [
 "Ericsson"
 ],
@@ -11497,98 +15919,66 @@
 ],
 "ims": []
 },
-"regions": [
-{
-"vendor": "Ericsson",
-"area": "전국 단독 — CETIN 2020 계약, 4,000+ 기지국 Huawei(및 모라비아 일부 Nokia) 장비 교체, 2024년 대부분 완료",
-"gens": [
-"2g",
-"4g",
-"5g"
-],
-"source": "https://www.lupa.cz/clanky/5g-vsude-do-tri-let-o2-a-cetin-rozjely-nejvetsi-modernizaci-mobilni-site-v-historii/"
-}
-],
+"regions": [],
 "share": [
 {
 "vendor": "Ericsson",
 "pct": 100,
-"sites": 4200,
-"basis": "CETIN 전국 Ericsson 단독 교체(4,000+ 기지국; 모라비아 4,200 로케이션 중 2,600 완료 2023.8), 2024 대부분 완료",
-"asof": "2024",
-"type": "estimate",
-"source": "https://insidetowers.com/?p=55607"
+"sites": null,
+"basis": "RAN 단독 공급사(스웨덴·에스토니아 1만 기지국 업그레이드 계약)",
+"asof": "2020",
+"type": "official",
+"source": "https://www.telecompaper.com/news/telia-picks-nokia-ericsson-as-5g-suppliers-in-nordic-baltic-markets--1358597"
 }
 ],
 "issues": [
 {
 "year": 2020,
-"text": "CETIN, Huawei 대신 Ericsson을 5G 단독 공급사로 선정(수십억 CZK)",
-"source": "https://ct24.ceskatelevize.cz/clanek/ekonomika/cetin-si-vybral-za-vyhradniho-dodavatele-5g-firmu-ericsson-43153"
-},
-{
-"year": 2021,
-"text": "4,000+ 기지국 Huawei→Ericsson 교체 착수(3년), 3G 11월 종료",
-"source": "https://www.lupa.cz/clanky/5g-vsude-do-tri-let-o2-a-cetin-rozjely-nejvetsi-modernizaci-mobilni-site-v-historii/"
-},
-{
-"year": 2023,
-"text": "모라비아 현대화: Huawei·Nokia 장비 Ericsson으로 교체(4,200 중 2,600 완료)",
-"source": "https://insidetowers.com/?p=55607"
-},
-{
-"year": 2024,
-"text": "Ericsson CETIN 현대화 마무리 단계, Huawei 제거로 Ericsson CZ 매출 10억 CZK 돌파",
-"source": "https://www.lupa.cz/aktuality/ericsson-dokoncuje-velkou-modernizaci-site-pro-cetin-a-letos-spusti-prvni-samostatne-5g-jadro"
+"text": "Ericsson이 스웨덴·에스토니아 RAN 단독 공급사로 선정(5년)",
+"source": "https://www.telecompaper.com/news/telia-picks-nokia-ericsson-as-5g-suppliers-in-nordic-baltic-markets--1358597"
 },
 {
 "year": 2025,
-"text": "체코 최초 5G SA 코어 상용 — Nokia CNF + Red Hat OpenShift, 구 코어 2026 폐쇄 예정",
-"source": "https://www.lupa.cz/clanky/mobilni-sit-o2-nabidne-rychlost-2-gb-s-a-velmi-nizke-odezvy-nokia-diky-dodavce-noveho-jadra-slavi-navrat/"
+"text": "Nokia 5G SA Core 계약(핀란드·스웨덴·노르웨이·에스토니아·리투아니아)",
+"source": "https://www.rcrwireless.com/20251107/5g/telia-5g-nokia"
+},
+{
+"year": 2023,
+"text": "3G 망 단계적 종료(2023년 11월 완료 계획)",
+"source": "https://www.err.ee/1608853565/"
 }
 ],
 "confidence": "high",
 "sources": [
 {
-"label": "ČT24 — CETIN Ericsson 단독 5G 공급사 선정",
-"url": "https://ct24.ceskatelevize.cz/clanek/ekonomika/cetin-si-vybral-za-vyhradniho-dodavatele-5g-firmu-ericsson-43153"
+"label": "tp_telia",
+"url": "https://www.telecompaper.com/news/telia-picks-nokia-ericsson-as-5g-suppliers-in-nordic-baltic-markets--1358597"
 },
 {
-"label": "Lupa.cz — O2/CETIN 최대 현대화 (2021.06)",
-"url": "https://www.lupa.cz/clanky/5g-vsude-do-tri-let-o2-a-cetin-rozjely-nejvetsi-modernizaci-mobilni-site-v-historii/"
+"label": "rcr_telia25",
+"url": "https://www.rcrwireless.com/20251107/5g/telia-5g-nokia"
 },
 {
-"label": "Inside Towers — Moravia Ericsson replacing Huawei/Nokia (2023.08)",
-"url": "https://insidetowers.com/?p=55607"
-},
-{
-"label": "Lupa.cz — O2 Nokia 5G SA 코어 (2025.07)",
-"url": "https://www.lupa.cz/clanky/mobilni-sit-o2-nabidne-rychlost-2-gb-s-a-velmi-nizke-odezvy-nokia-diky-dodavce-noveho-jadra-slavi-navrat/"
-},
-{
-"label": "Developing Telecoms — 체코 3G 종료 (2021.12)",
-"url": "https://www.developingtelecoms.com/telecom-technology/data-centres-networks/12445-czech-mate-for-3g-as-o2-and-t-mobile-complete-shutdown.html"
+"label": "err_telia3g",
+"url": "https://www.err.ee/1608853565/"
 }
 ]
 },
 {
-"name": "T-Mobile Czech Republic",
-"name_local": "T-Mobile CZ (Deutsche Telekom; 일부 지역 CETIN과 RAN 공유)",
+"name": "Elisa Eesti",
+"name_local": "",
 "type": "MNO",
 "subs_m": null,
 "subs_asof": "",
 "ran": {
 "2g": [],
-"3g": [
-"Huawei(종료 2021)"
-],
+"3g": [],
 "4g": [
-"Huawei",
-"Ericsson"
+"Nokia",
+"Huawei"
 ],
 "5g": [
-"Huawei",
-"Ericsson"
+"Nokia"
 ]
 },
 "core": {
@@ -11596,76 +15986,295 @@
 "5gc": [],
 "ims": []
 },
-"regions": [
+"regions": [],
+"share": [
 {
-"vendor": "Huawei",
-"area": "CETIN(O2)과 공유하지 않는 자체 구축 지역",
-"gens": [
-"4g",
-"5g"
-],
-"source": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
-},
-{
-"vendor": "Ericsson",
-"area": "CETIN과 RAN 공유 지역(CETIN망 Ericsson)",
-"gens": [
-"4g",
-"5g"
-],
-"source": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+"vendor": "Nokia",
+"pct": null,
+"sites": null,
+"basis": "전국 5G RAN 및 기존 4G 교체 공급사(5년 계약)",
+"asof": "2021-12",
+"type": "official",
+"source": "https://www.nokia.com/newsroom/nokia-wins-five-year-5g-deal-with-elisa-estonia-as-ran-vendor/"
 }
 ],
-"share": [],
 "issues": [
 {
 "year": 2021,
-"text": "3G 11월 종료 완료",
-"source": "https://www.developingtelecoms.com/telecom-technology/data-centres-networks/12445-czech-mate-for-3g-as-o2-and-t-mobile-complete-shutdown.html"
+"text": "Nokia, 기존 벤더 교체 포함 전국 5G RAN 5년 계약 수주",
+"source": "https://www.nokia.com/newsroom/nokia-wins-five-year-5g-deal-with-elisa-estonia-as-ran-vendor/"
 },
 {
 "year": 2022,
-"text": "DT 독일 코어 Huawei→Mavenir 교체 발표, 체코 T-Mobile은 RAN Huawei 유지 입장",
-"source": "https://www.lupa.cz/aktuality/vlastnik-ceskeho-t-mobilu-v-jadru-site-nahradi-huawei-technologii-vyvijenou-i-v-brne/"
+"text": "Huawei 2G~5G 사용 허가 신청 거부→행정소송, CJEU 회부(C-354/24)",
+"source": "https://curia.europa.eu/site/jcms/p1_1000081668"
 },
 {
-"year": 2025,
-"text": "5G SA 코어 상용 준비(B2B 사설망은 운영 중), 공급사 미공개(Ericsson 또는 Mavenir 유력)",
-"source": "https://www.lupa.cz/aktuality/take-cesky-t-mobile-chysta-spusteni-noveho-moderniho-jadra-5g-site-doda-ho-ericsson/"
+"year": 2026,
+"text": "CJEU 법무관 의견: 고위험 벤더 배제 적법·원칙적 보상 불요(3월)",
+"source": "https://curia.europa.eu/site/jcms/p1_1000081668"
 }
 ],
 "confidence": "medium",
 "sources": [
 {
-"label": "Lupa.cz — 체코 벤더 지형(Nokia comeback) (2024.10)",
-"url": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+"label": "nokia_elisa",
+"url": "https://www.nokia.com/newsroom/nokia-wins-five-year-5g-deal-with-elisa-estonia-as-ran-vendor/"
 },
 {
-"label": "Lupa.cz — T-Mobile CZ 5G SA 코어 준비 (2025.07)",
-"url": "https://www.lupa.cz/aktuality/take-cesky-t-mobile-chysta-spusteni-noveho-moderniho-jadra-5g-site-doda-ho-ericsson/"
+"label": "curia",
+"url": "https://curia.europa.eu/site/jcms/p1_1000081668"
 },
 {
-"label": "Lupa.cz — DT Mavenir 코어, 체코 RAN Huawei 유지 (2022.09)",
-"url": "https://www.lupa.cz/aktuality/vlastnik-ceskeho-t-mobilu-v-jadru-site-nahradi-huawei-technologii-vyvijenou-i-v-brne/"
+"label": "err_elisa2020",
+"url": "https://news.err.ee/1117620/elisa-ceo-hits-out-at-ministry-huawei-tech-ban-draft"
 }
 ]
 },
 {
-"name": "Vodafone Czech Republic",
-"name_local": "Vodafone CZ",
+"name": "Tele2 Eesti",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Nokia"
+],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [],
+"share": [
+{
+"vendor": "Nokia",
+"pct": 100,
+"sites": null,
+"basis": "발트 3국 기존(incumbent)·단독 RAN 공급사",
+"asof": "2022-01",
+"type": "official",
+"source": "https://totaltele.com/nokia-extends-partnership-with-tele2-for-baltic-5g/"
+}
+],
+"issues": [
+{
+"year": 2022,
+"text": "Nokia, 발트3국 5G RAN 장기계약(기존·단독 공급사)",
+"source": "https://totaltele.com/nokia-extends-partnership-with-tele2-for-baltic-5g/"
+},
+{
+"year": 2021,
+"text": "Nokia, 스웨덴·발트 5G SA Core 공급사 선정",
+"source": "https://rcrwireless.com/20210111/5g/tele2-selects-nokia-for-5g-core-in-sweden-baltics-following-huawei-ban"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "tt_tele2",
+"url": "https://totaltele.com/nokia-extends-partnership-with-tele2-for-baltic-5g/"
+},
+{
+"label": "lr_tele2",
+"url": "https://www.lightreading.com/5g/tele2-picks-nokia-for-5g-ran-in-baltics"
+},
+{
+"label": "rcr_tele2core",
+"url": "https://rcrwireless.com/20210111/5g/tele2-selects-nokia-for-5g-core-in-sweden-baltics-following-huawei-ban"
+},
+{
+"label": "err_telia3g",
+"url": "https://www.err.ee/1608853565/"
+}
+]
+}
+],
+"country_note": "2020년 전자통신법 개정으로 정부가 안보상 장비 사용을 규제. Huawei를 고위험 벤더로 지정해 EU에서 명시적 중국 벤더 금지국 중 하나. Elisa가 Huawei 사용 불허에 소송→CJEU 회부(C-354/24), 2026.3 법무관이 배제 적법·보상 불요 의견. 판결 대기. Telia=Ericsson, Elisa·Tele2=Nokia로 Huawei 대체 사실상 완료. Samsung 네트워크 공급 확인 안 됨.",
+"sources": [
+{
+"label": "cullen",
+"url": "https://www.cullen-international.com/news/2024/10/Update-on-5G-security-measures-across-Europe.html"
+},
+{
+"label": "curia",
+"url": "https://curia.europa.eu/site/jcms/p1_1000081668"
+},
+{
+"label": "err_elisa2020",
+"url": "https://news.err.ee/1117620/elisa-ceo-hits-out-at-ministry-huawei-tech-ban-draft"
+}
+]
+},
+{
+"iso3": "LVA",
+"name_ko": "라트비아",
+"carriers": [
+{
+"name": "LMT",
+"name_local": "Latvijas Mobilais Telefons",
 "type": "MNO",
 "subs_m": null,
 "subs_asof": "",
 "ran": {
 "2g": [],
 "3g": [
-"Huawei(종료 2021)"
+"Nokia (종료 2025)"
 ],
+"4g": [],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": [
+"Ericsson"
+]
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2022,
+"text": "Nokia 5G SA Core 선정(기존 Nokia 패킷코어·SDM 사용)",
+"source": "https://rcrwireless.com/20220607/5g/latvian-telco-lmt-taps-nokia-for-5g-standalone-core"
+},
+{
+"year": 2025,
+"text": "Ericsson과 가입자DB·NFVI·IMS 현대화 계약(7월)",
+"source": "https://www.lmt.lv/en/innovations/news/lmt-partners-with-ericsson-for-next-generation-network-modernization"
+},
+{
+"year": 2025,
+"text": "3G 망 단계적 종료 완료(2023~2025)",
+"source": "https://business.gov.lv/en/news/lmt-concludes-3g-era-latvia-and-lays-foundations-future-communications"
+},
+{
+"year": 2019,
+"text": "LMT CEO: Huawei 기술 미사용",
+"source": "https://eng.lsm.lv/article/economy/economy/lmt-head-huawei-row-will-affect-development-of-5g-networks.a319914/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "rcr_lmtcore",
+"url": "https://rcrwireless.com/20220607/5g/latvian-telco-lmt-taps-nokia-for-5g-standalone-core"
+},
+{
+"label": "lmt_eric25",
+"url": "https://www.lmt.lv/en/innovations/news/lmt-partners-with-ericsson-for-next-generation-network-modernization"
+},
+{
+"label": "lmt_3g",
+"url": "https://business.gov.lv/en/news/lmt-concludes-3g-era-latvia-and-lays-foundations-future-communications"
+},
+{
+"label": "lr_lmt3g",
+"url": "https://www.lightreading.com/cable-technology/lmt-picks-nokia-wcdma"
+},
+{
+"label": "lsm_lmt",
+"url": "https://eng.lsm.lv/article/economy/economy/lmt-head-huawei-row-will-affect-development-of-5g-networks.a319914/"
+},
+{
+"label": "lmt_5gdemo",
+"url": "https://www.lmt.lv/en/innovations/news/lmt-demonstrates-5g-in-latvia-for-the-first-time"
+}
+]
+},
+{
+"name": "Tele2 Latvia",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
 "4g": [
-"Huawei"
+"Nokia"
 ],
 "5g": [
-"Huawei"
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [],
+"share": [
+{
+"vendor": "Nokia",
+"pct": 100,
+"sites": null,
+"basis": "발트 3국 기존·단독 RAN 공급사",
+"asof": "2022-01",
+"type": "official",
+"source": "https://totaltele.com/nokia-extends-partnership-with-tele2-for-baltic-5g/"
+}
+],
+"issues": [
+{
+"year": 2022,
+"text": "Nokia 5G RAN 장기계약 + 4G 업그레이드",
+"source": "https://www.lightreading.com/5g/tele2-picks-nokia-for-5g-ran-in-baltics"
+},
+{
+"year": 2025,
+"text": "3G 2025년 말까지 종료 계획",
+"source": "https://telecomtalk.info/tele2-shutdown-3g-network-lithuania-latvia-by2025/923196/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "tt_tele2",
+"url": "https://totaltele.com/nokia-extends-partnership-with-tele2-for-baltic-5g/"
+},
+{
+"label": "lr_tele2",
+"url": "https://www.lightreading.com/5g/tele2-picks-nokia-for-5g-ran-in-baltics"
+},
+{
+"label": "rcr_tele2core",
+"url": "https://rcrwireless.com/20210111/5g/tele2-selects-nokia-for-5g-core-in-sweden-baltics-following-huawei-ban"
+},
+{
+"label": "ttalk_tele2_3g",
+"url": "https://telecomtalk.info/tele2-shutdown-3g-network-lithuania-latvia-by2025/923196/"
+}
+]
+},
+{
+"name": "Bite Latvija",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Ericsson"
+],
+"5g": [
+"Ericsson"
 ]
 },
 "core": {
@@ -11675,15 +16284,317 @@
 "5gc": [],
 "ims": []
 },
+"regions": [],
+"share": [
+{
+"vendor": "Ericsson",
+"pct": 100,
+"sites": null,
+"basis": "전국 RAN 단독 공급사(2022~2028)",
+"asof": "2022-05",
+"type": "official",
+"source": "https://www.ericsson.com/en/news/3/2022/bit-group-selects-ericsson-as-sole-network-supplier--bringing-5g-to-the-baltics"
+}
+],
+"issues": [
+{
+"year": 2022,
+"text": "Ericsson, Bite 그룹(LV·LT) 전국 RAN 단독+코어 공급(2022~28)",
+"source": "https://www.ericsson.com/en/news/3/2022/bit-group-selects-ericsson-as-sole-network-supplier--bringing-5g-to-the-baltics"
+},
+{
+"year": 2019,
+"text": "Huawei와 5G MoU 체결(리가 기지국 등)",
+"source": "https://www.baltictimes.com/bite_latvija_will_not_suspend_its_partnership_with_huawei"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "eric_bite",
+"url": "https://www.ericsson.com/en/news/3/2022/bit-group-selects-ericsson-as-sole-network-supplier--bringing-5g-to-the-baltics"
+},
+{
+"label": "bt_bite_hw",
+"url": "https://www.baltictimes.com/bite_latvija_will_not_suspend_its_partnership_with_huawei"
+}
+]
+}
+],
+"country_note": "2020.2 미국과 5G 보안 공동선언 서명으로 중국 벤더 견제. 주요 3사 모두 Nordic 벤더(Ericsson/Nokia) 체제로 전환. Bite는 2019년 Huawei MoU 후 2022년 Ericsson 단독으로 전환. LMT 상용 RAN 벤더는 공개자료로 미확인. Samsung 공급 확인 안 됨.",
+"sources": [
+{
+"label": "lrt_lv_us",
+"url": "https://www.lrt.lt/en/news-in-english/19/1146924/latvia-signs-5g-declaration-with-us-to-sideline-china"
+},
+{
+"label": "eric_bite",
+"url": "https://www.ericsson.com/en/news/3/2022/bit-group-selects-ericsson-as-sole-network-supplier--bringing-5g-to-the-baltics"
+},
+{
+"label": "tt_tele2",
+"url": "https://totaltele.com/nokia-extends-partnership-with-tele2-for-baltic-5g/"
+}
+]
+},
+{
+"iso3": "LTU",
+"name_ko": "리투아니아",
+"carriers": [
+{
+"name": "Telia Lietuva",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Ericsson"
+],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [],
+"share": [
+{
+"vendor": "Ericsson",
+"pct": 100,
+"sites": 2000,
+"basis": "Huawei 4G 약 2,000국 Ericsson으로 전량 교체",
+"asof": "2020-11",
+"type": "official",
+"source": "https://uk.finance.yahoo.com/news/telia-remove-huawei-equipment-lithuania-123210897.html"
+}
+],
+"issues": [
+{
+"year": 2020,
+"text": "Huawei 4G 약 2,000국 Ericsson 교체·5G Huawei 배제 발표",
+"source": "https://uk.finance.yahoo.com/news/telia-remove-huawei-equipment-lithuania-123210897.html"
+},
+{
+"year": 2023,
+"text": "Ericsson 현대화(2021~23) 완료, 5G 지리 커버리지 99%",
+"source": "https://www.telecomtv.com/content/5g/telia-achieves-99-5g-coverage-in-lithuania-with-ericsson-47937/"
+},
+{
+"year": 2025,
+"text": "Nokia 5G SA Core 계약(5개국)",
+"source": "https://www.rcrwireless.com/20251107/5g/telia-5g-nokia"
+}
+],
+"confidence": "high",
+"sources": [
+{
+"label": "yahoo_telia",
+"url": "https://uk.finance.yahoo.com/news/telia-remove-huawei-equipment-lithuania-123210897.html"
+},
+{
+"label": "lrt_telia",
+"url": "https://www.lrt.lt/en/news-in-english/19/1288268/lithuanian-telecoms-drop-huawei-for-geopolitical-reasons"
+},
+{
+"label": "tv_telia_lt",
+"url": "https://www.telecomtv.com/content/5g/telia-achieves-99-5g-coverage-in-lithuania-with-ericsson-47937/"
+},
+{
+"label": "tp_telia",
+"url": "https://www.telecompaper.com/news/telia-picks-nokia-ericsson-as-5g-suppliers-in-nordic-baltic-markets--1358597"
+},
+{
+"label": "rcr_telia25",
+"url": "https://www.rcrwireless.com/20251107/5g/telia-5g-nokia"
+}
+]
+},
+{
+"name": "Bite Lietuva",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Ericsson"
+],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [
+{
+"vendor": "Ericsson",
+"pct": 100,
+"sites": 1500,
+"basis": "전국 RAN 단독 공급사; 기지국 1,500+ (2/3 5G)",
+"asof": "2026-01",
+"type": "official",
+"source": "https://www.ericsson.com/en/news/3/2022/bit-group-selects-ericsson-as-sole-network-supplier--bringing-5g-to-the-baltics"
+}
+],
+"issues": [
+{
+"year": 2022,
+"text": "Ericsson 전국 RAN 단독+코어 공급(2022~28)",
+"source": "https://www.ericsson.com/en/news/3/2022/bit-group-selects-ericsson-as-sole-network-supplier--bringing-5g-to-the-baltics"
+},
+{
+"year": 2026,
+"text": "1억유로+ 현대화 완료, 3G 종료·기지국 1,500+",
+"source": "https://digital-strategy.ec.europa.eu/lt/miscellaneous/lithuania-bite-completes-major-network-modernisation-eur-100-million-investment"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "eric_bite",
+"url": "https://www.ericsson.com/en/news/3/2022/bit-group-selects-ericsson-as-sole-network-supplier--bringing-5g-to-the-baltics"
+},
+{
+"label": "ec_bite",
+"url": "https://digital-strategy.ec.europa.eu/lt/miscellaneous/lithuania-bite-completes-major-network-modernisation-eur-100-million-investment"
+}
+]
+},
+{
+"name": "Tele2 Lithuania",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Nokia"
+],
+"5g": [
+"Nokia"
+]
+},
+"core": {
+"epc": [],
+"5gc": [
+"Nokia"
+],
+"ims": []
+},
+"regions": [],
+"share": [
+{
+"vendor": "Nokia",
+"pct": 100,
+"sites": null,
+"basis": "발트 3국 기존·단독 RAN 공급사",
+"asof": "2022-01",
+"type": "official",
+"source": "https://totaltele.com/nokia-extends-partnership-with-tele2-for-baltic-5g/"
+}
+],
+"issues": [
+{
+"year": 2022,
+"text": "Nokia 발트3국 5G RAN 장기계약",
+"source": "https://totaltele.com/nokia-extends-partnership-with-tele2-for-baltic-5g/"
+},
+{
+"year": 2025,
+"text": "3G 2025년 말까지 종료 계획",
+"source": "https://telecomtalk.info/tele2-shutdown-3g-network-lithuania-latvia-by2025/923196/"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "tt_tele2",
+"url": "https://totaltele.com/nokia-extends-partnership-with-tele2-for-baltic-5g/"
+},
+{
+"label": "lr_tele2",
+"url": "https://www.lightreading.com/5g/tele2-picks-nokia-for-5g-ran-in-baltics"
+},
+{
+"label": "rcr_tele2core",
+"url": "https://rcrwireless.com/20210111/5g/tele2-selects-nokia-for-5g-core-in-sweden-baltics-following-huawei-ban"
+},
+{
+"label": "ttalk_tele2_3g",
+"url": "https://telecomtalk.info/tele2-shutdown-3g-network-lithuania-latvia-by2025/923196/"
+}
+]
+}
+],
+"country_note": "2021.5 의회(Seimas) 결정으로 Huawei 5G 참여 배제, 기존 장비 2025년까지 교체 유예(보도 기준). 2020.9 미국과 5G 협력 MoU. Telia Lietuva가 Huawei 4G 약 2,000국을 Ericsson으로 교체(2021~23). Samsung 공급 확인 안 됨.",
+"sources": [
+{
+"label": "15min",
+"url": "https://15min.lt/m/id/en/politics/seimas-leaves-huawei-behind-the-5g-fence-how-are-lithuanian-carriers-reacting-526-1511604"
+},
+{
+"label": "lrt_telia",
+"url": "https://www.lrt.lt/en/news-in-english/19/1288268/lithuanian-telecoms-drop-huawei-for-geopolitical-reasons"
+},
+{
+"label": "yahoo_telia",
+"url": "https://uk.finance.yahoo.com/news/telia-remove-huawei-equipment-lithuania-123210897.html"
+}
+]
+},
+{
+"iso3": "UKR",
+"name_ko": "우크라이나",
+"carriers": [
+{
+"name": "Kyivstar",
+"name_local": "Київстар",
+"type": "MNO",
+"subs_m": 23.0,
+"subs_asof": "2025-08",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei",
+"ZTE"
+],
+"5g": [
+"Ericsson",
+"Huawei"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
 "regions": [
 {
-"vendor": "Huawei",
-"area": "전국 RAN(2007년부터 전략 파트너); 코어는 Huawei 미사용(Ericsson)",
+"vendor": "Ericsson",
+"area": "키이우 5G 파일럿(n78, Huawei와 혼용)",
 "gens": [
-"4g",
 "5g"
 ],
-"source": "https://www.lupa.cz/aktuality/neni-to-pravda-reaguje-cesky-vodafone-na-informace-ze-zcela-zavisi-na-huawei/"
+"source": "https://dev.ua/en/news/tekhnichni-detali-5g-v-kyievi-1784895810"
 }
 ],
 "share": [
@@ -11691,59 +16602,538 @@
 "vendor": "Huawei",
 "pct": null,
 "sites": null,
-"basis": "Strand Consult: RAN 100% Huawei 주장 → Vodafone은 '복수 벤더 사용' 반박(비중 미공개)",
-"asof": "2020",
+"basis": "CEO 발언: Huawei·ZTE 합산 RAN 거의 100%, 코어 약 1/3",
+"asof": "2023-06",
 "type": "estimate",
-"source": "https://www.lupa.cz/aktuality/neni-to-pravda-reaguje-cesky-vodafone-na-informace-ze-zcela-zavisi-na-huawei/"
+"source": "https://www.mobileeurope.co.uk/?p=32267"
+},
+{
+"vendor": "ZTE",
+"pct": null,
+"sites": null,
+"basis": "CEO 발언: Huawei·ZTE 합산 RAN 거의 100%, 코어 약 1/3",
+"asof": "2023-06",
+"type": "estimate",
+"source": "https://www.mobileeurope.co.uk/?p=32267"
+},
+{
+"vendor": "Huawei",
+"pct": 60,
+"sites": null,
+"basis": "Ericsson 대체 시 계획 비중(Huawei 60/ZTE 40)",
+"asof": "2016",
+"type": "estimate",
+"source": "https://dengi.ua/amp-page/business/1797777-kitai-atakyet-kompanii-podnebesnoi-zahvativaut-ykrainskii-telekom"
+},
+{
+"vendor": "ZTE",
+"pct": 40,
+"sites": null,
+"basis": "Ericsson 대체 시 계획 비중",
+"asof": "2016",
+"type": "estimate",
+"source": "https://dengi.ua/amp-page/business/1797777-kitai-atakyet-kompanii-podnebesnoi-zahvativaut-ykrainskii-telekom"
 }
 ],
 "issues": [
 {
-"year": 2020,
-"text": "Huawei 100% 의존 보도 반박; 코어 Huawei 배제 방침, 5G 시험은 Ericsson 코어+Huawei 라디오",
-"source": "https://www.lupa.cz/aktuality/neni-to-pravda-reaguje-cesky-vodafone-na-informace-ze-zcela-zavisi-na-huawei/"
-},
-{
-"year": 2021,
-"text": "체코 최초 3G 종료(3월)",
-"source": "https://www.developingtelecoms.com/telecom-technology/data-centres-networks/12445-czech-mate-for-3g-as-o2-and-t-mobile-complete-shutdown.html"
+"year": 2023,
+"text": "CEO: 전후 재건도 Huawei/ZTE 지속, 교체엔 장기계획·재정지원 필요",
+"source": "https://www.mobileeurope.co.uk/?p=32267"
 },
 {
 "year": 2024,
-"text": "5G RAN Huawei 유지; 5G SA 코어 준비(Ericsson 유력), 중국 부품 배제 방침",
-"source": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+"text": "Rakuten Symphony와 4G/5G Open RAN 도입 LOI(2월)",
+"source": "https://www.telecomtv.com/content/open-ran/rakuten-symphony-and-kyivstar-sign-letter-of-intent-to-deploy-open-ran-to-rebuild-ukraine-s-digital-infrastructure-49751/amp/"
+},
+{
+"year": 2024,
+"text": "Airspan과 Open RAN MoU",
+"source": "https://datacenterdynamics.com/en/news/veon-and-airspan-partner-on-open-ran-for-ukraines-kyivstar"
+},
+{
+"year": 2025,
+"text": "Cohen Circle SPAC 합병으로 Nasdaq 상장(KYIV, 8월)",
+"source": "https://www.telecomtv.com/content/access-evolution/kyivstar-group-completes-business-combination-with-cohen-circle-ahead-of-historic-listing-on-nasdaq-53640/"
+},
+{
+"year": 2025,
+"text": "2025~26 대규모 망 현대화(노후장비·무선모듈 교체), 벤더 미공개",
+"source": "https://www.nasdaq.com/press-release/kyivstar-launches-large-scale-telecom-network-modernization-project-2025-10-06"
+},
+{
+"year": 2026,
+"text": "5G 파일럿(1월~), 키이우 7월 개시",
+"source": "https://interfax.com.ua/news/telecom/1189606-amp.html"
 }
 ],
 "confidence": "medium",
 "sources": [
 {
-"label": "Lupa.cz — Vodafone CZ Huawei 의존 반박 (2020.06)",
-"url": "https://www.lupa.cz/aktuality/neni-to-pravda-reaguje-cesky-vodafone-na-informace-ze-zcela-zavisi-na-huawei/"
+"label": "me_kyiv",
+"url": "https://www.mobileeurope.co.uk/?p=32267"
 },
 {
-"label": "Lupa.cz — 체코 벤더 지형 (2024.10)",
-"url": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+"label": "bbg_kyiv",
+"url": "https://www.bloomberg.com/news/articles/2023-06-21/ukrainian-telecom-giant-plans-rebuild-with-chinese-kit-for-now"
 },
 {
-"label": "Lupa.cz — 3대 사업자 SA 코어 전환 (2025.07)",
-"url": "https://www.lupa.cz/aktuality/take-cesky-t-mobile-chysta-spusteni-noveho-moderniho-jadra-5g-site-doda-ho-ericsson/"
+"label": "dengi2016",
+"url": "https://dengi.ua/amp-page/business/1797777-kitai-atakyet-kompanii-podnebesnoi-zahvativaut-ykrainskii-telekom"
+},
+{
+"label": "dt_kyiv_nokia",
+"url": "https://developingtelecoms.com/telecom-technology/wireless-networks/5943-kyivstar-upgrades-ukraine-network-with-nokia.html"
+},
+{
+"label": "devua_5gkyiv",
+"url": "https://dev.ua/en/news/tekhnichni-detali-5g-v-kyievi-1784895810"
+},
+{
+"label": "tv_kyiv_nasdaq",
+"url": "https://www.telecomtv.com/content/access-evolution/kyivstar-group-completes-business-combination-with-cohen-circle-ahead-of-historic-listing-on-nasdaq-53640/"
+},
+{
+"label": "tv_rakuten",
+"url": "https://www.telecomtv.com/content/open-ran/rakuten-symphony-and-kyivstar-sign-letter-of-intent-to-deploy-open-ran-to-rebuild-ukraine-s-digital-infrastructure-49751/amp/"
+},
+{
+"label": "kyiv_mod",
+"url": "https://www.nasdaq.com/press-release/kyivstar-launches-large-scale-telecom-network-modernization-project-2025-10-06"
+}
+]
+},
+{
+"name": "Vodafone Ukraine",
+"name_local": "VF Ukraine",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Huawei",
+"Nokia",
+"ZTE"
+],
+"5g": [
+"Nokia",
+"Huawei"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Nokia",
+"area": "키이우 5G 파일럿 약 150사이트 전량; 빈니키 시험",
+"gens": [
+"5g"
+],
+"source": "https://dev.ua/en/news/tekhnichni-detali-5g-v-kyievi-1784895810"
+},
+{
+"vendor": "Huawei",
+"area": "크로피우니츠키·이바노프란키우스크 5G 시험",
+"gens": [
+"5g"
+],
+"source": "https://digital-strategy.ec.europa.eu/en/miscellaneous/vodafone-ukraine-huawei-and-nokia-begin-5g-testing-three-cities"
+}
+],
+"share": [
+{
+"vendor": "Huawei",
+"pct": 35,
+"sites": null,
+"basis": "기지국 수 기준(당시 MTS Ukraine)",
+"asof": "2016",
+"type": "estimate",
+"source": "https://dengi.ua/amp-page/business/1797777-kitai-atakyet-kompanii-podnebesnoi-zahvativaut-ykrainskii-telekom"
+},
+{
+"vendor": "Nokia",
+"pct": 35,
+"sites": null,
+"basis": "기지국 수 기준(NSN)",
+"asof": "2016",
+"type": "estimate",
+"source": "https://dengi.ua/amp-page/business/1797777-kitai-atakyet-kompanii-podnebesnoi-zahvativaut-ykrainskii-telekom"
+},
+{
+"vendor": "ZTE",
+"pct": 30,
+"sites": null,
+"basis": "기지국 수 기준",
+"asof": "2016",
+"type": "estimate",
+"source": "https://dengi.ua/amp-page/business/1797777-kitai-atakyet-kompanii-podnebesnoi-zahvativaut-ykrainskii-telekom"
+}
+],
+"issues": [
+{
+"year": 2025,
+"text": "Huawei·Nokia로 3개 도시 5G 시험(5~7월)",
+"source": "https://digital-strategy.ec.europa.eu/en/miscellaneous/vodafone-ukraine-huawei-and-nokia-begin-5g-testing-three-cities"
+},
+{
+"year": 2025,
+"text": "Nokia·Finnvera와 3년 MoU(최대 3천만유로)",
+"source": "https://dev.ua/en/news/finliandiia-investuie-30-mln-ievro-u-modernizatsiiu-telekom-merezh-ukrainy-partnerstvo-uklaly-vodafone-nokia-ta-finnvera-1752239090"
+},
+{
+"year": 2026,
+"text": "3천만유로 수출신용 체결, Nokia 장비·서비스 구매(6월)",
+"source": "https://interfax.com.ua/news/telecom/1179922-amp.html"
+}
+],
+"confidence": "medium",
+"sources": [
+{
+"label": "dengi2016",
+"url": "https://dengi.ua/amp-page/business/1797777-kitai-atakyet-kompanii-podnebesnoi-zahvativaut-ykrainskii-telekom"
+},
+{
+"label": "ec_vfu5g",
+"url": "https://digital-strategy.ec.europa.eu/en/miscellaneous/vodafone-ukraine-huawei-and-nokia-begin-5g-testing-three-cities"
+},
+{
+"label": "devua_5gkyiv",
+"url": "https://dev.ua/en/news/tekhnichni-detali-5g-v-kyievi-1784895810"
+},
+{
+"label": "ifx_vfu",
+"url": "https://interfax.com.ua/news/telecom/1179922-amp.html"
+},
+{
+"label": "devua_vfu25",
+"url": "https://dev.ua/en/news/finliandiia-investuie-30-mln-ievro-u-modernizatsiiu-telekom-merezh-ukrainy-partnerstvo-uklaly-vodafone-nokia-ta-finnvera-1752239090"
+}
+]
+},
+{
+"name": "lifecell",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"Ericsson",
+"Huawei"
+],
+"5g": [
+"Ericsson"
+]
+},
+"core": {
+"epc": [
+"Ericsson"
+],
+"5gc": [
+"Ericsson"
+],
+"ims": []
+},
+"regions": [
+{
+"vendor": "Ericsson",
+"area": "키이우 5G 파일럿(n78)",
+"gens": [
+"5g"
+],
+"source": "https://dev.ua/en/news/tekhnichni-detali-5g-v-kyievi-1784895810"
+}
+],
+"share": [],
+"issues": [
+{
+"year": 2016,
+"text": "Huawei와 전략적 제휴, 망 상당부분 구축한 Ericsson도 유지",
+"source": "https://dengi.ua/amp-page/business/1797777-kitai-atakyet-kompanii-podnebesnoi-zahvativaut-ykrainskii-telekom"
+},
+{
+"year": 2026,
+"text": "Ericsson 클라우드 네이티브 패킷코어·UDM 도입(5G SA 대비, 2월)",
+"source": "https://dev.ua/en/news/ericsson-modernizuie-iadro-lifecell-1770386098"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "dengi2016",
+"url": "https://dengi.ua/amp-page/business/1797777-kitai-atakyet-kompanii-podnebesnoi-zahvativaut-ykrainskii-telekom"
+},
+{
+"label": "ifx_life2016",
+"url": "https://en.interfax.com.ua/news/economic/389054.html"
+},
+{
+"label": "cd_life_hw",
+"url": "https://convergedigest.com/ukraine-lifecell-deploys-huawei-in-city/?amp=1"
+},
+{
+"label": "devua_life",
+"url": "https://dev.ua/en/news/ericsson-modernizuie-iadro-lifecell-1770386098"
+},
+{
+"label": "devua_5gkyiv",
+"url": "https://dev.ua/en/news/tekhnichni-detali-5g-v-kyievi-1784895810"
 }
 ]
 }
 ],
-"country_note": "체코 NÚKIB(국가사이버정보보안청)는 2018.12 Huawei·ZTE 보안경고를 발령, 공공부문 중심 제한. 신(新)사이버보안법(264/2025 Coll., NIS2 이행)이 2025.11.1 발효 — 공급망 보안 메커니즘으로 지정 공급사·장비 제한 권한 부여(세부 정부령 미완). O2/CETIN은 2020~24 Huawei→Ericsson 전면 교체, SA 코어 Nokia. T-Mobile·Vodafone은 RAN Huawei 유지, 코어만 비중국화 추진. 3G 2021 전면 종료.",
+"country_note": "전시 중 망 복구 중심. Kyivstar는 RAN 거의 전량이 Huawei/ZTE(2023 CEO)이나 EU 가입 협상상 고위험 벤더 압박 존재. Vodafone은 Nokia(핀란드 수출신용) 비중 확대. 2026년 5G 파일럿(르비우→키이우), 3G는 2031.1.1까지 종료 합의. Open RAN(Rakuten·Airspan) 탐색. Samsung 공급 확인 안 됨.",
 "sources": [
 {
-"label": "NÚKIB — 공급망 보안 강화 입장",
-"url": "https://nukib.gov.cz/en/infoservis-en/news/1886-increasing-the-supply-chain-security-of-the-state-s-strategic-infrastructure-is-in-the-interest-of-the-czech-republic"
+"label": "me_kyiv",
+"url": "https://www.mobileeurope.co.uk/?p=32267"
 },
 {
-"label": "Bird & Bird — 체코 사이버보안법 264/2025 (2025.11 발효)",
-"url": "https://cm.twobirds.com/en/insights/2026/what-to-expect-in-2026-in-czech-cybersecurity-and-telecommunications-law"
+"label": "devua_3g2031",
+"url": "https://dev.ua/news/kyiv-stane-nastupnym-mistom-dlia-pilotu-5g-a-3g-v-ukraini-vymknut-do-2031-roku-1775123459"
 },
 {
-"label": "Lupa.cz — 체코 5G RAN 벤더 지형 (2024.10)",
-"url": "https://www.lupa.cz/clanky/legendarni-nokia-se-v-cesku-pokousi-o-comeback-uz-se-dostala-do-temelina-nebo-skodovky/"
+"label": "ifx_kyiv5g",
+"url": "https://interfax.com.ua/news/telecom/1189606-amp.html"
+},
+{
+"label": "devua_5gkyiv",
+"url": "https://dev.ua/en/news/tekhnichni-detali-5g-v-kyievi-1784895810"
+}
+]
+},
+{
+"iso3": "TUR",
+"name_ko": "튀르키예",
+"carriers": [
+{
+"name": "Turkcell",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"기타(ULAK)"
+],
+"5g": [
+"Ericsson",
+"기타(ULAK)"
+]
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "ULAK 차세대 기지국 3,250국 + 기존 4.5G ULAK 현대화 계약(보도)",
+"source": "https://www.ekonomigazetesi.com/kose-yazisi/20-yilda-21-milyar-dolar-yatirdi-lisans-isi-teknoloji-ussu-planini-yavaslatmadi-42602"
+},
+{
+"year": 2025,
+"text": "5G 경매 최대 낙찰: 700MHz A1+3.5GHz 4블록, 12억달러+",
+"source": "https://www.rcrwireless.com/20251020/5g/turkish-5g-auction"
+},
+{
+"year": 2026,
+"text": "Ericsson과 5G RAN 롤아웃 계약 + Cloud RAN 등 MoU(3월)",
+"source": "https://www.ericsson.com/en/press-releases/5/2026/turkcell-selects-ericsson-to-accelerate-5g-advanced-innovation"
+},
+{
+"year": 2026,
+"text": "Mavenir 클라우드 IMS MoU, Huawei 5G-A·6G MoU(MWC)",
+"source": "https://developingtelecoms.com/telecom-business/operator-news/19907-turkcell-sets-sights-on-5g-a-6g-and-ai-with-ericsson-and-mavenir-deals.html"
+},
+{
+"year": 2026,
+"text": "4.1 5G 상용화, 국산 기지국·코어 포함·BTK 국산화 비율 준수",
+"source": "https://www.capital.com.tr/sektorler/teknoloji/turkcell-5g-tanitimini-istanbulda-gerceklestirdi"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "eric_tcell26",
+"url": "https://www.ericsson.com/en/press-releases/5/2026/turkcell-selects-ericsson-to-accelerate-5g-advanced-innovation"
+},
+{
+"label": "dt_tcell_mav",
+"url": "https://developingtelecoms.com/telecom-business/operator-news/19907-turkcell-sets-sights-on-5g-a-6g-and-ai-with-ericsson-and-mavenir-deals.html"
+},
+{
+"label": "rcr_tcell_hw",
+"url": "https://www.rcrwireless.com/20260302/5g/turkcell-huawei-mwc-2026"
+},
+{
+"label": "ekgaz_ulak",
+"url": "https://www.ekonomigazetesi.com/kose-yazisi/20-yilda-21-milyar-dolar-yatirdi-lisans-isi-teknoloji-ussu-planini-yavaslatmadi-42602"
+},
+{
+"label": "capital_tcell",
+"url": "https://www.capital.com.tr/sektorler/teknoloji/turkcell-5g-tanitimini-istanbulda-gerceklestirdi"
+},
+{
+"label": "rcr_tr_auction",
+"url": "https://www.rcrwireless.com/20251020/5g/turkish-5g-auction"
+},
+{
+"label": "rcr_eric_tr24",
+"url": "https://www.rcrwireless.com/20240305/5g/ericsson-boosts-5g-a-6g-initiatives-turkey"
+}
+]
+},
+{
+"name": "Vodafone Türkiye",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"기타(ULAK)"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "5G 경매: 700MHz A2+3.5GHz 1블록, 6.27억달러",
+"source": "https://www.rcrwireless.com/20251020/5g/turkish-5g-auction"
+},
+{
+"year": 2026,
+"text": "4.1 81개 주도 동시 5G 상용화",
+"source": "https://meatechwatch.com/2026/04/02/turkiye-goes-live-with-5g-as-all-three-operators-launch-simultaneously-across-81-provincial-centres/"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "rcr_tr_auction",
+"url": "https://www.rcrwireless.com/20251020/5g/turkish-5g-auction"
+},
+{
+"label": "mea_tr_launch",
+"url": "https://meatechwatch.com/2026/04/02/turkiye-goes-live-with-5g-as-all-three-operators-launch-simultaneously-across-81-provincial-centres/"
+},
+{
+"label": "ekgaz_ulak",
+"url": "https://www.ekonomigazetesi.com/kose-yazisi/20-yilda-21-milyar-dolar-yatirdi-lisans-isi-teknoloji-ussu-planini-yavaslatmadi-42602"
+}
+]
+},
+{
+"name": "Türk Telekom",
+"name_local": "",
+"type": "MNO",
+"subs_m": null,
+"subs_asof": "",
+"ran": {
+"2g": [],
+"3g": [],
+"4g": [
+"기타(ULAK)"
+],
+"5g": []
+},
+"core": {
+"epc": [],
+"5gc": [],
+"ims": []
+},
+"regions": [],
+"share": [],
+"issues": [
+{
+"year": 2025,
+"text": "ULAK 기지국 약 3,200국 중 대부분이 Türk Telekom(보도)",
+"source": "https://www.ekonomigazetesi.com/kose-yazisi/20-yilda-21-milyar-dolar-yatirdi-lisans-isi-teknoloji-ussu-planini-yavaslatmadi-42602"
+},
+{
+"year": 2025,
+"text": "5G 경매: 700MHz 4.25억달러+3.5GHz 2블록 6억달러+",
+"source": "https://www.rcrwireless.com/20251020/5g/turkish-5g-auction"
+},
+{
+"year": 2026,
+"text": "MWC서 ULAK(5G·6G)·Nokia(L4S) 협력, CEO가 ULAK 이사 겸임",
+"source": "https://www.posta.com.tr/bilim-teknoloji/gsma-mobil-dunya-kongresinde-art-arda-onemli-anlasmalar-2970434"
+},
+{
+"year": 2026,
+"text": "Ericsson과 6G 연구 MoU",
+"source": "https://www.ericsson.com/ko/press-releases/5/2026/turk-telekom-partners-with-ericsson-to-shape-6g-standards"
+}
+],
+"confidence": "low",
+"sources": [
+{
+"label": "ekgaz_ulak",
+"url": "https://www.ekonomigazetesi.com/kose-yazisi/20-yilda-21-milyar-dolar-yatirdi-lisans-isi-teknoloji-ussu-planini-yavaslatmadi-42602"
+},
+{
+"label": "rcr_tr_auction",
+"url": "https://www.rcrwireless.com/20251020/5g/turkish-5g-auction"
+},
+{
+"label": "posta_tt",
+"url": "https://www.posta.com.tr/bilim-teknoloji/gsma-mobil-dunya-kongresinde-art-arda-onemli-anlasmalar-2970434"
+},
+{
+"label": "ulak_board",
+"url": "https://www.yuzde100yerli.com/en/strategic-handover-at-ulak-haberlesme-as-5g-approaches-defence-and-telecom-giants-unite"
+},
+{
+"label": "eric_tt6g",
+"url": "https://www.ericsson.com/ko/press-releases/5/2026/turk-telekom-partners-with-ericsson-to-shape-6g-standards"
+}
+]
+}
+],
+"country_note": "2025.10.16 5G 경매(700MHz·3.5GHz 11개 패키지, 약 30억달러+), 2026.4.1 3사 동시 상용화, 2년 내 전국망. 면허조건에 국산장비 비율 의무(4.5G 최종 45%; 5G 목표 상향 보도). 국산 RAN은 ASELSAN 계열 ULAK. Huawei 규제 없음. Samsung은 단말 제휴만 확인, 망 공급 미확인. 3사 상용 RAN 벤더 구성은 공개자료 부족.",
+"sources": [
+{
+"label": "rcr_tr_auction",
+"url": "https://www.rcrwireless.com/20251020/5g/turkish-5g-auction"
+},
+{
+"label": "mea_tr_launch",
+"url": "https://meatechwatch.com/2026/04/02/turkiye-goes-live-with-5g-as-all-three-operators-launch-simultaneously-across-81-provincial-centres/"
+},
+{
+"label": "haberturk",
+"url": "https://www.haberturk.com/ozel-icerikler/guntay-simsek-1019/3770758-turkiye-5gye-hangi-urunlerimizle-gececek"
+},
+{
+"label": "ulak_board",
+"url": "https://www.yuzde100yerli.com/en/strategic-handover-at-ulak-haberlesme-as-5g-approaches-defence-and-telecom-giants-unite"
+},
+{
+"label": "capital_tcell",
+"url": "https://www.capital.com.tr/sektorler/teknoloji/turkcell-5g-tanitimini-istanbulda-gerceklestirdi"
 }
 ]
 }
