@@ -3,14 +3,15 @@
   "period": "2026 Q3",
   "state": "pending",
   "msg": "이익 지표가 회사 고유 정의라 공식 자료 확인 필요",
-  "checked": "2026-11-20 05:33",
+  "checked": "2026-11-20 17:39",
   "g_checked": "2026-11-19"
  },
  "노키아": {
   "period": "2026 Q3",
   "state": "pending",
   "msg": "이익 지표가 회사 고유 정의라 공식 자료 확인 필요",
-  "checked": "2026-11-20 13:11"
+  "checked": "2026-11-20 17:39",
+  "g_checked": "2026-11-20"
  },
  "zte": {
   "period": "2026 Q3",
@@ -90,10 +91,10 @@
  },
  "_search": {
   "month": "2026-11",
-  "used": 2,
+  "used": 3,
   "day": "2026-11-20",
-  "day_used": 0,
-  "ran": false,
-  "blocked_until": "2026-11-20 17:32"
+  "day_used": 1,
+  "ran": true,
+  "blocked_until": "2026-11-21 17:39"
  }
 }
