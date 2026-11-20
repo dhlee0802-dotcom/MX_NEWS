@@ -126,6 +126,35 @@
   .arch tr:hover td{background:var(--raised)}
   .arch td a{color:var(--ink);text-decoration:none} .arch td a:hover{color:#dbe6ff}
   .arch .dt{white-space:nowrap;color:var(--sub);font-variant-numeric:tabular-nums}
+
+  .tb2{flex-direction:column;align-items:stretch;gap:8px}
+  .tbrow{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .seg{display:inline-flex;border:1px solid var(--line2);border-radius:999px;overflow:hidden;background:var(--panel)}
+  .seg button{font:inherit;font-size:12px;font-weight:700;padding:5px 12px;border:0;background:transparent;color:var(--sub);cursor:pointer;white-space:nowrap;transition:all .18s}
+  .seg button+button{border-left:1px solid var(--line2)}
+  .seg button.on{background:var(--blue);color:#fff}
+  .seg.sm button{font-size:11.5px;padding:4px 10px}
+  .chip .n{font-weight:600;opacity:.75;font-size:11px}
+  .flist{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px;font-size:12px;max-height:210px;overflow:auto;animation:in .3s var(--ease)}
+  .fl-row{display:grid;grid-template-columns:118px 1fr;gap:8px;align-items:start;padding:4px 0}
+  .fl-row+.fl-row{border-top:1px dashed var(--line)}
+  .fl-h{font-weight:700;color:var(--ink);display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding-top:3px}
+  .fl-h::before{content:"";width:9px;height:9px;border-radius:2px;background:var(--c)}
+  .fl-h b{color:var(--sub);font-weight:600}
+  .fl-items{display:flex;flex-wrap:wrap;gap:4px}
+  .fl-c{text-align:left;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink);background:var(--raised);border:1px solid var(--line);border-radius:7px;padding:3px 8px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;white-space:nowrap}
+  .fl-c:hover{border-color:var(--blue)}
+  .fl-d{color:#ffcf7a;font-weight:600;font-size:11px}
+  .gstrip{display:inline-flex;gap:3px;flex-wrap:wrap}
+  .gb{font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:5px;white-space:nowrap;border:1px solid transparent}
+  .gb.on{background:rgba(59,130,246,.18);color:#9cc2ff;border-color:rgba(59,130,246,.4)}
+  .gb.sunset{background:rgba(245,158,11,.18);color:#ffcf7a;border-color:rgba(245,158,11,.45)}
+  .gb.off{background:rgba(100,116,139,.15);color:#8a98b3;text-decoration:line-through;text-decoration-thickness:1px}
+  .gb.none{background:rgba(139,92,246,.14);color:#c4b0ff}
+  .gb.nd{color:#5d6b88;border:1px dashed #33405e}
+  .pb{font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;background:color-mix(in srgb,var(--c) 22%,transparent);color:#fff;border:1px solid color-mix(in srgb,var(--c) 60%,transparent);white-space:nowrap;display:inline-block}
+  .polbox{background:var(--raised);border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:12.5px}
+  @media(max-width:700px){.fl-row{grid-template-columns:1fr}.fl-c{white-space:normal}.fl-d{white-space:normal}.flist{max-height:170px}}
   @media(max-width:700px){h1 .t{display:none}.hbtn .lb{display:none}.legend{display:none}.hd-meta{display:none}main{padding:10px 10px 60px}.arch .hide-m{display:none}}
   @media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
 </style>
@@ -147,7 +176,8 @@
 </div></header>
 <main>
   <div id="viewMap">
-    <div class="toolbar" id="toolbar"></div>
+    <div class="toolbar tb2" id="toolbar"></div>
+    <div class="flist" id="flist" style="display:none"></div>
     <div class="layout" id="layout">
       <div class="mapbox" id="mapbox">
         <div class="mapctl">
@@ -270,21 +300,87 @@ function leadVendor(c){
   let best=null;for(const v in votes){if(!best||votes[v]>votes[best])best=v;} return best||first;
 }
 function vendorsIn(c){const set=new Set();c.carriers.forEach(k=>{for(const g in (k.ran||{}))(k.ran[g]||[]).forEach(v=>{if(!/종료/.test(v))set.add(vbase(v));});for(const g in (k.core||{}))(k.core[g]||[]).forEach(v=>set.add(vbase(v)));});return set;}
-function paint(){
-  document.querySelectorAll("#map .c").forEach(p=>{
-    const c=BYISO[p.dataset.iso]; if(!c){p.style.fill="";return;}
-    if(vendorFilter){p.style.fill=vendorsIn(c).has(vendorFilter)?(VCOL[vendorFilter]||OTHER):"#2f3d5c";}
-    else{const lv=leadVendor(c);p.style.fill=lv?(VCOL[lv]||OTHER):"#3a5582";}
-  });
-  const vendors=["Samsung","Ericsson","Nokia","Huawei","ZTE","Mavenir","NEC","Fujitsu"];
-  document.getElementById("legend").innerHTML=(vendorFilter?`<i style="--c:${VCOL[vendorFilter]||OTHER}">${esc(vendorFilter)} 공급 국가</i><i style="--c:#2f3d5c">미공급·미확인</i>`
-    :`<span style="width:100%;font-weight:700;color:var(--sub)">색 = 5G RAN 선두 벤더 (사이트 점유율 → 없으면 공급사 수)</span>`+vendors.map(v=>`<i style="--c:${VCOL[v]}">${v}</i>`).join("")+`<i style="--c:${NODATA}">미조사</i>`);
+/* ── 필터 모드: vendor | policy(중국 장비 규제) | gen(서비스 세대) ── */
+let mode="vendor", polPart="ran", polLv=null, genG="3g", genSt=null;
+const POL_LV={remove:{t:"철거 의무",c:"#ef4444"},ban_new:{t:"신규 설치 금지",c:"#f97316"},review:{t:"검토 중",c:"#eab308"},none:{t:"규제 없음",c:"#4b6a9b"}};
+const GST={on:{t:"서비스 중",c:"#3b82f6"},sunset:{t:"종료 예정",c:"#f59e0b"},off:{t:"종료",c:"#64748b"},none:{t:"미도입",c:"#8b5cf6"}};
+const DIM="#1c2742", TODAY=new Date().toISOString().slice(0,10);
+function polOf(c,part){const p=(c.cn_policy||{})[part];return p&&p.level&&POL_LV[p.level]?p:null;}
+function mnoCars(c){const m=c.carriers.filter(k=>!k.type||/MNO/i.test(k.type));return m.length?m:c.carriers;}
+function genOf(k,g){const x=(k.gens||{})[g];return x&&x.st&&GST[x.st]?x:null;}
+function countryGen(c,g){
+  const list=mnoCars(c).map(k=>({k,x:genOf(k,g)})).filter(o=>o.x); if(!list.length)return null;
+  const has=s=>list.some(o=>o.x.st===s);
+  const st=has("sunset")?"sunset":has("on")?"on":has("off")?"off":"none";
+  return {st,list,live:has("on")||has("sunset")};
 }
+function genMatch(cg){ if(!cg)return false; if(!genSt)return true; if(genSt==="live")return cg.live; if(genSt==="sunset")return cg.st==="sunset"; if(genSt==="off")return !cg.live&&cg.list.some(o=>o.x.st==="off"); if(genSt==="none")return cg.list.every(o=>o.x.st==="none"); return true;}
+function gdate(x){return x&&x.end?x.end:"";}
+function genBadge(g,x,big){ if(!x)return `<span class="gb nd">${GEN_LABEL[g].replace(" LTE","")} ?</span>`;
+  const L=GEN_LABEL[g].replace(" LTE","");
+  if(x.st==="on")return `<span class="gb on" title="${L} 서비스 중">${L}</span>`;
+  if(x.st==="sunset"){const past=x.end&&x.end<TODAY.slice(0,x.end.length);return `<span class="gb sunset" title="${L} ${past?"종료 예정일 경과 · 완료 여부 미확인":"서비스 중 · 종료 일정 확정"}">${L} ${big?(past?"종료 예정일 경과 ":"종료 예정 "):"~"}${esc(x.end||"")}${past&&!big?"?":""}</span>`;}
+  if(x.st==="off")return `<span class="gb off" title="${L} 서비스 종료">${L} 종료${x.end?" "+esc(x.end):""}</span>`;
+  return `<span class="gb none" title="${L} 미도입">${L} ${x.start?esc(x.start)+" 예정":"미도입"}</span>`;
+}
+function genStrip(k,big){ if(!k.gens)return ""; return `<span class="gstrip">${["2g","3g","4g","5g"].map(g=>genBadge(g,genOf(k,g),big)).join("")}</span>`;}
+function polBadge(p,part){ if(!p)return `<span class="pb" style="--c:#223052">${part==="ran"?"RAN":"Core"} 미조사</span>`; return `<span class="pb" style="--c:${POL_LV[p.level].c}">${part==="ran"?"RAN":"Core"} ${POL_LV[p.level].t}${p.deadline?" · "+esc(p.deadline):""}</span>`;}
+function countryColor(c){
+  if(mode==="policy"){const p=polOf(c,polPart); if(!p)return NODATA; if(polLv&&p.level!==polLv)return DIM; return POL_LV[p.level].c;}
+  if(mode==="gen"){const cg=countryGen(c,genG); if(!cg)return NODATA; if(!genMatch(cg))return DIM; return GST[cg.st].c;}
+  if(vendorFilter)return vendorsIn(c).has(vendorFilter)?(VCOL[vendorFilter]||OTHER):"#2f3d5c";
+  const lv=leadVendor(c);return lv?(VCOL[lv]||OTHER):"#3a5582";
+}
+function paint(){
+  document.querySelectorAll("#map .c").forEach(p=>{const c=BYISO[p.dataset.iso]; p.style.fill=c?countryColor(c):"";});
+  const vendors=["Samsung","Ericsson","Nokia","Huawei","ZTE","Mavenir","NEC","Fujitsu"];
+  let lg;
+  if(mode==="policy") lg=`<span style="width:100%;font-weight:700;color:var(--sub)">중국산 장비 규제 · ${polPart==="ran"?"기지국(RAN)":"Core"}</span>`+Object.keys(POL_LV).map(k=>`<i style="--c:${POL_LV[k].c}">${POL_LV[k].t}</i>`).join("")+`<i style="--c:${NODATA}">미조사</i>`;
+  else if(mode==="gen") lg=`<span style="width:100%;font-weight:700;color:var(--sub)">${GEN_LABEL[genG]} 서비스 현황 (전국 MNO 기준)</span>`+["on","sunset","off","none"].map(k=>`<i style="--c:${GST[k].c}">${k==="sunset"?"종료 일정 확정":k==="on"?"서비스 중":k==="off"?"전 사업자 종료":"미도입"}</i>`).join("")+`<i style="--c:${NODATA}">미조사</i>`;
+  else lg=vendorFilter?`<i style="--c:${VCOL[vendorFilter]||OTHER}">${esc(vendorFilter)} 공급 국가</i><i style="--c:#2f3d5c">미공급·미확인</i>`
+    :`<span style="width:100%;font-weight:700;color:var(--sub)">색 = 5G RAN 선두 벤더 (사이트 점유율 → 없으면 공급사 수)</span>`+vendors.map(v=>`<i style="--c:${VCOL[v]}">${v}</i>`).join("")+`<i style="--c:${NODATA}">미조사</i>`;
+  document.getElementById("legend").innerHTML=lg;
+  renderFlist();
+}
+function renderFlist(){
+  const el=document.getElementById("flist"); if(!el)return;
+  if(mode==="vendor"){el.innerHTML="";el.style.display="none";return;}
+  el.style.display="";
+  const cs=VM.countries;
+  if(mode==="policy"){
+    const lvls=polLv?[polLv]:Object.keys(POL_LV);
+    el.innerHTML=lvls.map(lv=>{const arr=cs.filter(c=>{const p=polOf(c,polPart);return p&&p.level===lv;});
+      return `<div class="fl-row"><span class="fl-h" style="--c:${POL_LV[lv].c}">${POL_LV[lv].t} <b>${arr.length}</b></span><div class="fl-items">${arr.map(c=>{const p=polOf(c,polPart);return `<button class="fl-c" onclick="selectCountry('${c.iso3}')" title="${esc(p.summary||"")}">${esc(c.name_ko)}${p.deadline?`<span class="fl-d">${esc(p.deadline)}</span>`:""}</button>`;}).join("")||'<span class="basis">해당 없음</span>'}</div></div>`;}).join("")
+      +`<div class="basis" style="margin-top:4px">미조사 ${cs.filter(c=>!polOf(c,polPart)).length}개국 · 국가 이름에 마우스를 올리면 요약, 클릭하면 근거</div>`;
+  }else{
+    const arr=cs.map(c=>({c,cg:countryGen(c,genG)})).filter(o=>genMatch(o.cg));
+    const ord={sunset:0,on:1,off:2,none:3};
+    arr.sort((a,b)=>ord[a.cg.st]-ord[b.cg.st]||(a.cg.st==="sunset"&&b.cg.st==="sunset"?minEnd(a.cg).localeCompare(minEnd(b.cg)):0)||a.c.name_ko.localeCompare(b.c.name_ko));
+    const groups={}; arr.forEach(o=>{(groups[o.cg.st]=groups[o.cg.st]||[]).push(o);});
+    el.innerHTML=["sunset","on","off","none"].filter(s=>groups[s]).map(s=>`<div class="fl-row"><span class="fl-h" style="--c:${GST[s].c}">${s==="sunset"?"종료 일정 확정":s==="on"?"서비스 중":s==="off"?"종료":"미도입"} <b>${groups[s].length}</b></span><div class="fl-items">${groups[s].map(o=>{
+        let d=""; if(s==="sunset"){const sl=o.cg.list.filter(x=>x.x.st==="sunset");const ends=[...new Set(sl.map(x=>x.x.end||""))];
+          d=(sl.length===o.cg.list.length&&sl.length>1&&ends.length===1)?`전 사업자 ${esc(ends[0])}`:sl.map(x=>`${esc(shortName(x.k.name))} ${esc(x.x.end||"")}`).join(" · ");}
+        else if(s==="off"){const e=o.cg.list.map(x=>x.x.end).filter(Boolean).sort().pop();d=e?"~"+esc(e):"";}
+        else if(s==="none"){const st=o.cg.list.map(x=>x.x.start).filter(Boolean).sort()[0];d=st?esc(st)+" 예정":"";}
+        return `<button class="fl-c" onclick="selectCountry('${o.c.iso3}')">${esc(o.c.name_ko)}${d?`<span class="fl-d">${d}</span>`:""}</button>`;}).join("")}</div></div>`).join("")
+      +`<div class="basis" style="margin-top:4px">국가 색은 전국 MNO 중 한 곳이라도 종료 일정이 확정되면 '종료 일정 확정', 아니면 서비스 중 사업자 존재 시 '서비스 중' · 미조사 ${cs.filter(c=>!countryGen(c,genG)).length}개국</div>`;
+  }
+}
+function minEnd(cg){return cg.list.filter(x=>x.x.st==="sunset").map(x=>x.x.end||"9999").sort()[0]||"9999";}
+function shortName(n){return String(n).replace(/\s*\(.*\)\s*$/,"");}
 function showTip(e,iso){
   const c=BYISO[iso]; const tip=document.getElementById("maptip"); if(!c){tip.style.display="none";return;}
+  if(mode==="policy"){
+    tip.innerHTML=`<div class="t">${esc(c.name_ko)} <span style="font-weight:500;color:#9fb3dc;font-size:11px">중국산 장비 규제 · 클릭하면 근거</span></div>`+
+      ["ran","core"].map(pt=>{const p=polOf(c,pt);return `<div class="r" style="display:block"><div>${polBadge(p,pt)}</div>${p&&p.summary?`<div style="color:#c9d6f2;font-size:11.5px;margin-top:3px">${esc(p.summary)}</div>`:""}</div>`;}).join("");
+  }else if(mode==="gen"){
+    tip.innerHTML=`<div class="t">${esc(c.name_ko)} <span style="font-weight:500;color:#9fb3dc;font-size:11px">세대별 서비스 현황 · 클릭하면 상세</span></div>`+
+      c.carriers.map(k=>`<div class="r"><b>${esc(k.name)}</b>${k.gens?genStrip(k):'<span style="color:#9fb3dc">미조사</span>'}</div>`).join("");
+  }else{
   tip.innerHTML=`<div class="t">${esc(c.name_ko)} <span style="font-weight:500;color:#9fb3dc;font-size:11px">사업자 ${c.carriers.length}곳 · 5G RAN 공급사 · 클릭하면 상세</span></div>`+
     c.carriers.map(k=>{const v=((k.ran||{})["5g"]||[]).filter(x=>!/종료/.test(x));const v4=((k.ran||{})["4g"]||[]).filter(x=>!/종료/.test(x));
       return `<div class="r"><b>${esc(k.name)}</b>${(v.length?v:v4).map(v=>vchip(v)).join("")||'<span style="color:#9fb3dc">미확인</span>'}${!v.length&&v4.length?'<span style="color:#9fb3dc;font-size:10.5px">(4G)</span>':""}</div>`;}).join("");
+  }
   const box=document.getElementById("mapbox").getBoundingClientRect();
   let x=e.clientX-box.left+14, y=e.clientY-box.top+14;
   tip.style.display="block";
@@ -372,6 +468,7 @@ function carrierCard(k,i){
       <div><h3>${esc(k.name)}</h3>${k.name_local&&k.name_local!==k.name?`<span class="loc">${esc(k.name_local)}</span>`:""}${k.type&&k.type!=="MNO"?`<span class="loc">${esc(k.type)}</span>`:""}${k.subs_m?`<span class="loc">가입자 ${k.subs_m}M</span>`:""}</div>
       <span class="conf ${esc(k.confidence||"")}">${cf}</span>
       <div class="line"><span class="k">5G RAN</span>${v5.length?v5.map(v=>vchip(v)).join(""):'<span class="k">미확인</span>'}${cores.includes("5gc")?`<span class="k" style="margin-left:8px">5GC</span>${k.core["5gc"].map(v=>vchip(v)).join("")}`:""}</div>
+      ${k.gens?`<div class="line"><span class="k">서비스</span>${genStrip(k,true)}${genSrc(k)}</div>`:""}
     </div>
     <div class="car-body"><div class="grid2">
       <div><div class="sec">RAN 공급사</div><table class="kv">${gens.length?gens.map(g=>`<tr><td>${GEN_LABEL[g]}</td><td><div class="vs">${k.ran[g].map(v=>vchip(v,true)).join("")}</div></td></tr>`).join(""):'<tr><td colspan="2" class="basis">공개 정보 없음</td></tr>'}</table></div>
@@ -382,6 +479,13 @@ function carrierCard(k,i){
     ${(k.issues||[]).length?`<div class="sec">교체·전환·계약 이슈</div>`+k.issues.slice().sort((a,b)=>(b.year||0)-(a.year||0)).slice(0,8).map(x=>`<div class="iss"><b>${esc(x.year||"")}</b><span>${esc(x.text)}${x.source?` <a class="sl" href="${esc(x.source)}" target="_blank" rel="noopener">↗</a>`:""}</span></div>`).join(""):""}
     ${(k.sources||[]).length?`<details class="srcs"><summary style="cursor:pointer">출처 ${k.sources.length}건</summary>${k.sources.map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join(" · ")}</details>`:""}
     </div></div>`;
+}
+function genSrc(k){const urls=[...new Set(["2g","3g","4g","5g"].map(g=>((k.gens||{})[g]||{}).src).filter(Boolean))];return urls.slice(0,3).map((u,i)=>`<a class="sl" href="${esc(u)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">근거${urls.length>1?i+1:""}↗</a>`).join(" ");}
+function policySection(c){
+  const cp=c.cn_policy; if(!cp)return "";
+  const row=pt=>{const p=polOf(c,pt); if(!p)return `<tr><td>${pt==="ran"?"기지국(RAN)":"Core"}</td><td><span class="basis">미조사</span></td></tr>`;
+    return `<tr><td>${pt==="ran"?"기지국(RAN)":"Core"}</td><td>${polBadge(p,pt)}<div style="margin-top:4px">${esc(p.summary||"")}</div><div class="basis">${p.basis?esc(p.basis):""}${p.since?" · 시행 "+esc(p.since):""}${p.deadline?" · 기한 "+esc(p.deadline):""}${p.source?` <a class="sl" href="${esc(p.source)}" target="_blank" rel="noopener">근거↗</a>`:""}</div></td></tr>`;};
+  return `<div class="polbox"><div class="sec" style="margin-top:0">중국산 통신장비 규제${cp.asof?` <span style="font-weight:500">· ${esc(cp.asof)} 기준</span>`:""}</div><table class="kv">${row("ran")}${row("core")}</table>${cp.note?`<div class="basis" style="margin-top:4px">${esc(cp.note)}</div>`:""}</div>`;
 }
 function dealRow(d){
   return `<div class="deal"><span class="d">${esc((d.date||"").slice(0,10))}</span><div><div class="m">${vchip(d.vendor)}${d.carrier?`<span class="tag">→ ${esc(d.carrier)}</span>`:""}${d.product?`<span class="tag">${esc(d.product)}</span>`:""}${d.kw&&!d.product?`<span class="tag">${esc(d.kw)}</span>`:""}</div><a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.title)}</a> <span class="basis">${esc(d.source||"")}</span></div></div>`;
@@ -413,6 +517,7 @@ function renderPanel(c){
   const note=c.country_note||""; const first=note.split(/(?<=[.다])\s/)[0]||"";
   el.innerHTML=`<div class="panel"><div class="p-hd"><h2>${esc(c.name_ko)}</h2><span class="cnt">전국망 사업자 ${c.carriers.length}곳 · 카드를 눌러 펼치기</span></div>
     <div class="p-body">${note?`<details class="cnote"><summary>국가 공통 사항 <span>— ${esc(first.length>70?first.slice(0,69)+"…":first)}</span></summary><p>${esc(note)}</p></details>`:""}
+    ${policySection(c)}
     ${c.carriers.map(carrierCard).join("")}
     ${certSection(c.iso3)}
     ${deals.length?`<div class="sec" style="margin-top:14px">최근 수주·벤더 변경 보도 <span style="font-weight:500">(뉴스 크롤 자동 수집)</span></div>${deals.map(dealRow).join("")}`:""}
@@ -422,12 +527,23 @@ function renderPanel(c){
 function renderToolbar(){
   const vendors=["Samsung","Ericsson","Nokia","Huawei","ZTE","Mavenir","NEC","Fujitsu"];
   const groups={}; VM.countries.forEach(c=>{const g=REGION[c.iso3]||"유럽";(groups[g]=groups[g]||[]).push(c);});
-  document.getElementById("toolbar").innerHTML=`<span class="lb">벤더 필터</span><button class="chip${!vendorFilter?" on":""}" onclick="setVendor(null)">선두 벤더</button>`+
-    vendors.map(v=>`<button class="chip${vendorFilter===v?" on":""}" style="--c:${VCOL[v]}" onclick="setVendor('${v}')"><span class="sw"></span>${v}</button>`).join("")+
+  let row1=`<span class="lb">지도 보기</span><div class="seg">${[["vendor","벤더 공급사"],["policy","중국 장비 규제"],["gen","서비스 세대"]].map(([m,t])=>`<button class="${mode===m?"on":""}" onclick="setMode('${m}')">${t}</button>`).join("")}</div>`+
     `<select class="chip" style="margin-left:auto" onchange="if(this.value)selectCountry(this.value)"><option value="">국가 바로가기 (${VM.countries.length}개국)</option>`+
     Object.keys(groups).map(g=>`<optgroup label="${g}">`+groups[g].map(c=>`<option value="${c.iso3}"${selIso===c.iso3?" selected":""}>${esc(c.name_ko)} (${c.carriers.length})</option>`).join("")+`</optgroup>`).join("")+`</select>`;
+  let row2="";
+  if(mode==="vendor") row2=`<span class="lb">벤더 필터</span><button class="chip${!vendorFilter?" on":""}" onclick="setVendor(null)">선두 벤더</button>`+
+    vendors.map(v=>`<button class="chip${vendorFilter===v?" on":""}" style="--c:${VCOL[v]}" onclick="setVendor('${v}')"><span class="sw"></span>${v}</button>`).join("");
+  else if(mode==="policy") row2=`<span class="lb">장비 구분</span><div class="seg sm">${[["ran","기지국(RAN)"],["core","Core"]].map(([p,t])=>`<button class="${polPart===p?"on":""}" onclick="setPol('part','${p}')">${t}</button>`).join("")}</div>
+    <span class="lb" style="margin-left:8px">규제 수준</span><button class="chip${!polLv?" on":""}" onclick="setPol('lv',null)">전체</button>`+
+    Object.keys(POL_LV).map(k=>{const n=VM.countries.filter(c=>{const p=polOf(c,polPart);return p&&p.level===k;}).length;return `<button class="chip${polLv===k?" on":""}" style="--c:${POL_LV[k].c}" onclick="setPol('lv','${k}')"><span class="sw"></span>${POL_LV[k].t} <span class="n">${n}</span></button>`;}).join("");
+  else row2=`<span class="lb">세대</span><div class="seg sm">${["2g","3g","4g","5g"].map(g=>`<button class="${genG===g?"on":""}" onclick="setGen('g','${g}')">${GEN_LABEL[g].replace(" LTE","")}</button>`).join("")}</div>
+    <span class="lb" style="margin-left:8px">상태</span>`+[[null,"전체"],["live","서비스 중"],["sunset","종료 일정 확정"],["off","종료"],["none","미도입"]].map(([k,t])=>{const n=k?VM.countries.filter(c=>{const cg=countryGen(c,genG);if(!cg)return false;const o=genSt;genSt=k;const r=genMatch(cg);genSt=o;return r;}).length:null;return `<button class="chip${genSt===k?" on":""}" ${k&&GST[k]?`style="--c:${GST[k].c}"`:k==="live"?`style="--c:${GST.on.c}"`:""} onclick="setGen('st',${k?`'${k}'`:"null"})">${k?'<span class="sw"></span>':""}${t}${n!=null?` <span class="n">${n}</span>`:""}</button>`;}).join("");
+  document.getElementById("toolbar").innerHTML=`<div class="tbrow">${row1}</div><div class="tbrow">${row2}</div>`;
 }
 function setVendor(v){vendorFilter=v;renderToolbar();paint();}
+function setMode(m){mode=m;renderToolbar();paint();}
+function setPol(k,v){if(k==="part")polPart=v;else polLv=polLv===v?null:v;renderToolbar();paint();}
+function setGen(k,v){if(k==="g")genG=v;else genSt=genSt===v?null:v;renderToolbar();paint();}
 
 /* ── 아카이브 뷰 ── */
 let afV=null, afC=null, afP=null;
