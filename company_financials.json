@@ -235,8 +235,7 @@
 "state": "pending",
 "due_from": "2026-10-14",
 "checked": "2026-11-21 18:35",
-"msg": "이익 지표가 회사 고유 정의라 공식 자료 확인 필요",
-"src": "https://finance.yahoo.com/quote/ERIC/financials/"
+"msg": "이익 지표가 회사 고유 정의라 공식 자료 확인 필요"
 }
 },
 "노키아": {
@@ -463,8 +462,7 @@
 "state": "pending",
 "due_from": "2026-10-14",
 "checked": "2026-11-21 18:35",
-"msg": "이익 지표가 회사 고유 정의라 공식 자료 확인 필요",
-"src": "https://finance.yahoo.com/quote/NOK/financials/"
+"msg": "이익 지표가 회사 고유 정의라 공식 자료 확인 필요"
 }
 },
 "화웨이": {
@@ -4144,7 +4142,7 @@
 }
 },
 "kpi_updated": "2026-10-30",
-"auto_checked": "2026-11-21 18:35",
+"auto_checked": "2026-11-21 18:45",
 "auto_search": {
 "month": "2026-11",
 "used": 4,
