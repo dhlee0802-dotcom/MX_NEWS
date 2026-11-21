@@ -17,7 +17,8 @@
   "period": "2026 Q3",
   "state": "pending",
   "msg": "공시 집계 값이 저장된 전년 동기와 불일치",
-  "checked": "2026-11-21 13:51"
+  "checked": "2026-11-21 17:46",
+  "g_checked": "2026-11-21"
  },
  "ast": {
   "period": "Q4 FY2026",
@@ -91,10 +92,10 @@
  },
  "_search": {
   "month": "2026-11",
-  "used": 3,
+  "used": 4,
   "day": "2026-11-21",
-  "day_used": 0,
-  "ran": false,
-  "blocked_until": "2026-11-21 17:39"
+  "day_used": 1,
+  "ran": true,
+  "blocked_until": "2026-11-22 17:46"
  }
 }
